@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shaohuogun.reader.message.dao.MessageMapper">
+	<resultMap id="messageResultMap" type="org.shaohuogun.reader.message.model.Message">
+		<id property="id" column="id" />
+		<result property="creator" column="creator" />
+		<result property="createDate" column="create_date" />
+		<result property="lastModifier" column="last_modifier" />
+		<result property="lastModifyDate" column="last_modify_date" />
+		<result property="deleted" column="deleted" />
+		<result property="pickingStatus" column="picking_status" />
+		<result property="pickingStrategy" column="picking_strategy" />
+		<result property="pickingBatchNo" column="picking_batch_no" />
+		<result property="pickingAmount" column="picking_amount" />
+		<result property="pickingCount" column="picking_count" />
+		<result property="channelId" column="channel_id" />
+		<result property="url" column="url" />
+		<result property="title" column="title" />
+		<result property="releaseDate" column="release_date" />
+		<result property="pageview" column="pageview" />
+		<result property="commentCount" column="comment_count" />
+		<result property="digest" column="digest"
+			typeHandler="org.shaohuogun.reader.plugin.ibatis.BlobTypeHandler" />
+	</resultMap>
+
+	<insert id="insert" parameterType="org.shaohuogun.reader.message.model.Message">
+		insert into READER_MESSAGE (id,
+		creator, create_date, deleted, picking_status, picking_strategy,
+		picking_batch_no,
+		picking_amount, picking_count, channel_id, url,
+		title, release_date,
+		pageview, comment_count, digest)
+		values (#{id},
+		#{creator},
+		#{createDate}, #{deleted},
+		#{pickingStatus},
+		#{pickingStrategy},
+		#{pickingBatchNo},
+		#{pickingAmount},
+		#{pickingCount},
+		#{channelId},
+		#{url}, #{title},
+		#{releaseDate},
+		#{pageview},
+		#{commentCount}, #{digest})
+	</insert>
+
+	<select id="selectAll" resultMap="messageResultMap">
+		select * from READER_MESSAGE where
+		deleted = '0'
+	</select>
+
+	<select id="selectById" parameterType="java.lang.String"
+		resultMap="messageResultMap">
+		select * from READER_MESSAGE where id = #{id}
+	</select>
+
+	<select id="selectByUrl" parameterType="java.lang.String"
+		resultMap="messageResultMap">
+		select * from READER_MESSAGE where deleted = '0' and url =
+		#{url}
+	</select>
+
+	<select id="countInChannel" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) from READER_MESSAGE where deleted = '0' and
+		channel_id = #{channelId}
+	</select>
+
+	<select id="selectInChannel" parameterType="java.lang.String"
+		resultMap="messageResultMap">
+		select * from READER_MESSAGE where deleted = '0' and channel_id
+		= #{channelId} order by url desc;
+	</select>
+
+	<update id="update" parameterType="org.shaohuogun.reader.message.model.Message"
+		flushCache="true">
+		update
+		READER_MESSAGE set last_modifier = #{lastModifier},
+		last_modify_date =
+		#{lastModifyDate}, deleted = #{deleted},
+		picking_status = #{pickingStatus},
+		picking_count =
+		#{pickingCount} where
+		id =
+		#{id}
+	</update>
+
+	<select id="selectByPickingStatus" parameterType="java.lang.String"
+		resultMap="messageResultMap">
+		select * from READER_MESSAGE where deleted = '0' and
+		picking_status = #{pickingStatus} order by create_date asc limit 1
+	</select>
+
+	<select id="selectByPickingBatchNo" parameterType="java.lang.String"
+		resultMap="messageResultMap">
+		select * from READER_MESSAGE where deleted = '0' and
+		picking_batch_no = #{pickingBatchNo} order by create_date asc limit 1
+	</select>	
+</mapper>

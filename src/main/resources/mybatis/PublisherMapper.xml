@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shaohuogun.reader.publisher.dao.PublisherMapper">
+	<resultMap id="publisherResultMap"
+		type="org.shaohuogun.reader.publisher.model.Publisher">
+		<id property="id" column="id" />
+		<result property="creator" column="creator" />
+		<result property="createDate" column="create_date" />
+		<result property="lastModifier" column="last_modifier" />
+		<result property="lastModifyDate" column="last_modify_date" />
+		<result property="deleted" column="deleted" />
+		<result property="name" column="name" />
+		<result property="nickname" column="nickname" />
+		<result property="sex" column="sex" />
+		<result property="portrait" column="portrait" />
+		<result property="profile" column="profile" />
+	</resultMap>
+
+	<insert id="insert" parameterType="org.shaohuogun.reader.publisher.model.Publisher">
+		insert into READER_PUBLISHER (id,
+		creator, create_date, deleted, name, nickname, sex,
+		portrait, profile)
+		values (#{id}, #{creator}, #{createDate}, #{deleted},
+		#{name},
+		#{nickname},
+		#{sex},
+		#{portrait}, #{profile})
+	</insert>
+
+	<select id="selectById" parameterType="java.lang.String"
+		resultMap="publisherResultMap">
+		select * from READER_PUBLISHER where id = #{id}
+	</select>
+
+</mapper>
+
