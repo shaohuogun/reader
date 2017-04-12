@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.servlet.ModelAndView;
 import org.shaohuogun.reader.publisher.model.Publisher;
 import org.shaohuogun.reader.publisher.service.PublisherService;
 
@@ -21,10 +21,9 @@ public class PublisherController extends Controller {
 	private PublisherService publisherService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(HttpServletRequest req) {
-		String curUserId = Utility.getUUID().toString();
-		req.getSession().setAttribute(CURRENT_USER, curUserId);
-		return "Greetings from Spring Boot!";
+	public ModelAndView index() {
+		ModelAndView mv = new ModelAndView("index");
+		return mv;
 	}
 
 	@RequestMapping(value = "/publisher", method = RequestMethod.POST)
