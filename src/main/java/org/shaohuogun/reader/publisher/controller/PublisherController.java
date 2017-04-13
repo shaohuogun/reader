@@ -4,27 +4,20 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.shaohuogun.common.Controller;
 import org.shaohuogun.common.Utility;
+import org.shaohuogun.reader.publisher.model.Publisher;
+import org.shaohuogun.reader.publisher.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-import org.shaohuogun.reader.publisher.model.Publisher;
-import org.shaohuogun.reader.publisher.service.PublisherService;
 
 @RestController
 public class PublisherController extends Controller {
 
 	@Autowired
 	private PublisherService publisherService;
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView("index");
-		return mv;
-	}
 
 	@RequestMapping(value = "/publisher", method = RequestMethod.POST)
 	public Publisher createPublisher(HttpServletRequest req, @RequestBody Publisher publisher) throws Exception {
