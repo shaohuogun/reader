@@ -10,8 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class PortalController extends Controller {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView index() {
-		return new ModelAndView("index");
+	public ModelAndView portal() {
+		return new ModelAndView("portal");
 	}
 
 }
