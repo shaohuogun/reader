@@ -2,7 +2,7 @@
   "name": "reader",
   "version": "1.0.0",
   "description": "A personal toolkit for reading the internet.",
-  "main": "index.js",
+  "main": "portal.js",
   "scripts": {
     "build": "webpack",
     "build-dev": "webpack -w -d"
