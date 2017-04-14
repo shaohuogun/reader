@@ -19,14 +19,14 @@ public class PublisherController extends Controller {
 	@Autowired
 	private PublisherService publisherService;
 
-	@RequestMapping(value = "/publisher", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/publisher", method = RequestMethod.POST)
 	public Publisher createPublisher(HttpServletRequest req, @RequestBody Publisher publisher) throws Exception {
 		publisher.setId(Utility.getUUID());
 		publisher.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");		
 		return publisherService.createPublisher(publisher);
 	}
 
-	@RequestMapping(value = "/publisher/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/publisher/{id}", method = RequestMethod.GET)
 	public Publisher getPublisher(@PathVariable String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
 			throw new Exception("Invalid argument.");

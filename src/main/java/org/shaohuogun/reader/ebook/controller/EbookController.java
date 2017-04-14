@@ -16,6 +16,9 @@ import org.shaohuogun.common.Controller;
 import org.shaohuogun.common.Model;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
+import org.shaohuogun.reader.message.model.Content;
+import org.shaohuogun.reader.message.model.Message;
+import org.shaohuogun.reader.message.service.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,45 +27,47 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.shaohuogun.reader.message.model.Message;
-import org.shaohuogun.reader.message.model.Content;
-import org.shaohuogun.reader.message.service.MessageService;
-import org.shaohuogun.reader.channel.model.Channel;
-import org.shaohuogun.reader.channel.service.ChannelService;
-
 @RestController
 public class EbookController extends Controller {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@Autowired
-	private ChannelService channelService;
 
 	@Autowired
 	private MessageService messageService;
 
-	@RequestMapping(value = "/ebook", method = RequestMethod.GET)
-	public void createChannel(HttpServletRequest req, @RequestParam(required = true) String channelId) throws Exception {
-		String str = "";
+	@RequestMapping(value = "/api/ebook", method = RequestMethod.GET)
+	public void createChannel(HttpServletRequest req, @RequestParam(required = true) String channelId,
+			@RequestParam(required = true) String book) throws Exception {
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		String innerString = "";
 		try {
-			String tempStr = "";
-			
-	        ClassLoader classLoader = getClass().getClassLoader();
-	        URL url = classLoader.getResource("template/template.html");
+			String tempStr1 = "";
+			URL url = classLoader.getResource("template/ebook-message.html");
 			FileInputStream is = new FileInputStream(url.getFile());
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			while ((tempStr = br.readLine()) != null) {
-				str = str + tempStr;
+			while ((tempStr1 = br.readLine()) != null) {
+				innerString = innerString + tempStr1;
 			}
-
 			is.close();
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
-		
-		Channel channel = channelService.getChannel(channelId);
 
-//		String channelId = "WX-张兰";
+		String outerString = "";
+		try {
+			String tempStr2 = "";
+			URL url = classLoader.getResource("template/ebook-channel.html");
+			FileInputStream is = new FileInputStream(url.getFile());
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			while ((tempStr2 = br.readLine()) != null) {
+				outerString = outerString + tempStr2;
+			}
+			is.close();
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+		}
+
 		int total = messageService.getMessageCountInChannel(channelId);
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
@@ -78,9 +83,9 @@ public class EbookController extends Controller {
 				Date releaseDate = ((Message) curMessage).getReleaseDate();
 				Content content = messageService.getContentByMessageId(curMessage.getId());
 
-				String ebook = new String(str);
+				String ebook = new String(innerString);
 				ebook = ebook.replace("###TITLE###", title);
-				ebook = ebook.replace("###RELEASE-DATE###", Utility.formatDate(releaseDate));				
+				ebook = ebook.replace("###RELEASE-DATE###", Utility.formatDate(releaseDate));
 				String original = content.getOriginal();
 				original = original.replace("<br>", "");
 				original = original.replaceAll("<img[^>]+src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>", "");
@@ -89,10 +94,11 @@ public class EbookController extends Controller {
 			}
 		}
 		
-		FileWriter fw = new FileWriter(
-				"/Users/iSnailing/Downloads/TempDir/ebook/" + channel.getName() + ".html");
+		outerString = outerString.replace("###TITLE###", book);
+		outerString = outerString.replace("###BODY###", sb.toString());
+		FileWriter fw = new FileWriter("/Users/iSnailing/Downloads/TempDir/ebook/" + book + ".html");
 		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(sb.toString());
+		bw.write(outerString);
 		bw.flush();
 		bw.close();
 	}

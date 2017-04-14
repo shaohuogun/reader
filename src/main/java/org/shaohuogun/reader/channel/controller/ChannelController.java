@@ -25,7 +25,7 @@ public class ChannelController extends Controller {
 	@Autowired
 	private ChannelService channelService;
 
-	@RequestMapping(value = "/publisher/{id}/channel", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/publisher/{id}/channel", method = RequestMethod.POST)
 	public Channel createChannel(HttpServletRequest req, @PathVariable String id, @RequestBody Channel channel) throws Exception {
 		if ((id == null) || id.isEmpty()) {
 			throw new Exception("Invalid argument.");
@@ -44,7 +44,7 @@ public class ChannelController extends Controller {
 		return channelService.createChannel(channel);
 	}
 
-	@RequestMapping(value = "/channel/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/channel/{id}", method = RequestMethod.GET)
 	public Channel getChannel(@PathVariable String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
 			throw new Exception("Invalid argument.");

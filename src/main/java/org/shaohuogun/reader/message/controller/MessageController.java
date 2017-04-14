@@ -82,7 +82,7 @@ public class MessageController extends Controller {
 		}
 	}
 
-	@RequestMapping(value = "/channel/{id}/message", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/channel/{id}/message", method = RequestMethod.GET)
 	public Pagination getMessagesInChannel(@PathVariable String id,
 			@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
 		if ((id == null) || id.isEmpty()) {
@@ -96,7 +96,7 @@ public class MessageController extends Controller {
 		return messageService.getMessagesInChannel(id, pagination);
 	}
 
-	@RequestMapping(value = "/message/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/message/{id}", method = RequestMethod.GET)
 	public Message getMessage(@PathVariable String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
 			throw new Exception("Invalid argument.");
@@ -105,7 +105,7 @@ public class MessageController extends Controller {
 		return messageService.getMessage(id);
 	}
 
-	@RequestMapping(value = "/message/{id}/content", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/message/{id}/content", method = RequestMethod.GET)
 	public Content getContentByMessageId(@PathVariable String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
 			throw new Exception("Invalid argument.");

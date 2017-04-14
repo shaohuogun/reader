@@ -31,7 +31,7 @@ public class PickerController extends Controller {
 	@Autowired
 	private MessageService messageService;
 
-	@RequestMapping(value = "/picker", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/picker", method = RequestMethod.POST)
 	public void receiveResult(HttpServletRequest req) throws Exception {
 		req.setCharacterEncoding(Utility.UTF8);
 		StringBuffer sb = new StringBuffer();

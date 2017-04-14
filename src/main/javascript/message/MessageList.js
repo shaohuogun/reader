@@ -1,15 +1,9 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
+import {ListItem, List} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
-import Avatar from 'material-ui/Avatar';
-import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
 
-var Message = React.createClass({
+var MessageListItem = React.createClass({
 	render: function() {
 		return (
 			<ListItem
@@ -27,7 +21,7 @@ var MessageList = React.createClass({
 		this.props.messages.forEach(function(message) {
 			rows.push(
 				<div>
-				<Message message={message} key={message.id} />
+				<MessageListItem message={message} key={message.id} />
 				<Divider />
 				</div>
 			);
