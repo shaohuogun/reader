@@ -1,5 +1,7 @@
 package org.shaohuogun.reader.channel.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,10 @@ public class ChannelDao {
 
 	public Channel selectById(String id) {
 		return sqlSession.selectOne("org.shaohuogun.reader.channel.dao.ChannelMapper.selectById", id);
+	}
+	
+	public List<Channel> selectByCreator(String creator) {
+		return sqlSession.selectList("org.shaohuogun.reader.channel.dao.ChannelMapper.selectByCreator", creator);
 	}
 
 	public void update(Channel channel) {

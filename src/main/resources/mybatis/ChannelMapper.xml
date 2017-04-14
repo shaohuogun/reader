@@ -46,6 +46,11 @@
 		select * from READER_CHANNEL where id = #{id}
 	</select>
 
+	<select id="selectByCreator" parameterType="java.lang.String"
+		resultMap="channelResultMap">
+		select * from READER_CHANNEL where deleted = '0' and creator = #{creator}
+	</select>
+	
 	<update id="update" parameterType="org.shaohuogun.reader.channel.model.Channel"
 		flushCache="true">
 		update

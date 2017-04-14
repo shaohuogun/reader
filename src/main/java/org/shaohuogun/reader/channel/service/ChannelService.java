@@ -33,6 +33,14 @@ public class ChannelService {
 
 		return channelDao.selectById(id);
 	}
+	
+	public List<Channel> getChannelsByCreator(String creator) throws Exception {
+		if ((creator == null) || creator.isEmpty()) {
+			throw new Exception("Invalid argument.");
+		}
+
+		return channelDao.selectByCreator(creator);
+	}
 
 	public List<Channel> getChannels(Pagination pagination) throws Exception {
 		if (pagination == null) {

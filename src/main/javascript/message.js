@@ -6,25 +6,27 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import MessageList from './message/MessageList';
 
-var App = React.createClass({
-  loadMessagesFromServer: function() {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    // 设置 initial state
+    this.state = { messages: [] };
+  }
+
+  loadMessagesFromServer() {
     var self = this;
     $.ajax({
       url: "/api/channel/b6840c19-501d-49e7-a809-24fcd3015c78/message",
     }).then(function(data) {
       self.setState({ messages: data.objects });
     });
-  },
+  }
 
-  getInitialState: function() {
-    return { messages: [] };
-  },
-
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadMessagesFromServer();
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -36,7 +38,16 @@ var App = React.createClass({
       </div>
     );
   }
-});
+
+};
+
+App.propTypes = {
+  initialValue: React.PropTypes.string
+};
+
+App.defaultProps = {
+  initialValue: ''
+};
 
 let app = document.createElement('div');
 ReactDOM.render(<App />, app);

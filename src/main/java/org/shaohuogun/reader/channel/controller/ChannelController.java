@@ -1,5 +1,7 @@
 package org.shaohuogun.reader.channel.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.shaohuogun.common.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.shaohuogun.reader.channel.model.Channel;
@@ -42,6 +45,11 @@ public class ChannelController extends Controller {
 		channel.setPickingBatchNo(Utility.getUUID());
 		
 		return channelService.createChannel(channel);
+	}
+	
+	@RequestMapping(value = "/api/channel", method = RequestMethod.GET)
+	public List<Channel> getChannelsByCreator(@RequestParam(required = true) String creator) throws Exception {
+		return channelService.getChannelsByCreator(creator);
 	}
 
 	@RequestMapping(value = "/api/channel/{id}", method = RequestMethod.GET)
