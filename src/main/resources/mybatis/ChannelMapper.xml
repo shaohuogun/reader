@@ -24,10 +24,8 @@
 	<insert id="insert" parameterType="org.shaohuogun.reader.channel.model.Channel">
 		insert into READER_CHANNEL
 		(id,
-		creator, create_date, deleted, picking_status,
-		picking_batch_no,
-		picking_amount, picking_count, publisher_id, url,
-		name)
+		creator, create_date, deleted, picking_status, picking_batch_no,
+		picking_amount, picking_count, publisher_id, url, name)
 		values (#{id},
 		#{creator}, #{createDate}, #{deleted},
 		#{pickingStatus},
@@ -35,7 +33,8 @@
 		#{pickingAmount},
 		#{pickingCount},
 		#{publisherId},
-		#{url}, #{name}
+		#{url},
+		#{name}
 		)
 	</insert>
 
