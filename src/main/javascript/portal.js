@@ -38,18 +38,17 @@ class App extends React.Component {
     this.state = {
       channels: [],
       messages: [],
+      selectedChannelId: "",
       total: 0,
       display: 0,
       number: 0,
     };
   }
-  
+
   gotoPage = (page) => {
     var self = this;
-    console.log(page);
-    console.log(page);
     $.ajax({
-      url: "/api/channel/b6840c19-501d-49e7-a809-24fcd3015c78/message?page=" + page.toString(),
+      url: "/api/channel/" + self.state.selectedChannelId + "/message?page=" + page.toString(),
     }).then(function(pagination) {
       self.setState({
         messages: pagination.objects,
@@ -88,7 +87,7 @@ class App extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Card style={channelListStyle}>
       <CardHeader title="徐胜勇" />
-      <ChannelList channels={this.state.channels} />
+      <ChannelList channels={this.state.channels} parent={this} />
       </Card>
       </MuiThemeProvider>
 

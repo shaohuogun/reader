@@ -26,6 +26,10 @@ export default class MessageList extends React.Component {
 	}
 
 	render() {
+		if (this.props.messages == null) {
+			return (<List></List>);
+		}
+
 		var rows = [];
 		var messageCount = this.props.messages.length;
 		for (var i = 0; i < messageCount; i++) {
