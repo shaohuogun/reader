@@ -1,5 +1,6 @@
 package org.shaohuogun.reader.channel.controller;
 
+import java.net.URL;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,7 @@ public class ChannelController extends Controller {
 		if (publisher == null) {
 			throw new Exception("Invalid argument.");
 		}
-		
+			
 		channel.setId(Utility.getUUID());
 		channel.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
 		channel.setPublisherId(id);
@@ -59,6 +60,12 @@ public class ChannelController extends Controller {
 		}
 
 		return channelService.getChannel(id);
+	}
+	
+	public static void main(String[] args) throws Exception {
+		URL targetUrl = new URL("http://www.ppzuowen.com/book/xiaomaoriji/xiangbianchengrendehouzi/");
+		String basePath = targetUrl.getProtocol() + "://" + targetUrl.getAuthority();
+		System.out.println(basePath);
 	}
 
 }

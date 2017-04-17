@@ -42,14 +42,12 @@ CREATE TABLE `READER_CHANNEL` (
   `last_modify_date` datetime DEFAULT NULL,
   `deleted` char(1) NOT NULL,
   `picking_status` varchar(16) NOT NULL,
-  `picking_strategy` char(36) NOT NULL,
   `picking_batch_no` char(36) NOT NULL,
   `picking_amount` int(11) NOT NULL,
   `picking_count` int(11) NOT NULL,
   `publisher_id` char(36) NOT NULL,
   `url` varchar(256) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `base_path` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -61,7 +59,6 @@ CREATE TABLE `READER_MESSAGE` (
   `last_modify_date` datetime DEFAULT NULL,
   `deleted` char(1) NOT NULL,
   `picking_status` varchar(16) NOT NULL, 
-  `picking_strategy` char(36) NOT NULL,
   `picking_batch_no` char(36) NOT NULL,
   `picking_amount` int(11) NOT NULL,
   `picking_count` int(11) NOT NULL,  

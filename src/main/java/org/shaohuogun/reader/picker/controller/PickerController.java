@@ -3,6 +3,7 @@ package org.shaohuogun.reader.picker.controller;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,18 +75,15 @@ public class PickerController extends Controller {
 				message.setId(Utility.getUUID());
 				message.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
 				message.setChannelId(channel.getId());
-				message.setUrl(channel.getBasePath() + jsonMsg.getString("url"));
+				
+				URL targetUrl = new URL(channel.getUrl());
+				String basePath = targetUrl.getProtocol() + "://" + targetUrl.getAuthority();				
+				message.setUrl(basePath + jsonMsg.getString("url"));
 				message.setTitle(jsonMsg.getString("title"));
 				message.setReleaseDate(Utility.parseDate(jsonMsg.getString("releaseDate")));
 				message.setPageview(Integer.valueOf(jsonMsg.getString("pageview")));
 				message.setCommentCount(Integer.valueOf(jsonMsg.getString("commentCount")));
 				message.setDigest(jsonMsg.getString("digest"));
-				
-				if (channel.getPickingStrategy().indexOf("csdn") != -1) {
-					message.setPickingStrategy("csdn-message");
-				} else if (channel.getPickingStrategy().indexOf("ppzw") != -1) {
-					message.setPickingStrategy("ppzw-message");
-				}
 				
 				message.setPickingBatchNo(Utility.getUUID());  
 				messageService.createMessage(message);

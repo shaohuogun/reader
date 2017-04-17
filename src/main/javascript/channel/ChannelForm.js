@@ -23,8 +23,6 @@ export default class ChannelForm extends React.Component {
       expanded: false,
       name: "",
       url: "",
-      basePath: "",
-      pickingStrategy: "",
       pickingAmount: 1,
     };
   }
@@ -39,10 +37,6 @@ export default class ChannelForm extends React.Component {
       this.setState({name: newValue});
     } else if (fieldId == "url") {
       this.setState({url: newValue});
-    } else if (fieldId == "basePath") {
-      this.setState({basePath: newValue});
-    } else if (fieldId == "pickingStrategy") {
-      this.setState({pickingStrategy: newValue});
     } else if (fieldId == "pickingAmount") {
       this.setState({pickingAmount: newValue});
     }
@@ -53,8 +47,6 @@ export default class ChannelForm extends React.Component {
       expanded: false,
       name: "",
       url: "",
-      basePath: "",
-      pickingStrategy: "",
       pickingAmount: 1,
     });
   };
@@ -63,8 +55,6 @@ export default class ChannelForm extends React.Component {
     var data = JSON.stringify({
       url: this.state.url,
       name: this.state.name,
-      basePath: this.state.basePath,
-      pickingStrategy: this.state.pickingStrategy,
       pickingAmount: parseInt(this.state.pickingAmount),
     });
 
@@ -102,24 +92,6 @@ export default class ChannelForm extends React.Component {
       value={this.state.url}
       hintText="http://blog.csdn.net/futurelight"
       floatingLabelText="频道地址"
-      fullWidth={true}
-      onChange={this.handleFieldChange}
-      />
-      <br />
-      <TextField
-      id="basePath"
-      value={this.state.basePath}
-      hintText="http://blog.csdn.net"
-      floatingLabelText="基准地址"
-      fullWidth={true}
-      onChange={this.handleFieldChange}
-      />
-      <br />
-      <TextField
-      id="pickingStrategy"
-      value={this.state.pickingStrategy}
-      hintText="csdn-channel"
-      floatingLabelText="采集策略"
       fullWidth={true}
       onChange={this.handleFieldChange}
       />

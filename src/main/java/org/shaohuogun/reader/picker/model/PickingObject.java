@@ -8,7 +8,6 @@ public abstract class PickingObject extends Model {
 	
 	public final static String KEY_TARGET_URL = "targetUrl";
 	public final static String KEY_TARGET_TYPE = "targetType";
-	public final static String KEY_STRATEGY_NAME = "strategyName";
 	public final static String KEY_BATCH_NO = "batchNo";
 
 	public static final String STATUS_INITIAL = "initial";
@@ -16,8 +15,6 @@ public abstract class PickingObject extends Model {
 	public static final String STATUS_FINISHED = "finished";
 
 	private String pickingStatus = STATUS_INITIAL;
-	
-	private String pickingStrategy;
 
 	private String pickingBatchNo;
 
@@ -33,14 +30,6 @@ public abstract class PickingObject extends Model {
 
 	public void setPickingStatus(String pickingStatus) {
 		this.pickingStatus = pickingStatus;
-	}
-
-	public String getPickingStrategy() {
-		return pickingStrategy;
-	}
-
-	public void setPickingStrategy(String pickingStrategy) {
-		this.pickingStrategy = pickingStrategy;
 	}
 
 	public String getPickingBatchNo() {

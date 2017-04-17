@@ -49,14 +49,12 @@ public class PickingRequestJob implements Job {
 			if (channel != null) {
 				String targetUrl = channel.getUrl();
 				String targetType = channel.getPickingType();
-				String strategyName = channel.getPickingStrategy();
 				String batchNo = channel.getPickingBatchNo();
 				if (channel.getPickingAmount() > 1) {
 					for (int i = 1; i <= channel.getPickingAmount(); i++) {
 						JSONObject jsonRequest = new JSONObject();
 						jsonRequest.put(PickingObject.KEY_TARGET_URL, (targetUrl + i));
 						jsonRequest.put(PickingObject.KEY_TARGET_TYPE, targetType);
-						jsonRequest.put(PickingObject.KEY_STRATEGY_NAME, strategyName);
 						jsonRequest.put(PickingObject.KEY_BATCH_NO, batchNo);
 						pickerService.sendRequest(jsonRequest);
 					}
@@ -64,7 +62,6 @@ public class PickingRequestJob implements Job {
 					JSONObject jsonRequest = new JSONObject();
 					jsonRequest.put(PickingObject.KEY_TARGET_URL, targetUrl);
 					jsonRequest.put(PickingObject.KEY_TARGET_TYPE, targetType);
-					jsonRequest.put(PickingObject.KEY_STRATEGY_NAME, strategyName);
 					jsonRequest.put(PickingObject.KEY_BATCH_NO, batchNo);
 					pickerService.sendRequest(jsonRequest);
 				}
@@ -79,7 +76,6 @@ public class PickingRequestJob implements Job {
 			if (message != null) {
 				String targetUrl = message.getUrl();
 				String targetType = message.getPickingType();
-				String strategyName = message.getPickingStrategy();
 				String batchNo = message.getPickingBatchNo();
 				if (message.getPickingAmount() > 1) {
 					for (int i = 1; i <= message.getPickingAmount(); i++) {
@@ -88,7 +84,6 @@ public class PickingRequestJob implements Job {
 						JSONObject jsonRequest = new JSONObject();
 						jsonRequest.put(PickingObject.KEY_TARGET_URL, targetUrl);
 						jsonRequest.put(PickingObject.KEY_TARGET_TYPE, targetType);
-						jsonRequest.put(PickingObject.KEY_STRATEGY_NAME, strategyName);
 						jsonRequest.put(PickingObject.KEY_BATCH_NO, batchNo);
 						pickerService.sendRequest(jsonRequest);
 					}
@@ -96,7 +91,6 @@ public class PickingRequestJob implements Job {
 					JSONObject jsonRequest = new JSONObject();
 					jsonRequest.put(PickingObject.KEY_TARGET_URL, targetUrl);
 					jsonRequest.put(PickingObject.KEY_TARGET_TYPE, targetType);
-					jsonRequest.put(PickingObject.KEY_STRATEGY_NAME, strategyName);
 					jsonRequest.put(PickingObject.KEY_BATCH_NO, batchNo);
 					pickerService.sendRequest(jsonRequest);
 				}

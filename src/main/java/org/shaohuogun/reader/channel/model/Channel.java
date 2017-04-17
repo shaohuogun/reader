@@ -16,8 +16,6 @@ public class Channel extends PickingObject {
 	private String url;
 	
 	private String name;
-	
-	private String basePath;
 
 	@Override
 	public String getPickingType() {
@@ -46,14 +44,6 @@ public class Channel extends PickingObject {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getBasePath() {
-		return basePath;
-	}
-
-	public void setBasePath(String basePath) {
-		this.basePath = basePath;
 	}
 
 }
