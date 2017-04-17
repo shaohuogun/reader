@@ -21,8 +21,6 @@ export default class ChannelList extends React.Component {
         <div>
         <ListItem
         primaryText={<a href={channel.url}>{channel.name}</a>}
-        key={channel.id}
-        index={i + 1}
         onTouchTap={this.handleListItemCLick.bind(this, channel.id)}
         />
         <Divider />

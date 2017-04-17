@@ -3,10 +3,12 @@ package org.shaohuogun.reader.channel.controller;
 import java.net.URL;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.shaohuogun.common.Controller;
 import org.shaohuogun.common.Utility;
+import org.shaohuogun.reader.channel.model.Channel;
+import org.shaohuogun.reader.channel.service.ChannelService;
+import org.shaohuogun.reader.publisher.model.Publisher;
+import org.shaohuogun.reader.publisher.service.PublisherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import org.shaohuogun.reader.channel.model.Channel;
-import org.shaohuogun.reader.channel.service.ChannelService;
-import org.shaohuogun.reader.publisher.model.Publisher;
-import org.shaohuogun.reader.publisher.service.PublisherService;
 
 @RestController
 public class ChannelController extends Controller {
@@ -30,7 +27,7 @@ public class ChannelController extends Controller {
 	private ChannelService channelService;
 
 	@RequestMapping(value = "/api/publisher/{id}/channel", method = RequestMethod.POST)
-	public Channel createChannel(HttpServletRequest req, @PathVariable String id, @RequestBody Channel channel) throws Exception {
+	public Channel createChannel(@PathVariable String id, @RequestBody Channel channel) throws Exception {
 		if ((id == null) || id.isEmpty()) {
 			throw new Exception("Invalid argument.");
 		}

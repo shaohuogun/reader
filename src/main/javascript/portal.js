@@ -86,7 +86,7 @@ class App extends React.Component {
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Card style={channelListStyle}>
-      <CardHeader title="徐胜勇" />
+      <CardHeader title="媒体频道" />
       <ChannelList channels={this.state.channels} parent={this} />
       </Card>
       </MuiThemeProvider>

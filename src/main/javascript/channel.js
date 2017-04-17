@@ -26,9 +26,6 @@ class App extends React.Component {
     this.state = {
       channels: [],
       messages: [],
-      total: 0,
-      display: 0,
-      number: 0,
     };
   }
 
@@ -57,7 +54,7 @@ class App extends React.Component {
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Card style={channelListStyle}>
-      <CardHeader title="徐胜勇" />
+      <CardHeader title="媒体频道" />
       <ChannelList channels={this.state.channels} />
       </Card>
       </MuiThemeProvider>

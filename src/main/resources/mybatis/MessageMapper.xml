@@ -12,8 +12,7 @@
 		<result property="lastModifier" column="last_modifier" />
 		<result property="lastModifyDate" column="last_modify_date" />
 		<result property="deleted" column="deleted" />
-		<result property="pickingStatus" column="picking_status" />
-		<result property="pickingStrategy" column="picking_strategy" />
+		<result property="pickingStatus" column="picking_status" />>
 		<result property="pickingBatchNo" column="picking_batch_no" />
 		<result property="pickingAmount" column="picking_amount" />
 		<result property="pickingCount" column="picking_count" />
@@ -29,7 +28,7 @@
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.message.model.Message">
 		insert into READER_MESSAGE (id,
-		creator, create_date, deleted, picking_status, picking_strategy,
+		creator, create_date, deleted, picking_status,
 		picking_batch_no,
 		picking_amount, picking_count, channel_id, url,
 		title, release_date,
@@ -38,7 +37,6 @@
 		#{creator},
 		#{createDate}, #{deleted},
 		#{pickingStatus},
-		#{pickingStrategy},
 		#{pickingBatchNo},
 		#{pickingAmount},
 		#{pickingCount},

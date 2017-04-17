@@ -13,31 +13,29 @@
 		<result property="lastModifyDate" column="last_modify_date" />
 		<result property="deleted" column="deleted" />
 		<result property="pickingStatus" column="picking_status" />
-		<result property="pickingStrategy" column="picking_strategy" />
 		<result property="pickingBatchNo" column="picking_batch_no" />
 		<result property="pickingAmount" column="picking_amount" />
 		<result property="pickingCount" column="picking_count" />
 		<result property="publisherId" column="publisher_id" />
 		<result property="url" column="url" />
 		<result property="name" column="name" />
-		<result property="basePath" column="base_path" />
 	</resultMap>
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.channel.model.Channel">
-		insert into READER_CHANNEL (id,
-		creator, create_date, deleted, picking_status, picking_strategy,
+		insert into READER_CHANNEL
+		(id,
+		creator, create_date, deleted, picking_status,
 		picking_batch_no,
 		picking_amount, picking_count, publisher_id, url,
-		name, base_path)
+		name)
 		values (#{id},
 		#{creator}, #{createDate}, #{deleted},
 		#{pickingStatus},
-		#{pickingStrategy},
 		#{pickingBatchNo},
 		#{pickingAmount},
 		#{pickingCount},
 		#{publisherId},
-		#{url}, #{name}, #{basePath}
+		#{url}, #{name}
 		)
 	</insert>
 
@@ -48,9 +46,10 @@
 
 	<select id="selectByCreator" parameterType="java.lang.String"
 		resultMap="channelResultMap">
-		select * from READER_CHANNEL where deleted = '0' and creator = #{creator}
+		select * from READER_CHANNEL where deleted = '0' and creator
+		= #{creator}
 	</select>
-	
+
 	<update id="update" parameterType="org.shaohuogun.reader.channel.model.Channel"
 		flushCache="true">
 		update
@@ -69,11 +68,11 @@
 		select * from READER_CHANNEL where deleted = '0' and
 		picking_status = #{pickingStatus} order by create_date asc limit 1
 	</select>
-	
+
 	<select id="selectByPickingBatchNo" parameterType="java.lang.String"
 		resultMap="channelResultMap">
 		select * from READER_CHANNEL where deleted = '0' and
 		picking_batch_no = #{pickingBatchNo} order by create_date asc limit 1
-	</select>		
+	</select>
 </mapper>
 
