@@ -1,6 +1,5 @@
 package org.shaohuogun.reader.channel.controller;
 
-import java.net.URL;
 import java.util.List;
 
 import org.shaohuogun.common.Controller;
@@ -59,10 +58,4 @@ public class ChannelController extends Controller {
 		return channelService.getChannel(id);
 	}
 	
-	public static void main(String[] args) throws Exception {
-		URL targetUrl = new URL("http://www.ppzuowen.com/book/xiaomaoriji/xiangbianchengrendehouzi/");
-		String basePath = targetUrl.getProtocol() + "://" + targetUrl.getAuthority();
-		System.out.println(basePath);
-	}
-
 }

@@ -117,14 +117,6 @@ class App extends React.Component {
 
 };
 
-App.propTypes = {
-  initialValue: React.PropTypes.string
-};
-
-App.defaultProps = {
-  initialValue: ''
-};
-
 let app = document.createElement('div');
 ReactDOM.render(<App />, app);
 document.body.appendChild(app);

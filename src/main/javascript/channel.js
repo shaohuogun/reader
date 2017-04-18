@@ -53,10 +53,7 @@ class App extends React.Component {
       <br />
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Card style={channelListStyle}>
-      <CardHeader title="媒体频道" />
-      <ChannelList channels={this.state.channels} />
-      </Card>
+      <ChannelList style={channelListStyle} channels={this.state.channels} />
       </MuiThemeProvider>
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -66,15 +63,6 @@ class App extends React.Component {
       </div>
     );
   }
-
-};
-
-App.propTypes = {
-  initialValue: React.PropTypes.string
-};
-
-App.defaultProps = {
-  initialValue: ''
 };
 
 let app = document.createElement('div');

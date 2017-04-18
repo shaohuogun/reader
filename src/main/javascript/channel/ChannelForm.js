@@ -21,8 +21,9 @@ export default class ChannelForm extends React.Component {
     // 设置 initial state
     this.state = {
       expanded: false,
-      name: "",
       url: "",
+      name: "",
+      description: "",
       pickingAmount: 1,
     };
   }
@@ -33,10 +34,12 @@ export default class ChannelForm extends React.Component {
 
   handleFieldChange = (event, newValue) => {
     var fieldId = event.target.id;
-    if (fieldId == "name") {
-      this.setState({name: newValue});
-    } else if (fieldId == "url") {
+    if (fieldId == "url") {
       this.setState({url: newValue});
+    } else if (fieldId == "name") {
+      this.setState({name: newValue});
+    } else if (fieldId == "description") {
+      this.setState({description: newValue});
     } else if (fieldId == "pickingAmount") {
       this.setState({pickingAmount: newValue});
     }
@@ -45,8 +48,9 @@ export default class ChannelForm extends React.Component {
   handleCancel = () => {
     this.setState({
       expanded: false,
-      name: "",
       url: "",
+      name: "",
+      description: "",
       pickingAmount: 1,
     });
   };
@@ -55,12 +59,13 @@ export default class ChannelForm extends React.Component {
     var data = JSON.stringify({
       url: this.state.url,
       name: this.state.name,
+      description: this.state.description,
       pickingAmount: parseInt(this.state.pickingAmount),
     });
 
     $.ajax({
-      type: "POST",
       url: "/api/publisher/27ce8721-01fb-4471-9060-614457b4532d/channel",
+      type: "POST",
       data: data,
       contentType: "application/json;charset=utf-8",
       dataType: "json"
@@ -79,15 +84,6 @@ export default class ChannelForm extends React.Component {
       />
       <CardText expandable={true}>
       <TextField
-      id="name"
-      value={this.state.name}
-      hintText="霍泰稳的编辑空间"
-      floatingLabelText="频道名称"
-      fullWidth={true}
-      onChange={this.handleFieldChange}
-      />
-      <br />
-      <TextField
       id="url"
       value={this.state.url}
       hintText="http://blog.csdn.net/futurelight"
@@ -96,6 +92,25 @@ export default class ChannelForm extends React.Component {
       onChange={this.handleFieldChange}
       />
       <br />
+
+      <TextField
+      id="name"
+      value={this.state.name}
+      floatingLabelText="频道名称"
+      fullWidth={true}
+      onChange={this.handleFieldChange}
+      />
+      <br />
+
+      <TextField
+      id="description"
+      value={this.state.description}
+      floatingLabelText="频道简介"
+      fullWidth={true}
+      onChange={this.handleFieldChange}
+      />
+      <br />
+
       <TextField
       id="pickingAmount"
       value={this.state.pickingAmount}
