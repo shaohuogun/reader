@@ -60,7 +60,7 @@ export default class ChannelForm extends React.Component {
 
     $.ajax({
       type: "POST",
-      url: "/api/publisher/c9ceea1d-967c-488b-a6ee-6582d622bad5/channel",
+      url: "/api/publisher/27ce8721-01fb-4471-9060-614457b4532d/channel",
       data: data,
       contentType: "application/json;charset=utf-8",
       dataType: "json"
