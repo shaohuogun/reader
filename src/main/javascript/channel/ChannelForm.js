@@ -1,15 +1,8 @@
 import $ from "jquery";
 import React from 'react';
-import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
-
-const channelFormStyle = {
-  width: 800,
-  margin: 20,
-  float: 'left',
-  display: 'inline-block',
-};
+import RaisedButton from 'material-ui/RaisedButton';
 
 const toolbarStyle = {
   textAlign: 'center',
@@ -18,7 +11,6 @@ const toolbarStyle = {
 export default class ChannelForm extends React.Component {
   constructor(props) {
     super(props);
-    // 设置 initial state
     this.state = {
       expanded: false,
       url: "",
@@ -76,7 +68,7 @@ export default class ChannelForm extends React.Component {
 
   render() {
     return (
-      <Card style={channelFormStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+      <Card style={this.props.style} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
       <CardHeader
       title="新增订阅频道"
       actAsExpander={true}
@@ -86,7 +78,7 @@ export default class ChannelForm extends React.Component {
       <TextField
       id="url"
       value={this.state.url}
-      hintText="http://blog.csdn.net/futurelight"
+      hintText="http://blog.csdn.net/futurelight/article/list/"
       floatingLabelText="频道地址"
       fullWidth={true}
       onChange={this.handleFieldChange}
@@ -121,8 +113,8 @@ export default class ChannelForm extends React.Component {
       />
       </CardText>
       <CardActions style={toolbarStyle} expandable={true}>
-      <FlatButton label="取消" onTouchTap={this.handleCancel} />
-      <FlatButton label="提交" onTouchTap={this.handleSubmit} />
+      <RaisedButton label="取消" secondary={true} onTouchTap={this.handleCancel} />
+      <RaisedButton label="提交" primary={true} onTouchTap={this.handleSubmit} />
       </CardActions>
       </Card>
     );

@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ActionBook from 'material-ui/svg-icons/action/book';
 import FontIcon from 'material-ui/FontIcon';
 
-const ebookButtonStyle = {
+const toolbarStyle = {
 	textAlign: 'center',
 };
 
@@ -55,7 +55,7 @@ export default class ChannelInfo extends React.Component {
       <CardText>
       {this.state.channel.description}
       </CardText>
-      <CardActions style={ebookButtonStyle}>
+      <CardActions style={toolbarStyle}>
       <RaisedButton
         label="生成电子书"
         labelPosition="before"

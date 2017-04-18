@@ -1,20 +1,22 @@
-import $ from "jquery";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppBar from 'material-ui/AppBar';
-import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card';
 
 import ChannelList from './channel/ChannelList';
 import ChannelForm from './channel/ChannelForm';
 
-injectTapEventPlugin();
-
 const channelListStyle = {
-  width: 300,
-  margin: 20,
+  width: 800,
+  marginLeft: 20,
+  float: 'left',
+  display: 'inline-block',
+};
+
+const channelFormStyle = {
+  width: 350,
+  marginLeft: 10,
   float: 'left',
   display: 'inline-block',
 };
@@ -22,25 +24,8 @@ const channelListStyle = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // 设置 initial state
     this.state = {
-      channels: [],
-      messages: [],
     };
-  }
-
-  loadMessagesFromServer() {
-    var self = this;
-
-    $.ajax({
-      url: "/api/channel?creator=a11039eb-4ba1-441a-bfdb-0d40f61a53dd",
-    }).then(function(data) {
-      self.setState({ channels: data });
-    });
-  }
-
-  componentDidMount() {
-    this.loadMessagesFromServer();
   }
 
   render() {
@@ -53,13 +38,12 @@ class App extends React.Component {
       <br />
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <ChannelList style={channelListStyle} channels={this.state.channels} />
+      <ChannelList style={channelListStyle} />
       </MuiThemeProvider>
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <ChannelForm/>
+      <ChannelForm style={channelFormStyle} />
       </MuiThemeProvider>
-
       </div>
     );
   }

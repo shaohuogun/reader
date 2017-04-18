@@ -1,8 +1,7 @@
 package org.shaohuogun.reader.channel.controller;
 
-import java.util.List;
-
 import org.shaohuogun.common.Controller;
+import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.channel.model.Channel;
 import org.shaohuogun.reader.channel.service.ChannelService;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ChannelController extends Controller {
-	
+
 	@Autowired
 	private PublisherService publisherService;
 
@@ -30,23 +29,18 @@ public class ChannelController extends Controller {
 		if ((id == null) || id.isEmpty()) {
 			throw new Exception("Invalid argument.");
 		}
-		
+
 		Publisher publisher = publisherService.getPublisher(id);
 		if (publisher == null) {
 			throw new Exception("Invalid argument.");
 		}
-			
+
 		channel.setId(Utility.getUUID());
 		channel.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
 		channel.setPublisherId(id);
 		channel.setPickingBatchNo(Utility.getUUID());
-		
+
 		return channelService.createChannel(channel);
-	}
-	
-	@RequestMapping(value = "/api/channel", method = RequestMethod.GET)
-	public List<Channel> getChannelsByCreator(@RequestParam(required = true) String creator) throws Exception {
-		return channelService.getChannelsByCreator(creator);
 	}
 
 	@RequestMapping(value = "/api/channel/{id}", method = RequestMethod.GET)
@@ -57,5 +51,16 @@ public class ChannelController extends Controller {
 
 		return channelService.getChannel(id);
 	}
-	
+
+	@RequestMapping(value = "/api/channel", method = RequestMethod.GET)
+	public Pagination getChannels(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
+		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
+
+		int total = channelService.getChannelCountByCreator(creator);
+		Pagination pagination = new Pagination();
+		pagination.setTotal(total);
+		pagination.setPageIndex(page);
+		return channelService.getChannelsByCreator(creator, pagination);
+	}
+
 }

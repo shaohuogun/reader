@@ -46,10 +46,16 @@
 		select * from READER_CHANNEL where id = #{id}
 	</select>
 
+	<select id="countByCreator" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) from READER_CHANNEL where deleted = '0' and creator
+		= #{creator}
+	</select>
+
 	<select id="selectByCreator" parameterType="java.lang.String"
 		resultMap="channelResultMap">
 		select * from READER_CHANNEL where deleted = '0' and creator
-		= #{creator}
+		= #{creator} order by create_date desc
 	</select>
 
 	<update id="update" parameterType="org.shaohuogun.reader.channel.model.Channel"

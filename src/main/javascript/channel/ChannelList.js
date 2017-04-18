@@ -1,52 +1,91 @@
+import $ from "jquery";
 import React from 'react';
 import PropTypes from 'prop-types';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import {ListItem, List} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
+import Pagination from 'material-ui-pagination';
+
+injectTapEventPlugin();
+
+const paginationStyle = {
+	textAlign: 'center',
+};
 
 export default class ChannelList extends React.Component {
   constructor(props) {
     super(props);
-  }
+    this.state = {
+			pagination: {},
+		};
+	}
 
-  handleItemCLick = (channelIndex) => {
-    var selectedChannel = this.props.parent.state.channels[channelIndex];
-    this.props.parent.setState({ selectedChannel: selectedChannel });
+	loadPagination = (page) => {
+		var self = this;
+		$.ajax({
+			url: "/api/channel?page=" + page.toString(),
+		}).then(function(data) {
+			self.setState({
+				pagination: data,
+			});
+		});
+	}
+
+	componentDidMount() {
+		this.loadPagination(1);
+	}
+
+  handleItemCLick = (channelId) => {
+
   }
 
   render() {
-    var rows = [];
-    var channelCount = this.props.channels.length;
+		var channels = this.state.pagination.objects;
+		if (channels == null) {
+			return (<List></List>);
+		}
+
+		var rows = [];
+		var channelCount = channels.length;
 		for (var i = 0; i < channelCount; i++) {
-			var channel = this.props.channels[i];
-      rows.push(
+			var channel = channels[i];
+			rows.push(
         <ListItem
-        primaryText={ channel.name }
-        key={ channel.id }
-        onTouchTap={ this.handleItemCLick.bind(this, i) }
-        />
-      );
+  			primaryText={<span>[<a href={channel.url}>原文地址</a>]：{channel.name}</span>}
+  			secondaryText={channel.description}
+  			secondaryTextLines={1}
+  			key={channel.id}
+        onTouchTap={this.handleItemCLick.bind(this, channel.id)}
+  			/>
+			);
 
-      if (i < (channelCount - 1)) {
-        rows.push(<Divider />);
-      }
-    };
+			if (i < (channelCount - 1)) {
+				rows.push(<Divider />);
+			}
+		}
 
-    return (
-      <Card style={ this.props.style }>
+		return (
+			<Card style={this.props.style} zDepth={1}>
       <CardHeader title="频道列表" />
-      <CardText>
-      <List>
-      {rows}
-      </List>
-      </CardText>
-      </Card>
-    );
-  }
+			<CardText>
+			<List>
+			{rows}
+			</List>
+			</CardText>
+			<CardActions style={paginationStyle}>
+			<Pagination
+			total = {this.state.pagination.pageCount}
+			current = {this.state.pagination.pageIndex}
+			display = {this.state.pagination.pageShow}
+			onChange = {current => this.loadPagination(current)}
+			/>
+			</CardActions>
+			</Card>
+		);
+	}
 
 };
 
 ChannelList.propTypes = {
-  channels: PropTypes.array.isRequired,
-  parent: PropTypes.object.isRequired,
 };

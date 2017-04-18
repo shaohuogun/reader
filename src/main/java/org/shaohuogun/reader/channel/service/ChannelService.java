@@ -2,6 +2,7 @@ package org.shaohuogun.reader.channel.service;
 
 import java.util.List;
 
+import org.shaohuogun.common.Model;
 import org.shaohuogun.common.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,21 +35,28 @@ public class ChannelService {
 		return channelDao.selectById(id);
 	}
 	
-	public List<Channel> getChannelsByCreator(String creator) throws Exception {
+	public int getChannelCountByCreator(String creator) throws Exception {
 		if ((creator == null) || creator.isEmpty()) {
 			throw new Exception("Invalid argument.");
 		}
-
-		return channelDao.selectByCreator(creator);
+		
+		return channelDao.countByCreator(creator);
 	}
-
-	public List<Channel> getChannels(Pagination pagination) throws Exception {
+	
+	public Pagination getChannelsByCreator(String creator, Pagination pagination) throws Exception {
+		if ((creator == null) || creator.isEmpty()) {
+			throw new Exception("Invalid argument.");
+		}
+		
 		if (pagination == null) {
 			throw new Exception("Invalid argument.");
 		}
-
-		// TODO Auto-generated method stub
-		return null;
+		
+		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
+		int limit = pagination.getPageSize();
+		List<Model> channels = channelDao.selectByCreator(creator, offset, limit);
+		pagination.setObjects(channels);
+		return pagination;
 	}
 
 	@Transactional
@@ -68,7 +76,7 @@ public class ChannelService {
 		
 		return channelDao.selectByPickingStatus(pickingStatus);
 	}
-
+	
 	public Channel getChannelByPickingBatchNo(String pickingBatchNo) throws Exception {
 		if (pickingBatchNo == null) {
 			throw new Exception("Invalid argument.");
@@ -76,5 +84,5 @@ public class ChannelService {
 		
 		return channelDao.selectByPickingBatchNo(pickingBatchNo);
 	}
-
+	
 }

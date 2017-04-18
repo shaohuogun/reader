@@ -1,35 +1,13 @@
 import $ from "jquery";
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ListItem, List} from 'material-ui/List';
 import {Card, CardText, CardActions} from 'material-ui/Card';
-import Pagination from 'material-ui-pagination';
+import {ListItem, List} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import Pagination from 'material-ui-pagination';
 
 const paginationStyle = {
 	textAlign: 'center',
-};
-
-export class MessageListItem extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-		return (
-			<ListItem
-			primaryText={<span>[<a href={this.props.message.url}>原文地址</a>]：{this.props.message.title}</span>}
-			secondaryText={this.props.message.digest}
-			secondaryTextLines={2}
-			key={this.props.message.id}
-			/>
-		);
-	}
-
-};
-
-MessageListItem.propTypes = {
-	message: PropTypes.object.isRequired,
 };
 
 export default class MessageList extends React.Component {
@@ -66,7 +44,12 @@ export default class MessageList extends React.Component {
 		for (var i = 0; i < messageCount; i++) {
 			var message = messages[i];
 			rows.push(
-				<MessageListItem message={message} />
+				<ListItem
+				primaryText={<span>[<a href={message.url}>原文地址</a>]：{message.title}</span>}
+				secondaryText={message.digest}
+				secondaryTextLines={2}
+				key={message.id}
+				/>
 			);
 
 			if (i < (messageCount - 1)) {

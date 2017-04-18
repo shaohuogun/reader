@@ -58,7 +58,11 @@ public class MessageService {
 		return messageDao.selectById(message.getId());
 	}
 
-	public int getMessageCountInChannel(String channelId) {
+	public int getMessageCountInChannel(String channelId) throws Exception {
+		if ((channelId == null) || channelId.isEmpty()) {
+			throw new Exception("Invalid argument.");
+		}
+		
 		return messageDao.countInChannel(channelId);
 	}
 
