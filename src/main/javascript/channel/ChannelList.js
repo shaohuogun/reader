@@ -1,13 +1,11 @@
 import $ from "jquery";
 import React from 'react';
 import PropTypes from 'prop-types';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import {ListItem, List} from 'material-ui/List';
+import {Link} from 'react-router-dom';
 import Divider from 'material-ui/Divider';
 import Pagination from 'material-ui-pagination';
-
-injectTapEventPlugin();
 
 const paginationStyle = {
 	textAlign: 'center',
@@ -52,7 +50,7 @@ export default class ChannelList extends React.Component {
 			var channel = channels[i];
 			rows.push(
         <ListItem
-  			primaryText={<span>[<a href={channel.url}>原文地址</a>]：{channel.name}</span>}
+  			primaryText={<span>[<a href={channel.url}>原文地址</a>]：<Link to={{pathname: "/message", query: {channelId: channel.id}}}>{channel.name}</Link></span>}
   			secondaryText={channel.description}
   			secondaryTextLines={1}
   			key={channel.id}

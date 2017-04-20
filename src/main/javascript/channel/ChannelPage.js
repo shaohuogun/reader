@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 
-import ChannelList from 'ChannelList';
-import ChannelForm from 'ChannelForm';
+import ChannelList from './ChannelList';
+import ChannelForm from './ChannelForm';
 
 const channelListStyle = {
   width: 800,
@@ -31,12 +30,6 @@ export default class ChannelPage extends React.Component {
   render() {
     return (
       <div>
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <AppBar title="阅读网络" />
-      </MuiThemeProvider>
-
-      <br />
-
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <ChannelList style={channelListStyle} />
       </MuiThemeProvider>

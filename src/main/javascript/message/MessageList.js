@@ -17,7 +17,7 @@ export default class MessageList extends React.Component {
 			pagination: {},
 		};
 	}
-	
+
 	loadPagination = (page) => {
 		var self = this;
 		$.ajax({
