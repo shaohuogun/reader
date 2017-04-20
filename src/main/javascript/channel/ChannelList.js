@@ -64,7 +64,7 @@ export default class ChannelList extends React.Component {
 		}
 
 		return (
-			<Card style={this.props.style} zDepth={1}>
+			<Card {...this.props} zDepth={1}>
       <CardHeader title="频道列表" />
 			<CardText>
 			<List>

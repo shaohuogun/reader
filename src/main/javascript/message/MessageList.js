@@ -58,7 +58,7 @@ export default class MessageList extends React.Component {
 		}
 
 		return (
-			<Card style={this.props.style} zDepth={1}>
+			<Card {...this.props} zDepth={1}>
 			<CardText>
 			<List>
 			{rows}

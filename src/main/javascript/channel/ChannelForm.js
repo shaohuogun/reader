@@ -68,7 +68,7 @@ export default class ChannelForm extends React.Component {
 
   render() {
     return (
-      <Card style={this.props.style} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+      <Card {...this.props} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
       <CardHeader
       title="新增订阅频道"
       actAsExpander={true}
