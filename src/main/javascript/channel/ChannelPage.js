@@ -4,8 +4,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 
-import ChannelList from './channel/ChannelList';
-import ChannelForm from './channel/ChannelForm';
+import ChannelList from 'ChannelList';
+import ChannelForm from 'ChannelForm';
 
 const channelListStyle = {
   width: 800,
@@ -21,7 +21,7 @@ const channelFormStyle = {
   display: 'inline-block',
 };
 
-class App extends React.Component {
+export default class ChannelPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,6 +49,5 @@ class App extends React.Component {
   }
 };
 
-let app = document.createElement('div');
-ReactDOM.render(<App />, app);
-document.body.appendChild(app);
+ChannelPage.propTypes = {
+};

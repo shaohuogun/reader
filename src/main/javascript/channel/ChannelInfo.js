@@ -67,7 +67,7 @@ export default class ChannelInfo extends React.Component {
       </Card>
     );
   }
-
+	
 };
 
 ChannelInfo.propTypes = {

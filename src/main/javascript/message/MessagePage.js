@@ -28,7 +28,7 @@ const messageListStyle = {
   display: 'inline-block',
 };
 
-class App extends React.Component {
+export default class MessagePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,9 +58,5 @@ class App extends React.Component {
 
 };
 
-App.propTypes = {
+MessagePage.propTypes = {
 };
-
-let app = document.createElement('div');
-ReactDOM.render(<App />, app);
-document.body.appendChild(app);

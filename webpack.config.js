@@ -6,9 +6,7 @@ const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 
 const config = {
   entry: {
-       portal: [path.join(srcPath, '/portal.js')],
-       channel: [path.join(srcPath, '/channel.js')],
-       message: [path.join(srcPath, '/message.js')]
+       reader: path.join(srcPath, '/reader.js'),
     },
   output: {
     path: dstPath,
