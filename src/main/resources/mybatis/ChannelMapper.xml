@@ -16,7 +16,6 @@
 		<result property="pickingBatchNo" column="picking_batch_no" />
 		<result property="pickingAmount" column="picking_amount" />
 		<result property="pickingCount" column="picking_count" />
-		<result property="publisherId" column="publisher_id" />
 		<result property="url" column="url" />
 		<result property="name" column="name" />
 		<result property="description" column="description"
@@ -27,14 +26,13 @@
 		insert into READER_CHANNEL
 		(id,
 		creator, create_date, deleted, picking_status, picking_batch_no,
-		picking_amount, picking_count, publisher_id, url, name, description)
+		picking_amount, picking_count, url, name, description)
 		values (#{id},
 		#{creator}, #{createDate}, #{deleted},
 		#{pickingStatus},
 		#{pickingBatchNo},
 		#{pickingAmount},
 		#{pickingCount},
-		#{publisherId},
 		#{url},
 		#{name},
 		#{description}

@@ -14,6 +14,14 @@ import MessagePage from './message/MessagePage';
 // Needed for onTouchTap
 injectTapEventPlugin();
 
+const CustomLink = ({activeOnlyWhenExact, to, label}) => (
+  <Route exact={activeOnlyWhenExact} path={to} children={({match}) => (
+    <span>
+      {match ? '[' : ''}<Link to={to}>{label}</Link>{match ? ']' : ''}
+    </span>
+  )}/>
+)
+
 export class Layout extends React.Component {
   constructor(props) {
     super(props);
@@ -27,8 +35,8 @@ export class Layout extends React.Component {
       </MuiThemeProvider>
 
       <ul>
-      <li><Link to="/">首页</Link></li>
-      <li><Link to="/channel">频道</Link></li>
+      <li><CustomLink activeOnlyWhenExact={true} to="/" label="首页"/></li>
+      <li><CustomLink to="/channel" label="频道"/></li>
       </ul>
       {this.props.children}
       </div>

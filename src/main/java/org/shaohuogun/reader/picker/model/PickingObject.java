@@ -1,5 +1,7 @@
 package org.shaohuogun.reader.picker.model;
 
+import javax.validation.constraints.Min;
+
 import org.shaohuogun.common.Model;
 
 public abstract class PickingObject extends Model {
@@ -17,7 +19,8 @@ public abstract class PickingObject extends Model {
 	private String pickingStatus = STATUS_INITIAL;
 
 	private String pickingBatchNo;
-
+	
+	@Min(value = 1, message = "最小值为：1")
 	private Integer pickingAmount = 1;
 
 	private Integer pickingCount = 0;
