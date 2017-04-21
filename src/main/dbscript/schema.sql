@@ -81,6 +81,6 @@ CREATE TABLE `READER_CONTENT` (
   `last_modify_date` datetime DEFAULT NULL,
   `deleted` char(1) NOT NULL,
   `message_id` char(36) NOT NULL,
-  `original` blob,
+  `original` mediumblob,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

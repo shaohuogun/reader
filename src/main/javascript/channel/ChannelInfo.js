@@ -22,6 +22,8 @@ export default class ChannelInfo extends React.Component {
     var self = this;
     $.ajax({
       url: "/api/channel/" + self.props.channelId,
+			type: "GET",
+			data: {},
     }).then(function(data) {
       self.setState({
         channel: data,
@@ -35,12 +37,15 @@ export default class ChannelInfo extends React.Component {
 
   generateEbook = () => {
     var self = this;
-    var requestParams = "targetType=1&targetId=" + self.props.channelId;
     $.ajax({
-      url: "/api/ebook/generate?" + requestParams,
-      type: "GET",
+      url: "/api/ebook/generate",
+			type: "GET",
+			data: {
+				targetType: "1",
+				targetId: self.props.channelId,
+			},
     }).then(function(data) {
-      var downloadUrl = "/api/ebook/download?" + requestParams;
+      var downloadUrl = "/api/ebook/download?targetType=1&targetId=" + self.props.channelId;
       window.open(downloadUrl, "_blank");
     });
   }
@@ -61,7 +66,7 @@ export default class ChannelInfo extends React.Component {
         labelPosition="before"
         primary={true}
         icon={<ActionBook />}
-        onTouchTap={ this.generateEbook.bind(this) }
+        onTouchTap={this.generateEbook.bind(this)}
       />
       </CardActions>
       </Card>

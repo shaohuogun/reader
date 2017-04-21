@@ -12,9 +12,9 @@ const paginationStyle = {
 };
 
 export default class ChannelList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+	constructor(props) {
+		super(props);
+		this.state = {
 			pagination: {},
 		};
 	}
@@ -22,7 +22,11 @@ export default class ChannelList extends React.Component {
 	loadPagination = (page) => {
 		var self = this;
 		$.ajax({
-			url: "/api/channel?page=" + page.toString(),
+			url: "/api/channel",
+			type: "GET",
+			data: {
+				page: page.toString(),
+			},
 		}).then(function(data) {
 			self.setState({
 				pagination: data,
@@ -34,11 +38,11 @@ export default class ChannelList extends React.Component {
 		this.loadPagination(1);
 	}
 
-  handleItemCLick = (channelId) => {
+	handleItemCLick = (channelId) => {
 
-  }
+	}
 
-  render() {
+	render() {
 		var channels = this.state.pagination.objects;
 		if (channels == null) {
 			return (<List></List>);
@@ -49,13 +53,13 @@ export default class ChannelList extends React.Component {
 		for (var i = 0; i < channelCount; i++) {
 			var channel = channels[i];
 			rows.push(
-        <ListItem
-  			primaryText={<span>[<a href={channel.url}>原文地址</a>]：<Link to={{pathname: "/message", query: {channelId: channel.id}}}>{channel.name}</Link></span>}
-  			secondaryText={channel.description}
-  			secondaryTextLines={1}
-  			key={channel.id}
-        onTouchTap={this.handleItemCLick.bind(this, channel.id)}
-  			/>
+				<ListItem
+				primaryText={<span>[<a href={channel.url}>原文地址</a>]：<Link to={{pathname: "/message", query: {channelId: channel.id}}}>{channel.name}</Link></span>}
+				secondaryText={channel.description}
+				secondaryTextLines={1}
+				key={channel.id}
+				onTouchTap={this.handleItemCLick.bind(this, channel.id)}
+				/>
 			);
 
 			if (i < (channelCount - 1)) {
@@ -65,7 +69,7 @@ export default class ChannelList extends React.Component {
 
 		return (
 			<Card {...this.props} zDepth={1}>
-      <CardHeader title="频道列表" />
+			<CardHeader title="频道列表" />
 			<CardText>
 			<List>
 			{rows}

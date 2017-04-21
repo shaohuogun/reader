@@ -21,7 +21,11 @@ export default class MessageList extends React.Component {
 	loadPagination = (page) => {
 		var self = this;
 		$.ajax({
-			url: "/api/channel/" + self.props.channelId + "/message?page=" + page.toString(),
+			url: "/api/channel/" + self.props.channelId + "/message",
+			type: "GET",
+		  data: {
+		    page: page.toString(),
+		  },
 		}).then(function(data) {
 			self.setState({
 				pagination: data,

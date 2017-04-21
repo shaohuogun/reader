@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import {BrowserRouter as Router, browserHistory, Route, Redirect} from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import {BrowserRouter as Router, browserHistory, Route, IndexRoute, Link, Redirect} from 'react-router-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -15,7 +14,7 @@ import MessagePage from './message/MessagePage';
 // Needed for onTouchTap
 injectTapEventPlugin();
 
-export class Navigation extends React.Component {
+export class Layout extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -23,14 +22,21 @@ export class Navigation extends React.Component {
   render() {
     return (
       <div>
-      <Link to="/portal">首页</Link>
-      <Link to="/channel">频道</Link>
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <AppBar title="阅读网络" />
+      </MuiThemeProvider>
+
+      <ul>
+      <li><Link to="/">首页</Link></li>
+      <li><Link to="/channel">频道</Link></li>
+      </ul>
+      {this.props.children}
       </div>
     );
   }
 }
 
-Navigation.propTypes = {
+Layout.propTypes = {
 };
 
 export default class Reader extends React.Component {
@@ -41,17 +47,11 @@ export default class Reader extends React.Component {
   render() {
     return (
       <Router history={browserHistory}>
-      <div>
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <AppBar title="阅读网络" />
-      </MuiThemeProvider>
-
-      <Route path="/" component={Navigation} />
-      <Redirect from="/" to="/portal" />
-      <Route path="/portal" component={PortalPage}/>
+      <Layout>
+      <Route exact path="/" component={PortalPage}/>
       <Route path="/channel" component={ChannelPage}/>
       <Route path="/message" component={MessagePage}/>
-      </div>
+      </Layout>
       </Router>
     );
   }
