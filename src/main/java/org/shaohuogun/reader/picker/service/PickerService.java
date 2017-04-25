@@ -25,7 +25,7 @@ public class PickerService {
 
 		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost httpPost = new HttpPost(pickerServiceUrl);
-		StringEntity params = new StringEntity(jsonRequest.toString(), Utility.UTF8);
+		StringEntity params = new StringEntity(jsonRequest.toString(), Utility.ENCODE_UTF8);
 		httpPost.addHeader("Content-Type", "application/json;charset=UTF-8");
 		httpPost.addHeader("Accept", "application/json");
 		httpPost.setEntity(params);

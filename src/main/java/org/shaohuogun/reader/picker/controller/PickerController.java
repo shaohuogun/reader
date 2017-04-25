@@ -34,7 +34,7 @@ public class PickerController extends Controller {
 
 	@RequestMapping(value = "/api/picker", method = RequestMethod.POST)
 	public void receiveResult(HttpServletRequest req) throws Exception {
-		req.setCharacterEncoding(Utility.UTF8);
+		req.setCharacterEncoding(Utility.ENCODE_UTF8);
 		StringBuffer sb = new StringBuffer();
 		InputStream is = req.getInputStream();
 		InputStreamReader isr = new InputStreamReader(is);
