@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>${ channelName }</title>
+    <style type="text/css">
+        body{
+            font-size: 1.1em;
+            margin:0 5px;
+        }
+        
+        h1{
+            font-size:4em;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+<div id="cover">
+    <h1 id="title">${ channelName }</h1>
+    <br />
+    <a href="content.html">跳至正文首页</a><br /> 
+    ${ createTime?datetime?string.short }
+</div>
+<mbp:pagebreak />
+</body>
+</html>

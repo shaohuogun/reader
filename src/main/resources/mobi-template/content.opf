@@ -9,7 +9,7 @@
             <dc:title>${ channelName }(${ createTime?datetime?string.short })</dc:title>
             </#if>
             <dc:language>zh-CN</dc:language>
-            <dc:identifier id="uid">${ uuid }${ currentDatetime?string("yyyy-MM-dd hh:mm:ss a") }</dc:identifier>
+            <dc:identifier id="uid" opf:scheme="uuid">${ uuid }${ currentDatetime?string("yyyy-MM-dd hh:mm:ss a") }</dc:identifier>
             <dc:creator>kindlereader</dc:creator>
             <dc:publisher>kindlereader</dc:publisher>
             <dc:subject>xushengyong</dc:subject>
@@ -21,19 +21,30 @@
             <output encoding="utf-8" content-type="application/x-mobipocket-subscription-magazine"></output>
         </x-metadata>
         </#if>
+        <meta name="cover" content="BookCover" />   
     </metadata>
-    <manifest>
+    
+    <manifest> 
+    <item id="BookCover" media-type="image/jpg" href="cover.jpg"></item>  
+    <item id="cover" media-type="application/xhtml+xml" href="cover.html"></item>
+    <item id="copyright" media-type="application/xhtml+xml" href="copyright.html"></item>
+    <item id="toc" media-type="application/xhtml+xml" href="toc.html"></item>
     <item id="content" media-type="application/xhtml+xml" href="content.html"></item>
-    <item id="toc" media-type="application/x-dtbncx+xml" href="toc.ncx"></item>
+    <item id="about" media-type="application/xhtml+xml" href="about.html"></item>
+    <item id="MyNcx" media-type="application/x-dtbncx+xml" href="toc.ncx"></item>
     </manifest>
-
-    <spine toc="toc">
-    <itemref idref="content"/>
+    
+    <spine toc="MyNcx">
+	<itemref idref="cover"/>
+	<itemref idref="copyright"/>
+	<itemref idref="toc"/>
+	<itemref idref="content"/>
+	<itemref idref="about"/>
     </spine>
 
     <guide>
-    <reference type="start" title="start" href="content.html#content"></reference>
-    <reference type="toc" title="toc" href="content.html#toc"></reference>
-    <reference type="text" title="cover" href="content.html#cover"></reference>
+    <reference type="cover" title="Cover" href="cover.html"></reference>
+    <reference type="toc" title="Table of Contents" href="toc.html"></reference>
+    <reference type="start" title="Start" href="copyright.html"></reference>  
     </guide>
 </package>

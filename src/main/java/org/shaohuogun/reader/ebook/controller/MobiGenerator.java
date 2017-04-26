@@ -2,6 +2,7 @@ package org.shaohuogun.reader.ebook.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,11 +28,14 @@ public class MobiGenerator {
 
 	private static final Logger logger = Logger.getLogger(MobiGenerator.class);
 
-	private static final String[] templateNames = { "content.html", "content.opf", "toc.ncx" };
+	private static final String[] templateNames = { "cover.html", "copyright.html", "toc.html", "content.html",
+			"about.html", "content.opf", "toc.ncx" };
 
 	private Configuration config;
-	
+
 	private final String kindlegenPath;
+	
+	private final String templateDir;
 
 	private final String outputDir;
 
@@ -46,6 +50,7 @@ public class MobiGenerator {
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL url = classLoader.getResource(templateDir);
 		this.config.setDirectoryForTemplateLoading(new File(url.getFile()));
+		this.templateDir = templateDir;
 		this.outputDir = outputDir;
 	}
 
@@ -57,27 +62,27 @@ public class MobiGenerator {
 		mobiMap.put("format", "periodical");
 		mobiMap.put("createTime", new Date());
 		mobiMap.put("messageCount", messages.size());
-		
+
 		List<HashMap<String, Object>> messageMaps = new ArrayList<HashMap<String, Object>>();
 		for (Model model : messages) {
 			if (model instanceof Message) {
 				Message message = (Message) model;
 				HashMap<String, Object> messageMap = new HashMap<String, Object>();
-				
-				String title = message.getTitle().replace('<', '[').replace('>', ']');				
+
+				String title = message.getTitle().replace('<', '[').replace('>', ']');
 				messageMap.put("title", title);
 				messageMap.put("releaseDate", message.getReleaseDate());
 				messageMap.put("url", message.getUrl());
 				messageMap.put("content", message.getDigest());
-				
+
 				messageMaps.add(messageMap);
 			}
 		}
-		
-		mobiMap.put("messages", messageMaps);		
+
+		mobiMap.put("messages", messageMaps);
 		return mobiMap;
 	}
-	
+
 	private void outputContent2File(final String content, final String fileName) throws Exception {
 		if ((content == null) || content.isEmpty() || (fileName == null) || fileName.isEmpty()) {
 			throw new NullPointerException("Content and file's name cann't be null or empty.");
@@ -109,9 +114,32 @@ public class MobiGenerator {
 		}
 	}
 	
+	private void copyCoverImage() throws Exception {
+		ClassLoader classLoader = getClass().getClassLoader();
+		URL url = classLoader.getResource(this.templateDir);
+		String imgSrcPath = String.format("%s/%s", url.getFile(), "cover.jpg");
+		String imgDstPath = String.format("%s/%s", this.outputDir, "cover.jpg");
+		
+		File imgSrcFile = new File(imgSrcPath);
+		File imgDstFile = new File(imgDstPath);
+		FileInputStream is = new FileInputStream(imgSrcFile);
+		FileOutputStream os = new FileOutputStream(imgDstFile);
+		
+		int readSize = 0;
+		byte[] readByte = new byte[1024];
+		while ((readSize = is.read(readByte)) != -1) {
+			os.write(readByte, 0, readSize);
+		}
+		
+		is.close();
+		os.close();
+	}
+
 	private String generateMobi() throws Exception {
+		copyCoverImage();
+		
 		String mobiFileName = channel.getName() + ".mobi";
-		String opfFilePath = String.format("%s/%s", this.outputDir, templateNames[1]);
+		String opfFilePath = String.format("%s/%s", this.outputDir, templateNames[5]);
 
 		String cmdString = String.format("%s/kindlegen %s -o %s", this.kindlegenPath, opfFilePath, mobiFileName);
 		Process process = Runtime.getRuntime().exec(cmdString);

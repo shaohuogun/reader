@@ -8,12 +8,10 @@
             font-size: 1.1em;
             margin:0 5px;
         }
-
         h1{
             font-size:4em;
             font-weight:bold;
         }
-
         h2 {
             font-size: 1.2em;
             font-weight: bold;
@@ -55,23 +53,20 @@
     </style>
 </head>
 <body>
-<div id="content">
-    <div id="section" class="section">
-        <#list messages as message >
-        <div id="article_${ message_index }" class="article">
-            <h2 class="do_article_title">
-                <#if message['url']?exists >
-                <a href="${ message['url'] }">${ message['title'] }</a>
-                <#else>
-                ${ message['title'] }
-                </#if>
-            </h2>
-            <#if message['releaseDate']?exists >${ message['releaseDate']?string("yyyy-MM-dd hh:mm:ss a") }</#if>
-            <div>${ message['content'] }</div>
-            <a href="toc.html#articleSignal_${ message_index }">跳至文章起始位置</a>
-        </div>
-        </#list>
-    </div>
+<div id="toc">
+	<h2>${ channelName }</h2>
+    <ol>
+		<#list messages as message >
+			<div id="articleSignal_${ message_index }">
+				<li>
+					<a href="content.html#article_${ message_index }">${ message['title'] }</a>
+					<br/>
+					<#if message['releaseDate']?exists > ${ message['releaseDate']?datetime?string.short }</#if>
+                </li>
+            </div>
+		</#list>
+	</ol>
 </div>
+<mbp:pagebreak />
 </body>
 </html>
