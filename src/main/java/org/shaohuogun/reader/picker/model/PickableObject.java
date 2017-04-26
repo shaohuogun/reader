@@ -4,7 +4,7 @@ import javax.validation.constraints.Min;
 
 import org.shaohuogun.common.Model;
 
-public abstract class PickingObject extends Model {
+public abstract class PickableObject extends Model {
 
 	private static final long serialVersionUID = 1L;
 	

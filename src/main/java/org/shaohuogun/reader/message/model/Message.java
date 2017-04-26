@@ -2,9 +2,9 @@ package org.shaohuogun.reader.message.model;
 
 import java.util.Date;
 
-import org.shaohuogun.reader.picker.model.PickingObject;
+import org.shaohuogun.reader.picker.model.PickableObject;
 
-public class Message extends PickingObject {
+public class Message extends PickableObject {
 
 	private static final long serialVersionUID = 1L;
 	

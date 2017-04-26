@@ -14,7 +14,7 @@ import org.shaohuogun.reader.channel.model.Channel;
 import org.shaohuogun.reader.channel.service.ChannelService;
 import org.shaohuogun.reader.message.model.Message;
 import org.shaohuogun.reader.message.service.MessageService;
-import org.shaohuogun.reader.picker.model.PickingObject;
+import org.shaohuogun.reader.picker.model.PickableObject;
 import org.shaohuogun.reader.picker.service.PickerService;
 import org.shaohuogun.reader.plugin.quartz.QuartzConfig;
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class PickingRequestJob implements Job {
 			PickerService pickerService = (PickerService) applicationContext.getBean("pickerService");
 
 			ChannelService channelService = (ChannelService) applicationContext.getBean("channelService");
-			Channel channel = channelService.getChannelByPickingStatus(PickingObject.STATUS_INITIAL);
+			Channel channel = channelService.getChannelByPickingStatus(PickableObject.STATUS_INITIAL);
 			if (channel != null) {
 				String targetUrl = channel.getUrl();
 				String targetType = channel.getPickingType();
@@ -53,26 +53,26 @@ public class PickingRequestJob implements Job {
 				if (channel.getPickingAmount() > 1) {
 					for (int i = 1; i <= channel.getPickingAmount(); i++) {
 						JSONObject jsonRequest = new JSONObject();
-						jsonRequest.put(PickingObject.KEY_TARGET_URL, (targetUrl + i));
-						jsonRequest.put(PickingObject.KEY_TARGET_TYPE, targetType);
-						jsonRequest.put(PickingObject.KEY_BATCH_NO, batchNo);
+						jsonRequest.put(PickableObject.KEY_TARGET_URL, (targetUrl + i));
+						jsonRequest.put(PickableObject.KEY_TARGET_TYPE, targetType);
+						jsonRequest.put(PickableObject.KEY_BATCH_NO, batchNo);
 						pickerService.sendRequest(jsonRequest);
 					}
 				} else {
 					JSONObject jsonRequest = new JSONObject();
-					jsonRequest.put(PickingObject.KEY_TARGET_URL, targetUrl);
-					jsonRequest.put(PickingObject.KEY_TARGET_TYPE, targetType);
-					jsonRequest.put(PickingObject.KEY_BATCH_NO, batchNo);
+					jsonRequest.put(PickableObject.KEY_TARGET_URL, targetUrl);
+					jsonRequest.put(PickableObject.KEY_TARGET_TYPE, targetType);
+					jsonRequest.put(PickableObject.KEY_BATCH_NO, batchNo);
 					pickerService.sendRequest(jsonRequest);
 				}
 
 				channel.setLastModifyDate(new Date());
-				channel.setPickingStatus(PickingObject.STATUS_PICKING);
+				channel.setPickingStatus(PickableObject.STATUS_PICKING);
 				channelService.modifyChannel(channel);
 			}
 
 			MessageService messageService = (MessageService) applicationContext.getBean("messageService");
-			Message message = messageService.getMessageByPickingStatus(PickingObject.STATUS_INITIAL);
+			Message message = messageService.getMessageByPickingStatus(PickableObject.STATUS_INITIAL);
 			if (message != null) {
 				String targetUrl = message.getUrl();
 				String targetType = message.getPickingType();
@@ -82,21 +82,21 @@ public class PickingRequestJob implements Job {
 						targetUrl += i;
 
 						JSONObject jsonRequest = new JSONObject();
-						jsonRequest.put(PickingObject.KEY_TARGET_URL, targetUrl);
-						jsonRequest.put(PickingObject.KEY_TARGET_TYPE, targetType);
-						jsonRequest.put(PickingObject.KEY_BATCH_NO, batchNo);
+						jsonRequest.put(PickableObject.KEY_TARGET_URL, targetUrl);
+						jsonRequest.put(PickableObject.KEY_TARGET_TYPE, targetType);
+						jsonRequest.put(PickableObject.KEY_BATCH_NO, batchNo);
 						pickerService.sendRequest(jsonRequest);
 					}
 				} else {
 					JSONObject jsonRequest = new JSONObject();
-					jsonRequest.put(PickingObject.KEY_TARGET_URL, targetUrl);
-					jsonRequest.put(PickingObject.KEY_TARGET_TYPE, targetType);
-					jsonRequest.put(PickingObject.KEY_BATCH_NO, batchNo);
+					jsonRequest.put(PickableObject.KEY_TARGET_URL, targetUrl);
+					jsonRequest.put(PickableObject.KEY_TARGET_TYPE, targetType);
+					jsonRequest.put(PickableObject.KEY_BATCH_NO, batchNo);
 					pickerService.sendRequest(jsonRequest);
 				}
 
 				message.setLastModifyDate(new Date());
-				message.setPickingStatus(PickingObject.STATUS_PICKING);
+				message.setPickingStatus(PickableObject.STATUS_PICKING);
 				messageService.modifyMessage(message);
 			}
 		} catch (Exception e) {

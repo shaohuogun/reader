@@ -45,8 +45,10 @@ CREATE TABLE `READER_CHANNEL` (
   `picking_batch_no` char(36) NOT NULL,
   `picking_amount` int(11) NOT NULL,
   `picking_count` int(11) NOT NULL,
+  `category` varchar(32) NOT NULL,
   `url` varchar(256) NOT NULL,
   `name` varchar(64) NOT NULL,
+  `publisher` varchar(64) NOT NULL,
   `description` blob,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

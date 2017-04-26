@@ -16,8 +16,10 @@
 		<result property="pickingBatchNo" column="picking_batch_no" />
 		<result property="pickingAmount" column="picking_amount" />
 		<result property="pickingCount" column="picking_count" />
+		<result property="category" column="category" />
 		<result property="url" column="url" />
 		<result property="name" column="name" />
+		<result property="publisher" column="publisher" />
 		<result property="description" column="description"
 			typeHandler="org.shaohuogun.reader.plugin.ibatis.BlobTypeHandler" />
 	</resultMap>
@@ -26,15 +28,17 @@
 		insert into READER_CHANNEL
 		(id,
 		creator, create_date, deleted, picking_status, picking_batch_no,
-		picking_amount, picking_count, url, name, description)
+		picking_amount, picking_count, category, url, name, publisher, description)
 		values (#{id},
 		#{creator}, #{createDate}, #{deleted},
 		#{pickingStatus},
 		#{pickingBatchNo},
 		#{pickingAmount},
 		#{pickingCount},
+		#{category},
 		#{url},
 		#{name},
+		#{publisher},
 		#{description}
 		)
 	</insert>

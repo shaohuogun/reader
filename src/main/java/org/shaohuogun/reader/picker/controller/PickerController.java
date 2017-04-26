@@ -17,7 +17,7 @@ import org.shaohuogun.reader.channel.service.ChannelService;
 import org.shaohuogun.reader.message.model.Content;
 import org.shaohuogun.reader.message.model.Message;
 import org.shaohuogun.reader.message.service.MessageService;
-import org.shaohuogun.reader.picker.model.PickingObject;
+import org.shaohuogun.reader.picker.model.PickableObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,14 +57,14 @@ public class PickerController extends Controller {
 		}
 
 		JSONObject jsonResult = new JSONObject(json);
-		String targetType = jsonResult.getString(PickingObject.KEY_TARGET_TYPE);
-		String batchNo = jsonResult.getString(PickingObject.KEY_BATCH_NO);
+		String targetType = jsonResult.getString(PickableObject.KEY_TARGET_TYPE);
+		String batchNo = jsonResult.getString(PickableObject.KEY_BATCH_NO);
 		if (Channel.PICKING_TYPE.equalsIgnoreCase(targetType)) {
 			Channel channel = channelService.getChannelByPickingBatchNo(batchNo);
 			channel.setLastModifyDate(new Date());
 			channel.setPickingCount(channel.getPickingCount() + 1);
 			if (channel.getPickingAmount() == channel.getPickingCount()) {
-				channel.setPickingStatus(PickingObject.STATUS_FINISHED);
+				channel.setPickingStatus(PickableObject.STATUS_FINISHED);
 			}
 
 			JSONArray jsonMsgs = jsonResult.getJSONArray("messages");
@@ -95,7 +95,7 @@ public class PickerController extends Controller {
 			message.setLastModifyDate(new Date());
 			message.setPickingCount(message.getPickingCount() + 1);
 			if (message.getPickingAmount() == message.getPickingCount()) {
-				message.setPickingStatus(PickingObject.STATUS_FINISHED);
+				message.setPickingStatus(PickableObject.STATUS_FINISHED);
 			}
 			
 			Content content = new Content();
