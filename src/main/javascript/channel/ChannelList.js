@@ -22,7 +22,7 @@ export default class ChannelList extends React.Component {
 	loadPagination = (page) => {
 		var self = this;
 		$.ajax({
-			url: "/api/channel",
+			url: "/api/channels",
 			type: "GET",
 			data: {
 				page: page.toString(),
@@ -45,7 +45,7 @@ export default class ChannelList extends React.Component {
 	render() {
 		var channels = this.state.pagination.objects;
 		if (channels == null) {
-			return (<List></List>);
+			return (<Card {...this.props} zDepth={1}></Card>);
 		}
 
 		var rows = [];

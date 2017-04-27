@@ -6,14 +6,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ChannelList from './ChannelList';
 import ChannelForm from './ChannelForm';
 
-const channelListStyle = {
+const leftStyle = {
   width: 800,
   marginLeft: 20,
   float: 'left',
   display: 'inline-block',
 };
 
-const channelFormStyle = {
+const rightStyle = {
   width: 350,
   marginLeft: 10,
   float: 'left',
@@ -31,11 +31,11 @@ export default class ChannelPage extends React.Component {
     return (
       <div>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <ChannelList style={channelListStyle} />
+      <ChannelList style={leftStyle} />
       </MuiThemeProvider>
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <ChannelForm style={channelFormStyle} />
+      <ChannelForm style={rightStyle} />
       </MuiThemeProvider>
       </div>
     );

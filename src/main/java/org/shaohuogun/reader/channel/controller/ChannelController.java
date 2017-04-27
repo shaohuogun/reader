@@ -34,7 +34,7 @@ public class ChannelController extends Controller {
 		return channelService.getChannel(id);
 	}
 
-	@RequestMapping(value = "/api/channel", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/channels", method = RequestMethod.GET)
 	public Pagination getChannels(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
 		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
 

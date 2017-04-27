@@ -23,7 +23,7 @@ export default class EbookTable extends React.Component {
 	loadPagination = (page) => {
 		var self = this;
 		$.ajax({
-			url: "/api/channel/" + self.props.channelId + "/ebook",
+			url: "/api/channel/" + self.props.channelId + "/ebooks",
 			type: "GET",
 		  data: {
 		    page: page.toString(),

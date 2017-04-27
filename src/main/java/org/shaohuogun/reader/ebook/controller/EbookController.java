@@ -71,7 +71,7 @@ public class EbookController extends Controller {
 		return ebookService.createEbook(ebook);
 	}
 	
-	@RequestMapping(value = "/api/channel/{id}/ebook", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/channel/{id}/ebooks", method = RequestMethod.GET)
 	public Pagination getEbooksInChannel(@PathVariable String id,
 			@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
 		int total = ebookService.getEbookCountInChannel(id);

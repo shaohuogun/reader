@@ -82,7 +82,7 @@ public class MessageController extends Controller {
 		}
 	}
 
-	@RequestMapping(value = "/api/channel/{id}/message", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/channel/{id}/messages", method = RequestMethod.GET)
 	public Pagination getMessagesInChannel(@PathVariable String id,
 			@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
 		int total = messageService.getMessageCountInChannel(id);

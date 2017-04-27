@@ -21,7 +21,7 @@ export default class MessageList extends React.Component {
 	loadPagination = (page) => {
 		var self = this;
 		$.ajax({
-			url: "/api/channel/" + self.props.channelId + "/message",
+			url: "/api/channel/" + self.props.channelId + "/messages",
 			type: "GET",
 		  data: {
 		    page: page.toString(),
@@ -40,7 +40,7 @@ export default class MessageList extends React.Component {
 	render() {
 		var messages = this.state.pagination.objects;
 		if (messages == null) {
-			return (<List></List>);
+			return (<Card {...this.props} zDepth={1}></Card>);
 		}
 
 		var rows = [];

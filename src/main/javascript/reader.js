@@ -5,7 +5,6 @@ import {BrowserRouter as Router, browserHistory, Route, IndexRoute, Link, Redire
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
 
 import PortalPage from './portal/PortalPage';
 import ChannelPage from './channel/ChannelPage';
