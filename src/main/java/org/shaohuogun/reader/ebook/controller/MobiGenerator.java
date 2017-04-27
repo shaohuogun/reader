@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 import org.shaohuogun.common.Model;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.channel.model.Channel;
+import org.shaohuogun.reader.ebook.model.Ebook;
 import org.shaohuogun.reader.message.model.Message;
 
 import freemarker.template.Configuration;
@@ -38,6 +39,8 @@ public class MobiGenerator {
 	private final String templateDir;
 
 	private final String outputDir;
+	
+	private String mobiFilePath;
 
 	private Channel channel;
 
@@ -45,13 +48,14 @@ public class MobiGenerator {
 
 	public MobiGenerator(String kindlegenDir, String templateDir, String outputDir) throws Exception {
 		this.kindlegenDir = kindlegenDir;
+		this.templateDir = templateDir;
+		this.outputDir = outputDir;
+		
 		Version version = new Version(2, 3, 26);
 		this.config = new Configuration(version);
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL url = classLoader.getResource(templateDir);
 		this.config.setDirectoryForTemplateLoading(new File(url.getFile()));
-		this.templateDir = templateDir;
-		this.outputDir = outputDir;
 	}
 
 	private Map<String, Object> generateMobiMap4Template() throws Exception {
@@ -93,7 +97,7 @@ public class MobiGenerator {
 		}
 
 		
-		String filePath = String.format("%s/%s", this.outputDir, fileName);
+		String filePath = String.format("%s/%s/%s", this.outputDir, mobiFilePath, fileName);
 		File newFile = new File(filePath);
 		if (!newFile.exists()) {
 			if (!newFile.createNewFile()) {
@@ -106,7 +110,7 @@ public class MobiGenerator {
 		outputStream.close();
 	}
 
-	private void generateTemplateFile(Map<String, Object> mobiMap) throws Exception {
+	private void generateFromTemplate(Map<String, Object> mobiMap) throws Exception {
 		for (int i = 0; i < templateNames.length; i++) {
 			String templateName = templateNames[i];
 			Template template = this.config.getTemplate(templateName);
@@ -123,7 +127,7 @@ public class MobiGenerator {
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL url = classLoader.getResource(this.templateDir);
 		String imgSrcPath = String.format("%s/%s", url.getFile(), "cover.jpg");
-		String imgDstPath = String.format("%s/%s", this.outputDir, "cover.jpg");
+		String imgDstPath = String.format("%s/%s/%s", this.outputDir, mobiFilePath, "cover.jpg");
 		
 		File imgSrcFile = new File(imgSrcPath);
 		File imgDstFile = new File(imgDstPath);
@@ -139,13 +143,45 @@ public class MobiGenerator {
 		is.close();
 		os.close();
 	}
+	
+	public Ebook generate(Channel channel, List<Model> messages) throws Exception {
+		if (channel == null) {
+			throw new NullPointerException("Channel cann't be null.");
+		}
+		
+		if ((messages == null) || messages.isEmpty()) {
+			throw new IllegalArgumentException("Messages cann't be null or empty.");
+		}
+		
+		this.channel = channel;
+		this.messages = messages;
+				
+		String creatorPath = String.format("%s/%s", this.outputDir, channel.getCreator());
+		File creatorDir = new File(creatorPath);
+        if (!creatorDir.exists()) {
+            boolean isSuccess = creatorDir.mkdir();
+            if (!isSuccess) {
+                throw new RuntimeException("Failed to create the directory:" + creatorPath);
+            }       	
+        }
 
-	private String generateMobi() throws Exception {
+		String channelPath = String.format("%s/%s", creatorPath, channel.getId());
+		File channelDir = new File(channelPath);
+        if (!channelDir.exists()) {
+            boolean isSuccess = channelDir.mkdir();
+            if (!isSuccess) {
+                throw new RuntimeException("Failed to create the directory:" + channelPath);
+            }       	
+        }
+        
+		String mobiFileName = channel.getName() + ".mobi";
+		mobiFilePath = String.format("%s/%s", channel.getCreator(), channel.getId());
+		      
+		Map<String, Object> mobiMap = generateMobiMap4Template();
+		generateFromTemplate(mobiMap);
 		copyCoverImage();
 		
-		String mobiFileName = channel.getName() + ".mobi";
-		String opfFilePath = String.format("%s/%s", this.outputDir, templateNames[5]);
-
+		String opfFilePath = String.format("%s/%s/%s", this.outputDir, mobiFilePath, templateNames[5]);
 		String cmdString = String.format("%s/kindlegen %s -o %s", this.kindlegenDir, opfFilePath, mobiFileName);
 		Process process = Runtime.getRuntime().exec(cmdString);
 		process.waitFor();
@@ -158,25 +194,15 @@ public class MobiGenerator {
 			result += tempString;
 		}
 		is.close();
-
 		logger.info(result);
-		return String.format("%s/%s", this.outputDir, mobiFileName);
-	}
-
-	public String generate(Channel channel, List<Model> messages) throws Exception {
-		if (channel == null) {
-			throw new NullPointerException("Channel cann't be null.");
-		}
 		
-		if ((messages == null) || messages.isEmpty()) {
-			throw new IllegalArgumentException("Messages cann't be null or empty.");
-		}
-		
-		this.channel = channel;
-		this.messages = messages;
-		Map<String, Object> mobiMap = this.generateMobiMap4Template();
-		this.generateTemplateFile(mobiMap);
-		return this.generateMobi();
+		Ebook ebook = new Ebook();
+		ebook.setId(Utility.getUUID());
+		ebook.setCreator(channel.getCreator());
+		ebook.setChannelId(channel.getId());
+		ebook.setName(mobiFileName);
+		ebook.setPath(mobiFilePath);
+		return ebook;
 	}
 
 }

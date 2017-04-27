@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shaohuogun.reader.ebook.dao.EbookMapper">
+	<resultMap id="ebookResultMap" type="org.shaohuogun.reader.ebook.model.Ebook">
+		<id property="id" column="id" />
+		<result property="creator" column="creator" />
+		<result property="createDate" column="create_date" />
+		<result property="lastModifier" column="last_modifier" />
+		<result property="lastModifyDate" column="last_modify_date" />
+		<result property="deleted" column="deleted" />
+		<result property="channelId" column="channel_id" />
+		<result property="name" column="name" />
+		<result property="path" column="path" />
+		<result property="downloads" column="downloads" />		
+	</resultMap>
+
+	<insert id="insert" parameterType="org.shaohuogun.reader.ebook.model.Ebook">
+		insert into READER_EBOOK (id,
+		creator, create_date, deleted, channel_id, name, path, downloads)
+		values (#{id},
+		#{creator}, #{createDate}, #{deleted}, #{channelId}, #{name}, #{path}, #{downloads})
+	</insert>
+
+	<select id="selectById" parameterType="java.lang.String"
+		resultMap="ebookResultMap">
+		select * from READER_EBOOK where id = #{id}
+	</select>
+
+	<select id="selectByChannelId" parameterType="java.lang.String"
+		resultMap="ebookResultMap">
+		select * from READER_EBOOK where deleted = '0' and channel_id
+		=
+		#{channelId}
+	</select>
+
+</mapper>

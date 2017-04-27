@@ -6,14 +6,16 @@
 
 <configuration>
     <typeAliases>
-    	<package name="org.shaohuogun.reader.publisher.model"/>
         <package name="org.shaohuogun.reader.channel.model"/>
         <package name="org.shaohuogun.reader.message.model"/>
+        <package name="org.shaohuogun.reader.ebook.model"/>
+        <package name="org.shaohuogun.reader.publisher.model"/>
     </typeAliases>
     <mappers>
-    	<mapper resource="mybatis/PublisherMapper.xml"/>
         <mapper resource="mybatis/ChannelMapper.xml"/>
         <mapper resource="mybatis/MessageMapper.xml"/>
         <mapper resource="mybatis/ContentMapper.xml"/>
+        <mapper resource="mybatis/EbookMapper.xml"/>
+        <mapper resource="mybatis/PublisherMapper.xml"/>
     </mappers>
 </configuration>

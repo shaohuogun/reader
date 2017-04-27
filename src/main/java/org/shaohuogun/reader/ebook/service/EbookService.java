@@ -21,5 +21,13 @@ public class EbookService {
 		ebookDao.insert(ebook);
 		return ebookDao.selectById(ebook.getId());
 	}
+	
+	public Ebook getEbook(String id) throws Exception {
+		if ((id == null) || id.isEmpty()) {
+			throw new IllegalArgumentException("Ebook id cann't be null or empty.");
+		}
+		
+		return ebookDao.selectById(id);
+	}
 
 }

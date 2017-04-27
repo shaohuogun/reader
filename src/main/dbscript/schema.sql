@@ -14,25 +14,11 @@
 --    limitations under the License.
 --
 
-drop table if exists `READER_PUBLISHER`;
 drop table if exists `READER_CHANNEL`;
 drop table if exists `READER_MESSAGE`;
 drop table if exists `READER_CONTENT`;
-
-CREATE TABLE `READER_PUBLISHER` (
-  `id` char(36) NOT NULL,
-  `creator` char(36) NOT NULL,
-  `create_date` datetime NOT NULL,
-  `last_modifier` char(36) DEFAULT NULL,
-  `last_modify_date` datetime DEFAULT NULL,
-  `deleted` char(1) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  `nickname` varchar(64) NOT NULL,
-  `sex` char(1) NOT NULL,
-  `portrait` varchar(256) NOT NULL,
-  `profile` blob,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+drop table if exists `READER_EBOOK`;
+drop table if exists `READER_PUBLISHER`;
 
 CREATE TABLE `READER_CHANNEL` (
   `id` char(36) NOT NULL,
@@ -85,3 +71,33 @@ CREATE TABLE `READER_CONTENT` (
   `original` mediumblob,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `READER_EBOOK` (
+  `id` char(36) NOT NULL,
+  `creator` char(36) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `last_modifier` char(36) DEFAULT NULL,
+  `last_modify_date` datetime DEFAULT NULL,
+  `deleted` char(1) NOT NULL,
+  `channel_id` char(36) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `path` varchar(256) NOT NULL,  
+  `downloads` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `READER_PUBLISHER` (
+  `id` char(36) NOT NULL,
+  `creator` char(36) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `last_modifier` char(36) DEFAULT NULL,
+  `last_modify_date` datetime DEFAULT NULL,
+  `deleted` char(1) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `nickname` varchar(64) NOT NULL,
+  `sex` char(1) NOT NULL,
+  `portrait` varchar(256) NOT NULL,
+  `profile` blob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

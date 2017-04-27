@@ -45,7 +45,8 @@ export default class ChannelInfo extends React.Component {
 				targetId: self.props.channelId,
 			},
     }).then(function(data) {
-      var downloadUrl = "/api/ebook/download?targetType=1&targetId=" + self.props.channelId;
+			var ebook = data;
+      var downloadUrl = "/api/ebook/" + ebook.id + "/download";
       window.open(downloadUrl, "_blank");
     });
   }
