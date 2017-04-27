@@ -24,7 +24,7 @@ public class MessageService {
 	@Transactional
 	public Message createMessage(Message message) throws Exception {
 		if (message == null) {
-			throw new Exception("Invalid argument.");
+			throw new NullPointerException("Message cann't be null.");
 		}
 
 		Message oldMessage = messageDao.selectByUrl(message.getUrl());
@@ -42,7 +42,7 @@ public class MessageService {
 
 	public Message getMessage(String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
-			throw new Exception("Invalid argument.");
+			throw new IllegalArgumentException("Message's id cann't be null or empty.");
 		}
 
 		return messageDao.selectById(id);
@@ -51,7 +51,7 @@ public class MessageService {
 	@Transactional
 	public Message modifyMessage(Message message) throws Exception {
 		if (message == null) {
-			throw new Exception("Invalid argument.");
+			throw new NullPointerException("Message cann't be null.");
 		}
 
 		messageDao.update(message);
@@ -60,15 +60,19 @@ public class MessageService {
 
 	public int getMessageCountInChannel(String channelId) throws Exception {
 		if ((channelId == null) || channelId.isEmpty()) {
-			throw new Exception("Invalid argument.");
+			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
 		}
 		
 		return messageDao.countInChannel(channelId);
 	}
 
 	public Pagination getMessagesInChannel(String id, Pagination pagination) throws Exception {
-		if ((id == null) || id.isEmpty() || (pagination == null)) {
-			throw new Exception("Invalid argument.");
+		if ((id == null) || id.isEmpty()) {
+			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
+		}
+		
+		if (pagination == null) {
+			throw new NullPointerException("Pagination cann't be null.");
 		}
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
@@ -81,7 +85,7 @@ public class MessageService {
 	@Transactional
 	public Content createContent(Content content) throws Exception {
 		if (content == null) {
-			throw new Exception("Invalid argument.");
+			throw new NullPointerException("Content cann't be null.");
 		}
 
 		contentDao.insert(content);
@@ -90,7 +94,7 @@ public class MessageService {
 
 	public Content getContent(String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
-			throw new Exception("Invalid argument.");
+			throw new IllegalArgumentException("Content's id cann't be null or empty.");
 		}
 
 		return contentDao.selectById(id);
@@ -98,7 +102,7 @@ public class MessageService {
 
 	public Content getContentByMessageId(String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
-			throw new Exception("Invalid argument.");
+			throw new IllegalArgumentException("Message's id cann't be null or empty.");
 		}
 
 		return contentDao.selectByMessageId(id);
@@ -107,7 +111,7 @@ public class MessageService {
 	@Transactional
 	public Content modifyContent(Content content) throws Exception {
 		if (content == null) {
-			throw new Exception("Invalid argument.");
+			throw new NullPointerException("Content cann't be null.");
 		}
 
 		contentDao.update(content);
@@ -115,17 +119,17 @@ public class MessageService {
 	}
 
 	public Message getMessageByPickingStatus(String pickingStatus) throws Exception {
-		if (pickingStatus == null) {
-			throw new Exception("Invalid argument.");
-		}
+		if ((pickingStatus == null) || pickingStatus.isEmpty()) {
+			throw new IllegalArgumentException("Picking status cann't be null or empty.");
+		}	
 
 		return messageDao.selectByPickingStatus(pickingStatus);
 	}
 	
 	public Message getMessageByPickingBatchNo(String pickingBatchNo) throws Exception {
-		if (pickingBatchNo == null) {
-			throw new Exception("Invalid argument.");
-		}		
+		if ((pickingBatchNo == null) || pickingBatchNo.isEmpty()) {
+			throw new IllegalArgumentException("Picking batch no cann't be null or empty.");
+		}	
 		
 		return messageDao.selectByPickingBatchNo(pickingBatchNo);
 	}

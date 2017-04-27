@@ -20,7 +20,7 @@ public class PickerService {
 	
 	public void sendRequest(JSONObject jsonRequest) throws Exception {
 		if (jsonRequest == null) {
-			throw new Exception("Invalid argument.");
+			throw new NullPointerException("Request cann't be null.");
 		}
 
 		HttpClient httpClient = HttpClientBuilder.create().build();

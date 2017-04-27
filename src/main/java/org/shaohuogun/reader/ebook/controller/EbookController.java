@@ -31,8 +31,8 @@ public class EbookController extends Controller {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Value("${ebook.kindlegen.path}")
-	private String kindlegenPath;
+	@Value("${ebook.kindlegen.dir}")
+	private String kindlegenDir;
 	
 	@Value("${ebook.mobi.template.dir}")
 	private String mobiTemplateDir;
@@ -48,12 +48,8 @@ public class EbookController extends Controller {
 
 	@RequestMapping(value = "/api/ebook/generate", method = RequestMethod.GET)
 	public void generateEbook(@RequestParam(required = true) String targetType,
-			@RequestParam(required = true) String targetId) throws Exception {
-		if ((targetId == null) || targetId.isEmpty()) {
-			throw new Exception("Invalid argument.");
-		}
-		
-		MobiGenerator mobiGenerator = new MobiGenerator(kindlegenPath, mobiTemplateDir, mobiOutputDir);
+			@RequestParam(required = true) String targetId) throws Exception {		
+		MobiGenerator mobiGenerator = new MobiGenerator(kindlegenDir, mobiTemplateDir, mobiOutputDir);
 		Channel channel = channelService.getChannel(targetId);
 		int total = messageService.getMessageCountInChannel(targetId);
 		Pagination pagination = new Pagination();
@@ -68,10 +64,6 @@ public class EbookController extends Controller {
 	@RequestMapping(value = "/api/ebook/download", method = RequestMethod.GET)
 	public void downloadEbook(@RequestParam(required = true) String targetType,
 			@RequestParam(required = true) String targetId, HttpServletResponse resp) throws Exception {
-		if ((targetId == null) || targetId.isEmpty()) {
-			throw new Exception("Invalid argument.");
-		}
-
 		Channel channel = channelService.getChannel(targetId);
 		String mobiFileName = channel.getName() + ".mobi";
 		String mobiFilePath = String.format("%s/%s", this.mobiOutputDir, mobiFileName);

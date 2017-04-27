@@ -20,7 +20,7 @@ public class ChannelService {
 	@Transactional
 	public Channel createChannel(Channel channel) throws Exception {
 		if (channel == null) {
-			throw new Exception("Invalid argument.");
+			throw new NullPointerException("Channel cann't be null.");
 		}
 
 		channelDao.insert(channel);
@@ -29,7 +29,7 @@ public class ChannelService {
 
 	public Channel getChannel(String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
-			throw new Exception("Invalid argument.");
+			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
 		}
 
 		return channelDao.selectById(id);
@@ -37,7 +37,7 @@ public class ChannelService {
 	
 	public int getChannelCountByCreator(String creator) throws Exception {
 		if ((creator == null) || creator.isEmpty()) {
-			throw new Exception("Invalid argument.");
+			throw new IllegalArgumentException("Creator cann't be null or empty.");
 		}
 		
 		return channelDao.countByCreator(creator);
@@ -45,11 +45,11 @@ public class ChannelService {
 	
 	public Pagination getChannelsByCreator(String creator, Pagination pagination) throws Exception {
 		if ((creator == null) || creator.isEmpty()) {
-			throw new Exception("Invalid argument.");
+			throw new IllegalArgumentException("Creator cann't be null or empty.");
 		}
 		
 		if (pagination == null) {
-			throw new Exception("Invalid argument.");
+			throw new NullPointerException("Pagination cann't be null.");
 		}
 		
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
@@ -62,7 +62,7 @@ public class ChannelService {
 	@Transactional
 	public Channel modifyChannel(Channel channel) throws Exception {
 		if (channel == null) {
-			throw new Exception("Invalid argument.");
+			throw new NullPointerException("Channel cann't be null.");
 		}
 
 		channelDao.update(channel);
@@ -70,16 +70,16 @@ public class ChannelService {
 	}
 	
 	public Channel getChannelByPickingStatus(String pickingStatus) throws Exception {
-		if (pickingStatus == null) {
-			throw new Exception("Invalid argument.");
+		if ((pickingStatus == null) || pickingStatus.isEmpty()) {
+			throw new IllegalArgumentException("Picking status cann't be null or empty.");
 		}		
 		
 		return channelDao.selectByPickingStatus(pickingStatus);
 	}
 	
 	public Channel getChannelByPickingBatchNo(String pickingBatchNo) throws Exception {
-		if (pickingBatchNo == null) {
-			throw new Exception("Invalid argument.");
+		if ((pickingBatchNo == null) || pickingBatchNo.isEmpty()) {
+			throw new IllegalArgumentException("Picking batch no cann't be null or empty.");
 		}		
 		
 		return channelDao.selectByPickingBatchNo(pickingBatchNo);

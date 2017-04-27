@@ -16,7 +16,7 @@ public class PublisherService {
 	@Transactional
 	public Publisher createPublisher(Publisher publisher) throws Exception {
 		if (publisher == null) {
-			throw new Exception("Invalid argument.");
+			throw new NullPointerException("Publisher cann't be null.");
 		}
 		
 		publisherDao.insert(publisher);
@@ -25,7 +25,7 @@ public class PublisherService {
 	
 	public Publisher getPublisher(String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
-			throw new Exception("Invalid argument.");
+			throw new IllegalArgumentException("Publisher id cann't be null or empty.");
 		}
 		
 		return publisherDao.selectById(id);

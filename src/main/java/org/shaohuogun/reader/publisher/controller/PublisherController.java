@@ -28,10 +28,6 @@ public class PublisherController extends Controller {
 
 	@RequestMapping(value = "/api/publisher/{id}", method = RequestMethod.GET)
 	public Publisher getPublisher(@PathVariable String id) throws Exception {
-		if ((id == null) || id.isEmpty()) {
-			throw new Exception("Invalid argument.");
-		}
-
 		return publisherService.getPublisher(id);
 	}
 

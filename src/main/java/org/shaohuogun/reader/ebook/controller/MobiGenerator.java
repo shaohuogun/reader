@@ -33,7 +33,7 @@ public class MobiGenerator {
 
 	private Configuration config;
 
-	private final String kindlegenPath;
+	private final String kindlegenDir;
 	
 	private final String templateDir;
 
@@ -43,8 +43,8 @@ public class MobiGenerator {
 
 	private List<Model> messages;
 
-	public MobiGenerator(String kindlegenPath, String templateDir, String outputDir) throws Exception {
-		this.kindlegenPath = kindlegenPath;
+	public MobiGenerator(String kindlegenDir, String templateDir, String outputDir) throws Exception {
+		this.kindlegenDir = kindlegenDir;
 		Version version = new Version(2, 3, 26);
 		this.config = new Configuration(version);
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -84,10 +84,15 @@ public class MobiGenerator {
 	}
 
 	private void outputContent2File(final String content, final String fileName) throws Exception {
-		if ((content == null) || content.isEmpty() || (fileName == null) || fileName.isEmpty()) {
-			throw new NullPointerException("Content and file's name cann't be null or empty.");
+		if ((content == null) || content.isEmpty()) {
+			throw new IllegalArgumentException("Content cann't be null or empty.");
 		}
 
+		if ((fileName == null) || fileName.isEmpty()) {
+			throw new IllegalArgumentException("File's name cann't be null or empty.");
+		}
+
+		
 		String filePath = String.format("%s/%s", this.outputDir, fileName);
 		File newFile = new File(filePath);
 		if (!newFile.exists()) {
@@ -141,7 +146,7 @@ public class MobiGenerator {
 		String mobiFileName = channel.getName() + ".mobi";
 		String opfFilePath = String.format("%s/%s", this.outputDir, templateNames[5]);
 
-		String cmdString = String.format("%s/kindlegen %s -o %s", this.kindlegenPath, opfFilePath, mobiFileName);
+		String cmdString = String.format("%s/kindlegen %s -o %s", this.kindlegenDir, opfFilePath, mobiFileName);
 		Process process = Runtime.getRuntime().exec(cmdString);
 		process.waitFor();
 
@@ -159,6 +164,14 @@ public class MobiGenerator {
 	}
 
 	public String generate(Channel channel, List<Model> messages) throws Exception {
+		if (channel == null) {
+			throw new NullPointerException("Channel cann't be null.");
+		}
+		
+		if ((messages == null) || messages.isEmpty()) {
+			throw new IllegalArgumentException("Messages cann't be null or empty.");
+		}
+		
 		this.channel = channel;
 		this.messages = messages;
 		Map<String, Object> mobiMap = this.generateMobiMap4Template();

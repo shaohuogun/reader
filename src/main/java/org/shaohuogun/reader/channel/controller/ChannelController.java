@@ -31,10 +31,6 @@ public class ChannelController extends Controller {
 
 	@RequestMapping(value = "/api/channel/{id}", method = RequestMethod.GET)
 	public Channel getChannel(@PathVariable String id) throws Exception {
-		if ((id == null) || id.isEmpty()) {
-			throw new Exception("Invalid argument.");
-		}
-
 		return channelService.getChannel(id);
 	}
 
