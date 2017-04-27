@@ -69,6 +69,16 @@ public class EbookController extends Controller {
 		return ebookService.createEbook(ebook);
 	}
 	
+	@RequestMapping(value = "/api/channel/{id}/ebook", method = RequestMethod.GET)
+	public Pagination getEbooksInChannel(@PathVariable String id,
+			@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
+		int total = ebookService.getEbookCountInChannel(id);
+		Pagination pagination = new Pagination();
+		pagination.setTotal(total);
+		pagination.setPageIndex(page);
+		return ebookService.getEbooksInChannel(id, pagination);
+	}
+	
 	@RequestMapping(value = "/api/ebook/{id}/download", method = RequestMethod.GET)
 	public void downloadEbook(@PathVariable String id, HttpServletResponse resp) throws Exception {
 		Ebook ebook = ebookService.getEbook(id);

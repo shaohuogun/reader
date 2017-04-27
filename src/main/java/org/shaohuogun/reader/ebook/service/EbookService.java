@@ -1,5 +1,9 @@
 package org.shaohuogun.reader.ebook.service;
 
+import java.util.List;
+
+import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Pagination;
 import org.shaohuogun.reader.ebook.dao.EbookDao;
 import org.shaohuogun.reader.ebook.model.Ebook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,30 @@ public class EbookService {
 		}
 		
 		return ebookDao.selectById(id);
+	}
+
+	public int getEbookCountInChannel(String channelId) {
+		if ((channelId == null) || channelId.isEmpty()) {
+			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
+		}
+		
+		return ebookDao.countInChannel(channelId);
+	}
+
+	public Pagination getEbooksInChannel(String channelId, Pagination pagination) {
+		if ((channelId == null) || channelId.isEmpty()) {
+			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
+		}
+		
+		if (pagination == null) {
+			throw new NullPointerException("Pagination cann't be null.");
+		}
+
+		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
+		int limit = pagination.getPageSize();
+		List<Model> ebooks = ebookDao.selectInChannel(channelId, offset, limit);
+		pagination.setObjects(ebooks);
+		return pagination;
 	}
 
 }

@@ -37,4 +37,16 @@
 		#{channelId}
 	</select>
 
+	<select id="countInChannel" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) from READER_EBOOK where deleted = '0' and
+		channel_id = #{channelId}
+	</select>
+
+	<select id="selectInChannel" parameterType="java.lang.String"
+		resultMap="ebookResultMap">
+		select * from READER_EBOOK where deleted = '0' and channel_id
+		= #{channelId} order by create_date desc;
+	</select>
+	
 </mapper>
