@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {Card, CardText, CardActions} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import Snackbar from 'material-ui/Snackbar';
 import Pagination from 'material-ui-pagination';
 
 const paginationStyle = {
@@ -15,6 +16,7 @@ export default class EbookTable extends React.Component {
 		super(props);
 		this.state = {
 			pagination: {},
+			open: false,
 		};
 	}
 
@@ -42,6 +44,25 @@ export default class EbookTable extends React.Component {
 		window.open(downloadUrl, "_blank");
   }
 
+	postEbook = (ebookId) => {
+		var self = this;
+		$.ajax({
+			url: "/api/ebook/" + ebookId + "/post",
+			type: "GET",
+		  data: {},
+		}).then(function(data) {
+			self.setState({
+	      open: true,
+	    });
+		});
+  }
+
+	handleRequestClose = () => {
+    this.setState({
+      open: false,
+    });
+  }
+
 	render() {
 		var ebooks = this.state.pagination.objects;
 		if (ebooks == null) {
@@ -62,6 +83,11 @@ export default class EbookTable extends React.Component {
 						label="下载"
 						secondary={true}
 						onTouchTap={this.downloadEbook.bind(this, ebook.id)}
+						/>
+						<FlatButton
+						label="发送"
+						secondary={true}
+						onTouchTap={this.postEbook.bind(this, ebook.id)}
 						/>
 					</TableRowColumn>
 				</TableRow>
@@ -84,6 +110,12 @@ export default class EbookTable extends React.Component {
 				{rows}
 		    </TableBody>
 		  </Table>
+			<Snackbar
+				open={this.state.open}
+				message="已经通过邮件将电子书籍发送出去，谢谢！"
+				autoHideDuration={4000}
+				onRequestClose={this.handleRequestClose}
+			/>
 			</CardText>
 			<CardActions style={paginationStyle}>
 			<Pagination

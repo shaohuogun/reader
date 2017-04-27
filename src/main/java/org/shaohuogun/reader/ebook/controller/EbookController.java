@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -100,6 +102,21 @@ public class EbookController extends Controller {
 		outputStream.flush();
 		outputStream.close();
 		inputStream.close();
+	}
+	
+	@RequestMapping(value = "/api/ebook/{id}/post", method = RequestMethod.GET)
+	public void postEbook(@PathVariable String id) throws Exception {
+		Ebook ebook = ebookService.getEbook(id);
+
+		ClassLoader classLoader = getClass().getClassLoader();
+		URL url = classLoader.getResource("mail.properties");
+
+		FileInputStream fis = new FileInputStream(url.getFile());
+		Properties props = new Properties();
+		props.load(fis);
+		fis.close();
+
+		Postman.send(props, mobiOutputDir, ebook);
 	}
 
 }
