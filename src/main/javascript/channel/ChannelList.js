@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import Divider from 'material-ui/Divider';
 import Pagination from 'material-ui-pagination';
 
-const paginationStyle = {
+const toolbarStyle = {
 	textAlign: 'center',
 };
 
@@ -75,7 +75,7 @@ export default class ChannelList extends React.Component {
 			{rows}
 			</List>
 			</CardText>
-			<CardActions style={paginationStyle}>
+			<CardActions style={toolbarStyle}>
 			<Pagination
 			total = {this.state.pagination.pageCount}
 			current = {this.state.pagination.pageIndex}

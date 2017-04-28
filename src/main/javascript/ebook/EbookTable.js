@@ -7,7 +7,7 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 import Snackbar from 'material-ui/Snackbar';
 import Pagination from 'material-ui-pagination';
 
-const paginationStyle = {
+const toolbarStyle = {
 	textAlign: 'center',
 };
 
@@ -117,7 +117,7 @@ export default class EbookTable extends React.Component {
 				onRequestClose={this.handleRequestClose}
 			/>
 			</CardText>
-			<CardActions style={paginationStyle}>
+			<CardActions style={toolbarStyle}>
 			<Pagination
 			total = {this.state.pagination.pageCount}
 			current = {this.state.pagination.pageIndex}

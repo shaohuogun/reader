@@ -55,8 +55,6 @@ export class MessageListItem extends React.Component {
 			<CardText expandable={true}>
 			{this.state.content.original}
 			</CardText>
-			<CardActions style={toolbarStyle}>
-			</CardActions>
 			</Card>
 		);
 	}
