@@ -1,13 +1,70 @@
 import $ from "jquery";
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Card, CardText, CardActions} from 'material-ui/Card';
+import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import {ListItem, List} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Pagination from 'material-ui-pagination';
 
-const paginationStyle = {
+const toolbarStyle = {
 	textAlign: 'center',
+};
+
+export class MessageListItem extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			content: {},
+		};
+	}
+
+	handleExpandChange(newExpandedState) {
+		if (!newExpandedState) {
+			return;
+		}
+
+    var self = this;
+    $.ajax({
+      url: "/api/message/" + self.props.message.id + "/content",
+			type: "GET",
+			data: {},
+    }).then(function(data) {
+      self.setState({
+        content: data,
+      });
+    });
+  }
+
+	render() {
+		var message = this.props.message;
+		return (
+			<Card
+			{...this.props}
+			zDepth={0}
+			onExpandChange={this.handleExpandChange.bind(this)}
+			>
+			<CardHeader
+			title={<span>[<a href={message.url}>原文地址</a>]：{message.title}</span>}
+			subtitle={<span>发布日期：{message.releaseDate}   浏览数量：{message.pageview}   评论数量：{message.commentCount}</span>}
+			actAsExpander={true}
+			showExpandableButton={true}
+			/>
+			<CardText expandable={false}>
+			{message.digest}
+			</CardText>
+			<CardText expandable={true}>
+			{this.state.content.original}
+			</CardText>
+			<CardActions style={toolbarStyle}>
+			</CardActions>
+			</Card>
+		);
+	}
+
+};
+
+MessageListItem.propTypes = {
+	message: PropTypes.object.isRequired,
 };
 
 export default class MessageList extends React.Component {
@@ -23,9 +80,9 @@ export default class MessageList extends React.Component {
 		$.ajax({
 			url: "/api/channel/" + self.props.channelId + "/messages",
 			type: "GET",
-		  data: {
-		    page: page.toString(),
-		  },
+			data: {
+				page: page.toString(),
+			},
 		}).then(function(data) {
 			self.setState({
 				pagination: data,
@@ -48,12 +105,7 @@ export default class MessageList extends React.Component {
 		for (var i = 0; i < messageCount; i++) {
 			var message = messages[i];
 			rows.push(
-				<ListItem
-				primaryText={<span>[<a href={message.url}>原文地址</a>]：{message.title}</span>}
-				secondaryText={message.digest}
-				secondaryTextLines={2}
-				key={message.id}
-				/>
+				<MessageListItem message={message} />
 			);
 
 			if (i < (messageCount - 1)) {
@@ -64,11 +116,9 @@ export default class MessageList extends React.Component {
 		return (
 			<Card {...this.props} zDepth={1}>
 			<CardText>
-			<List>
 			{rows}
-			</List>
 			</CardText>
-			<CardActions style={paginationStyle}>
+			<CardActions style={toolbarStyle}>
 			<Pagination
 			total = {this.state.pagination.pageCount}
 			current = {this.state.pagination.pageIndex}
