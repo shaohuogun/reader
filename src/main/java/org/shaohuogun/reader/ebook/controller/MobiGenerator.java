@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.shaohuogun.common.Model;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.channel.model.Channel;
 import org.shaohuogun.reader.ebook.model.Ebook;
+import org.shaohuogun.reader.message.model.Content;
 import org.shaohuogun.reader.message.model.Message;
 
 import freemarker.template.Configuration;
@@ -44,7 +44,9 @@ public class MobiGenerator {
 
 	private Channel channel;
 
-	private List<Model> messages;
+	private List<Message> messages;
+	
+	private List<Content> contents;
 
 	public MobiGenerator(String kindlegenDir, String templateDir, String outputDir) throws Exception {
 		this.kindlegenDir = kindlegenDir;
@@ -68,19 +70,17 @@ public class MobiGenerator {
 		mobiMap.put("messageCount", messages.size());
 
 		List<HashMap<String, Object>> messageMaps = new ArrayList<HashMap<String, Object>>();
-		for (Model model : messages) {
-			if (model instanceof Message) {
-				Message message = (Message) model;
-				HashMap<String, Object> messageMap = new HashMap<String, Object>();
+		for (int i = 0; i < messages.size(); i++) {
+			Message message = messages.get(i);
+			Content content = contents.get(i);
+			HashMap<String, Object> messageMap = new HashMap<String, Object>();
 
-				String title = message.getTitle().replace('<', '[').replace('>', ']');
-				messageMap.put("title", title);
-				messageMap.put("releaseDate", message.getReleaseDate());
-				messageMap.put("url", message.getUrl());
-				messageMap.put("content", message.getDigest());
-
-				messageMaps.add(messageMap);
-			}
+			String title = message.getTitle().replace('<', '[').replace('>', ']');
+			messageMap.put("title", title);
+			messageMap.put("releaseDate", message.getReleaseDate());
+			messageMap.put("url", message.getUrl());
+			messageMap.put("content", content.getOriginal());
+			messageMaps.add(messageMap);
 		}
 
 		mobiMap.put("messages", messageMaps);
@@ -144,7 +144,7 @@ public class MobiGenerator {
 		os.close();
 	}
 	
-	public Ebook generate(Channel channel, List<Model> messages) throws Exception {
+	public Ebook generate(Channel channel, List<Message> messages, List<Content> contents) throws Exception {
 		if (channel == null) {
 			throw new NullPointerException("Channel cann't be null.");
 		}
@@ -155,6 +155,7 @@ public class MobiGenerator {
 		
 		this.channel = channel;
 		this.messages = messages;
+		this.contents = contents;
 				
 		String creatorPath = String.format("%s/%s", this.outputDir, channel.getCreator());
 		File creatorDir = new File(creatorPath);
