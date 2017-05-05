@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>${ channelName }</title>
   <style type="text/css">
   body {
     font-size: 1.1em;
@@ -62,11 +61,11 @@
       <h2 class="article_title">
         ${ message['title'] }
       </h2>
-      <span class="release_date">
+      <h2 class="release_date">
         <#if message['releaseDate']?exists >
         ${ message['releaseDate']?string('yyyy-MM-dd hh:mm:ss') }
         </#if>
-      </span>
+      </h2>
       <br />
       <div>${ message['content'] }</div>
       <br />

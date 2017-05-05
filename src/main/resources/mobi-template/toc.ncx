@@ -9,22 +9,22 @@
   <docAuthor><text>${ uuid }</text></docAuthor>
   <navMap>
     <navPoint id="navpoint-1" playOrder="1">
-      <navLabel><text>Cover Page</text></navLabel>
+      <navLabel><text>内封</text></navLabel>
       <content src="cover.html"/>
     </navPoint>
 
     <navPoint id="navpoint-2" playOrder="2">
-      <navLabel><text>Copyright</text></navLabel>
+      <navLabel><text>版权信息</text></navLabel>
       <content src="copyright.html"/>
     </navPoint>
 
     <navPoint id="navpoint-3" playOrder="3">
-      <navLabel><text>Table of Contents</text></navLabel>
+      <navLabel><text>目录索引</text></navLabel>
       <content src="toc.html"/>
     </navPoint>
 
     <navPoint id="navpoint-4" playOrder="4">
-      <navLabel><text>Content</text></navLabel>
+      <navLabel><text>正文内容</text></navLabel>
       <content src="content.html" />
       <#if (messageCount > 0) >
         <#list messages as message >
@@ -37,7 +37,7 @@
     </navPoint>
 
     <navPoint id="navpoint-5" playOrder="5">
-      <navLabel><text>About</text></navLabel>
+      <navLabel><text>关于</text></navLabel>
       <content src="about.html"/>
     </navPoint>
   </navMap>

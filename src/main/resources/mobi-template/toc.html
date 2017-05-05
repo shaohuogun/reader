@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>${ channelName }</title>
   <style type="text/css">
   body {
     font-size: 1.1em;
@@ -35,16 +34,12 @@
 </head>
 <body>
   <div id="toc">
-    <h2>${ channelName }</h2>
+    <h2>目录</h2>
     <ol>
       <#list messages as message >
       <div id="articleSignal_${ message_index }">
         <li>
-          <span>
-            <a href="content.html#article_${ message_index }">${ message['title'] }</a>
-            &nbsp;&nbsp;&nbsp;
-            <#if message['releaseDate']?exists > ${ message['releaseDate']?string('yyyy-MM-dd hh:mm:ss') }</#if>
-          </span>
+          <a href="content.html#article_${ message_index }">${ message['title'] }</a>
         </li>
       </div>
       </#list>
