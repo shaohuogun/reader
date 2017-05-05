@@ -1,77 +1,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>${ channelName }</title>
-    <style type="text/css">
-        body{
-            font-size: 1.1em;
-            margin:0 5px;
-        }
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>${ channelName }</title>
+  <style type="text/css">
+  body {
+    font-size: 1.1em;
+    margin:0 5px;
+  }
 
-        h1{
-            font-size:4em;
-            font-weight:bold;
-        }
+  h1 {
+    font-size:4em;
+    font-weight:bold;
+  }
 
-        h2 {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin:0;
-        }
-        a {
-            color: inherit;
-            text-decoration: inherit;
-            cursor: default
-        }
-        a[href] {
-            color: blue;
-            text-decoration: underline;
-            cursor: pointer
-        }
-        p{
-            text-indent:1.5em;
-            line-height:1.3em;
-            margin-top:0;
-            margin-bottom:0;
-        }
-        .italic {
-            font-style: italic
-        }
-        .do_article_title{
-            line-height:1.5em;
-            page-break-before: always;
-        }
-        #cover{
-            text-align:center;
-        }
-        #toc{
-            page-break-before: always;
-        }
-        #content{
-            margin-top:10px;
-            page-break-after: always;
-        }
-    </style>
+  h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin:0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+    cursor: default
+  }
+
+  a[href] {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer
+  }
+
+  p {
+    text-indent:1.5em;
+    line-height:1.3em;
+    margin-top:0;
+    margin-bottom:0;
+  }
+
+  .article_title {
+    line-height:1.5em;
+    page-break-before: always;
+    text-align: center;
+  }
+
+  .release_date {
+    text-align: center;
+  }
+
+  #content {
+    margin-top:10px;
+    page-break-after: always;
+  }
+  </style>
 </head>
 <body>
-<div id="content">
-    <div id="section" class="section">
-        <#list messages as message >
-        <div id="article_${ message_index }" class="article">
-            <h2 class="do_article_title">
-                <#if message['url']?exists >
-                <a href="${ message['url'] }">${ message['title'] }</a>
-                <#else>
-                ${ message['title'] }
-                </#if>
-            </h2>
-            <#if message['releaseDate']?exists >${ message['releaseDate']?string("yyyy-MM-dd hh:mm:ss a") }</#if>
-            <div>${ message['content'] }</div>
-            <a href="toc.html#articleSignal_${ message_index }">跳至文章起始位置</a>
-        </div>
-        </#list>
+  <div id="content">
+    <#list messages as message >
+    <div id="article_${ message_index }" class="article">
+      <h2 class="article_title">
+        ${ message['title'] }
+      </h2>
+      <span class="release_date">
+        <#if message['releaseDate']?exists >
+        ${ message['releaseDate']?string('yyyy-MM-dd hh:mm:ss') }
+        </#if>
+      </span>
+      <br />
+      <div>${ message['content'] }</div>
+      <br />
+      <a href="toc.html#articleSignal_${ message_index }">回到目录索引</a>
     </div>
-</div>
+    </#list>
+  </div>
 </body>
 </html>

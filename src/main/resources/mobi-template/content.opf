@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uid">
-    <metadata>
-        <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
-            <#assign currentDatetime = .now?datetime >
-            <#if format == 'periodical' >
-            <dc:title>${ channelName }</dc:title>
-            <#else>
+  <metadata>
+    <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+      <#assign currentDatetime = .now?datetime >
+        <#if format == 'periodical' >
+          <dc:title>${ channelName }</dc:title>
+          <#else>
             <dc:title>${ channelName }(${ createTime?datetime?string.short })</dc:title>
-            </#if>
-            <dc:language>zh-CN</dc:language>
-            <dc:identifier id="uid" opf:scheme="uuid">${ uuid }${ currentDatetime?string("yyyy-MM-dd hh:mm:ss a") }</dc:identifier>
-            <dc:creator>kindlereader</dc:creator>
-            <dc:publisher>kindlereader</dc:publisher>
-            <dc:subject>xushengyong</dc:subject>
-            <dc:date>${ currentDatetime?string("yyyy-MM-dd hh:mm:ss a") }</dc:date>
-            <dc:description></dc:description>
+          </#if>
+          <dc:language>zh-CN</dc:language>
+          <dc:identifier id="uid" opf:scheme="uuid">${ uuid }${ currentDatetime?string("yyyy-MM-dd hh:mm:ss") }</dc:identifier>
+          <dc:creator>kindlereader</dc:creator>
+          <dc:publisher>kindlereader</dc:publisher>
+          <dc:subject>xushengyong</dc:subject>
+          <dc:date>${ currentDatetime?string("yyyy-MM-dd hh:mm:ss") }</dc:date>
+          <dc:description></dc:description>
         </dc-metadata>
         <#if format == 'periodical' >
-        <x-metadata>
+          <x-metadata>
             <output encoding="utf-8" content-type="application/x-mobipocket-subscription-magazine"></output>
-        </x-metadata>
+          </x-metadata>
         </#if>
-        <meta name="cover" content="BookCover" />   
-    </metadata>
-    
-    <manifest> 
-    <item id="BookCover" media-type="image/jpg" href="cover.jpg"></item>  
-    <item id="cover" media-type="application/xhtml+xml" href="cover.html"></item>
-    <item id="copyright" media-type="application/xhtml+xml" href="copyright.html"></item>
-    <item id="toc" media-type="application/xhtml+xml" href="toc.html"></item>
-    <item id="content" media-type="application/xhtml+xml" href="content.html"></item>
-    <item id="about" media-type="application/xhtml+xml" href="about.html"></item>
-    <item id="MyNcx" media-type="application/x-dtbncx+xml" href="toc.ncx"></item>
-    </manifest>
-    
-    <spine toc="MyNcx">
-	<itemref idref="cover"/>
-	<itemref idref="copyright"/>
-	<itemref idref="toc"/>
-	<itemref idref="content"/>
-	<itemref idref="about"/>
-    </spine>
+        <meta name="cover" content="BookCover" />
+      </metadata>
 
-    <guide>
-    <reference type="cover" title="Cover" href="cover.html"></reference>
-    <reference type="toc" title="Table of Contents" href="toc.html"></reference>
-    <reference type="start" title="Start" href="copyright.html"></reference>  
-    </guide>
-</package>
+      <manifest>
+        <item id="BookCover" media-type="image/jpg" href="cover.jpg"></item>
+        <item id="cover" media-type="application/xhtml+xml" href="cover.html"></item>
+        <item id="copyright" media-type="application/xhtml+xml" href="copyright.html"></item>
+        <item id="toc" media-type="application/xhtml+xml" href="toc.html"></item>
+        <item id="content" media-type="application/xhtml+xml" href="content.html"></item>
+        <item id="about" media-type="application/xhtml+xml" href="about.html"></item>
+        <item id="MyNcx" media-type="application/x-dtbncx+xml" href="toc.ncx"></item>
+      </manifest>
+
+      <spine toc="MyNcx">
+        <itemref idref="cover"/>
+        <itemref idref="copyright"/>
+        <itemref idref="toc"/>
+        <itemref idref="content"/>
+        <itemref idref="about"/>
+      </spine>
+
+      <guide>
+        <reference type="cover" title="Cover" href="cover.html"></reference>
+        <reference type="toc" title="Table of Contents" href="toc.html"></reference>
+        <reference type="start" title="Start" href="copyright.html"></reference>
+      </guide>
+    </package>

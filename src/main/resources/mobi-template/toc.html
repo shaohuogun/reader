@@ -1,72 +1,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>${ channelName }</title>
-    <style type="text/css">
-        body{
-            font-size: 1.1em;
-            margin:0 5px;
-        }
-        h1{
-            font-size:4em;
-            font-weight:bold;
-        }
-        h2 {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin:0;
-        }
-        a {
-            color: inherit;
-            text-decoration: inherit;
-            cursor: default
-        }
-        a[href] {
-            color: blue;
-            text-decoration: underline;
-            cursor: pointer
-        }
-        p{
-            text-indent:1.5em;
-            line-height:1.3em;
-            margin-top:0;
-            margin-bottom:0;
-        }
-        .italic {
-            font-style: italic
-        }
-        .do_article_title{
-            line-height:1.5em;
-            page-break-before: always;
-        }
-        #cover{
-            text-align:center;
-        }
-        #toc{
-            page-break-before: always;
-        }
-        #content{
-            margin-top:10px;
-            page-break-after: always;
-        }
-    </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>${ channelName }</title>
+  <style type="text/css">
+  body {
+    font-size: 1.1em;
+    margin: 0 5px;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+    cursor: default;
+  }
+
+  a[href] {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  #toc {
+    page-break-before: always;
+  }
+  </style>
 </head>
 <body>
-<div id="toc">
-	<h2>${ channelName }</h2>
+  <div id="toc">
+    <h2>${ channelName }</h2>
     <ol>
-		<#list messages as message >
-			<div id="articleSignal_${ message_index }">
-				<li>
-					<a href="content.html#article_${ message_index }">${ message['title'] }</a>
-					<br/>
-					<#if message['releaseDate']?exists > ${ message['releaseDate']?datetime?string.short }</#if>
-                </li>
-            </div>
-		</#list>
-	</ol>
-</div>
-<mbp:pagebreak />
+      <#list messages as message >
+      <div id="articleSignal_${ message_index }">
+        <li>
+          <span>
+            <a href="content.html#article_${ message_index }">${ message['title'] }</a>
+            &nbsp;&nbsp;&nbsp;
+            <#if message['releaseDate']?exists > ${ message['releaseDate']?string('yyyy-MM-dd hh:mm:ss') }</#if>
+          </span>
+        </li>
+      </div>
+      </#list>
+    </ol>
+  </div>
+  <mbp:pagebreak />
 </body>
 </html>
