@@ -39,7 +39,7 @@ public class EbookService {
 			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
 		}
 		
-		return ebookDao.countInChannel(channelId);
+		return ebookDao.countByChannelId(channelId);
 	}
 
 	public Pagination getEbooksInChannel(String channelId, Pagination pagination) {
@@ -53,7 +53,7 @@ public class EbookService {
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> ebooks = ebookDao.selectInChannel(channelId, offset, limit);
+		List<Model> ebooks = ebookDao.selectByChannelId(channelId, offset, limit);
 		pagination.setObjects(ebooks);
 		return pagination;
 	}

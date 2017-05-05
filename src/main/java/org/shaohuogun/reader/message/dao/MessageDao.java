@@ -33,13 +33,13 @@ public class MessageDao {
 		return sqlSession.selectOne("org.shaohuogun.reader.message.dao.MessageMapper.selectByUrl", url);
 	}
 
-	public int countInChannel(String channelId) {
-		return sqlSession.selectOne("org.shaohuogun.reader.message.dao.MessageMapper.countInChannel", channelId);
+	public int countByChannelId(String channelId) {
+		return sqlSession.selectOne("org.shaohuogun.reader.message.dao.MessageMapper.countByChannelId", channelId);
 	}
 
-	public List<Model> selectInChannel(String channelId, int offset, int limit) {
+	public List<Model> selectByChannelId(String channelId, int offset, int limit) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.message.dao.MessageMapper.selectInChannel", channelId,
+		return sqlSession.selectList("org.shaohuogun.reader.message.dao.MessageMapper.selectByChannelId", channelId,
 				rowBounds);
 	}
 

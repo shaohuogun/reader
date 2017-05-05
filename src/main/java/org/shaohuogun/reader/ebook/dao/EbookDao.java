@@ -25,13 +25,13 @@ public class EbookDao {
 		return sqlSession.selectOne("org.shaohuogun.reader.ebook.dao.EbookMapper.selectById", id);
 	}
 
-	public int countInChannel(String channelId) {
-		return sqlSession.selectOne("org.shaohuogun.reader.ebook.dao.EbookMapper.countInChannel", channelId);
+	public int countByChannelId(String channelId) {
+		return sqlSession.selectOne("org.shaohuogun.reader.ebook.dao.EbookMapper.countByChannelId", channelId);
 	}
 
-	public List<Model> selectInChannel(String channelId, int offset, int limit) {
+	public List<Model> selectByChannelId(String channelId, int offset, int limit) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.ebook.dao.EbookMapper.selectInChannel", channelId,
+		return sqlSession.selectList("org.shaohuogun.reader.ebook.dao.EbookMapper.selectByChannelId", channelId,
 				rowBounds);
 	}
 

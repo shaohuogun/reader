@@ -63,13 +63,13 @@
 		#{url}
 	</select>
 
-	<select id="countInChannel" parameterType="java.lang.String"
+	<select id="countByChannelId" parameterType="java.lang.String"
 		resultType="java.lang.Integer">
 		select count(*) from READER_MESSAGE where deleted = '0' and
 		channel_id = #{channelId}
 	</select>
 
-	<select id="selectInChannel" parameterType="java.lang.String"
+	<select id="selectByChannelId" parameterType="java.lang.String"
 		resultMap="messageResultMap">
 		select * from READER_MESSAGE where deleted = '0' and channel_id
 		= #{channelId} order by url desc;

@@ -35,7 +35,7 @@ public class ChannelService {
 		return channelDao.selectById(id);
 	}
 	
-	public int getChannelCountByCreator(String creator) throws Exception {
+	public int getChannelCountOfCreator(String creator) throws Exception {
 		if ((creator == null) || creator.isEmpty()) {
 			throw new IllegalArgumentException("Creator cann't be null or empty.");
 		}
@@ -43,7 +43,7 @@ public class ChannelService {
 		return channelDao.countByCreator(creator);
 	}
 	
-	public Pagination getChannelsByCreator(String creator, Pagination pagination) throws Exception {
+	public Pagination getChannelsOfCreator(String creator, Pagination pagination) throws Exception {
 		if ((creator == null) || creator.isEmpty()) {
 			throw new IllegalArgumentException("Creator cann't be null or empty.");
 		}

@@ -63,7 +63,7 @@ public class MessageService {
 			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
 		}
 		
-		return messageDao.countInChannel(channelId);
+		return messageDao.countByChannelId(channelId);
 	}
 
 	public Pagination getMessagesInChannel(String channelId, Pagination pagination) throws Exception {
@@ -77,7 +77,7 @@ public class MessageService {
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> messages = messageDao.selectInChannel(channelId, offset, limit);
+		List<Model> messages = messageDao.selectByChannelId(channelId, offset, limit);
 		pagination.setObjects(messages);
 		return pagination;
 	}

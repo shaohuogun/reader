@@ -38,11 +38,11 @@ public class ChannelController extends Controller {
 	public Pagination getChannels(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
 		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
 
-		int total = channelService.getChannelCountByCreator(creator);
+		int total = channelService.getChannelCountOfCreator(creator);
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
 		pagination.setPageIndex(page);
-		return channelService.getChannelsByCreator(creator, pagination);
+		return channelService.getChannelsOfCreator(creator, pagination);
 	}
 
 }
