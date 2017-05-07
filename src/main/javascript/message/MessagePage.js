@@ -12,19 +12,16 @@ import ChannelInfo from '../channel/ChannelInfo';
 import MessageList from './MessageList';
 import EbookTable from '../ebook/EbookTable';
 
-const leftStyle = {
-  width: 350,
+const pageStyle = {
+  width: 800,
+  marginTop: 20,
   marginLeft: 20,
   float: 'left',
   display: 'inline-block',
 };
 
-const rightStyle = {
-  width: 800,
-  marginLeft: 10,
-  marginRight: 20,
-  float: 'left',
-  display: 'inline-block',
+const tabStyle = {
+  marginTop: 20,
 };
 
 export default class MessagePage extends React.Component {
@@ -37,13 +34,10 @@ export default class MessagePage extends React.Component {
 
   render() {
     return (
-      <div>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <ChannelInfo style={leftStyle} channelId={this.state.channelId} />
-      </MuiThemeProvider>
-
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Tabs style={rightStyle}>
+      <div style={pageStyle}>
+      <ChannelInfo channelId={this.state.channelId} />
+      <Tabs style={tabStyle}>
         <Tab
           icon={<MapsPersonPin />}
           label="消息列表">
@@ -55,8 +49,8 @@ export default class MessagePage extends React.Component {
           <EbookTable channelId={this.state.channelId} />
         </Tab>
       </Tabs>
-      </MuiThemeProvider>
       </div>
+      </MuiThemeProvider>
     );
   }
 
