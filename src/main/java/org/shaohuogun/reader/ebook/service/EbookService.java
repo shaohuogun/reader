@@ -58,4 +58,28 @@ public class EbookService {
 		return pagination;
 	}
 
+	public int getEbookCountOfCreator(String creator) {
+		if ((creator == null) || creator.isEmpty()) {
+			throw new IllegalArgumentException("Creator cann't be null or empty.");
+		}
+		
+		return ebookDao.countByCreator(creator);
+	}
+	
+	public Pagination getEbooksOfCreator(String creator, Pagination pagination) {
+		if ((creator == null) || creator.isEmpty()) {
+			throw new IllegalArgumentException("Creator cann't be null or empty.");
+		}
+
+		if (pagination == null) {
+			throw new NullPointerException("Pagination cann't be null.");
+		}
+
+		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
+		int limit = pagination.getPageSize();
+		List<Model> ebooks = ebookDao.selectByCreator(creator, offset, limit);
+		pagination.setObjects(ebooks);
+		return pagination;
+	}
+	
 }

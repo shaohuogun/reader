@@ -21,9 +21,11 @@
 	</resultMap>
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.publisher.model.Publisher">
-		insert into READER_PUBLISHER (id,
+		insert into READER_PUBLISHER
+		(id,
 		creator, create_date, deleted, name, nickname, sex,
-		portrait, profile)
+		portrait,
+		profile)
 		values (#{id}, #{creator}, #{createDate}, #{deleted},
 		#{name},
 		#{nickname},

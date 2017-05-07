@@ -66,7 +66,7 @@ export default class EbookTable extends React.Component {
 	render() {
 		var ebooks = this.state.pagination.objects;
 		if (ebooks == null) {
-			return (<TableRow></TableRow>);
+			return (<Card {...this.props} zDepth={1}></Card>);
 		}
 
 		var rows = [];

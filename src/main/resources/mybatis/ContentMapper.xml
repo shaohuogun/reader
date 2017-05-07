@@ -18,7 +18,8 @@
 	</resultMap>
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.message.model.Content">
-		insert into READER_CONTENT (id,
+		insert into READER_CONTENT
+		(id,
 		creator, create_date, deleted, message_id, original)
 		values (#{id},
 		#{creator}, #{createDate}, #{deleted}, #{messageId}, #{original})
@@ -31,7 +32,8 @@
 
 	<select id="selectByMessageId" parameterType="java.lang.String"
 		resultMap="contentResultMap">
-		select * from READER_CONTENT where deleted = '0' and message_id
+		select * from READER_CONTENT where deleted = '0' and
+		message_id
 		=
 		#{messageId}
 	</select>

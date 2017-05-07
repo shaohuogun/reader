@@ -35,4 +35,13 @@ public class EbookDao {
 				rowBounds);
 	}
 
+	public int countByCreator(String creator) {
+		return sqlSession.selectOne("org.shaohuogun.reader.ebook.dao.EbookMapper.countByCreator", creator);
+	}
+
+	public List<Model> selectByCreator(String creator, int offset, int limit) {
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return sqlSession.selectList("org.shaohuogun.reader.ebook.dao.EbookMapper.selectByCreator", creator, rowBounds);
+	}
+
 }

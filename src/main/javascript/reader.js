@@ -9,6 +9,7 @@ import AppBar from 'material-ui/AppBar';
 import PortalPage from './portal/PortalPage';
 import ChannelPage from './channel/ChannelPage';
 import MessagePage from './message/MessagePage';
+import EbookPage from './ebook/EbookPage';
 
 // Needed for onTouchTap
 injectTapEventPlugin();
@@ -35,7 +36,8 @@ export class Layout extends React.Component {
 
       <ul>
       <li><CustomLink activeOnlyWhenExact={true} to="/" label="首页"/></li>
-      <li><CustomLink to="/channel" label="频道"/></li>
+      <li><CustomLink to="/channel" label="媒体频道"/></li>
+      <li><CustomLink to="/ebook" label="电子书籍"/></li>
       </ul>
       {this.props.children}
       </div>
@@ -58,6 +60,7 @@ export default class Reader extends React.Component {
       <Route exact path="/" component={PortalPage}/>
       <Route path="/channel" component={ChannelPage}/>
       <Route path="/message" component={MessagePage}/>
+      <Route path="/ebook" component={EbookPage}/>
       </Layout>
       </Router>
     );

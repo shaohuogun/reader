@@ -83,16 +83,6 @@ public class EbookController extends Controller {
 		return ebookService.createEbook(ebook);
 	}
 	
-	@RequestMapping(value = "/api/channel/{id}/ebooks", method = RequestMethod.GET)
-	public Pagination getEbooksInChannel(@PathVariable String id,
-			@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
-		int total = ebookService.getEbookCountInChannel(id);
-		Pagination pagination = new Pagination();
-		pagination.setTotal(total);
-		pagination.setPageIndex(page);
-		return ebookService.getEbooksInChannel(id, pagination);
-	}
-	
 	@RequestMapping(value = "/api/ebook/{id}/download", method = RequestMethod.GET)
 	public void downloadEbook(@PathVariable String id, HttpServletResponse resp) throws Exception {
 		Ebook ebook = ebookService.getEbook(id);
@@ -115,6 +105,28 @@ public class EbookController extends Controller {
 		outputStream.close();
 		inputStream.close();
 	}
+	
+	@RequestMapping(value = "/api/channel/{id}/ebooks", method = RequestMethod.GET)
+	public Pagination getEbooksInChannel(@PathVariable String id,
+			@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
+		int total = ebookService.getEbookCountInChannel(id);
+		Pagination pagination = new Pagination();
+		pagination.setTotal(total);
+		pagination.setPageIndex(page);
+		return ebookService.getEbooksInChannel(id, pagination);
+	}
+	
+	@RequestMapping(value = "/api/ebooks", method = RequestMethod.GET)
+	public Pagination getEbooks(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
+		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
+
+		int total = ebookService.getEbookCountOfCreator(creator);
+		Pagination pagination = new Pagination();
+		pagination.setPageSize(16);
+		pagination.setTotal(total);
+		pagination.setPageIndex(page);
+		return ebookService.getEbooksOfCreator(creator, pagination);
+	}	
 	
 	@RequestMapping(value = "/api/ebook/{id}/post", method = RequestMethod.GET)
 	public void postEbook(@PathVariable String id) throws Exception {

@@ -27,7 +27,8 @@
 	</resultMap>
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.message.model.Message">
-		insert into READER_MESSAGE (id,
+		insert into READER_MESSAGE
+		(id,
 		creator, create_date, deleted, picking_status,
 		picking_batch_no,
 		picking_amount, picking_count, channel_id, url,
@@ -48,7 +49,8 @@
 	</insert>
 
 	<select id="selectAll" resultMap="messageResultMap">
-		select * from READER_MESSAGE where
+		select * from READER_MESSAGE
+		where
 		deleted = '0'
 	</select>
 
@@ -71,7 +73,8 @@
 
 	<select id="selectByChannelId" parameterType="java.lang.String"
 		resultMap="messageResultMap">
-		select * from READER_MESSAGE where deleted = '0' and channel_id
+		select * from READER_MESSAGE where deleted = '0' and
+		channel_id
 		= #{channelId} order by url desc;
 	</select>
 
@@ -98,5 +101,5 @@
 		resultMap="messageResultMap">
 		select * from READER_MESSAGE where deleted = '0' and
 		picking_batch_no = #{pickingBatchNo} order by create_date asc limit 1
-	</select>	
+	</select>
 </mapper>

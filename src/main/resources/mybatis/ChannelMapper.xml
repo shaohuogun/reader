@@ -28,7 +28,8 @@
 		insert into READER_CHANNEL
 		(id,
 		creator, create_date, deleted, picking_status, picking_batch_no,
-		picking_amount, picking_count, category, url, name, publisher, description)
+		picking_amount, picking_count, category, url, name, publisher,
+		description)
 		values (#{id},
 		#{creator}, #{createDate}, #{deleted},
 		#{pickingStatus},
@@ -50,7 +51,8 @@
 
 	<select id="countByCreator" parameterType="java.lang.String"
 		resultType="java.lang.Integer">
-		select count(*) from READER_CHANNEL where deleted = '0' and creator
+		select count(*) from READER_CHANNEL where deleted = '0' and
+		creator
 		= #{creator}
 	</select>
 
