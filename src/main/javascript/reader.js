@@ -18,6 +18,7 @@ injectTapEventPlugin();
 const navigatorStyle = {
   width: 350,
   marginTop: 20,
+  marginBottom: 20,
   float: 'left',
   display: 'inline-block',
 };
@@ -63,7 +64,7 @@ export class Layout extends React.Component {
     return (
       <div>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <AppBar title="阅读网络" />
+      <AppBar title="阅读网络" zDepth={0} />
       </MuiThemeProvider>
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -71,6 +72,10 @@ export class Layout extends React.Component {
       </MuiThemeProvider>
 
       {this.props.children}
+
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <AppBar title="阅读网络" zDepth={0} />
+      </MuiThemeProvider>
       </div>
     );
   }

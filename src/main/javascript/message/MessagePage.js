@@ -6,7 +6,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Link} from 'react-router-dom';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
 
 import ChannelInfo from '../channel/ChannelInfo';
 import MessageList from './MessageList';
@@ -16,6 +15,7 @@ const pageStyle = {
   width: 800,
   marginTop: 20,
   marginLeft: 20,
+  marginBottom: 20,
   float: 'left',
   display: 'inline-block',
 };
@@ -38,14 +38,10 @@ export default class MessagePage extends React.Component {
       <div style={pageStyle}>
       <ChannelInfo channelId={this.state.channelId} />
       <Tabs style={tabStyle}>
-        <Tab
-          icon={<MapsPersonPin />}
-          label="消息列表">
+        <Tab label="消息列表">
           <MessageList channelId={this.state.channelId} />
         </Tab>
-        <Tab
-          icon={<MapsPersonPin />}
-          label="电子书籍">
+        <Tab label="电子书籍">
           <EbookTable channelId={this.state.channelId} />
         </Tab>
       </Tabs>

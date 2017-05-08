@@ -9,6 +9,7 @@ const pageStyle = {
   width: 800,
   marginTop: 20,
   marginLeft: 20,
+  marginBottom: 20,
   float: 'left',
   display: 'flex',
   flexWrap: 'wrap',
