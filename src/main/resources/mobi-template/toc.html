@@ -8,13 +8,6 @@
     margin: 0 5px;
   }
 
-  h2 {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin: 0;
-    text-align: center;
-  }
-
   a {
     color: inherit;
     text-decoration: inherit;
@@ -30,11 +23,18 @@
   #toc {
     page-break-before: always;
   }
+
+  #catalog {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+  }
   </style>
 </head>
 <body>
   <div id="toc">
-    <h2>目录</h2>
+    <span id="catalog">目录</span>
     <ol>
       <#list messages as message >
       <div id="articleSignal_${ message_index }">

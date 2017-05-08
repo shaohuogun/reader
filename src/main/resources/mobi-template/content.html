@@ -8,17 +8,6 @@
     margin:0 5px;
   }
 
-  h1 {
-    font-size:4em;
-    font-weight:bold;
-  }
-
-  h2 {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin:0;
-  }
-
   a {
     color: inherit;
     text-decoration: inherit;
@@ -39,12 +28,18 @@
   }
 
   .article_title {
+    margin:0;
+    font-size: 1.2em;
+    font-weight: bold;
     line-height:1.5em;
     page-break-before: always;
     text-align: center;
   }
 
   .release_date {
+    margin:0;
+    font-size: 1.2em;
+    font-weight: bold;    
     text-align: center;
   }
 
@@ -58,14 +53,14 @@
   <div id="content">
     <#list messages as message >
     <div id="article_${ message_index }" class="article">
-      <h2 class="article_title">
+      <div class="article_title">
         ${ message['title'] }
-      </h2>
-      <h2 class="release_date">
+      </div>
+      <div class="release_date">
         <#if message['releaseDate']?exists >
         ${ message['releaseDate']?string('yyyy-MM-dd hh:mm:ss') }
         </#if>
-      </h2>
+      </div>
       <br />
       <div>${ message['content'] }</div>
       <br />

@@ -8,19 +8,19 @@
 		margin: 0 5px;
 	}
 
-	h1 {
-		font-size: 4em;
-		font-weight: bold;
-	}
-
 	#cover {
     text-align:center;
   }
+
+	#title {
+		font-size: 4em;
+		font-weight: bold;
+	}
 	</style>
 </head>
 <body>
 	<div id="cover">
-		<h1 id="title">${ channelName }</h1>
+		<span id="title">${ channelName }</span>
 		<br />
 		<span>创建时间：${ createTime?string('yyyy-MM-dd hh:mm:ss') }</span>
 		<br />
