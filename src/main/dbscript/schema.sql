@@ -18,6 +18,8 @@ drop table if exists `READER_CHANNEL`;
 drop table if exists `READER_MESSAGE`;
 drop table if exists `READER_CONTENT`;
 drop table if exists `READER_EBOOK`;
+drop table if exists `READER_READING_LIST`;
+drop table if exists `READER_READING_LIST_ITEM`;
 drop table if exists `READER_PUBLISHER`;
 
 CREATE TABLE `READER_CHANNEL` (
@@ -100,4 +102,34 @@ CREATE TABLE `READER_PUBLISHER` (
   `profile` blob,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `READER_READING_LIST` (
+  `id` char(36) NOT NULL,
+  `creator` char(36) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `last_modifier` char(36) DEFAULT NULL,
+  `last_modify_date` datetime DEFAULT NULL,
+  `deleted` char(1) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `description` blob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `READER_READING_LIST_ITEM` (
+  `id` char(36) NOT NULL,
+  `creator` char(36) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `last_modifier` char(36) DEFAULT NULL,
+  `last_modify_date` datetime DEFAULT NULL,
+  `deleted` char(1) NOT NULL,
+  `list_id` char(36) NOT NULL,
+  `book_id` char(36) NOT NULL,
+  `book_name` varchar(64) NOT NULL,
+  `status` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
 
