@@ -1,10 +1,13 @@
 import $ from "jquery";
 import React from 'react';
-import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
+import PropTypes from 'prop-types';
+import {Card, CardText, CardActions} from 'material-ui/Card';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+
 
 const toolbarStyle = {
   textAlign: 'center',
@@ -14,7 +17,6 @@ export default class ChannelForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: false,
       category: "blog",
       url: "",
       name: "",
@@ -23,10 +25,6 @@ export default class ChannelForm extends React.Component {
       pickingAmount: 1,
     };
   }
-
-  handleExpandChange = (expanded) => {
-    this.setState({expanded: expanded});
-  };
 
   handleSelectFieldChange = (event, key, payload) => {
     this.setState({category: payload});
@@ -47,9 +45,8 @@ export default class ChannelForm extends React.Component {
     }
   };
 
-  handleCancel = () => {
+  handleReset = () => {
     this.setState({
-      expanded: false,
       category: "blog",
       url: "",
       name: "",
@@ -75,20 +72,18 @@ export default class ChannelForm extends React.Component {
       data: data,
       contentType: "application/json;charset=utf-8",
       dataType: "json"
-    }).then(function() {
-      this.setState({expanded: {false}});
+    }).then(function(data) {
+      var channel = data;
     });
   };
 
   render() {
     return (
-      <Card {...this.props} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-      <CardHeader
-      title="新增订阅频道"
-      actAsExpander={true}
-      showExpandableButton={true}
-      />
-      <CardText expandable={true}>
+      <Card
+      {...this.props}
+      zDepth={0}
+      >
+      <CardText>
       <SelectField
         id="category"
         floatingLabelText="类别"
@@ -147,12 +142,15 @@ export default class ChannelForm extends React.Component {
       onChange={this.handleTextFieldChange}
       />
       </CardText>
-      <CardActions style={toolbarStyle} expandable={true}>
-      <RaisedButton label="取消" secondary={true} onTouchTap={this.handleCancel} />
-      <RaisedButton label="提交" primary={true} onTouchTap={this.handleSubmit} />
+      <CardActions style={toolbarStyle}>
+      <FlatButton label="重置" secondary={true} onTouchTap={this.handleReset} />
+      <RaisedButton label="下一步" primary={true} onTouchTap={this.handleSubmit} />
       </CardActions>
       </Card>
     );
   }
 
+};
+
+ChannelForm.propTypes = {
 };
