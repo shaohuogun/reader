@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Link} from 'react-router-dom';
 
 import ReadingListInfo from './ReadingListInfo';
+import ReadingListItemForm from './ReadingListItemForm';
 import ReadingListItemList from './ReadingListItemList';
 
 const pageStyle = {
@@ -35,6 +36,7 @@ export default class ReadingListItemPage extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
       <ReadingListInfo listId={this.state.listId} />
+      <ReadingListItemForm listId={this.state.listId} />
       <ReadingListItemList style={listStyle} listId={this.state.listId} />
       </div>
       </MuiThemeProvider>

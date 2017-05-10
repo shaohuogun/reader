@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionBook from 'material-ui/svg-icons/action/book';
-import FontIcon from 'material-ui/FontIcon';
 
 const toolbarStyle = {
 	textAlign: 'center',

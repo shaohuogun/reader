@@ -11,45 +11,42 @@ const toolbarStyle = {
   textAlign: 'center',
 };
 
-export default class ReadingListForm extends React.Component {
+export default class ReadingListItemForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
-      name: "",
-      description: "",
+      bookName: "",
     };
   }
 
   handleExpandChange = (expanded) => {
     this.setState({expanded: expanded});
-  }
+  };
 
   handleTextFieldChange = (event, newValue) => {
     var fieldId = event.target.id;
-    if (fieldId == "name") {
-      this.setState({name: newValue});
-    } else if (fieldId == "description") {
-      this.setState({description: newValue});
+    if (fieldId == "bookName") {
+      this.setState({bookName: newValue});
     }
   };
 
   handleCancel = () => {
     this.setState({
       expanded: false,
-      name: "",
-      description: "",
+      bookName: "",
     });
   };
 
   handleSubmit = () => {
     var data = JSON.stringify({
-      name: this.state.name,
-      description: this.state.description,
+      listId: this.props.listId,
+      bookId: "123456789",
+      bookName: this.state.bookName,
     });
 
     $.ajax({
-      url: "/api/readinglist",
+      url: "/api/readinglistitem",
       type: "POST",
       data: data,
       contentType: "application/json;charset=utf-8",
@@ -63,24 +60,15 @@ export default class ReadingListForm extends React.Component {
     return (
       <Card {...this.props} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
       <CardHeader
-      title="新增阅读清单"
+      title="新增清单子项"
       actAsExpander={true}
       showExpandableButton={true}
       />
       <CardText expandable={true}>
       <TextField
-      id="name"
-      value={this.state.name}
-      floatingLabelText="清单名称"
-      fullWidth={true}
-      onChange={this.handleTextFieldChange}
-      />
-      <br />
-
-      <TextField
-      id="description"
-      value={this.state.description}
-      floatingLabelText="频道简介"
+      id="bookName"
+      value={this.state.bookName}
+      floatingLabelText="书籍名称"
       fullWidth={true}
       onChange={this.handleTextFieldChange}
       />
@@ -95,5 +83,6 @@ export default class ReadingListForm extends React.Component {
 
 };
 
-ReadingListForm.propTypes = {
+ReadingListItemForm.propTypes = {
+	listId: PropTypes.string.isRequired,
 };
