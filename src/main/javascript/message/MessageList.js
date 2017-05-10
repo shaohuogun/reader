@@ -2,7 +2,6 @@ import $ from "jquery";
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
-import {ListItem, List} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Pagination from 'material-ui-pagination';
 

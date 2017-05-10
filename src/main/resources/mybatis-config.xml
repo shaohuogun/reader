@@ -10,6 +10,7 @@
         <package name="org.shaohuogun.reader.message.model"/>
         <package name="org.shaohuogun.reader.ebook.model"/>
         <package name="org.shaohuogun.reader.publisher.model"/>
+        <package name="org.shaohuogun.reader.read.model"/>
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/ChannelMapper.xml"/>
@@ -17,5 +18,6 @@
         <mapper resource="mybatis/ContentMapper.xml"/>
         <mapper resource="mybatis/EbookMapper.xml"/>
         <mapper resource="mybatis/PublisherMapper.xml"/>
+        <mapper resource="mybatis/ReadMapper.xml"/>
     </mappers>
 </configuration>

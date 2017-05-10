@@ -8,6 +8,8 @@ import AppBar from 'material-ui/AppBar';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 import PortalPage from './portal/PortalPage';
+import ReadingListPage from './read/ReadingListPage';
+import ReadingListItemPage from './read/ReadingListItemPage';
 import ChannelPage from './channel/ChannelPage';
 import MessagePage from './message/MessagePage';
 import EbookPage from './ebook/EbookPage';
@@ -43,6 +45,7 @@ export class Navigator extends React.Component {
       <CardText>
       <ul>
       <li><CustomLink activeOnlyWhenExact={true} to="/" label="首页"/></li>
+      <li><CustomLink to="/readinglist" label="阅读清单"/></li>
       <li><CustomLink to="/channel" label="媒体频道"/></li>
       <li><CustomLink to="/ebook" label="电子书籍"/></li>
       </ul>
@@ -94,6 +97,8 @@ export default class Reader extends React.Component {
       <Router history={browserHistory}>
       <Layout>
       <Route exact path="/" component={PortalPage}/>
+      <Route path="/readinglist" component={ReadingListPage}/>
+      <Route path="/readinglistitem" component={ReadingListItemPage}/>
       <Route path="/channel" component={ChannelPage}/>
       <Route path="/message" component={MessagePage}/>
       <Route path="/ebook" component={EbookPage}/>
