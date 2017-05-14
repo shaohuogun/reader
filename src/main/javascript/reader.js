@@ -45,11 +45,11 @@ export class Navigator extends React.Component {
       <CardHeader title="个人中心" />
       <CardText>
       <ul>
-      <li><CustomLink activeOnlyWhenExact={true} to="/" label="首页"/></li>
-      <li><CustomLink to="/readinglist" label="阅读清单"/></li>
-      <li><CustomLink to="/wizard" label="创建向导"/></li>
-      <li><CustomLink to="/channel" label="媒体频道"/></li>
-      <li><CustomLink to="/ebook" label="电子书籍"/></li>
+      <li><CustomLink activeOnlyWhenExact={true} to="/html" label="首页"/></li>
+      <li><CustomLink to="/html/readinglist" label="阅读清单"/></li>
+      <li><CustomLink to="/html/wizard" label="创建向导"/></li>
+      <li><CustomLink to="/html/channel" label="媒体频道"/></li>
+      <li><CustomLink to="/html/ebook" label="电子书籍"/></li>
       </ul>
       </CardText>
       </Card>
@@ -98,13 +98,13 @@ export default class Reader extends React.Component {
     return (
       <Router history={browserHistory}>
       <Layout>
-      <Route exact path="/" component={PortalPage}/>
-      <Route path="/readinglist" component={ReadingListPage}/>
-      <Route path="/readinglistitem" component={ReadingListItemPage}/>
-      <Route path="/wizard" component={EbookWizard}/>
-      <Route path="/channel" component={ChannelPage}/>
-      <Route path="/message" component={MessagePage}/>
-      <Route path="/ebook" component={EbookPage}/>
+      <Route exact path="/html" component={PortalPage}/>
+      <Route path="/html/readinglist" component={ReadingListPage}/>
+      <Route path="/html/readinglistitem" component={ReadingListItemPage}/>
+      <Route path="/html/wizard" component={EbookWizard}/>
+      <Route path="/html/channel" component={ChannelPage}/>
+      <Route path="/html/message" component={MessagePage}/>
+      <Route path="/html/ebook" component={EbookPage}/>
       </Layout>
       </Router>
     );
