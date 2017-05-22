@@ -9,9 +9,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
 import ChannelForm from '../channel/ChannelForm';
+import RemoteSubmitButton from '../channel/RemoteSubmitButton'
 import ChannelInfo from '../channel/ChannelInfo';
 import MessageList from '../message/MessageList';
 import EbookInfo from '../ebook/EbookInfo';
+
+import {connect} from 'react-redux';
+import {createChannel} from '../../actions'
 
 const pageStyle = {
   width: 800,
@@ -26,19 +30,19 @@ const toolbarStyle = {
   textAlign: 'center',
 };
 
-export default class EbookWizard extends React.Component {
+class EbookWizard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       finished: false,
       stepIndex: 0,
-      channelId: '',
       ebookId: '',
     };
   }
 
   handleNext = () => {
     const {stepIndex} = this.state;
+
     this.setState({
       stepIndex: stepIndex + 1,
       finished: stepIndex >= 2,
@@ -55,44 +59,17 @@ export default class EbookWizard extends React.Component {
   getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
-      return (<ChannelForm />);
-      case 1:
       return (
-        <div>
-        <MessageList channelId={this.state.channelId} />
-        <div style={toolbarStyle}>
-        <FlatButton
-        label="Back"
-        disabled={stepIndex === 0}
-        onTouchTap={this.handlePrev}
-        style={{marginRight: 12}}
-        />
-        <RaisedButton
-        label={stepIndex === 2 ? 'Finish' : 'Next'}
-        primary={true}
-        onTouchTap={this.handleNext}
-        />
-        </div>
-        </div>
+        <ChannelForm />
+      );
+      case 1:
+      const {channel} = this.props
+      return (
+        <MessageList channelId={channel.id} />
       );
       case 2:
       return (
-        <div>
         <EbookInfo ebookId={this.state.ebookId} />
-        <div style={toolbarStyle}>
-        <FlatButton
-        label="上一步"
-        disabled={stepIndex === 0}
-        onTouchTap={this.handlePrev}
-        style={{marginRight: 12}}
-        />
-        <RaisedButton
-        label={stepIndex === 2 ? '完成' : '下一步'}
-        primary={true}
-        onTouchTap={this.handleNext}
-        />
-        </div>
-        </div>
       );
       default:
       return '';
@@ -130,7 +107,27 @@ export default class EbookWizard extends React.Component {
         Click here
         </a> to reset the example.
         </p>
-      ) : (<div>{this.getStepContent(stepIndex)}</div>)}
+      ) : (
+        <div>
+        {this.getStepContent(stepIndex)}
+        <div style={toolbarStyle}>
+        <FlatButton
+        label={stepIndex === 0 ? '重置' : '上一步'}
+        onTouchTap={this.handlePrev}
+        style={{marginRight: 12}}
+        />
+        {stepIndex === 0 ? (
+          <RemoteSubmitButton />
+        ) : (
+          <RaisedButton
+          label={stepIndex === 2 ? '完成' : '下一步'}
+          primary={true}
+          onTouchTap={this.handleNext}
+          />
+        )}
+        </div>
+        </div>
+      )}
       </div>
       </div>
       </MuiThemeProvider>
@@ -139,4 +136,10 @@ export default class EbookWizard extends React.Component {
 };
 
 EbookWizard.propTypes = {
-};
+}
+
+function mapStateToProps(state) {
+  return {}
+}
+
+export default connect(mapStateToProps)(EbookWizard)

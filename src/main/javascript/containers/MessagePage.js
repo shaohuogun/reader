@@ -7,9 +7,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Link} from 'react-router-dom';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
-import ChannelInfo from '../channel/ChannelInfo';
-import MessageList from './MessageList';
-import EbookTable from '../ebook/EbookTable';
+import ChannelInfo from '../components/channel/ChannelInfo';
+import MessageList from '../components/message/MessageList';
+import EbookTable from '../components/ebook/EbookTable';
 
 const pageStyle = {
   width: 800,

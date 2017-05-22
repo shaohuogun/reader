@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import ReadingListList from './ReadingListList';
-import ReadingListForm from './ReadingListForm';
+import ReadingListList from '../components/read/ReadingListList';
+import ReadingListForm from '../components/read/ReadingListForm';
 
 const pageStyle = {
   width: 800,

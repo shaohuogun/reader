@@ -6,9 +6,9 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Link} from 'react-router-dom';
 
-import ReadingListInfo from './ReadingListInfo';
-import ReadingListItemForm from './ReadingListItemForm';
-import ReadingListItemList from './ReadingListItemList';
+import ReadingListInfo from '../components/read/ReadingListInfo';
+import ReadingListItemForm from '../components/read/ReadingListItemForm';
+import ReadingListItemList from '../components/read/ReadingListItemList';
 
 const pageStyle = {
   width: 800,

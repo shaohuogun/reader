@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import EbookGridList from './EbookGridList';
+import EbookGridList from '../components/ebook/EbookGridList';
 
 const pageStyle = {
   width: 800,

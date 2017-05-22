@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import ChannelList from './ChannelList';
+import ChannelList from '../components/channel/ChannelList';
 
 const pageStyle = {
   width: 800,
