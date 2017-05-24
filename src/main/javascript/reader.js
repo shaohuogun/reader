@@ -17,7 +17,7 @@ import ReadingListItemPage from './containers/ReadingListItemPage'
 import ChannelPage from './containers/ChannelPage'
 import MessagePage from './containers/MessagePage'
 import EbookPage from './containers/EbookPage'
-import EbookWizard from './components/wizard/EbookWizard'
+import EbookWizard from './containers/EbookWizard'
 
 // Needed for onTouchTap
 injectTapEventPlugin();

@@ -8,14 +8,14 @@ import ArrowForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
-import ChannelForm from '../channel/ChannelForm';
-import RemoteSubmitButton from '../channel/RemoteSubmitButton'
-import ChannelInfo from '../channel/ChannelInfo';
-import MessageList from '../message/MessageList';
-import EbookInfo from '../ebook/EbookInfo';
+import ChannelForm from '../components/channel/ChannelForm';
+import RemoteSubmitButton from '../components/channel/RemoteSubmitButton'
+import ChannelInfo from '../components/channel/ChannelInfo';
+import MessageList from '../components/message/MessageList';
+import EbookInfo from '../components/ebook/EbookInfo';
 
 import {connect} from 'react-redux';
-import {createChannel} from '../../actions'
+import {createChannel} from '../actions'
 
 const pageStyle = {
   width: 800,
@@ -42,7 +42,6 @@ class EbookWizard extends React.Component {
 
   handleNext = () => {
     const {stepIndex} = this.state;
-
     this.setState({
       stepIndex: stepIndex + 1,
       finished: stepIndex >= 2,
