@@ -1,6 +1,8 @@
 export const UPDATE_WIZARD = 'UPDATE_WIZARD'
 export const SUBMIT_CHANNEL = 'SUBMIT_CHANNEL'
 export const UPDATE_CHANNEL = 'UPDATE_CHANNEL'
+export const UPDATE_PAGINATION = 'UPDATE_PAGINATION'
+export const ASYNC_PAGINATION = 'ASYNC_PAGINATION'
 
 export function updateWizard(wizard) {
   return {
@@ -24,16 +26,26 @@ export function updateChannel(channel) {
   }
 }
 
-export function ansyncRequest(channel) {
+export function updatePagination(pagination) {
+  return {
+    type: UPDATE_PAGINATION,
+    pagination
+  }
+}
+
+export function asyncPagination(channelId, page) {
   return dispatch => {
-    dispatch(submitChannel(channel))
-    return fetch('/api/channel', {
-      method: 'POST',
+    var url = '/api/channel/' + channelId + '/messages'
+    var data = {
+      page: page.toString()
+    }
+    return fetch(url, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify(channel)
+      body: JSON.stringify(data)
     }).then(response => response.json())
-    .then(json => dispatch(updateChannel(json)))
+    .then(json => dispatch(updatePagination(json)))
   }
 }

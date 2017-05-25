@@ -10,11 +10,11 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 
 import ChannelForm from './ChannelForm'
-import RemoteSubmitButton from '../components/channel/RemoteSubmitButton'
 import ChannelInfo from '../components/channel/ChannelInfo'
 import MessageList from '../components/message/MessageList'
 import EbookInfo from '../components/ebook/EbookInfo'
 
+import {submit} from 'redux-form'
 import {connect} from 'react-redux'
 import {updateWizard} from '../actions'
 
@@ -24,25 +24,34 @@ const pageStyle = {
   marginLeft: 20,
   marginBottom: 20,
   float: 'left',
-  display: 'inline-block',
+  display: 'inline-block'
+}
+
+const contentStyle = {
+  margin: '0 16px'
 }
 
 const toolbarStyle = {
-  textAlign: 'center',
+  textAlign: 'center'
 }
 
 class EbookWizard extends React.Component {
   handleNext = () => {
     const {dispatch, wizard} = this.props
-    dispatch(updateWizard({
-      finished: wizard.stepIndex >=2,
-      stepIndex: wizard.stepIndex + 1
-    }))
+    if (wizard.stepIndex === 0) {
+      dispatch(submit('channelForm'))
+    } else {
+      dispatch(updateWizard({
+        finished: wizard.stepIndex >=2,
+        stepIndex: wizard.stepIndex + 1
+      }))
+    }
   }
 
   handlePrev = () => {
     const {dispatch, wizard} = this.props
     dispatch(updateWizard({
+      finished: wizard.stepIndex >=2,
       stepIndex: wizard.stepIndex - 1
     }))
   }
@@ -54,39 +63,15 @@ class EbookWizard extends React.Component {
         <ChannelForm />
       )
       case 1:
-      const {channel} = this.props
       return (
-        <MessageList channelId={channel.id} />
+        <MessageList />
       );
       case 2:
       return (
         <EbookInfo ebookId={1} />
       )
       default:
-      return ''
-    }
-  }
-
-  render() {
-    const {wizard} = this.props
-    const contentStyle = {margin: '0 16px'}
-
-    return (
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <div style={pageStyle}>
-      <Stepper activeStep={wizard.stepIndex} connector={<ArrowForwardIcon />}>
-      <Step>
-      <StepLabel>输入目标频道信息</StepLabel>
-      </Step>
-      <Step>
-      <StepLabel>采集频道下的消息</StepLabel>
-      </Step>
-      <Step>
-      <StepLabel>导出消息到电子书</StepLabel>
-      </Step>
-      </Stepper>
-      <div style={contentStyle}>
-      {wizard.finished ? (
+      return (
         <p>
         <a
         href="#"
@@ -99,31 +84,50 @@ class EbookWizard extends React.Component {
           }))
         }}
         >
-        Click here
-        </a> to reset the example.
+        点击此处
+        </a> 再来一次！
         </p>
-      ) : (
-        <div>
-        {this.getStepContent(wizard.stepIndex)}
+      )
+    }
+  }
+
+  render() {
+    const {wizard} = this.props
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <div style={pageStyle}>
+
+      <Stepper activeStep={wizard.stepIndex} connector={<ArrowForwardIcon />}>
+      <Step>
+      <StepLabel>输入目标频道信息</StepLabel>
+      </Step>
+      <Step>
+      <StepLabel>采集频道下的消息</StepLabel>
+      </Step>
+      <Step>
+      <StepLabel>导出消息到电子书</StepLabel>
+      </Step>
+      </Stepper>
+
+      <div style={contentStyle}>
+      {this.getStepContent(wizard.stepIndex)}
+      </div>
+
+      {!wizard.finished ? (
         <div style={toolbarStyle}>
         <FlatButton
         label={wizard.stepIndex === 0 ? '重置' : '上一步'}
         onTouchTap={this.handlePrev}
         style={{marginRight: 12}}
         />
-        {wizard.stepIndex === 0 ? (
-          <RemoteSubmitButton />
-        ) : (
-          <RaisedButton
-          label={wizard.stepIndex === 2 ? '完成' : '下一步'}
-          primary={true}
-          onTouchTap={this.handleNext}
-          />
-        )}
+        <RaisedButton
+        label={wizard.stepIndex === 2 ? '完成' : '下一步'}
+        primary={true}
+        onTouchTap={this.handleNext}
+        />
         </div>
-        </div>
-      )}
-      </div>
+      ) : ''}
+
       </div>
       </MuiThemeProvider>
     )
@@ -131,13 +135,11 @@ class EbookWizard extends React.Component {
 }
 
 EbookWizard.propTypes = {
-  wizard: PropTypes.object.isRequired,
-  channel: PropTypes.object.isRequired
+  wizard: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  wizard: state.wizard,
-  channel: state.channel
+  wizard: state.wizard
 })
 
 export default connect(mapStateToProps)(EbookWizard)

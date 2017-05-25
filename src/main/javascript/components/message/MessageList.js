@@ -5,6 +5,10 @@ import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import Pagination from 'material-ui-pagination';
 
+import {connect} from 'react-redux'
+
+import {ansyncPagination} from '../../actions'
+
 const toolbarStyle = {
 	textAlign: 'center',
 };
@@ -64,49 +68,33 @@ MessageListItem.propTypes = {
 	message: PropTypes.object.isRequired,
 };
 
-export default class MessageList extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			pagination: {},
-		};
-	}
-
+class MessageList extends React.Component {
 	loadPagination = (page) => {
-		var self = this;
-		$.ajax({
-			url: "/api/channel/" + self.props.channelId + "/messages",
-			type: "GET",
-			data: {
-				page: page.toString(),
-			},
-		}).then(function(data) {
-			self.setState({
-				pagination: data,
-			});
-		});
+		const {dispatch, channel} = this.props
+		dispatch(ansyncPagination(channel.id, page))
 	}
 
 	componentDidMount() {
-		this.loadPagination(1);
+		this.loadPagination(1)
 	}
-
+	
 	render() {
-		var messages = this.state.pagination.objects;
+		const {pagination} = this.props
+		var messages = pagination.objects
 		if (messages == null) {
-			return (<Card {...this.props} zDepth={1}></Card>);
+			return (<Card {...this.props} zDepth={1}></Card>)
 		}
 
 		var rows = [];
-		var messageCount = messages.length;
+		var messageCount = messages.length
 		for (var i = 0; i < messageCount; i++) {
-			var message = messages[i];
+			var message = messages[i]
 			rows.push(
 				<MessageListItem message={message} />
-			);
+			)
 
 			if (i < (messageCount - 1)) {
-				rows.push(<Divider />);
+				rows.push(<Divider />)
 			}
 		}
 
@@ -117,9 +105,9 @@ export default class MessageList extends React.Component {
 			</CardText>
 			<CardActions style={toolbarStyle}>
 			<Pagination
-			total = {this.state.pagination.pageCount}
-			current = {this.state.pagination.pageIndex}
-			display = {this.state.pagination.pageShow}
+			total = {pagination.pageCount}
+			current = {pagination.pageIndex}
+			display = {pagination.pageShow}
 			onChange = {current => this.loadPagination(current)}
 			/>
 			</CardActions>
@@ -130,5 +118,13 @@ export default class MessageList extends React.Component {
 };
 
 MessageList.propTypes = {
-	channelId: PropTypes.string.isRequired,
+	channel: PropTypes.object.isRequired,
+	pagination: PropTypes.object.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  channel: state.channel,
+	pagination: state.pagination
+})
+
+export default connect(mapStateToProps)(MessageList)

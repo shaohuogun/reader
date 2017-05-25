@@ -31,7 +31,7 @@ export default class Layout extends React.Component {
       </MuiThemeProvider>
 
       {this.props.children}
-
+      
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <AppBar title="阅读网络" zDepth={0} />
       </MuiThemeProvider>
