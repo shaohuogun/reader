@@ -45,7 +45,10 @@ Reader.propTypes = {
 
 export default Reader
 
-storeProvider.init(configureStore)
+storeProvider.init(configureStore({wizard: {
+    finished: false,
+    stepIndex: 0
+  }}))
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 

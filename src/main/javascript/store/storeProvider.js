@@ -1,10 +1,10 @@
-var store = undefined;
+var global_store = undefined
 
 export default {
-  init(configureStore){
-    store = configureStore();
+  init(store){
+    global_store = store
   },
   getStore(){
-    return store;
+    return global_store
   }
-};
+}

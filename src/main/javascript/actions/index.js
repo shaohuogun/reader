@@ -1,16 +1,24 @@
-export const REQUEST_CHANNEL = 'REQUEST_CHANNEL'
-export const RECEIVE_CHANNEL = 'RECEIVE_CHANNEL'
+export const UPDATE_WIZARD = 'UPDATE_WIZARD'
+export const SUBMIT_CHANNEL = 'SUBMIT_CHANNEL'
+export const UPDATE_CHANNEL = 'UPDATE_CHANNEL'
 
-export function requestChannel(channel) {
+export function updateWizard(wizard) {
   return {
-    type: REQUEST_CHANNEL,
+    type: UPDATE_WIZARD,
+    wizard
+  }
+}
+
+export function submitChannel(channel) {
+  return {
+    type: SUBMIT_CHANNEL,
     channel
   }
 }
 
-export function receiveChannel(channel) {
+export function updateChannel(channel) {
   return {
-    type: RECEIVE_CHANNEL,
+    type: UPDATE_CHANNEL,
     channel,
     receivedAt: Date.now()
   }
@@ -18,7 +26,7 @@ export function receiveChannel(channel) {
 
 export function ansyncRequest(channel) {
   return dispatch => {
-    dispatch(requestChannel(channel))
+    dispatch(submitChannel(channel))
     return fetch('/api/channel', {
       method: 'POST',
       headers: {
@@ -26,6 +34,6 @@ export function ansyncRequest(channel) {
       },
       body: JSON.stringify(channel)
     }).then(response => response.json())
-    .then(json => dispatch(receiveChannel(json)))
+    .then(json => dispatch(updateChannel(json)))
   }
 }
