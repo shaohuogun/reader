@@ -1,6 +1,5 @@
 package org.shaohuogun.reader.message.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,16 +10,14 @@ import org.json.JSONObject;
 import org.shaohuogun.common.Controller;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
+import org.shaohuogun.reader.message.model.Message;
+import org.shaohuogun.reader.message.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import org.shaohuogun.reader.message.model.Message;
-import org.shaohuogun.reader.message.model.Content;
-import org.shaohuogun.reader.message.service.MessageService;
 
 @RestController
 public class MessageController extends Controller {
@@ -70,14 +67,20 @@ public class MessageController extends Controller {
 				
 				messageService.createMessage(message);
 			} else if (type == 1) {
-				String original = jsonMsgInfo.getString("content");
-				SimpleDateFormat releaseDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-				Content content = new Content();
-				content.setId(Utility.getUUID());
-				content.setCreator("WX-张兰");
-				content.setMessageId(releaseDateFormat.format(releaseDate));
-				content.setOriginal(original);
-				messageService.createContent(content);				
+				String content = jsonMsgInfo.getString("content");
+				
+				Message message = new Message();
+				message.setId(Utility.getUUID());
+				message.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
+				message.setChannelId("WX-张兰");
+				message.setUrl("");
+				message.setTitle("hello world!");
+				message.setReleaseDate(releaseDate);
+				message.setPageview(0);
+				message.setCommentCount(0);
+				message.setDigest("");
+				message.setContent(content);
+				messageService.createMessage(message);			
 			}
 		}
 	}
@@ -95,11 +98,6 @@ public class MessageController extends Controller {
 	@RequestMapping(value = "/api/message/{id}", method = RequestMethod.GET)
 	public Message getMessage(@PathVariable String id) throws Exception {
 		return messageService.getMessage(id);
-	}
-
-	@RequestMapping(value = "/api/message/{id}/content", method = RequestMethod.GET)
-	public Content getContentByMessageId(@PathVariable String id) throws Exception {
-		return messageService.getContentByMessageId(id);
 	}
 
 }

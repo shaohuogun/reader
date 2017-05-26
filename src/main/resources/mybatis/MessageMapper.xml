@@ -24,6 +24,8 @@
 		<result property="commentCount" column="comment_count" />
 		<result property="digest" column="digest"
 			typeHandler="org.shaohuogun.reader.plugin.ibatis.BlobTypeHandler" />
+		<result property="content" column="content"
+			typeHandler="org.shaohuogun.reader.plugin.ibatis.BlobTypeHandler" />
 	</resultMap>
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.message.model.Message">
@@ -33,7 +35,7 @@
 		picking_batch_no,
 		picking_amount, picking_count, channel_id, url,
 		title, release_date,
-		pageview, comment_count, digest)
+		pageview, comment_count, digest, content)
 		values (#{id},
 		#{creator},
 		#{createDate}, #{deleted},
@@ -45,7 +47,7 @@
 		#{url}, #{title},
 		#{releaseDate},
 		#{pageview},
-		#{commentCount}, #{digest})
+		#{commentCount}, #{digest}, #{content})
 	</insert>
 
 	<select id="selectAll" resultMap="messageResultMap">
@@ -86,7 +88,8 @@
 		#{lastModifyDate}, deleted = #{deleted},
 		picking_status = #{pickingStatus},
 		picking_count =
-		#{pickingCount} where
+		#{pickingCount},
+		content = #{content} where
 		id =
 		#{id}
 	</update>

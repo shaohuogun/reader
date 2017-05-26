@@ -6,45 +6,19 @@ import Divider from 'material-ui/Divider';
 import Pagination from 'material-ui-pagination';
 
 import {connect} from 'react-redux'
-
-import {ansyncPagination} from '../../actions'
+import {asyncPagination} from '../../actions'
 
 const toolbarStyle = {
-	textAlign: 'center',
-};
+	textAlign: 'center'
+}
 
 export class MessageListItem extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			content: {},
-		};
-	}
-
-	handleExpandChange(newExpandedState) {
-		if (!newExpandedState) {
-			return;
-		}
-
-    var self = this;
-    $.ajax({
-      url: "/api/message/" + self.props.message.id + "/content",
-			type: "GET",
-			data: {},
-    }).then(function(data) {
-      self.setState({
-        content: data,
-      });
-    });
-  }
-
 	render() {
-		var message = this.props.message;
+		var message = this.props.message
 		return (
 			<Card
 			{...this.props}
 			zDepth={0}
-			onExpandChange={this.handleExpandChange.bind(this)}
 			>
 			<CardHeader
 			title={<span>[<a href={message.url}>原文地址</a>]：{message.title}</span>}
@@ -56,28 +30,27 @@ export class MessageListItem extends React.Component {
 			{message.digest}
 			</CardText>
 			<CardText expandable={true}>
-			{this.state.content.original}
+			{message.content}
 			</CardText>
 			</Card>
-		);
+		)
 	}
-
-};
+}
 
 MessageListItem.propTypes = {
-	message: PropTypes.object.isRequired,
-};
+	message: PropTypes.object.isRequired
+}
 
 class MessageList extends React.Component {
 	loadPagination = (page) => {
 		const {dispatch, channel} = this.props
-		dispatch(ansyncPagination(channel.id, page))
+		dispatch(asyncPagination(channel.id, page))
 	}
 
 	componentDidMount() {
 		this.loadPagination(1)
 	}
-	
+
 	render() {
 		const {pagination} = this.props
 		var messages = pagination.objects
@@ -85,7 +58,7 @@ class MessageList extends React.Component {
 			return (<Card {...this.props} zDepth={1}></Card>)
 		}
 
-		var rows = [];
+		var rows = []
 		var messageCount = messages.length
 		for (var i = 0; i < messageCount; i++) {
 			var message = messages[i]
@@ -112,15 +85,14 @@ class MessageList extends React.Component {
 			/>
 			</CardActions>
 			</Card>
-		);
+		)
 	}
-
-};
+}
 
 MessageList.propTypes = {
 	channel: PropTypes.object.isRequired,
 	pagination: PropTypes.object.isRequired
-};
+}
 
 const mapStateToProps = (state) => ({
   channel: state.channel,

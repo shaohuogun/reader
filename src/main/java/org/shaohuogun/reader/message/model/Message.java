@@ -24,6 +24,8 @@ public class Message extends PickableObject {
 	
 	private String digest;
 	
+	private String content;
+	
 	@Override
 	public String getPickingType() {
 		return PICKING_TYPE;
@@ -83,6 +85,14 @@ public class Message extends PickableObject {
 
 	public void setDigest(String digest) {
 		this.digest = digest;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 }

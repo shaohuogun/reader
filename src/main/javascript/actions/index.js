@@ -35,16 +35,12 @@ export function updatePagination(pagination) {
 
 export function asyncPagination(channelId, page) {
   return dispatch => {
-    var url = '/api/channel/' + channelId + '/messages'
-    var data = {
-      page: page.toString()
-    }
+    var url = '/api/channel/' + channelId + '/messages?page=' + page
     return fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(data)
+      }
     }).then(response => response.json())
     .then(json => dispatch(updatePagination(json)))
   }

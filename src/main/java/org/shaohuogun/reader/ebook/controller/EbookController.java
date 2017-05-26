@@ -21,7 +21,6 @@ import org.shaohuogun.reader.channel.model.Channel;
 import org.shaohuogun.reader.channel.service.ChannelService;
 import org.shaohuogun.reader.ebook.model.Ebook;
 import org.shaohuogun.reader.ebook.service.EbookService;
-import org.shaohuogun.reader.message.model.Content;
 import org.shaohuogun.reader.message.model.Message;
 import org.shaohuogun.reader.message.service.MessageService;
 import org.slf4j.Logger;
@@ -70,15 +69,11 @@ public class EbookController extends Controller {
 		pagination = messageService.getMessagesInChannel(targetId, pagination);
 		List<Model> models = pagination.getObjects();
 		List<Message> messages = new ArrayList<Message>();
-		List<Content> contents = new ArrayList<Content>();
 		for (int i = 0; i < models.size(); i++) {
-			Message message = (Message) models.get(i);
-			Content content = messageService.getContentByMessageId(message.getId());
-			messages.add(message);
-			contents.add(content);
+			messages.add((Message) models.get(i));
 		}
 		
-		Ebook ebook = mobiGenerator.generate(channel, messages, contents);
+		Ebook ebook = mobiGenerator.generate(channel, messages);
 		logger.info(ebook.getPath());
 		return ebookService.createEbook(ebook);
 	}

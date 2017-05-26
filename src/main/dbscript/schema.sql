@@ -16,7 +16,6 @@
 
 drop table if exists `READER_CHANNEL`;
 drop table if exists `READER_MESSAGE`;
-drop table if exists `READER_CONTENT`;
 drop table if exists `READER_EBOOK`;
 drop table if exists `READER_READING_LIST`;
 drop table if exists `READER_READING_LIST_ITEM`;
@@ -58,19 +57,8 @@ CREATE TABLE `READER_MESSAGE` (
   `release_date` datetime NOT NULL,
   `pageview` int(11) NOT NULL,
   `comment_count` int(11) NOT NULL,
-  `digest` blob,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `READER_CONTENT` (
-  `id` char(36) NOT NULL,
-  `creator` char(36) NOT NULL,
-  `create_date` datetime NOT NULL,
-  `last_modifier` char(36) DEFAULT NULL,
-  `last_modify_date` datetime DEFAULT NULL,
-  `deleted` char(1) NOT NULL,
-  `message_id` char(36) NOT NULL,
-  `original` mediumblob,
+  `digest` blob DEFAULT NULL,
+  `content` mediumblob DEFAULT NULL,  
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

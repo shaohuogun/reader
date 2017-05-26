@@ -14,7 +14,6 @@ import org.shaohuogun.common.Controller;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.channel.model.Channel;
 import org.shaohuogun.reader.channel.service.ChannelService;
-import org.shaohuogun.reader.message.model.Content;
 import org.shaohuogun.reader.message.model.Message;
 import org.shaohuogun.reader.message.service.MessageService;
 import org.shaohuogun.reader.picker.model.PickableObject;
@@ -98,12 +97,7 @@ public class PickerController extends Controller {
 				message.setPickingStatus(PickableObject.STATUS_FINISHED);
 			}
 			
-			Content content = new Content();
-			content.setId(Utility.getUUID());
-			content.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
-			content.setMessageId(message.getId());
-			content.setOriginal(jsonResult.getString("content"));
-			messageService.createContent(content);
+			message.setContent(jsonResult.getString("content"));
 			messageService.modifyMessage(message);
 		}
 	}

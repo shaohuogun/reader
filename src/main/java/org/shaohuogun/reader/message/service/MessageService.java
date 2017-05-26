@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.shaohuogun.common.Model;
 import org.shaohuogun.common.Pagination;
-import org.shaohuogun.reader.message.dao.ContentDao;
 import org.shaohuogun.reader.message.dao.MessageDao;
-import org.shaohuogun.reader.message.model.Content;
 import org.shaohuogun.reader.message.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +15,6 @@ public class MessageService {
 
 	@Autowired
 	private MessageDao messageDao;
-
-	@Autowired
-	private ContentDao contentDao;
 
 	@Transactional
 	public Message createMessage(Message message) throws Exception {
@@ -80,42 +75,6 @@ public class MessageService {
 		List<Model> messages = messageDao.selectByChannelId(channelId, offset, limit);
 		pagination.setObjects(messages);
 		return pagination;
-	}
-
-	@Transactional
-	public Content createContent(Content content) throws Exception {
-		if (content == null) {
-			throw new NullPointerException("Content cann't be null.");
-		}
-
-		contentDao.insert(content);
-		return contentDao.selectById(content.getId());
-	}
-
-	public Content getContent(String id) throws Exception {
-		if ((id == null) || id.isEmpty()) {
-			throw new IllegalArgumentException("Content's id cann't be null or empty.");
-		}
-
-		return contentDao.selectById(id);
-	}
-
-	public Content getContentByMessageId(String id) throws Exception {
-		if ((id == null) || id.isEmpty()) {
-			throw new IllegalArgumentException("Message's id cann't be null or empty.");
-		}
-
-		return contentDao.selectByMessageId(id);
-	}
-
-	@Transactional
-	public Content modifyContent(Content content) throws Exception {
-		if (content == null) {
-			throw new NullPointerException("Content cann't be null.");
-		}
-
-		contentDao.update(content);
-		return contentDao.selectById(content.getId());
 	}
 
 	public Message getMessageByPickingStatus(String pickingStatus) throws Exception {
