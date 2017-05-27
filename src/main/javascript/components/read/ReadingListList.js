@@ -52,9 +52,10 @@ export default class ReadingListList extends React.Component {
 		var listCount = lists.length;
 		for (var i = 0; i < listCount; i++) {
 			var list = lists[i];
+			var uri = '/html/readinglist/' + list.id
 			rows.push(
 				<ListItem
-				primaryText={<Link to={{pathname: "/html/readinglistitem", query: {listId: list.id}}}>{list.name}</Link>}
+				primaryText={<Link to={uri}>{list.name}</Link>}
 				secondaryText={list.description}
 				secondaryTextLines={1}
 				key={list.id}

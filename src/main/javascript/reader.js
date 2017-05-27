@@ -27,12 +27,12 @@ const Reader = ({store, history}) => (
   <Router history={history}>
   <Layout>
   <Route exact path="/html" component={PortalPage}/>
-  <Route path="/html/readinglist" component={ReadingListPage}/>
-  <Route path="/html/readinglistitem" component={ReadingListItemPage}/>
+  <Route exact path="/html/readinglists" component={ReadingListPage}/>
+  <Route path="/html/readinglist/:listId" component={ReadingListItemPage}/>
   <Route path="/html/wizard" component={EbookWizard}/>
-  <Route path="/html/channel" component={ChannelPage}/>
-  <Route path="/html/message" component={MessagePage}/>
-  <Route path="/html/ebook" component={EbookPage}/>
+  <Route exact path="/html/channels" component={ChannelPage}/>
+  <Route path="/html/channel/:channelId" component={MessagePage}/>
+  <Route path="/html/ebooks" component={EbookPage}/>
   </Layout>
   </Router>
   </Provider>

@@ -24,20 +24,14 @@ const listStyle = {
 };
 
 export default class ReadingListItemPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listId: props.location.query.listId,
-    };
-  }
-
   render() {
+    var listId = this.props.match.params.listId
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
-      <ReadingListInfo listId={this.state.listId} />
-      <ReadingListItemForm listId={this.state.listId} />
-      <ReadingListItemList style={listStyle} listId={this.state.listId} />
+      <ReadingListInfo listId={listId} />
+      <ReadingListItemForm listId={listId} />
+      <ReadingListItemList style={listStyle} listId={listId} />
       </div>
       </MuiThemeProvider>
     );

@@ -20,12 +20,6 @@ const listStyle = {
 };
 
 export default class ReadingListPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>

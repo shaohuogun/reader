@@ -25,24 +25,18 @@ const tabStyle = {
 };
 
 export default class MessagePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      channelId: props.location.query.channelId,
-    };
-  }
-
   render() {
+    var channelId = this.props.match.params.channelId
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
-      <ChannelInfo channelId={this.state.channelId} />
+      <ChannelInfo channelId={channelId} />
       <Tabs style={tabStyle}>
         <Tab label="消息列表">
-          <MessageList channelId={this.state.channelId} />
+          <MessageList channelId={channelId} />
         </Tab>
         <Tab label="电子书籍">
-          <EbookTable channelId={this.state.channelId} />
+          <EbookTable channelId={channelId} />
         </Tab>
       </Tabs>
       </div>

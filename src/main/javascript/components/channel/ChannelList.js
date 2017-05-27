@@ -52,9 +52,10 @@ export default class ChannelList extends React.Component {
 		var channelCount = channels.length;
 		for (var i = 0; i < channelCount; i++) {
 			var channel = channels[i];
+			var uri = '/html/channel/' + channel.id
 			rows.push(
 				<ListItem
-				primaryText={<span>[<a href={channel.url}>原文地址</a>]：<Link to={{pathname: "/html/message", query: {channelId: channel.id}}}>{channel.name}</Link></span>}
+				primaryText={<span>[<a href={channel.url}>原文地址</a>]：<Link to={uri}>{channel.name}</Link></span>}
 				secondaryText={channel.description}
 				secondaryTextLines={1}
 				key={channel.id}

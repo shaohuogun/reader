@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class PortalController extends Controller {
 
-	@RequestMapping(value = {"/html", "/html/*"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/html/**"}, method = RequestMethod.GET)
 	public ModelAndView reader() {
 		return new ModelAndView("reader");
 	}

@@ -43,8 +43,8 @@ MessageListItem.propTypes = {
 
 class MessageList extends React.Component {
 	loadPagination = (page) => {
-		const {dispatch, channel} = this.props
-		dispatch(asyncPagination(channel.id, page))
+		const {dispatch, channelId} = this.props
+		dispatch(asyncPagination(channelId, page))
 	}
 
 	componentDidMount() {
@@ -90,12 +90,11 @@ class MessageList extends React.Component {
 }
 
 MessageList.propTypes = {
-	channel: PropTypes.object.isRequired,
+	channelId: PropTypes.string.isRequired,
 	pagination: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  channel: state.channel,
 	pagination: state.pagination
 })
 
