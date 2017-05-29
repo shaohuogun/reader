@@ -57,6 +57,7 @@ class EbookWizard extends React.Component {
   }
 
   getStepContent(stepIndex) {
+    console.log(this.props)
     switch (stepIndex) {
       case 0:
       return (
@@ -64,7 +65,7 @@ class EbookWizard extends React.Component {
       )
       case 1:
       return (
-        <MessageList />
+        <MessageList channelId={this.props.channelId}/>
       );
       case 2:
       return (
@@ -135,11 +136,13 @@ class EbookWizard extends React.Component {
 }
 
 EbookWizard.propTypes = {
-  wizard: PropTypes.object.isRequired
+  wizard: PropTypes.object.isRequired,
+  channelId: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  wizard: state.wizard
+  wizard: state.wizard,
+  channelId: state.channel.id
 })
 
 export default connect(mapStateToProps)(EbookWizard)
