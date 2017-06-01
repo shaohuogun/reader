@@ -1,56 +1,44 @@
-import $ from "jquery";
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 
 const toolbarStyle = {
 	textAlign: 'center',
-};
+}
 
 export default class EbookInfo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ebook: {},
-    };
-  }
+	
+	render() {
+		const {ebook, downloadEbook, postEbook} = this.props
+		return (
+			<Card {...this.props} zDepth={1}>
+			<CardHeader
+			title={ebook.name}
+			/>
+			<CardText>
+			{ebook.createDate}
+			</CardText>
+			<CardActions style={toolbarStyle}>
+			<FlatButton
+			label="下载"
+			secondary={true}
+			onTouchTap={downloadEbook.bind(this, ebook.id)}
+			/>
+			<FlatButton
+			label="发送"
+			secondary={true}
+			onTouchTap={postEbook.bind(this, ebook.id)}
+			/>
+			</CardActions>
+			</Card>
+		)
+	}
 
-  loadEbook() {
-    var self = this;
-    $.ajax({
-      url: "/api/ebook/" + self.props.ebookId,
-			type: "GET",
-			data: {},
-    }).then(function(data) {
-      self.setState({
-        ebook: data,
-      });
-    });
-  }
-
-  componentDidMount() {
-    this.loadEbook();
-  }
-
-  addItem = () => {
-
-  }
-
-  render() {
-    return (
-      <Card {...this.props} zDepth={1}>
-      <CardHeader
-      title={this.state.ebook.name}
-      />
-      <CardText>
-      {this.state.ebook.createDate}
-      </CardText>
-      </Card>
-    );
-  }
-
-};
+}
 
 EbookInfo.propTypes = {
-  ebookId: PropTypes.string.isRequired,
-};
+	ebook: PropTypes.object.isRequired,
+	downloadEbook: PropTypes.func.isRequired,
+	postEbook: PropTypes.func.isRequired
+}

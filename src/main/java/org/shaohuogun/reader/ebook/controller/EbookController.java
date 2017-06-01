@@ -124,7 +124,7 @@ public class EbookController extends Controller {
 	}	
 	
 	@RequestMapping(value = "/api/ebook/{id}/post", method = RequestMethod.GET)
-	public void postEbook(@PathVariable String id) throws Exception {
+	public Ebook postEbook(@PathVariable String id) throws Exception {
 		Ebook ebook = ebookService.getEbook(id);
 
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -136,6 +136,7 @@ public class EbookController extends Controller {
 		fis.close();
 
 		Postman.send(props, mobiOutputDir, ebook);
+		return ebook;
 	}
 
 }

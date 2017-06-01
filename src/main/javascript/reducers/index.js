@@ -5,7 +5,11 @@ import {
   UPDATE_WIZARD,
   SUBMIT_CHANNEL,
   UPDATE_CHANNEL,
-  UPDATE_PAGINATION
+  UPDATE_PAGINATION,
+  GENERATING_EBOOK,
+  GENERATED_EBOOK,
+  POSTING_EBOOK,
+  POSTED_EBOOK
 } from '../actions'
 
 function wizardReducer(state = {}, action) {
@@ -38,12 +42,28 @@ function channelReducer(state = {}, action) {
   }
 }
 
+function ebookReducer(state = {}, action) {
+  switch (action.type) {
+    case GENERATING_EBOOK:
+    return Object.assign({}, state, {status: 'generating', channelId: action.channelId})
+    case GENERATED_EBOOK:
+    return Object.assign({}, state, {status: 'generated', ...action.ebook})
+    case POSTING_EBOOK:
+    return Object.assign({}, state, {status: 'posting'})
+    case POSTED_EBOOK:
+    return Object.assign({}, state, {status: 'posted'})
+    default:
+    return state
+  }
+}
+
 const rootReducer = combineReducers({
   routing,
-  form: formReducer,
   wizard: wizardReducer,
+  form: formReducer,
   channel: channelReducer,
-  pagination: paginationReducer
+  pagination: paginationReducer,
+  ebook: ebookReducer
 })
 
 export default rootReducer

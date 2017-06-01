@@ -16,7 +16,7 @@ import EbookInfo from '../components/ebook/EbookInfo'
 
 import {submit} from 'redux-form'
 import {connect} from 'react-redux'
-import {updateWizard} from '../actions'
+import {updateWizard, generateEbook, postEbook} from '../actions'
 
 const pageStyle = {
   width: 800,
@@ -36,11 +36,16 @@ const toolbarStyle = {
 }
 
 class EbookWizard extends React.Component {
+
   handleNext = () => {
-    const {dispatch, wizard} = this.props
+    const {dispatch, wizard, channelId} = this.props
     if (wizard.stepIndex === 0) {
       dispatch(submit('channelForm'))
     } else {
+      if (wizard.stepIndex === 1) {
+        dispatch(generateEbook(channelId))
+      }
+
       dispatch(updateWizard({
         finished: wizard.stepIndex >=2,
         stepIndex: wizard.stepIndex + 1
@@ -57,7 +62,7 @@ class EbookWizard extends React.Component {
   }
 
   getStepContent(stepIndex) {
-    console.log(this.props)
+    const {dispatch, ebookId} = this.props
     switch (stepIndex) {
       case 0:
       return (
@@ -69,7 +74,14 @@ class EbookWizard extends React.Component {
       );
       case 2:
       return (
-        <EbookInfo ebookId={1} />
+        <EbookInfo
+        ebook={ebook}
+        downloadEbook={ebookId => {
+          var downloadUrl = "/api/ebook/" + ebookId + "/download"
+      		window.open(downloadUrl, "_blank")
+        }}
+        postEbook={ebookId =>
+          dispatch(postEbook(ebookId))} />
       )
       default:
       return (
@@ -137,12 +149,14 @@ class EbookWizard extends React.Component {
 
 EbookWizard.propTypes = {
   wizard: PropTypes.object.isRequired,
-  channelId: PropTypes.string.isRequired
+  channelId: PropTypes.string.isRequired,
+  ebook: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
   wizard: state.wizard,
-  channelId: state.channel.id
+  channelId: state.channel.id,
+  ebook: state.ebook
 })
 
 export default connect(mapStateToProps)(EbookWizard)
