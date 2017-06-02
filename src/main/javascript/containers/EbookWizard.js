@@ -41,11 +41,9 @@ class EbookWizard extends React.Component {
     const {dispatch, wizard, channelId} = this.props
     if (wizard.stepIndex === 0) {
       dispatch(submit('channelForm'))
+    } else if (wizard.stepIndex === 1) {
+      dispatch(generateEbook(channelId))
     } else {
-      if (wizard.stepIndex === 1) {
-        dispatch(generateEbook(channelId))
-      }
-
       dispatch(updateWizard({
         finished: wizard.stepIndex >=2,
         stepIndex: wizard.stepIndex + 1
@@ -62,7 +60,7 @@ class EbookWizard extends React.Component {
   }
 
   getStepContent(stepIndex) {
-    const {dispatch, ebookId} = this.props
+    const {dispatch, channelId, ebook} = this.props
     switch (stepIndex) {
       case 0:
       return (
@@ -70,7 +68,7 @@ class EbookWizard extends React.Component {
       )
       case 1:
       return (
-        <MessageList channelId={this.props.channelId}/>
+        <MessageList channelId={channelId}/>
       );
       case 2:
       return (

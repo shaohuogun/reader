@@ -74,7 +74,12 @@ export function generateEbook(channelId) {
         'Content-Type': 'application/json;charset=utf-8'
       }
     }).then(response => response.json())
-    .then(json => dispatch(generatedEbook(json)))
+    .then(json => {
+      dispatch(generatedEbook(json))
+      dispatch(updateWizard({
+        stepIndex: 2
+      }))
+    })
   }
 }
 
