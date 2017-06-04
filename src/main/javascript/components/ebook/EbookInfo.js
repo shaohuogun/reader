@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card'
+import {Card, CardHeader, CardActions} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
 const toolbarStyle = {
@@ -15,10 +15,8 @@ export default class EbookInfo extends React.Component {
 			<Card {...this.props} zDepth={1}>
 			<CardHeader
 			title={ebook.name}
+			subtitle={ebook.createDate}
 			/>
-			<CardText>
-			{ebook.createDate}
-			</CardText>
 			<CardActions style={toolbarStyle}>
 			<FlatButton
 			label="下载"

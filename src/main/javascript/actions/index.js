@@ -1,4 +1,5 @@
 export const UPDATE_WIZARD = 'UPDATE_WIZARD'
+export const UPDATE_PROGRESS = 'UPDATE_PROGRESS'
 export const SUBMIT_CHANNEL = 'SUBMIT_CHANNEL'
 export const UPDATE_CHANNEL = 'UPDATE_CHANNEL'
 export const UPDATE_PAGINATION = 'UPDATE_PAGINATION'
@@ -12,6 +13,41 @@ export function updateWizard(wizard) {
   return {
     type: UPDATE_WIZARD,
     wizard
+  }
+}
+
+export function updateProgress(progress) {
+  return {
+    type: UPDATE_PROGRESS,
+    progress
+  }
+}
+
+export function asyncProgress(progressId) {
+  return dispatch => {
+    var url = '/api/progress/' + progressId
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    }).then(response => response.json())
+    .then(json => {
+      dispatch(updateProgress(json))
+      if (json === 100) {
+        dispatch(updateWizard({
+          stepIndex: 1
+        }))
+      }
+    })
+  }
+}
+
+export function asyncProgressWithTimeout(progressId) {
+  return dispatch => {
+    setInterval(() => {
+      dispatch(asyncProgress(progressId))
+    }, 1000)
   }
 }
 

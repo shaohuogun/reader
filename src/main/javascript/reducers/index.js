@@ -3,6 +3,7 @@ import {reducer as formReducer} from 'redux-form'
 import {combineReducers} from 'redux'
 import {
   UPDATE_WIZARD,
+  UPDATE_PROGRESS,
   SUBMIT_CHANNEL,
   UPDATE_CHANNEL,
   UPDATE_PAGINATION,
@@ -21,8 +22,17 @@ function wizardReducer(state = {}, action) {
   }
 }
 
-function paginationReducer(state = {}, action) {
+function progressReducer(state = {}, action) {
   console.log(state)
+  switch (action.type) {
+    case UPDATE_PROGRESS:
+    return action.progress
+    default:
+    return state
+  }
+}
+
+function paginationReducer(state = {}, action) {
   switch (action.type) {
     case UPDATE_PAGINATION:
     return Object.assign({}, state, action.pagination)
@@ -60,6 +70,7 @@ function ebookReducer(state = {}, action) {
 const rootReducer = combineReducers({
   routing,
   wizard: wizardReducer,
+  progress: progressReducer,
   form: formReducer,
   channel: channelReducer,
   pagination: paginationReducer,

@@ -5,6 +5,8 @@ import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.channel.model.Channel;
 import org.shaohuogun.reader.channel.service.ChannelService;
+import org.shaohuogun.reader.progress.model.Progress;
+import org.shaohuogun.reader.progress.service.ProgressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ public class ChannelController extends Controller {
 
 	@Autowired
 	private ChannelService channelService;
+	
+	@Autowired
+	private ProgressService progressService;
 
 	@RequestMapping(value = "/api/channel", method = RequestMethod.POST)
 	public Channel createChannel(@RequestBody @Validated Channel channel) throws Exception {		
@@ -26,7 +31,11 @@ public class ChannelController extends Controller {
 		channel.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
 		channel.setPickingBatchNo(Utility.getUUID());
 
-		return channelService.createChannel(channel);
+		channel = channelService.createChannel(channel);
+		Progress progress = new Progress();
+		progress.setId(channel.getId());
+		progressService.addProgress(progress);
+		return channel;
 	}
 
 	@RequestMapping(value = "/api/channel/{id}", method = RequestMethod.GET)

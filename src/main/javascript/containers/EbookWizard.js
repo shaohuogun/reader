@@ -8,6 +8,7 @@ import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
 import ArrowForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
+import LinearProgress from 'material-ui/LinearProgress'
 
 import ChannelForm from './ChannelForm'
 import ChannelInfo from '../components/channel/ChannelInfo'
@@ -32,6 +33,7 @@ const contentStyle = {
 }
 
 const toolbarStyle = {
+  marginTop: 20,
   textAlign: 'center'
 }
 
@@ -60,15 +62,21 @@ class EbookWizard extends React.Component {
   }
 
   getStepContent(stepIndex) {
-    const {dispatch, channelId, ebook} = this.props
+    const {dispatch, progress, channelId, ebook} = this.props
     switch (stepIndex) {
       case 0:
       return (
+        <div>
         <ChannelForm />
+        <LinearProgress mode="determinate" value={progress} />
+        </div>
       )
       case 1:
       return (
+        <div>
         <MessageList channelId={channelId}/>
+        <LinearProgress mode="determinate" value={progress} />
+        </div>
       );
       case 2:
       return (
@@ -147,12 +155,14 @@ class EbookWizard extends React.Component {
 
 EbookWizard.propTypes = {
   wizard: PropTypes.object.isRequired,
+  progress: PropTypes.number.isRequired,
   channelId: PropTypes.string.isRequired,
   ebook: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
   wizard: state.wizard,
+  progress: state.progress,
   channelId: state.channel.id,
   ebook: state.ebook
 })

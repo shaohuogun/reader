@@ -17,6 +17,7 @@ import org.shaohuogun.reader.channel.service.ChannelService;
 import org.shaohuogun.reader.message.model.Message;
 import org.shaohuogun.reader.message.service.MessageService;
 import org.shaohuogun.reader.picker.model.PickableObject;
+import org.shaohuogun.reader.progress.service.ProgressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,9 @@ public class PickerController extends Controller {
 
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private ProgressService progressService;
 
 	@RequestMapping(value = "/api/picker", method = RequestMethod.POST)
 	public void receiveResult(HttpServletRequest req) throws Exception {
@@ -60,12 +64,6 @@ public class PickerController extends Controller {
 		String batchNo = jsonResult.getString(PickableObject.KEY_BATCH_NO);
 		if (Channel.PICKING_TYPE.equalsIgnoreCase(targetType)) {
 			Channel channel = channelService.getChannelByPickingBatchNo(batchNo);
-			channel.setLastModifyDate(new Date());
-			channel.setPickingCount(channel.getPickingCount() + 1);
-			if (channel.getPickingAmount() == channel.getPickingCount()) {
-				channel.setPickingStatus(PickableObject.STATUS_FINISHED);
-			}
-
 			JSONArray jsonMsgs = jsonResult.getJSONArray("messages");
 			for (int i = 0; i < jsonMsgs.length(); i++) {
 				JSONObject jsonMsg = jsonMsgs.getJSONObject(i);
@@ -88,7 +86,13 @@ public class PickerController extends Controller {
 				messageService.createMessage(message);
 			}
 
-			channelService.modifyChannel(channel);
+			channel.setLastModifyDate(new Date());
+			channel.setPickingCount(channel.getPickingCount() + 1);
+			if (channel.getPickingAmount() == channel.getPickingCount()) {
+				channel.setPickingStatus(PickableObject.STATUS_FINISHED);
+			}
+			channelService.modifyChannel(channel);			
+			progressService.incProgressAmount(channel.getId(), jsonMsgs.length());			
 		} else if (Message.PICKING_TYPE.equalsIgnoreCase(targetType)) {
 			Message message = messageService.getMessageByPickingBatchNo(batchNo);
 			message.setLastModifyDate(new Date());
@@ -99,6 +103,7 @@ public class PickerController extends Controller {
 			
 			message.setContent(jsonResult.getString("content"));
 			messageService.modifyMessage(message);
+			progressService.incProgressCount(message.getChannelId(), 1);
 		}
 	}
 

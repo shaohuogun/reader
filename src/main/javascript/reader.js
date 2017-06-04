@@ -50,6 +50,7 @@ storeProvider.init(configureStore({
     finished: false,
     stepIndex: 0
   },
+  progress: 0,
   pagination: {}
 }))
 const store = storeProvider.getStore()
