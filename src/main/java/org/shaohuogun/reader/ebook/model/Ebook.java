@@ -6,8 +6,16 @@ import org.shaohuogun.common.Model;
 public class Ebook extends Model {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	public static final String FORMAT_MOBI = "mobi";
+	public static final String FORMAT_AZW3 = "azw3"; 
+	public static final String FORMAT_EPUB = "epub"; 
+	
+	@NotBlank(message = "不允许为空！")
 	private String channelId;
+	
+	@NotBlank(message = "不允许为空！")
+	private String format;
 	
 	@NotBlank(message = "不允许为空！")
 	private String name;
@@ -23,6 +31,14 @@ public class Ebook extends Model {
 
 	public void setChannelId(String channelId) {
 		this.channelId = channelId;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
 	public String getName() {

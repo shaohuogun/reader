@@ -70,6 +70,7 @@ CREATE TABLE `READER_EBOOK` (
   `last_modify_date` datetime DEFAULT NULL,
   `deleted` char(1) NOT NULL,
   `channel_id` char(36) NOT NULL,
+  `format` varchar(16) NOT NULL,
   `name` varchar(64) NOT NULL,
   `path` varchar(256) NOT NULL,  
   `downloads` int(11) NOT NULL,

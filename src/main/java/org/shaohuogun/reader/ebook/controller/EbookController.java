@@ -21,12 +21,12 @@ import org.shaohuogun.reader.channel.model.Channel;
 import org.shaohuogun.reader.channel.service.ChannelService;
 import org.shaohuogun.reader.ebook.model.Ebook;
 import org.shaohuogun.reader.ebook.service.EbookService;
+import org.shaohuogun.reader.ebook.service.MobiGenerator;
 import org.shaohuogun.reader.message.model.Message;
 import org.shaohuogun.reader.message.service.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,15 +37,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class EbookController extends Controller {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@Value("${ebook.kindlegen.dir}")
-	private String kindlegenDir;
-	
-	@Value("${ebook.mobi.template.dir}")
-	private String mobiTemplateDir;
-
-	@Value("${ebook.mobi.output.dir}")
-	private String mobiOutputDir;
 
 	@Autowired
 	private ChannelService channelService;
@@ -54,12 +45,14 @@ public class EbookController extends Controller {
 	private MessageService messageService;
 	
 	@Autowired
+	private MobiGenerator mobiGenerator;
+	
+	@Autowired
 	private EbookService ebookService;
 
 	@RequestMapping(value = "/api/ebook/generate", method = RequestMethod.GET)
 	public Ebook generateEbook(@RequestParam(required = true) String targetType,
-			@RequestParam(required = true) String targetId) throws Exception {		
-		MobiGenerator mobiGenerator = new MobiGenerator(kindlegenDir, mobiTemplateDir, mobiOutputDir);
+			@RequestParam(required = true) String targetId) throws Exception {
 		Channel channel = channelService.getChannel(targetId);
 		int total = messageService.getMessageCountInChannel(targetId);
 		Pagination pagination = new Pagination();
@@ -81,7 +74,7 @@ public class EbookController extends Controller {
 	@RequestMapping(value = "/api/ebook/{id}/download", method = RequestMethod.GET)
 	public void downloadEbook(@PathVariable String id, HttpServletResponse resp) throws Exception {
 		Ebook ebook = ebookService.getEbook(id);
-		String ebookPath = String.format("%s/%s/%s", this.mobiOutputDir, ebook.getPath(), ebook.getName());
+		String ebookPath = String.format("%s/%s/%s", mobiGenerator.getOutputDir(), ebook.getPath(), ebook.getName());
 
 		File ebookFile = new File(ebookPath);
 		resp.reset();
@@ -135,7 +128,7 @@ public class EbookController extends Controller {
 		props.load(fis);
 		fis.close();
 
-		Postman.send(props, mobiOutputDir, ebook);
+		Postman.send(props, mobiGenerator.getOutputDir(), ebook);
 		return ebook;
 	}
 

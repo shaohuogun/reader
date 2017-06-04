@@ -13,6 +13,7 @@
 		<result property="lastModifyDate" column="last_modify_date" />
 		<result property="deleted" column="deleted" />
 		<result property="channelId" column="channel_id" />
+		<result property="format" column="format" />
 		<result property="name" column="name" />
 		<result property="path" column="path" />
 		<result property="downloads" column="downloads" />
@@ -20,9 +21,9 @@
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.ebook.model.Ebook">
 		insert into READER_EBOOK (id,
-		creator, create_date, deleted, channel_id, name, path, downloads)
+		creator, create_date, deleted, channel_id, format, name, path, downloads)
 		values (#{id},
-		#{creator}, #{createDate}, #{deleted}, #{channelId},
+		#{creator}, #{createDate}, #{deleted}, #{channelId}, #{format},
 		#{name}, #{path}, #{downloads})
 	</insert>
 
