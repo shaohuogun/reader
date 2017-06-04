@@ -23,30 +23,25 @@ export function updateProgress(progress) {
   }
 }
 
-export function asyncProgress(progressId) {
+export function asyncProgressWithInterval(progressId) {
   return dispatch => {
-    var url = '/api/progress/' + progressId
-    return fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      }
-    }).then(response => response.json())
-    .then(json => {
-      dispatch(updateProgress(json))
-      if (json === 100) {
-        dispatch(updateWizard({
-          stepIndex: 1
-        }))
-      }
-    })
-  }
-}
-
-export function asyncProgressWithTimeout(progressId) {
-  return dispatch => {
-    setInterval(() => {
-      dispatch(asyncProgress(progressId))
+    const interval = setInterval(() => {
+      var url = '/api/progress/' + progressId
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        }
+      }).then(response => response.json())
+      .then(json => {
+        dispatch(updateProgress(json))
+        if (json === 100) {
+          clearInterval(interval);
+          dispatch(updateWizard({
+            stepIndex: 1
+          }))
+        }
+      })
     }, 1000)
   }
 }
