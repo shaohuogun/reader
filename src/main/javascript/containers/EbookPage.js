@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import EbookGridList from '../components/ebook/EbookGridList';
+import EbookGrid from '../components/ebook/EbookGrid';
 
 const pageStyle = {
   width: 800,
@@ -26,7 +26,7 @@ export default class EbookPage extends React.Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <EbookGridList style={pageStyle} />
+      <EbookGrid style={pageStyle} />
       </MuiThemeProvider>
     );
   }

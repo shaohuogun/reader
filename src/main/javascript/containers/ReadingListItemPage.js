@@ -7,8 +7,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Link} from 'react-router-dom';
 
 import ReadingListInfo from '../components/read/ReadingListInfo';
-import ReadingListItemForm from '../components/read/ReadingListItemForm';
-import ReadingListItemList from '../components/read/ReadingListItemList';
+import ReadingItemForm from '../components/read/ReadingItemForm';
+import ReadingItemList from '../components/read/ReadingItemList';
 
 const pageStyle = {
   width: 800,
@@ -23,15 +23,15 @@ const listStyle = {
   marginTop: 20,
 };
 
-export default class ReadingListItemPage extends React.Component {
+export default class ReadingItemPage extends React.Component {
   render() {
     var listId = this.props.match.params.listId
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
       <ReadingListInfo listId={listId} />
-      <ReadingListItemForm listId={listId} />
-      <ReadingListItemList style={listStyle} listId={listId} />
+      <ReadingItemForm listId={listId} />
+      <ReadingItemList style={listStyle} listId={listId} />
       </div>
       </MuiThemeProvider>
     );
@@ -39,5 +39,5 @@ export default class ReadingListItemPage extends React.Component {
 
 };
 
-ReadingListItemPage.propTypes = {
+ReadingItemPage.propTypes = {
 };

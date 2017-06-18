@@ -5,7 +5,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.shaohuogun.reader.read.dao.ReadMapper">
-	<resultMap id="listResultMap" type="org.shaohuogun.reader.read.model.ReadingList">
+	<resultMap id="readingListResultMap" type="org.shaohuogun.reader.read.model.ReadingList">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
@@ -17,8 +17,7 @@
 			typeHandler="org.shaohuogun.reader.plugin.ibatis.BlobTypeHandler" />
 	</resultMap>
 
-	<resultMap id="listItemResultMap"
-		type="org.shaohuogun.reader.read.model.ReadingListItem">
+	<resultMap id="readingItemResultMap" type="org.shaohuogun.reader.read.model.ReadingItem">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
@@ -31,7 +30,7 @@
 		<result property="status" column="status" />
 	</resultMap>
 
-	<insert id="insertList" parameterType="org.shaohuogun.reader.read.model.ReadingList">
+	<insert id="insertReadingList" parameterType="org.shaohuogun.reader.read.model.ReadingList">
 		insert into
 		READER_READING_LIST
 		(id,
@@ -44,12 +43,12 @@
 		)
 	</insert>
 
-	<select id="selectListById" parameterType="java.lang.String"
-		resultMap="listResultMap">
+	<select id="selectReadingListById" parameterType="java.lang.String"
+		resultMap="readingListResultMap">
 		select * from READER_READING_LIST where id = #{id}
 	</select>
 
-	<select id="countListByCreator" parameterType="java.lang.String"
+	<select id="countReadingListByCreator" parameterType="java.lang.String"
 		resultType="java.lang.Integer">
 		select count(*) from READER_READING_LIST where deleted =
 		'0' and
@@ -57,14 +56,14 @@
 		= #{creator}
 	</select>
 
-	<select id="selectListsByCreator" parameterType="java.lang.String"
-		resultMap="listResultMap">
+	<select id="selectReadingListsByCreator" parameterType="java.lang.String"
+		resultMap="readingListResultMap">
 		select * from READER_READING_LIST where deleted = '0' and
 		creator
 		= #{creator} order by create_date desc
 	</select>
 
-	<update id="updateList" parameterType="org.shaohuogun.reader.read.model.ReadingList"
+	<update id="updateReadingList" parameterType="org.shaohuogun.reader.read.model.ReadingList"
 		flushCache="true">
 		update
 		READER_READING_LIST set last_modifier =
@@ -78,9 +77,9 @@
 		id = #{id}
 	</update>
 
-	<insert id="insertListItem" parameterType="org.shaohuogun.reader.read.model.ReadingListItem">
+	<insert id="insertReadingItem" parameterType="org.shaohuogun.reader.read.model.ReadingItem">
 		insert into
-		READER_READING_LIST_ITEM
+		READER_READING_ITEM
 		(id,
 		creator, create_date, deleted, list_id,
 		book_id, book_name, status)
@@ -94,33 +93,30 @@
 		)
 	</insert>
 
-	<select id="selectListItemById" parameterType="java.lang.String"
-		resultMap="listItemResultMap">
-		select * from READER_READING_LIST_ITEM where id = #{id}
+	<select id="selectReadingItemById" parameterType="java.lang.String"
+		resultMap="readingItemResultMap">
+		select * from READER_READING_ITEM where id = #{id}
 	</select>
 
-	<select id="countListItemByCreator" parameterType="java.lang.String"
+	<select id="countReadingItemByListId" parameterType="java.lang.String"
 		resultType="java.lang.Integer">
-		select count(*) from READER_READING_LIST_ITEM where deleted
-		=
-		'0' and
-		creator
-		= #{creator}
+		select count(*) from READER_READING_ITEM where deleted
+		= '0'
+		and list_id = #{listId}
 	</select>
-
-	<select id="selectListItemsByCreator" parameterType="java.util.Map"
-		resultMap="listItemResultMap">
-		select * from READER_READING_LIST_ITEM where deleted = '0'
+	
+	<select id="selectReadingItemsByListId" parameterType="java.lang.String"
+		resultMap="readingItemResultMap">
+		select * from READER_READING_ITEM where deleted = '0'
 		and
-		creator
-		= #{creator} and list_id = #{listId} order by create_date
+		list_id = #{listId} order by create_date
 		desc
 	</select>
 
-	<update id="updateListItem" parameterType="org.shaohuogun.reader.read.model.ReadingListItem"
+	<update id="updateReadingItem" parameterType="org.shaohuogun.reader.read.model.ReadingItem"
 		flushCache="true">
 		update
-		READER_READING_LIST_ITEM set last_modifier =
+		READER_READING_ITEM set last_modifier =
 		#{lastModifier},
 		last_modify_date =
 		#{lastModifyDate}, deleted =

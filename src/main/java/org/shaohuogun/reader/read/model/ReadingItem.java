@@ -2,11 +2,9 @@ package org.shaohuogun.reader.read.model;
 
 import org.shaohuogun.common.Model;
 
-public class ReadingListItem extends Model {
+public class ReadingItem extends Model {
 
 	private static final long serialVersionUID = 1L;
-	
-	public static final String FIELD_LIST_ID = "listId";
 	
 	public static final String STATUS_WANT = "want";
 	public static final String STATUS_READING = "reading";
@@ -23,11 +21,11 @@ public class ReadingListItem extends Model {
 	public String getListId() {
 		return listId;
 	}
-
+	
 	public void setListId(String listId) {
 		this.listId = listId;
 	}
-
+	
 	public String getBookId() {
 		return bookId;
 	}

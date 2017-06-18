@@ -12,7 +12,7 @@ const toolbarStyle = {
 	textAlign: 'center',
 };
 
-export default class EbookGridList extends React.Component {
+export default class EbookGrid extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -117,5 +117,5 @@ export default class EbookGridList extends React.Component {
 
 };
 
-EbookGridList.propTypes = {
+EbookGrid.propTypes = {
 };

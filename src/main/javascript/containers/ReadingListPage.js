@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import ReadingListList from '../components/read/ReadingListList';
+import ReadingListGrid from '../components/read/ReadingListGrid';
 import ReadingListForm from '../components/read/ReadingListForm';
 
 const pageStyle = {
@@ -25,7 +25,7 @@ export default class ReadingListPage extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
       <ReadingListForm />
-      <ReadingListList style={listStyle} />
+      <ReadingListGrid style={listStyle} />
       </div>
       </MuiThemeProvider>
     );

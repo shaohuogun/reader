@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import {ListItem, List} from 'material-ui/List';
+import {Link} from 'react-router-dom';
 import Divider from 'material-ui/Divider';
 import Pagination from 'material-ui-pagination';
 
@@ -10,7 +11,7 @@ const toolbarStyle = {
 	textAlign: 'center',
 };
 
-export default class ReadingListItemList extends React.Component {
+export default class ReadingListGrid extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -21,7 +22,7 @@ export default class ReadingListItemList extends React.Component {
 	loadPagination = (page) => {
 		var self = this;
 		$.ajax({
-			url: "/api/readinglist/" + self.props.listId + "/items",
+			url: "/api/readinglists",
 			type: "GET",
 			data: {
 				page: page.toString(),
@@ -37,32 +38,39 @@ export default class ReadingListItemList extends React.Component {
 		this.loadPagination(1);
 	}
 
+	handleItemCLick = (listId) => {
+
+	}
+
 	render() {
-		var listItems = this.state.pagination.objects;
-		if (listItems == null) {
+		var lists = this.state.pagination.objects;
+		if (lists == null) {
 			return (<Card {...this.props} zDepth={1}></Card>);
 		}
 
 		var rows = [];
-		var listItemCount = listItems.length;
-		for (var i = 0; i < listItemCount; i++) {
-			var listItem = listItems[i];
+		var listCount = lists.length;
+		for (var i = 0; i < listCount; i++) {
+			var list = lists[i];
+			var uri = '/html/readinglist/' + list.id
 			rows.push(
 				<ListItem
-          primaryText={listItem.bookName}
-          secondaryText={<span>{listItem.status}</span>}
-          secondaryTextLines={1}
-					key={listItem.id}
-        />
+				primaryText={<Link to={uri}>{list.name}</Link>}
+				secondaryText={list.description}
+				secondaryTextLines={1}
+				key={list.id}
+				onTouchTap={this.handleItemCLick.bind(this, list.id)}
+				/>
 			);
 
-			if (i < (listItemCount - 1)) {
+			if (i < (listCount - 1)) {
 				rows.push(<Divider />);
 			}
 		}
 
 		return (
 			<Card {...this.props} zDepth={1}>
+			<CardHeader title="清单列表" />
 			<CardText>
 			<List>
 			{rows}
@@ -82,6 +90,5 @@ export default class ReadingListItemList extends React.Component {
 
 };
 
-ReadingListItemList.propTypes = {
-	listId: PropTypes.string.isRequired,
+ReadingListGrid.propTypes = {
 };

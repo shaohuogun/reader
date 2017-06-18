@@ -11,7 +11,7 @@ const toolbarStyle = {
   textAlign: 'center',
 };
 
-export default class ReadingListItemForm extends React.Component {
+export default class ReadingItemForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +46,7 @@ export default class ReadingListItemForm extends React.Component {
     });
 
     $.ajax({
-      url: "/api/readinglistitem",
+      url: "/api/readingitem",
       type: "POST",
       data: data,
       contentType: "application/json;charset=utf-8",
@@ -83,6 +83,6 @@ export default class ReadingListItemForm extends React.Component {
 
 };
 
-ReadingListItemForm.propTypes = {
+ReadingItemForm.propTypes = {
 	listId: PropTypes.string.isRequired,
 };

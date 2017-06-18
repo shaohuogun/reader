@@ -4,7 +4,7 @@ import org.shaohuogun.common.Controller;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.read.model.ReadingList;
-import org.shaohuogun.reader.read.model.ReadingListItem;
+import org.shaohuogun.reader.read.model.ReadingItem;
 import org.shaohuogun.reader.read.service.ReadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -20,53 +20,51 @@ public class ReadController extends Controller {
 
 	@Autowired
 	private ReadService readService;
-
+	
 	@RequestMapping(value = "/api/readinglist", method = RequestMethod.POST)
-	public ReadingList createList(@RequestBody @Validated ReadingList list) throws Exception {		
-		list.setId(Utility.getUUID());
-		list.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
-		
-		return readService.createList(list);
+	public ReadingList createReadingList(@RequestBody @Validated ReadingList readingList) throws Exception {
+		readingList.setId(Utility.getUUID());
+		readingList.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
+
+		return readService.createReadingList(readingList);
 	}
 
 	@RequestMapping(value = "/api/readinglist/{id}", method = RequestMethod.GET)
-	public ReadingList getList(@PathVariable String id) throws Exception {
-		return readService.getList(id);
+	public ReadingList getReadingList(@PathVariable String id) throws Exception {
+		return readService.getReadingList(id);
 	}
 
 	@RequestMapping(value = "/api/readinglists", method = RequestMethod.GET)
-	public Pagination getLists(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
+	public Pagination getReadingLists(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
 		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
 
-		int total = readService.getListCountOfCreator(creator);
+		int total = readService.getReadingListCount(creator);
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
 		pagination.setPageIndex(page);
-		return readService.getListsOfCreator(creator, pagination);
+		return readService.getReadingLists(creator, pagination);
 	}
 	
-	@RequestMapping(value = "/api/readinglistitem", method = RequestMethod.POST)
-	public ReadingListItem createListItem(@RequestBody @Validated ReadingListItem listItem) throws Exception {		
-		listItem.setId(Utility.getUUID());
-		listItem.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
+	@RequestMapping(value = "/api/readingitem", method = RequestMethod.POST)
+	public ReadingItem createReadingItem(@RequestBody @Validated ReadingItem readingItem) throws Exception {		
+		readingItem.setId(Utility.getUUID());
+		readingItem.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
 		
-		return readService.createListItem(listItem);
+		return readService.createReadingItem(readingItem);
 	}
-
-	@RequestMapping(value = "/api/readinglistitem/{id}", method = RequestMethod.GET)
-	public ReadingListItem getListItem(@PathVariable String id) throws Exception {
-		return readService.getListItem(id);
+	
+	@RequestMapping(value = "/api/readingitem/{id}", method = RequestMethod.GET)
+	public ReadingItem getReadingItem(@PathVariable String id) throws Exception {
+		return readService.getReadingItem(id);
 	}
 
 	@RequestMapping(value = "/api/readinglist/{id}/items", method = RequestMethod.GET)
-	public Pagination getListItems(@PathVariable String id, @RequestParam(defaultValue = "1", required = false) int page) throws Exception {
-		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
-
-		int total = readService.getListItemCountOfCreator(creator, id);
+	public Pagination getReadingItems(@PathVariable String id, @RequestParam(defaultValue = "1", required = false) int page) throws Exception {
+		int total = readService.getReadingItemCount(id);
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
 		pagination.setPageIndex(page);
-		return readService.getListItemsOfCreator(creator, id, pagination);
+		return readService.getReadingItems(id, pagination);
 	}
 	
 }

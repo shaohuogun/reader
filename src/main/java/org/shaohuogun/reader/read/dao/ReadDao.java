@@ -1,14 +1,12 @@
 package org.shaohuogun.reader.read.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.shaohuogun.common.Model;
+import org.shaohuogun.reader.read.model.ReadingItem;
 import org.shaohuogun.reader.read.model.ReadingList;
-import org.shaohuogun.reader.read.model.ReadingListItem;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,51 +18,48 @@ public class ReadDao {
 		this.sqlSession = sqlSession;
 	}
 
-	public void insertList(ReadingList list) {
-		sqlSession.insert("org.shaohuogun.reader.read.dao.ReadMapper.insertList", list);
+	public void insertReadingList(ReadingList readingList) {
+		sqlSession.insert("org.shaohuogun.reader.read.dao.ReadMapper.insertReadingList", readingList);
 	}
 
-	public ReadingList selectListById(String id) {
-		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.selectListById", id);
+	public ReadingList selectReadingListById(String id) {
+		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.selectReadingListById", id);
 	}
 
-	public int countListByCreator(String creator) {
-		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.countListByCreator", creator);
+	public int countReadingListByCreator(String creator) {
+		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.countReadingListByCreator", creator);
 	}
 
-	public List<Model> selectListsByCreator(String creator, int offset, int limit) {
+	public List<Model> selectReadingListsByCreator(String creator, int offset, int limit) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.read.dao.ReadMapper.selectListsByCreator", creator,
+		return sqlSession.selectList("org.shaohuogun.reader.read.dao.ReadMapper.selectReadingListsByCreator", creator,
 				rowBounds);
 	}
 
-	public void updateList(ReadingList list) {
-		sqlSession.update("org.shaohuogun.reader.read.dao.ReadMapper.updateList", list);
+	public void updateReadingList(ReadingList readingList) {
+		sqlSession.update("org.shaohuogun.reader.read.dao.ReadMapper.updateReadingList", readingList);
 	}
 
-	public void insertListItem(ReadingListItem listItem) {
-		sqlSession.insert("org.shaohuogun.reader.read.dao.ReadMapper.insertListItem", listItem);
+	public void insertReadingItem(ReadingItem readingItem) {
+		sqlSession.insert("org.shaohuogun.reader.read.dao.ReadMapper.insertReadingItem", readingItem);
 	}
 
-	public ReadingListItem selectListItemById(String id) {
-		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.selectListItemById", id);
+	public ReadingItem selectReadingItemById(String id) {
+		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.selectReadingItemById", id);
 	}
 
-	public int countListItemByCreator(String creator, String listId) {
-		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.countListItemByCreator", creator);
+	public int countReadingItemByListId(String listId) {
+		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.countReadingItemByListId", listId);
 	}
 
-	public List<Model> selectListItemsByCreator(String creator, String listId, int offset, int limit) {
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put(Model.FIELD_CREATOR, creator);
-		paramMap.put(ReadingListItem.FIELD_LIST_ID, listId);
+	public List<Model> selectReadingItemsByListId(String listId, int offset, int limit) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.read.dao.ReadMapper.selectListItemsByCreator", paramMap,
+		return sqlSession.selectList("org.shaohuogun.reader.read.dao.ReadMapper.selectReadingItemsByListId", listId,
 				rowBounds);
 	}
 
-	public void updateListItem(ReadingListItem listItem) {
-		sqlSession.update("org.shaohuogun.reader.read.dao.ReadMapper.updateListItem", listItem);
+	public void updateReadingItem(ReadingItem readingItem) {
+		sqlSession.update("org.shaohuogun.reader.read.dao.ReadMapper.updateReadingItem", readingItem);
 	}
 
 }
