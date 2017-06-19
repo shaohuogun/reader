@@ -26,14 +26,17 @@ public class ReadDao {
 		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.selectReadingListById", id);
 	}
 
-	public int countReadingListByCreator(String creator) {
-		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.countReadingListByCreator", creator);
+	public List<Model> selectReadingListsByCreator(String creator) {
+		return sqlSession.selectList("org.shaohuogun.reader.read.dao.ReadMapper.selectReadingListsByCreator", creator);
 	}
 
-	public List<Model> selectReadingListsByCreator(String creator, int offset, int limit) {
+	public int countReadingList() {
+		return sqlSession.selectOne("org.shaohuogun.reader.read.dao.ReadMapper.countReadingList");
+	}
+
+	public List<Model> selectReadingLists(int offset, int limit) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.read.dao.ReadMapper.selectReadingListsByCreator", creator,
-				rowBounds);
+		return sqlSession.selectList("org.shaohuogun.reader.read.dao.ReadMapper.selectReadingLists", rowBounds);
 	}
 
 	public void updateReadingList(ReadingList readingList) {

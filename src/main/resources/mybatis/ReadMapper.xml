@@ -42,25 +42,27 @@
 		#{description}
 		)
 	</insert>
-
+	
 	<select id="selectReadingListById" parameterType="java.lang.String"
 		resultMap="readingListResultMap">
 		select * from READER_READING_LIST where id = #{id}
 	</select>
 
-	<select id="countReadingListByCreator" parameterType="java.lang.String"
-		resultType="java.lang.Integer">
-		select count(*) from READER_READING_LIST where deleted =
-		'0' and
-		creator
-		= #{creator}
-	</select>
-
 	<select id="selectReadingListsByCreator" parameterType="java.lang.String"
 		resultMap="readingListResultMap">
-		select * from READER_READING_LIST where deleted = '0' and
-		creator
-		= #{creator} order by create_date desc
+		select * from
+		READER_READING_LIST where deleted = '0' and
+		creator = #{creator} order by create_date desc
+	</select>
+
+	<select id="countReadingList" resultType="java.lang.Integer">
+		select count(*) from
+		READER_READING_LIST where deleted = '0'
+	</select>
+
+	<select id="selectReadingLists" resultMap="readingListResultMap">
+		select * from
+		READER_READING_LIST where deleted = '0' order by create_date desc
 	</select>
 
 	<update id="updateReadingList" parameterType="org.shaohuogun.reader.read.model.ReadingList"
@@ -104,7 +106,7 @@
 		= '0'
 		and list_id = #{listId}
 	</select>
-	
+
 	<select id="selectReadingItemsByListId" parameterType="java.lang.String"
 		resultMap="readingItemResultMap">
 		select * from READER_READING_ITEM where deleted = '0'

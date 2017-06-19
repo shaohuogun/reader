@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import ReadingListGrid from '../components/read/ReadingListGrid';
-import ReadingListForm from '../components/read/ReadingListForm';
+import ReadingListForm from '../components/read/ReadingListForm'
+import ReadingListTabs from '../components/read/ReadingListTabs'
 
 const pageStyle = {
   width: 800,
@@ -13,11 +13,11 @@ const pageStyle = {
   marginBottom: 20,
   float: 'left',
   display: 'inline-block',
-};
+}
 
-const listStyle = {
+const tabsStyle = {
   marginTop: 20,
-};
+}
 
 export default class ReadingListPage extends React.Component {
   render() {
@@ -25,12 +25,12 @@ export default class ReadingListPage extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
       <ReadingListForm />
-      <ReadingListGrid style={listStyle} />
+      <ReadingListTabs style={tabsStyle} />
       </div>
       </MuiThemeProvider>
-    );
+    )
   }
-};
+}
 
 ReadingListPage.propTypes = {
-};
+}

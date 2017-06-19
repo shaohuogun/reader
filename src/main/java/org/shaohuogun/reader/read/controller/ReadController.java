@@ -1,6 +1,9 @@
 package org.shaohuogun.reader.read.controller;
 
+import java.util.List;
+
 import org.shaohuogun.common.Controller;
+import org.shaohuogun.common.Model;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.read.model.ReadingList;
@@ -20,7 +23,7 @@ public class ReadController extends Controller {
 
 	@Autowired
 	private ReadService readService;
-	
+
 	@RequestMapping(value = "/api/readinglist", method = RequestMethod.POST)
 	public ReadingList createReadingList(@RequestBody @Validated ReadingList readingList) throws Exception {
 		readingList.setId(Utility.getUUID());
@@ -33,38 +36,48 @@ public class ReadController extends Controller {
 	public ReadingList getReadingList(@PathVariable String id) throws Exception {
 		return readService.getReadingList(id);
 	}
+	
+	@RequestMapping(value = "/api/readinglist/{id}", method = RequestMethod.DELETE)
+	public void deleteReadingList(@PathVariable String id) throws Exception {
+		readService.deleteReadingList(id);
+	}
+
+	@RequestMapping(value = "/api/myreadinglists", method = RequestMethod.GET)
+	public List<Model> getMyReadingLists() throws Exception {
+		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
+		return readService.getReadingLists(creator);
+	}
 
 	@RequestMapping(value = "/api/readinglists", method = RequestMethod.GET)
 	public Pagination getReadingLists(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
-		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
-
-		int total = readService.getReadingListCount(creator);
+		int total = readService.getReadingListCount();
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
 		pagination.setPageIndex(page);
-		return readService.getReadingLists(creator, pagination);
+		return readService.getReadingLists(pagination);
 	}
-	
+
 	@RequestMapping(value = "/api/readingitem", method = RequestMethod.POST)
-	public ReadingItem createReadingItem(@RequestBody @Validated ReadingItem readingItem) throws Exception {		
+	public ReadingItem createReadingItem(@RequestBody @Validated ReadingItem readingItem) throws Exception {
 		readingItem.setId(Utility.getUUID());
 		readingItem.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
-		
+
 		return readService.createReadingItem(readingItem);
 	}
-	
+
 	@RequestMapping(value = "/api/readingitem/{id}", method = RequestMethod.GET)
 	public ReadingItem getReadingItem(@PathVariable String id) throws Exception {
 		return readService.getReadingItem(id);
 	}
 
 	@RequestMapping(value = "/api/readinglist/{id}/items", method = RequestMethod.GET)
-	public Pagination getReadingItems(@PathVariable String id, @RequestParam(defaultValue = "1", required = false) int page) throws Exception {
+	public Pagination getReadingItems(@PathVariable String id,
+			@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
 		int total = readService.getReadingItemCount(id);
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
 		pagination.setPageIndex(page);
 		return readService.getReadingItems(id, pagination);
 	}
-	
+
 }

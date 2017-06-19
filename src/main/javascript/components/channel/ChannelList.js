@@ -22,7 +22,7 @@ export default class ChannelList extends React.Component {
 	loadPagination = (page) => {
 		var self = this;
 		$.ajax({
-			url: "/api/channels",
+			url: "/api/mychannels",
 			type: "GET",
 			data: {
 				page: page.toString(),
@@ -39,7 +39,7 @@ export default class ChannelList extends React.Component {
 	}
 
 	handleItemCLick = (channelId) => {
-
+		
 	}
 
 	render() {

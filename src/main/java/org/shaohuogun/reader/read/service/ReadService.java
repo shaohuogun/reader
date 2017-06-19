@@ -34,27 +34,42 @@ public class ReadService {
 
 		return readDao.selectReadingListById(id);
 	}
+	
+	public void deleteReadingList(String id) throws Exception {
+		if ((id == null) || id.isEmpty()) {
+			throw new IllegalArgumentException("Reading list's id cann't be null or empty.");
+		}
 
-	public int getReadingListCount(String creator) throws Exception {
+		ReadingList readingList = readDao.selectReadingListById(id);
+		if (readingList == null) {
+			throw new NullPointerException("Reading list cann't be null.");
+		}
+
+		readingList.setDeleted(Model.DELETED_YES);
+		readDao.updateReadingList(readingList);
+	}
+		
+	
+	public List<Model> getReadingLists(String creator) throws Exception {
 		if ((creator == null) || creator.isEmpty()) {
 			throw new IllegalArgumentException("Creator cann't be null or empty.");
 		}
-
-		return readDao.countReadingListByCreator(creator);
+		
+		return readDao.selectReadingListsByCreator(creator);
 	}
 
-	public Pagination getReadingLists(String creator, Pagination pagination) throws Exception {
-		if ((creator == null) || creator.isEmpty()) {
-			throw new IllegalArgumentException("Creator cann't be null or empty.");
-		}
+	public int getReadingListCount() throws Exception {
+		return readDao.countReadingList();
+	}
 
+	public Pagination getReadingLists(Pagination pagination) throws Exception {
 		if (pagination == null) {
 			throw new NullPointerException("Pagination cann't be null.");
 		}
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> readingLists = readDao.selectReadingListsByCreator(creator, offset, limit);
+		List<Model> readingLists = readDao.selectReadingLists(offset, limit);
 		pagination.setObjects(readingLists);
 		return pagination;
 	}

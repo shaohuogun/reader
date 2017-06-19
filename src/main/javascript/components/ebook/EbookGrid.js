@@ -24,7 +24,7 @@ export default class EbookGrid extends React.Component {
 	loadPagination = (page) => {
 		var self = this;
 		$.ajax({
-			url: "/api/ebooks",
+			url: "/api/myebooks",
 			type: "GET",
 			data: {
 				page: page.toString(),

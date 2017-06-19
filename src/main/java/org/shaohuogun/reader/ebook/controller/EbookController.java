@@ -104,8 +104,8 @@ public class EbookController extends Controller {
 		return ebookService.getEbooksInChannel(id, pagination);
 	}
 	
-	@RequestMapping(value = "/api/ebooks", method = RequestMethod.GET)
-	public Pagination getEbooks(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
+	@RequestMapping(value = "/api/myebooks", method = RequestMethod.GET)
+	public Pagination getMyEbooks(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
 		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
 
 		int total = ebookService.getEbookCountOfCreator(creator);
