@@ -1,12 +1,23 @@
 import $ from "jquery"
 import React from 'react'
 import PropTypes from 'prop-types'
-import Tabs from 'material-ui/Tabs'
+import {Tabs, Tab} from 'material-ui/Tabs'
+import {Card, CardText, CardActions} from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 
-import ReadingListTab from './ReadingListTab'
+import ReadingItemForm from './ReadingItemForm'
+import ReadingItemList from './ReadingItemList'
 
 const tabStyle = {
   marginTop: 20,
+}
+
+const listStyle = {
+  marginTop: 20,
+}
+
+const toolbarStyle = {
+	textAlign: 'center',
 }
 
 export default class ReadingListTabs extends React.Component {
@@ -34,6 +45,17 @@ export default class ReadingListTabs extends React.Component {
     this.loadMyReadingLists()
   }
 
+  deleteReadingList = (listId) => {
+    var self = this
+    $.ajax({
+      url: "/api/readinglist/" + listId,
+      type: "DELETE",
+      data: {},
+    }).then(function(data) {
+
+    })
+  }
+
   render() {
     var lists = this.state.readingLists
     if (lists == null) {
@@ -45,11 +67,24 @@ export default class ReadingListTabs extends React.Component {
     for (var i = 0; i < listCount; i++) {
       var list = lists[i];
       tabs.push(
-        <ReadingListTab
-        id={list.id}
-        name={list.name}
-        description={list.description}
-        />
+        <Tab label={list.name}>
+  			<Card>
+  			<CardText>
+  			{list.description}
+  			</CardText>
+  			<CardText>
+  			<ReadingItemForm listId={list.id} />
+  			<ReadingItemList style={listStyle} listId={list.id} />
+  			</CardText>
+  			<CardActions style={toolbarStyle}>
+  			<FlatButton
+  			label="删除"
+  			secondary={true}
+  			onTouchTap={this.deleteReadingList.bind(this, list.id)}
+  			/>
+  			</CardActions>
+  			</Card>
+  			</Tab>
       )
     }
 
