@@ -11,6 +11,7 @@ import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
 import Layout from './containers/Layout'
+import UserCenter from './containers/UserCenter'
 import PortalPage from './containers/PortalPage'
 import ReadingListPage from './containers/ReadingListPage'
 import ChannelPage from './containers/ChannelPage'
@@ -26,11 +27,12 @@ const Reader = ({store, history}) => (
   <Router history={history}>
   <Layout>
   <Route exact path="/html" component={PortalPage}/>
-  <Route exact path="/html/readinglists" component={ReadingListPage}/>
   <Route path="/html/wizard" component={EbookWizard}/>
-  <Route exact path="/html/channels" component={ChannelPage}/>
-  <Route path="/html/channel/:channelId" component={MessagePage}/>
-  <Route path="/html/ebooks" component={EbookPage}/>
+  <Route path="/html/usercenter" component={UserCenter}/>
+  <Route path="/html/usercenter/readinglists" component={ReadingListPage}/>
+  <Route exact path="/html/usercenter/channels" component={ChannelPage}/>
+  <Route path="/html/usercenter/channel/:channelId" component={MessagePage}/>
+  <Route path="/html/usercenter/ebooks" component={EbookPage}/>
   </Layout>
   </Router>
   </Provider>

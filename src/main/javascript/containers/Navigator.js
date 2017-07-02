@@ -22,11 +22,9 @@ export default class Navigator extends React.Component {
       <CardHeader title="个人中心" />
       <CardText>
       <ul>
-      <li><CustomLink activeOnlyWhenExact={true} to="/html" label="首页"/></li>
-      <li><CustomLink to="/html/readinglists" label="阅读清单"/></li>
-      <li><CustomLink to="/html/wizard" label="创建向导"/></li>
-      <li><CustomLink to="/html/channels" label="媒体频道"/></li>
-      <li><CustomLink to="/html/ebooks" label="电子书籍"/></li>
+      <li><CustomLink to="/html/usercenter/readinglists" label="阅读清单"/></li>
+      <li><CustomLink to="/html/usercenter/channels" label="媒体频道"/></li>
+      <li><CustomLink to="/html/usercenter/ebooks" label="电子书籍"/></li>
       </ul>
       </CardText>
       </Card>
