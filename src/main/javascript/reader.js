@@ -22,10 +22,15 @@ import EbookWizard from './containers/EbookWizard'
 // Needed for onTouchTap
 injectTapEventPlugin();
 
+const layoutStyle = {
+  margin: '0 auto',
+  backgroundColor: '#f5f5f5',
+}
+
 const Reader = ({store, history}) => (
   <Provider store={store}>
   <Router history={history}>
-  <Layout>
+  <Layout style={layoutStyle}>
   <Route exact path="/html" component={PortalPage}/>
   <Route path="/html/wizard" component={EbookWizard}/>
   <Route path="/html/usercenter" component={UserCenter}/>

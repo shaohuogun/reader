@@ -81,7 +81,7 @@ export default class EbookGrid extends React.Component {
 				subtitle={<span>by <b>{ebook.createDate}</b></span>}
 				actionIcon={<IconButton><ActionFavoriteBorder color="white" /></IconButton>}
 				>
-				<img src="../image/cover-default.jpg" />
+				<img src="/image/cover-default.jpg" />
 				</GridTile>
 			);
 		}

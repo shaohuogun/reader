@@ -16,12 +16,9 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   )}/>
 )
 
-const navigatorStyle = {
-  width: 350,
-  marginTop: 20,
-  marginBottom: 20,
-  float: 'left',
-  display: 'inline-block',
+const contentStyle = {
+  margin: '0 auto',
+  backgroundColor: '#f5f5f5',
 }
 
 export default class Layout extends React.Component {
@@ -34,21 +31,23 @@ export default class Layout extends React.Component {
       <div>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Toolbar>
-        <ToolbarGroup firstChild={true}>
-        <FontIcon className="muidocs-icon-action-home" />
-        <ToolbarTitle text="阅读网络" />
-        </ToolbarGroup>
-        <ToolbarGroup>
-        <CustomLink to="/html" label="首页"/>
-        <ToolbarSeparator />
-        <CustomLink to="/html/wizard" label="创建向导"/>
-        <ToolbarSeparator />
-        <CustomLink to="/html/usercenter" label="用户中心"/>
-        </ToolbarGroup>
+      <ToolbarGroup firstChild={true}>
+      <FontIcon className="muidocs-icon-action-home" />
+      <ToolbarTitle text="阅读网络" />
+      </ToolbarGroup>
+      <ToolbarGroup>
+      <CustomLink to="/html" label="首页"/>
+      <ToolbarSeparator />
+      <CustomLink to="/html/wizard" label="创建向导"/>
+      <ToolbarSeparator />
+      <CustomLink to="/html/usercenter" label="用户中心"/>
+      </ToolbarGroup>
       </Toolbar>
       </MuiThemeProvider>
 
+      <div style={contentStyle}>
       {this.props.children}
+      </div>
 
       </div>
     );

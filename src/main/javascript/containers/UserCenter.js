@@ -11,6 +11,7 @@ const navigatorStyle = {
   marginBottom: 20,
   float: 'left',
   display: 'inline-block',
+  backgroundColor: '#f5f5f5',  
 }
 
 export default class UserCenter extends React.Component {
