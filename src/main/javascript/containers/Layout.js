@@ -18,7 +18,6 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
 
 const contentStyle = {
   margin: '0 auto',
-  backgroundColor: '#f5f5f5',
 }
 
 export default class Layout extends React.Component {
