@@ -3,35 +3,28 @@ import PropTypes from 'prop-types'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import Navigator from './Navigator'
+import MyNavigator from './MyNavigator'
 
-const navigatorStyle = {
-  width: 350,
-  marginTop: 20,
-  marginBottom: 20,
+const myNavigatorStyle = {
+  width: 300,
+  marginTop: 15,
   float: 'left',
   display: 'inline-block',
-  backgroundColor: '#fff',  
+  backgroundColor: '#fff',
 }
 
 export default class UserCenter extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Navigator style={navigatorStyle} />
+      <MyNavigator style={myNavigatorStyle} />
       </MuiThemeProvider>
-
       {this.props.children}
-
       </div>
-    );
+    )
   }
 }
 
 UserCenter.propTypes = {
-};
+}

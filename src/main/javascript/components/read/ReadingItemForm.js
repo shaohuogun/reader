@@ -58,7 +58,7 @@ export default class ReadingItemForm extends React.Component {
 
   render() {
     return (
-      <Card {...this.props} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+      <Card {...this.props} zDepth={0} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
       <CardHeader
       title="新增清单子项"
       actAsExpander={true}

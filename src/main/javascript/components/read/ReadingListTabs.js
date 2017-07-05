@@ -9,11 +9,11 @@ import ReadingItemForm from './ReadingItemForm'
 import ReadingItemList from './ReadingItemList'
 
 const tabStyle = {
-  marginTop: 20,
+  marginTop: 15,
 }
 
 const listStyle = {
-  marginTop: 20,
+  marginTop: 15,
 }
 
 const toolbarStyle = {
@@ -59,7 +59,7 @@ export default class ReadingListTabs extends React.Component {
   render() {
     var lists = this.state.readingLists
     if (lists == null) {
-      return (<Tabs {...this.props} style={tabStyle} zDepth={1}></Tabs>);
+      return (<Tabs {...this.props} zDepth={0} style={tabStyle}></Tabs>);
     }
 
     var tabs = [];
@@ -67,8 +67,8 @@ export default class ReadingListTabs extends React.Component {
     for (var i = 0; i < listCount; i++) {
       var list = lists[i];
       tabs.push(
-        <Tab label={list.name}>
-  			<Card>
+        <Tab label={list.name} zDepth={0}>
+  			<Card zDepth={0}>
   			<CardText>
   			{list.description}
   			</CardText>
@@ -89,7 +89,7 @@ export default class ReadingListTabs extends React.Component {
     }
 
     return (
-      <Tabs {...this.props} style={tabStyle} zDepth={1}>
+      <Tabs {...this.props} style={tabStyle}>
       {tabs}
       </Tabs>
     )

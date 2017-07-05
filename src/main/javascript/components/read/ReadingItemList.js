@@ -40,7 +40,7 @@ export default class ReadingItemList extends React.Component {
 	render() {
 		var listItems = this.state.pagination.objects;
 		if (listItems == null) {
-			return (<Card {...this.props} zDepth={1}></Card>);
+			return (<Card {...this.props} zDepth={0}></Card>);
 		}
 
 		var rows = [];
@@ -62,7 +62,7 @@ export default class ReadingItemList extends React.Component {
 		}
 
 		return (
-			<Card {...this.props} zDepth={1}>
+			<Card {...this.props} zDepth={0}>
 			<CardText>
 			<List>
 			{rows}

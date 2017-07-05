@@ -52,7 +52,7 @@ export default class ChannelInfo extends React.Component {
 
   render() {
     return (
-      <Card {...this.props} zDepth={1}>
+      <Card {...this.props} zDepth={0}>
       <CardHeader
       title={this.state.channel.name}
       subtitle={<span>[ <a href={this.state.channel.url}>原文地址</a> ]</span>}

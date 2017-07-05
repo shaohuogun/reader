@@ -8,11 +8,11 @@ const toolbarStyle = {
 }
 
 export default class EbookInfo extends React.Component {
-	
+
 	render() {
 		const {ebook, downloadEbook, postEbook} = this.props
 		return (
-			<Card {...this.props} zDepth={1}>
+			<Card {...this.props} zDepth={0}>
 			<CardHeader
 			title={ebook.name}
 			subtitle={ebook.createDate}

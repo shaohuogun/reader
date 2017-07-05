@@ -7,16 +7,15 @@ import ReadingListForm from '../components/read/ReadingListForm'
 import ReadingListTabs from '../components/read/ReadingListTabs'
 
 const pageStyle = {
-  width: 800,
-  marginTop: 20,
-  marginLeft: 20,
-  marginBottom: 20,
+  width: 685,
+  marginTop: 15,
+  marginLeft: 15,
   float: 'left',
   display: 'inline-block',
 }
 
 const tabsStyle = {
-  marginTop: 20,
+  marginTop: 15,
 }
 
 export default class ReadingListPage extends React.Component {

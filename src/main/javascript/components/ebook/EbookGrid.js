@@ -67,7 +67,7 @@ export default class EbookGrid extends React.Component {
 	render() {
 		var ebooks = this.state.pagination.objects;
 		if (ebooks == null) {
-			return (<GridList {...this.props}></GridList>);
+			return (<GridList {...this.props} zDepth={0}></GridList>);
 		}
 
 		var rows = [];
@@ -87,7 +87,7 @@ export default class EbookGrid extends React.Component {
 		}
 
 		return (
-			<Card {...this.props} zDepth={1}>
+			<Card {...this.props} zDepth={0}>
 			<CardText>
 			<GridList
 			cols={4}

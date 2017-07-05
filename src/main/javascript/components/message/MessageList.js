@@ -55,7 +55,7 @@ class MessageList extends React.Component {
 		const {pagination} = this.props
 		var messages = pagination.objects
 		if (messages == null) {
-			return (<Card {...this.props} zDepth={1}></Card>)
+			return (<Card {...this.props} zDepth={0}></Card>)
 		}
 
 		var rows = []
@@ -72,7 +72,7 @@ class MessageList extends React.Component {
 		}
 
 		return (
-			<Card {...this.props} zDepth={1}>
+			<Card {...this.props} zDepth={0}>
 			<CardText>
 			{rows}
 			</CardText>

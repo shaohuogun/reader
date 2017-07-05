@@ -45,7 +45,7 @@ export default class ChannelList extends React.Component {
 	render() {
 		var channels = this.state.pagination.objects;
 		if (channels == null) {
-			return (<Card {...this.props} zDepth={1}></Card>);
+			return (<Card {...this.props} zDepth={0}></Card>);
 		}
 
 		var rows = [];
@@ -69,7 +69,7 @@ export default class ChannelList extends React.Component {
 		}
 
 		return (
-			<Card {...this.props} zDepth={1}>
+			<Card {...this.props} zDepth={0}>
 			<CardHeader title="频道列表" />
 			<CardText>
 			<List>

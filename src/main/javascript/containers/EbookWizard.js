@@ -20,10 +20,9 @@ import {connect} from 'react-redux'
 import {updateWizard, generateEbook, postEbook} from '../actions'
 
 const pageStyle = {
-  width: 800,
-  marginTop: 20,
-  marginLeft: 20,
-  marginBottom: 20,
+  width: 685,
+  marginTop: 15,
+  marginLeft: 15,
   float: 'left',
   display: 'inline-block'
 }
@@ -33,7 +32,7 @@ const contentStyle = {
 }
 
 const toolbarStyle = {
-  marginTop: 20,
+  marginTop: 15,
   textAlign: 'center'
 }
 

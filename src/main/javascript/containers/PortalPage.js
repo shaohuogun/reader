@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const pageStyle = {
-  width: 800,
-  marginTop: 20,
-  marginLeft: 20,
-  marginBottom: 20,
+  width: 685,
+  marginTop: 15,
+  marginLeft: 15,
   float: 'left',
   display: 'inline-block',
 };

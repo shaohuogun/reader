@@ -66,7 +66,7 @@ export default class EbookTable extends React.Component {
 	render() {
 		var ebooks = this.state.pagination.objects;
 		if (ebooks == null) {
-			return (<Card {...this.props} zDepth={1}></Card>);
+			return (<Card {...this.props} zDepth={0}></Card>);
 		}
 
 		var rows = [];
@@ -95,7 +95,7 @@ export default class EbookTable extends React.Component {
 		}
 
 		return (
-			<Card {...this.props} zDepth={1}>
+			<Card {...this.props} zDepth={0}>
 			<CardText>
 			<Table>
 		    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>

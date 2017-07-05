@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Route, Link} from "react-router-dom"
-import Avatar from 'material-ui/Avatar'
+import {Route, Link} from 'react-router-dom'
 import {List, ListItem} from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
+import Avatar from 'material-ui/Avatar'
 
 const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   <Route exact={activeOnlyWhenExact} path={to} children={({match}) => (
@@ -13,22 +13,18 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   )}/>
 )
 
-export default class Navigator extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
+export default class MyNavigator extends React.Component {
   render() {
     return (
-      <List {...this.props} zDepth={1}>
-      <Subheader>个人中心</Subheader>
+      <List {...this.props}>
+      <Subheader>我的读伴</Subheader>
       <ListItem
-      primaryText={<CustomLink to="/html/usercenter/readinglists" label="阅读清单" />}
+      primaryText={<CustomLink to="/html/usercenter/readinglists" label="阅读书单" />}
       leftAvatar={<Avatar src="/image/readinglist.jpg" />}
       />
       <ListItem
-      primaryText={<CustomLink to="/html/usercenter/channels" label="媒体频道" />}
-      leftAvatar={<Avatar src="/image/channel.jpeg" />}
+      primaryText={<CustomLink to="/html/usercenter/channels" label="自媒体集" />}
+      leftAvatar={<Avatar src="/image/channel.jpg" />}
       />
       <ListItem
       primaryText={<CustomLink to="/html/usercenter/ebooks" label="电子书籍" />}
@@ -39,5 +35,5 @@ export default class Navigator extends React.Component {
   }
 }
 
-Navigator.propTypes = {
+MyNavigator.propTypes = {
 }

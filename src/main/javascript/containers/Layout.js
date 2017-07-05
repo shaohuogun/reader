@@ -2,11 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {Route, Link} from "react-router-dom"
+import {Route, Link} from 'react-router-dom'
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
 import FontIcon from 'material-ui/FontIcon'
-
-import Navigator from './Navigator'
 
 const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   <Route exact={activeOnlyWhenExact} path={to} children={({match}) => (

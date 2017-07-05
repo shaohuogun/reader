@@ -12,16 +12,15 @@ import MessageList from '../components/message/MessageList';
 import EbookTable from '../components/ebook/EbookTable';
 
 const pageStyle = {
-  width: 800,
-  marginTop: 20,
-  marginLeft: 20,
-  marginBottom: 20,
+  width: 685,
+  marginTop: 15,
+  marginLeft: 15,
   float: 'left',
   display: 'inline-block',
 };
 
 const tabStyle = {
-  marginTop: 20,
+  marginTop: 15,
 };
 
 export default class MessagePage extends React.Component {
