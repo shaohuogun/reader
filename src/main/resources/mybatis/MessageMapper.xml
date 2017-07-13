@@ -4,8 +4,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.shaohuogun.reader.message.dao.MessageMapper">
-	<resultMap id="messageResultMap" type="org.shaohuogun.reader.message.model.Message">
+<mapper namespace="org.shaohuogun.reader.portal.message.dao.MessageMapper">
+	<resultMap id="messageResultMap" type="org.shaohuogun.reader.portal.message.model.Message">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
@@ -23,12 +23,12 @@
 		<result property="pageview" column="pageview" />
 		<result property="commentCount" column="comment_count" />
 		<result property="digest" column="digest"
-			typeHandler="org.shaohuogun.reader.plugin.ibatis.BlobTypeHandler" />
+			typeHandler="org.shaohuogun.reader.portal.plugin.ibatis.BlobTypeHandler" />
 		<result property="content" column="content"
-			typeHandler="org.shaohuogun.reader.plugin.ibatis.BlobTypeHandler" />
+			typeHandler="org.shaohuogun.reader.portal.plugin.ibatis.BlobTypeHandler" />
 	</resultMap>
 
-	<insert id="insert" parameterType="org.shaohuogun.reader.message.model.Message">
+	<insert id="insert" parameterType="org.shaohuogun.reader.portal.message.model.Message">
 		insert into READER_MESSAGE
 		(id,
 		creator, create_date, deleted, picking_status,
@@ -80,7 +80,7 @@
 		= #{channelId} order by url desc;
 	</select>
 
-	<update id="update" parameterType="org.shaohuogun.reader.message.model.Message"
+	<update id="update" parameterType="org.shaohuogun.reader.portal.message.model.Message"
 		flushCache="true">
 		update
 		READER_MESSAGE set last_modifier = #{lastModifier},

@@ -4,8 +4,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.shaohuogun.reader.ebook.dao.EbookMapper">
-	<resultMap id="ebookResultMap" type="org.shaohuogun.reader.ebook.model.Ebook">
+<mapper namespace="org.shaohuogun.reader.portal.ebook.dao.EbookMapper">
+	<resultMap id="ebookResultMap" type="org.shaohuogun.reader.portal.ebook.model.Ebook">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
@@ -19,7 +19,7 @@
 		<result property="downloads" column="downloads" />
 	</resultMap>
 
-	<insert id="insert" parameterType="org.shaohuogun.reader.ebook.model.Ebook">
+	<insert id="insert" parameterType="org.shaohuogun.reader.portal.ebook.model.Ebook">
 		insert into READER_EBOOK (id,
 		creator, create_date, deleted, channel_id, format, name, path, downloads)
 		values (#{id},

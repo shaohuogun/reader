@@ -19,15 +19,15 @@ export default class MyNavigator extends React.Component {
       <List {...this.props}>
       <Subheader>我的读伴</Subheader>
       <ListItem
-      primaryText={<CustomLink to="/html/usercenter/readinglists" label="阅读书单" />}
-      leftAvatar={<Avatar src="/image/readinglist.jpg" />}
+      primaryText={<CustomLink to="/usercenter/readinglists" label="阅读书单" />}
+      leftAvatar={<Avatar src="/image/reading-list.jpg" />}
       />
       <ListItem
-      primaryText={<CustomLink to="/html/usercenter/channels" label="自媒体集" />}
+      primaryText={<CustomLink to="/usercenter/channels" label="自媒体集" />}
       leftAvatar={<Avatar src="/image/channel.jpg" />}
       />
       <ListItem
-      primaryText={<CustomLink to="/html/usercenter/ebooks" label="电子书籍" />}
+      primaryText={<CustomLink to="/usercenter/ebooks" label="电子书籍" />}
       leftAvatar={<Avatar src="/image/ebook.jpg" />}
       />
       </List>

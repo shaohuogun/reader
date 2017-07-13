@@ -6,7 +6,8 @@ const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 
 const config = {
   entry: {
-       reader: path.join(srcPath, '/reader.js'),
+       index: path.join(srcPath, '/index.js'),
+       userCenter: path.join(srcPath, '/userCenter.js'),
     },
   output: {
     path: dstPath,

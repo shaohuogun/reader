@@ -1,0 +1,7 @@
+export { default as IndexPage } from './IndexPage'
+export { default as EbookWizard } from './EbookWizard'
+export { default as UserCenterPage } from './UserCenterPage'
+export { default as ReadingListPage } from './ReadingListPage'
+export { default as ChannelPage } from './ChannelPage'
+export { default as MessagePage } from './MessagePage'
+export { default as EbookPage } from './EbookPage'

@@ -4,8 +4,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.shaohuogun.reader.read.dao.ReadMapper">
-	<resultMap id="readingListResultMap" type="org.shaohuogun.reader.read.model.ReadingList">
+<mapper namespace="org.shaohuogun.reader.portal.read.dao.ReadMapper">
+	<resultMap id="readingListResultMap" type="org.shaohuogun.reader.portal.read.model.ReadingList">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
@@ -14,10 +14,10 @@
 		<result property="deleted" column="deleted" />
 		<result property="name" column="name" />
 		<result property="description" column="description"
-			typeHandler="org.shaohuogun.reader.plugin.ibatis.BlobTypeHandler" />
+			typeHandler="org.shaohuogun.reader.portal.plugin.ibatis.BlobTypeHandler" />
 	</resultMap>
 
-	<resultMap id="readingItemResultMap" type="org.shaohuogun.reader.read.model.ReadingItem">
+	<resultMap id="readingItemResultMap" type="org.shaohuogun.reader.portal.read.model.ReadingItem">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
@@ -30,7 +30,7 @@
 		<result property="status" column="status" />
 	</resultMap>
 
-	<insert id="insertReadingList" parameterType="org.shaohuogun.reader.read.model.ReadingList">
+	<insert id="insertReadingList" parameterType="org.shaohuogun.reader.portal.read.model.ReadingList">
 		insert into
 		READER_READING_LIST
 		(id,
@@ -65,7 +65,7 @@
 		READER_READING_LIST where deleted = '0' order by create_date desc
 	</select>
 
-	<update id="updateReadingList" parameterType="org.shaohuogun.reader.read.model.ReadingList"
+	<update id="updateReadingList" parameterType="org.shaohuogun.reader.portal.read.model.ReadingList"
 		flushCache="true">
 		update
 		READER_READING_LIST set last_modifier =
@@ -79,7 +79,7 @@
 		id = #{id}
 	</update>
 
-	<insert id="insertReadingItem" parameterType="org.shaohuogun.reader.read.model.ReadingItem">
+	<insert id="insertReadingItem" parameterType="org.shaohuogun.reader.portal.read.model.ReadingItem">
 		insert into
 		READER_READING_ITEM
 		(id,
@@ -115,7 +115,7 @@
 		desc
 	</select>
 
-	<update id="updateReadingItem" parameterType="org.shaohuogun.reader.read.model.ReadingItem"
+	<update id="updateReadingItem" parameterType="org.shaohuogun.reader.portal.read.model.ReadingItem"
 		flushCache="true">
 		update
 		READER_READING_ITEM set last_modifier =

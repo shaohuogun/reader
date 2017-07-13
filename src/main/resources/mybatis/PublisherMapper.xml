@@ -4,9 +4,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.shaohuogun.reader.publisher.dao.PublisherMapper">
+<mapper namespace="org.shaohuogun.reader.portal.publisher.dao.PublisherMapper">
 	<resultMap id="publisherResultMap"
-		type="org.shaohuogun.reader.publisher.model.Publisher">
+		type="org.shaohuogun.reader.portal.publisher.model.Publisher">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
@@ -20,7 +20,7 @@
 		<result property="profile" column="profile" />
 	</resultMap>
 
-	<insert id="insert" parameterType="org.shaohuogun.reader.publisher.model.Publisher">
+	<insert id="insert" parameterType="org.shaohuogun.reader.portal.publisher.model.Publisher">
 		insert into READER_PUBLISHER
 		(id,
 		creator, create_date, deleted, name, nickname, sex,

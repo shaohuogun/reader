@@ -4,8 +4,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.shaohuogun.reader.channel.dao.ChannelMapper">
-	<resultMap id="channelResultMap" type="org.shaohuogun.reader.channel.model.Channel">
+<mapper namespace="org.shaohuogun.reader.portal.channel.dao.ChannelMapper">
+	<resultMap id="channelResultMap" type="org.shaohuogun.reader.portal.channel.model.Channel">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
@@ -21,10 +21,10 @@
 		<result property="name" column="name" />
 		<result property="publisher" column="publisher" />
 		<result property="description" column="description"
-			typeHandler="org.shaohuogun.reader.plugin.ibatis.BlobTypeHandler" />
+			typeHandler="org.shaohuogun.reader.portal.plugin.ibatis.BlobTypeHandler" />
 	</resultMap>
 
-	<insert id="insert" parameterType="org.shaohuogun.reader.channel.model.Channel">
+	<insert id="insert" parameterType="org.shaohuogun.reader.portal.channel.model.Channel">
 		insert into READER_CHANNEL
 		(id,
 		creator, create_date, deleted, picking_status, picking_batch_no,
@@ -62,7 +62,7 @@
 		= #{creator} order by create_date desc
 	</select>
 
-	<update id="update" parameterType="org.shaohuogun.reader.channel.model.Channel"
+	<update id="update" parameterType="org.shaohuogun.reader.portal.channel.model.Channel"
 		flushCache="true">
 		update
 		READER_CHANNEL set last_modifier = #{lastModifier},
