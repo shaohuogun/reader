@@ -8,8 +8,8 @@ import {BrowserRouter as Router} from 'react-router-dom'
 
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
-import routes from './routes'
 
+import routes from './routes/userCenter'
 import Layout from './Layout'
 
 // Needed for onTouchTap
@@ -32,19 +32,6 @@ storeProvider.init(configureStore({
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
-function createElements (history) {
-  const elements = [
-    <Router key="router" history={history} children={routes} />
-  ]
-
-  // if (typeof __DEVTOOLS__ !== 'undefined' && __DEVTOOLS__) {
-  //   const DevTools = require('./DevTools')
-  //   elements.push(<DevTools key="devtools" />)
-  // }
-
-  return elements
-}
-
 export default class UserCenter extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired
@@ -53,9 +40,11 @@ export default class UserCenter extends Component {
   render () {
     return (
       <Provider key="provider" store={store}>
+      <Router key="router" history={this.props.history} >
       <Layout style={layoutStyle}>
-      {createElements(this.props.history)}
+      {routes}
       </Layout>
+      </Router>
       </Provider>
     )
   }

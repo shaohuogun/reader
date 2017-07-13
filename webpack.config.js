@@ -7,6 +7,7 @@ const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const config = {
   entry: {
        index: path.join(srcPath, '/index.js'),
+       product: path.join(srcPath, '/product.js'),
        userCenter: path.join(srcPath, '/userCenter.js'),
     },
   output: {
