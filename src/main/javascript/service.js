@@ -9,8 +9,9 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import routes from './routes/userCenter'
 import Layout from './Layout'
+import routes from './routes/service'
+
 
 // Needed for onTouchTap
 injectTapEventPlugin();
@@ -32,7 +33,7 @@ storeProvider.init(configureStore({
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
-export default class UserCenter extends Component {
+export default class Service extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired
   }
@@ -51,6 +52,6 @@ export default class UserCenter extends Component {
 }
 
 ReactDOM.render(
-  <UserCenter history={history} />,
+  <Service history={history} />,
   document.getElementById('root')
 )

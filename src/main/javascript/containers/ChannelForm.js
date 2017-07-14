@@ -7,7 +7,7 @@ import {SelectField, TextField} from 'redux-form-material-ui'
 import storeProvider from '../store/storeProvider'
 import {
   submitChannel, updateChannel, asyncProgressWithInterval
-} from '../actions'
+} from '../actions/service'
 
 export function createChannel(channel) {
   const store = storeProvider.getStore()

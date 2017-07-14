@@ -6,8 +6,9 @@ import {createBrowserHistory} from 'history'
 import {syncHistoryWithStore} from 'react-router-redux'
 import {BrowserRouter as Router} from 'react-router-dom'
 
-import storeProvider from './store/storeProvider'
 import configureStore from './store/configureStore'
+import storeProvider from './store/storeProvider'
+
 import Layout from './Layout'
 import routes from './routes/index'
 

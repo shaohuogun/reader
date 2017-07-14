@@ -13,21 +13,21 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   )}/>
 )
 
-export default class MyNavigator extends React.Component {
+export default class MineNavigator extends React.Component {
   render() {
     return (
       <List {...this.props}>
       <Subheader>我的读伴</Subheader>
       <ListItem
-      primaryText={<CustomLink to="/usercenter/readinglists" label="阅读书单" />}
+      primaryText={<CustomLink to="/mine/readinglists" label="阅读书单" />}
       leftAvatar={<Avatar src="/image/reading-list.jpg" />}
       />
       <ListItem
-      primaryText={<CustomLink to="/usercenter/channels" label="自媒体集" />}
+      primaryText={<CustomLink to="/mine/channels" label="自媒体集" />}
       leftAvatar={<Avatar src="/image/channel.jpg" />}
       />
       <ListItem
-      primaryText={<CustomLink to="/usercenter/ebooks" label="电子书籍" />}
+      primaryText={<CustomLink to="/mine/ebooks" label="电子书籍" />}
       leftAvatar={<Avatar src="/image/ebook.jpg" />}
       />
       </List>
@@ -35,5 +35,5 @@ export default class MyNavigator extends React.Component {
   }
 }
 
-MyNavigator.propTypes = {
+MineNavigator.propTypes = {
 }

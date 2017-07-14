@@ -17,7 +17,8 @@ import EbookInfo from '../components/ebook/EbookInfo'
 
 import {submit} from 'redux-form'
 import {connect} from 'react-redux'
-import {updateWizard, generateEbook, postEbook} from '../actions'
+import {updateWizard} from '../actions/service'
+import {generateEbook, postEbook} from '../actions/mine'
 
 const pageStyle = {
   width: 685,

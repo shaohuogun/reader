@@ -1,11 +1,7 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 
-import * as containers from '../containers'
-
-const {
-  EbookWizard
-} = containers
+import EbookWizard from '../containers/EbookWizard'
 
 export default (
   <div>

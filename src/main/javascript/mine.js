@@ -6,10 +6,11 @@ import {createBrowserHistory} from 'history'
 import {syncHistoryWithStore} from 'react-router-redux'
 import {BrowserRouter as Router} from 'react-router-dom'
 
-import storeProvider from './store/storeProvider'
 import configureStore from './store/configureStore'
+import storeProvider from './store/storeProvider'
+
 import Layout from './Layout'
-import routes from './routes/product'
+import routes from './routes/mine'
 
 // Needed for onTouchTap
 injectTapEventPlugin();
@@ -31,7 +32,7 @@ storeProvider.init(configureStore({
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
-export default class Product extends Component {
+export default class Mine extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired
   }
@@ -50,6 +51,6 @@ export default class Product extends Component {
 }
 
 ReactDOM.render(
-  <Product history={history} />,
+  <Mine history={history} />,
   document.getElementById('root')
 )

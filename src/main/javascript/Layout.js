@@ -9,10 +9,9 @@ const contentStyle = {
 }
 
 export default class Layout extends Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
   }
-
+  
   render() {
     return (
       <div>
@@ -20,14 +19,14 @@ export default class Layout extends Component {
       <Toolbar>
       <ToolbarGroup firstChild={true}>
       <FontIcon className="muidocs-icon-action-home" />
-      <ToolbarTitle text="伴读网络" />
+      <ToolbarTitle text="TAIZIDU" />
       </ToolbarGroup>
       <ToolbarGroup>
       <a href="/index">首页</a>
       <ToolbarSeparator />
-      <a href="/product">产品服务</a>
+      <a href="/service">服务目录</a>
       <ToolbarSeparator />
-      <a href="/usercenter">用户中心</a>
+      <a href="/mine">我的主页</a>
       </ToolbarGroup>
       </Toolbar>
       </MuiThemeProvider>
@@ -39,6 +38,3 @@ export default class Layout extends Component {
     );
   }
 }
-
-Layout.propTypes = {
-};

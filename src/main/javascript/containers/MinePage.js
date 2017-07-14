@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import MyNavigator from './MyNavigator'
+import MineNavigator from './MineNavigator'
 
-const myNavigatorStyle = {
+const mineNavigatorStyle = {
   width: 300,
   marginTop: 15,
   float: 'left',
@@ -13,12 +13,12 @@ const myNavigatorStyle = {
   backgroundColor: '#fff',
 }
 
-export default class UserCenterPage extends React.Component {
+export default class MinePage extends React.Component {
   render() {
     return (
       <div>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <MyNavigator style={myNavigatorStyle} />
+      <MineNavigator style={mineNavigatorStyle} />
       </MuiThemeProvider>
       {this.props.children}
       </div>
@@ -26,5 +26,5 @@ export default class UserCenterPage extends React.Component {
   }
 }
 
-UserCenterPage.propTypes = {
+MinePage.propTypes = {
 }

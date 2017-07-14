@@ -1,11 +1,7 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 
-import * as containers from '../containers'
-
-const {
-  IndexPage
-} = containers
+import IndexPage from '../containers/IndexPage'
 
 export default (
   <div>

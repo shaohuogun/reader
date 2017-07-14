@@ -13,15 +13,15 @@ public class PortalController extends Controller {
 	public ModelAndView index() {
 		return new ModelAndView("index");
 	}
-
-	@RequestMapping(value = {"/product/**"}, method = RequestMethod.GET)
-	public ModelAndView product() {
-		return new ModelAndView("product");
-	}		
 	
-	@RequestMapping(value = {"/usercenter/**"}, method = RequestMethod.GET)
-	public ModelAndView userCenter() {
-		return new ModelAndView("userCenter");
+	@RequestMapping(value = {"/service/**"}, method = RequestMethod.GET)
+	public ModelAndView service() {
+		return new ModelAndView("service");
+	}
+	
+	@RequestMapping(value = {"/mine/**"}, method = RequestMethod.GET)
+	public ModelAndView mine() {
+		return new ModelAndView("mine");
 	}	
 	
 }
