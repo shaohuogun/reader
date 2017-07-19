@@ -11,7 +11,7 @@ const contentStyle = {
 export default class Layout extends Component {
   static propTypes = {
   }
-  
+
   render() {
     return (
       <div>
@@ -24,7 +24,7 @@ export default class Layout extends Component {
       <ToolbarGroup>
       <a href="/index">首页</a>
       <ToolbarSeparator />
-      <a href="/service">服务目录</a>
+      <a href="/service">伴读服务</a>
       <ToolbarSeparator />
       <a href="/mine">我的主页</a>
       </ToolbarGroup>

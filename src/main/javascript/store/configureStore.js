@@ -9,9 +9,9 @@ import {paginationReducer, ebookReducer} from '../reducers/mine'
 
 const rootReducer = combineReducers({
   routing,
+  form: formReducer,
   wizard: wizardReducer,
   progress: progressReducer,
-  form: formReducer,
   channel: channelReducer,
   pagination: paginationReducer,
   ebook: ebookReducer

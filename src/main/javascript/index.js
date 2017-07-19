@@ -9,7 +9,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import Layout from './Layout'
+import MainLayout from './components/MainLayout'
 import routes from './routes/index'
 
 // Needed for onTouchTap
@@ -41,9 +41,9 @@ export default class Index extends Component {
     return (
       <Provider key="provider" store={store}>
       <Router key="router" history={this.props.history} >
-      <Layout style={layoutStyle}>
+      <MainLayout style={layoutStyle}>
       {routes}
-      </Layout>
+      </MainLayout>
       </Router>
       </Provider>
     )

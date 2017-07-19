@@ -8,7 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class PortalController extends Controller {
-
+	
+	@RequestMapping(value = {"/entry/**"}, method = RequestMethod.GET)
+	public ModelAndView entry() {
+		return new ModelAndView("entry");
+	}
+	
 	@RequestMapping(value = {"/index/**"}, method = RequestMethod.GET)
 	public ModelAndView index() {
 		return new ModelAndView("index");
@@ -22,6 +27,6 @@ public class PortalController extends Controller {
 	@RequestMapping(value = {"/mine/**"}, method = RequestMethod.GET)
 	public ModelAndView mine() {
 		return new ModelAndView("mine");
-	}	
+	}
 	
 }
