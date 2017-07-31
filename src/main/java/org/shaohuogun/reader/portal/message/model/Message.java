@@ -8,11 +8,9 @@ public class Message extends PickableObject {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static final String PICKING_TYPE = "message";
+	public static final String ACTION_TYPE = "message";
 	
 	private String channelId;
-	
-	private String url;
 	
 	private String title;
 	
@@ -27,8 +25,8 @@ public class Message extends PickableObject {
 	private String content;
 	
 	@Override
-	public String getPickingType() {
-		return PICKING_TYPE;
+	public String getActionType() {
+		return ACTION_TYPE;
 	}
 
 	public String getChannelId() {
@@ -37,14 +35,6 @@ public class Message extends PickableObject {
 
 	public void setChannelId(String channelId) {
 		this.channelId = channelId;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public String getTitle() {

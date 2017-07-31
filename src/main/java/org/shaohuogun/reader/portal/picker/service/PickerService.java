@@ -15,17 +15,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class PickerService {
 	
-	@Value("${picker.service.url}")
-	private String pickerServiceUrl;
+	@Value("${service.url.picker}")
+	private String serviceUrlOfPicker;
 	
-	public void sendRequest(JSONObject jsonRequest) throws Exception {
-		if (jsonRequest == null) {
+	public void sendRequest(JSONObject jsonReq) throws Exception {
+		if (jsonReq == null) {
 			throw new NullPointerException("Request cann't be null.");
 		}
 
 		HttpClient httpClient = HttpClientBuilder.create().build();
-		HttpPost httpPost = new HttpPost(pickerServiceUrl);
-		StringEntity params = new StringEntity(jsonRequest.toString(), Utility.ENCODE_UTF8);
+		HttpPost httpPost = new HttpPost(serviceUrlOfPicker);
+		StringEntity params = new StringEntity(jsonReq.toString(), Utility.ENCODE_UTF8);
 		httpPost.addHeader("Content-Type", "application/json;charset=UTF-8");
 		httpPost.addHeader("Accept", "application/json");
 		httpPost.setEntity(params);

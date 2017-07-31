@@ -2,61 +2,75 @@ package org.shaohuogun.reader.portal.picker.model;
 
 import javax.validation.constraints.Min;
 
+import org.hibernate.validator.constraints.URL;
 import org.shaohuogun.common.Model;
 
 public abstract class PickableObject extends Model {
 
 	private static final long serialVersionUID = 1L;
 	
-	public final static String KEY_TARGET_URL = "targetUrl";
-	public final static String KEY_TARGET_TYPE = "targetType";
-	public final static String KEY_BATCH_NO = "batchNo";
+	public final static String KEY_ACTION_TYPE = "actionType";
+	public final static String KEY_SERIAL_NUMBER = "serialNumber";
+	public final static String KEY_URL = "url";
+	public static final String KEY_CONTENT = "content";
+	public static final String KEY_HOOK_URL = "hookUrl";	
 
 	public static final String STATUS_INITIAL = "initial";
 	public static final String STATUS_PICKING = "picking";
-	public static final String STATUS_FINISHED = "finished";
+	public static final String STATUS_PICKED = "picked";
 
-	private String pickingStatus = STATUS_INITIAL;
-
-	private String pickingBatchNo;
+	private String serialNumber;
+	
+	@URL(message = "请输入格式正确的URL！")
+	private String url;
 	
 	@Min(value = 1, message = "最小值为：1")
-	private Integer pickingAmount = 1;
+	private Integer amount = 1;
 
-	private Integer pickingCount = 0;
-
-	public abstract String getPickingType();
-
-	public String getPickingStatus() {
-		return pickingStatus;
+	private Integer count = 0;
+	
+	private String status = STATUS_INITIAL;
+	
+	public abstract String getActionType();
+	
+	public String getSerialNumber() {
+		return serialNumber;
 	}
 
-	public void setPickingStatus(String pickingStatus) {
-		this.pickingStatus = pickingStatus;
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+	
+	public String getUrl() {
+		return url;
 	}
 
-	public String getPickingBatchNo() {
-		return pickingBatchNo;
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	public Integer getAmount() {
+		return amount;
 	}
 
-	public void setPickingBatchNo(String pickingBatchNo) {
-		this.pickingBatchNo = pickingBatchNo;
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
-	public Integer getPickingAmount() {
-		return pickingAmount;
+	public Integer getCount() {
+		return count;
+	}
+	
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 
-	public void setPickingAmount(Integer pickingAmount) {
-		this.pickingAmount = pickingAmount;
+	public String getStatus() {
+		return status;
 	}
-
-	public Integer getPickingCount() {
-		return pickingCount;
+	
+	public void setStatus(String status) {
+		this.status = status;
 	}
-
-	public void setPickingCount(Integer pickingCount) {
-		this.pickingCount = pickingCount;
-	}
-
+	
 }

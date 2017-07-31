@@ -82,15 +82,15 @@ public class MessageService {
 			throw new IllegalArgumentException("Picking status cann't be null or empty.");
 		}	
 
-		return messageDao.selectByPickingStatus(pickingStatus);
+		return messageDao.selectByStatus(pickingStatus);
 	}
 	
-	public Message getMessageByPickingBatchNo(String pickingBatchNo) throws Exception {
+	public Message getMessageBySerialNumber(String pickingBatchNo) throws Exception {
 		if ((pickingBatchNo == null) || pickingBatchNo.isEmpty()) {
 			throw new IllegalArgumentException("Picking batch no cann't be null or empty.");
 		}	
 		
-		return messageDao.selectByPickingBatchNo(pickingBatchNo);
+		return messageDao.selectBySerialNumber(pickingBatchNo);
 	}
 
 }

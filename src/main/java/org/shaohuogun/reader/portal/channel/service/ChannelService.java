@@ -74,15 +74,15 @@ public class ChannelService {
 			throw new IllegalArgumentException("Picking status cann't be null or empty.");
 		}		
 		
-		return channelDao.selectByPickingStatus(pickingStatus);
+		return channelDao.selectByStatus(pickingStatus);
 	}
 	
-	public Channel getChannelByPickingBatchNo(String pickingBatchNo) throws Exception {
+	public Channel getChannelBySerialNumber(String pickingBatchNo) throws Exception {
 		if ((pickingBatchNo == null) || pickingBatchNo.isEmpty()) {
 			throw new IllegalArgumentException("Picking batch no cann't be null or empty.");
 		}		
 		
-		return channelDao.selectByPickingBatchNo(pickingBatchNo);
+		return channelDao.selectBySerialNumber(pickingBatchNo);
 	}
 	
 }

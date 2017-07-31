@@ -1,23 +1,19 @@
 package org.shaohuogun.reader.portal.channel.model;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 import org.shaohuogun.reader.portal.picker.model.PickableObject;
 
 public class Channel extends PickableObject {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String PICKING_TYPE = "channel";
+	public static final String ACTION_TYPE = "channel";
 	
 	public static final String CATEGORY_BOOK = "book";
 	public static final String CATEGORY_BLOG = "blog";
 	
 	@NotBlank(message = "不允许为空！")
 	private String category;
-
-	@URL(message = "请输入格式正确的URL！")
-	private String url;
 	
 	@NotBlank(message = "不允许为空！")
 	private String name;
@@ -28,8 +24,8 @@ public class Channel extends PickableObject {
 	private String description;
 
 	@Override
-	public String getPickingType() {
-		return PICKING_TYPE;
+	public String getActionType() {
+		return ACTION_TYPE;
 	}
 
 	public String getCategory() {
@@ -38,14 +34,6 @@ public class Channel extends PickableObject {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public String getName() {

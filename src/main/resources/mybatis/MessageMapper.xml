@@ -5,19 +5,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.shaohuogun.reader.portal.message.dao.MessageMapper">
-	<resultMap id="messageResultMap" type="org.shaohuogun.reader.portal.message.model.Message">
+	<resultMap id="messageResultMap"
+		type="org.shaohuogun.reader.portal.message.model.Message">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
 		<result property="lastModifier" column="last_modifier" />
 		<result property="lastModifyDate" column="last_modify_date" />
 		<result property="deleted" column="deleted" />
-		<result property="pickingStatus" column="picking_status" />
-		<result property="pickingBatchNo" column="picking_batch_no" />
-		<result property="pickingAmount" column="picking_amount" />
-		<result property="pickingCount" column="picking_count" />
-		<result property="channelId" column="channel_id" />
+		<result property="serialNumber" column="serial_number" />
 		<result property="url" column="url" />
+		<result property="amount" column="amount" />
+		<result property="count" column="count" />
+		<result property="status" column="status" />
+		<result property="channelId" column="channel_id" />
 		<result property="title" column="title" />
 		<result property="releaseDate" column="release_date" />
 		<result property="pageview" column="pageview" />
@@ -31,23 +32,26 @@
 	<insert id="insert" parameterType="org.shaohuogun.reader.portal.message.model.Message">
 		insert into READER_MESSAGE
 		(id,
-		creator, create_date, deleted, picking_status,
-		picking_batch_no,
-		picking_amount, picking_count, channel_id, url,
+		creator, create_date, deleted, serial_number, url,
+		amount, count,
+		status, channel_id,
 		title, release_date,
-		pageview, comment_count, digest, content)
+		pageview, comment_count,
+		digest, content)
 		values (#{id},
 		#{creator},
 		#{createDate}, #{deleted},
-		#{pickingStatus},
-		#{pickingBatchNo},
-		#{pickingAmount},
-		#{pickingCount},
+		#{serialNumber},
+		#{url},
+		#{amount},
+		#{count},
+		#{status},
 		#{channelId},
-		#{url}, #{title},
+		#{title},
 		#{releaseDate},
 		#{pageview},
-		#{commentCount}, #{digest}, #{content})
+		#{commentCount}, #{digest},
+		#{content})
 	</insert>
 
 	<select id="selectAll" resultMap="messageResultMap">
@@ -86,23 +90,25 @@
 		READER_MESSAGE set last_modifier = #{lastModifier},
 		last_modify_date =
 		#{lastModifyDate}, deleted = #{deleted},
-		picking_status = #{pickingStatus},
-		picking_count =
-		#{pickingCount},
+		count =
+		#{count},
+		status =
+		#{status},
 		content = #{content} where
 		id =
 		#{id}
 	</update>
 
-	<select id="selectByPickingStatus" parameterType="java.lang.String"
+	<select id="selectByStatus" parameterType="java.lang.String"
 		resultMap="messageResultMap">
 		select * from READER_MESSAGE where deleted = '0' and
-		picking_status = #{pickingStatus} order by create_date asc limit 1
+		status =
+		#{status} order by create_date asc limit 1
 	</select>
 
-	<select id="selectByPickingBatchNo" parameterType="java.lang.String"
+	<select id="selectBySerialNumber" parameterType="java.lang.String"
 		resultMap="messageResultMap">
 		select * from READER_MESSAGE where deleted = '0' and
-		picking_batch_no = #{pickingBatchNo} order by create_date asc limit 1
+		serial_number = #{serialNumber} order by create_date asc limit 1
 	</select>
 </mapper>
