@@ -10,6 +10,13 @@ public class Message extends PickableObject {
 	
 	public static final String ACTION_TYPE = "message";
 	
+	public static final String KEY_TITLE = "title";
+	public static final String KEY_RELEASE_DATE = "releaseDate";
+	public static final String KEY_PAGEVIEW = "pageview";
+	public static final String KEY_COMMENT_COUNT = "commentCount";
+	public static final String KEY_DIGEST = "digest";
+	public static final String KEY_CONTENT = "content";
+	
 	private String channelId;
 	
 	private String title;

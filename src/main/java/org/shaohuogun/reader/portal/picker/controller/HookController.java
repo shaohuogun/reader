@@ -74,12 +74,12 @@ public class HookController extends Controller {
 
 			URL targetUrl = new URL(channel.getUrl());
 			String basePath = targetUrl.getProtocol() + "://" + targetUrl.getAuthority();
-			message.setUrl(basePath + jsonMsg.getString("url"));
-			message.setTitle(jsonMsg.getString("title"));
-			message.setReleaseDate(Utility.parseDate(jsonMsg.getString("releaseDate")));
-			message.setPageview(Integer.valueOf(jsonMsg.getString("pageview")));
-			message.setCommentCount(Integer.valueOf(jsonMsg.getString("commentCount")));
-			message.setDigest(jsonMsg.getString("digest"));
+			message.setUrl(basePath + jsonMsg.getString(Message.KEY_URL));
+			message.setTitle(jsonMsg.getString(Message.KEY_TITLE));
+			message.setReleaseDate(Utility.parseDate(jsonMsg.getString(Message.KEY_RELEASE_DATE)));
+			message.setPageview(Integer.valueOf(jsonMsg.getString(Message.KEY_PAGEVIEW)));
+			message.setCommentCount(Integer.valueOf(jsonMsg.getString(Message.KEY_COMMENT_COUNT)));
+			message.setDigest(jsonMsg.getString(Message.KEY_DIGEST));
 
 			message.setSerialNumber(Utility.getUUID());
 			messageService.createMessage(message);
@@ -129,7 +129,7 @@ public class HookController extends Controller {
 			message.setStatus(PickableObject.STATUS_PICKED);
 		}
 
-		message.setContent(jsonContent.getString("content"));
+		message.setContent(jsonContent.getString(Message.KEY_CONTENT));
 		messageService.modifyMessage(message);
 		progressService.incProgressCount(message.getChannelId(), 1);
 	}
