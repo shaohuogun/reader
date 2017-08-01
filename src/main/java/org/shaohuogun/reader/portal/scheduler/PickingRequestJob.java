@@ -51,7 +51,7 @@ public class PickingRequestJob implements Job {
 			PickerService pickerService = (PickerService) applicationContext.getBean("pickerService");
 
 			ChannelService channelService = (ChannelService) applicationContext.getBean("channelService");
-			Channel channel = channelService.getChannelByPickingStatus(PickableObject.STATUS_INITIAL);
+			Channel channel = channelService.getChannelByStatus(PickableObject.STATUS_INITIAL);
 			if (channel != null) {
 				String actionType = channel.getActionType();
 				String url = channel.getUrl();
@@ -74,7 +74,7 @@ public class PickingRequestJob implements Job {
 			}
 
 			MessageService messageService = (MessageService) applicationContext.getBean("messageService");
-			Message message = messageService.getMessageByPickingStatus(PickableObject.STATUS_INITIAL);
+			Message message = messageService.getMessageByStatus(PickableObject.STATUS_INITIAL);
 			if (message != null) {
 				String actionType = message.getActionType();
 				String url = message.getUrl();

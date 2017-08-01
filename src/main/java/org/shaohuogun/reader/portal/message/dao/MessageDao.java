@@ -34,13 +34,14 @@ public class MessageDao {
 	}
 
 	public int countByChannelId(String channelId) {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.message.dao.MessageMapper.countByChannelId", channelId);
+		return sqlSession.selectOne("org.shaohuogun.reader.portal.message.dao.MessageMapper.countByChannelId",
+				channelId);
 	}
 
 	public List<Model> selectByChannelId(String channelId, int offset, int limit) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.portal.message.dao.MessageMapper.selectByChannelId", channelId,
-				rowBounds);
+		return sqlSession.selectList("org.shaohuogun.reader.portal.message.dao.MessageMapper.selectByChannelId",
+				channelId, rowBounds);
 	}
 
 	public void update(Message message) {
@@ -52,6 +53,7 @@ public class MessageDao {
 	}
 
 	public Message selectBySerialNumber(String serialNumber) {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.message.dao.MessageMapper.selectBySerialNumber", serialNumber);
+		return sqlSession.selectOne("org.shaohuogun.reader.portal.message.dao.MessageMapper.selectBySerialNumber",
+				serialNumber);
 	}
 }

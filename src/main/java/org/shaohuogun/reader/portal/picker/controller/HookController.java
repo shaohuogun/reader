@@ -93,7 +93,7 @@ public class HookController extends Controller {
 		channelService.modifyChannel(channel);
 		progressService.incProgressAmount(channel.getId(), jsonMsgs.length());
 	}
-
+	
 	@RequestMapping(value = "/api/hook/message", method = RequestMethod.POST)
 	public void receiveMessage(HttpServletRequest req) throws Exception {
 		req.setCharacterEncoding(Utility.ENCODE_UTF8);

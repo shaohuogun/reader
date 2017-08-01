@@ -77,9 +77,9 @@ public class MessageService {
 		return pagination;
 	}
 
-	public Message getMessageByPickingStatus(String status) throws Exception {
+	public Message getMessageByStatus(String status) throws Exception {
 		if ((status == null) || status.isEmpty()) {
-			throw new IllegalArgumentException("Picking status cann't be null or empty.");
+			throw new IllegalArgumentException("Status cann't be null or empty.");
 		}	
 
 		return messageDao.selectByStatus(status);
@@ -87,7 +87,7 @@ public class MessageService {
 	
 	public Message getMessageBySerialNumber(String serialNumber) throws Exception {
 		if ((serialNumber == null) || serialNumber.isEmpty()) {
-			throw new IllegalArgumentException("Picking batch no cann't be null or empty.");
+			throw new IllegalArgumentException("Serial number cann't be null or empty.");
 		}	
 		
 		return messageDao.selectBySerialNumber(serialNumber);

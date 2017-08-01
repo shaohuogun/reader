@@ -40,8 +40,7 @@ public class ChannelDao {
 	}
 
 	public Channel selectByStatus(String status) {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.channel.dao.ChannelMapper.selectByStatus",
-				status);
+		return sqlSession.selectOne("org.shaohuogun.reader.portal.channel.dao.ChannelMapper.selectByStatus", status);
 	}
 
 	public Channel selectBySerialNumber(String serialNumber) {

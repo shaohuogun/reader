@@ -69,9 +69,9 @@ public class ChannelService {
 		return channelDao.selectById(channel.getId());
 	}
 	
-	public Channel getChannelByPickingStatus(String status) throws Exception {
+	public Channel getChannelByStatus(String status) throws Exception {
 		if ((status == null) || status.isEmpty()) {
-			throw new IllegalArgumentException("Picking status cann't be null or empty.");
+			throw new IllegalArgumentException("Status cann't be null or empty.");
 		}		
 		
 		return channelDao.selectByStatus(status);
@@ -79,7 +79,7 @@ public class ChannelService {
 	
 	public Channel getChannelBySerialNumber(String serialNumber) throws Exception {
 		if ((serialNumber == null) || serialNumber.isEmpty()) {
-			throw new IllegalArgumentException("Picking batch no cann't be null or empty.");
+			throw new IllegalArgumentException("Serial number cann't be null or empty.");
 		}		
 		
 		return channelDao.selectBySerialNumber(serialNumber);
