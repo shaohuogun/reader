@@ -28,13 +28,12 @@
 	<insert id="insert" parameterType="org.shaohuogun.reader.portal.channel.model.Channel">
 		insert into READER_CHANNEL
 		(id,
-		creator, create_date, deleted, serial_number, url,
+		creator, create_date, deleted, url,
 		amount, count,
 		status, category, name, publisher,
 		description)
 		values (#{id},
 		#{creator}, #{createDate}, #{deleted},
-		#{serialNumber},
 		#{url},
 		#{amount},
 		#{count},
@@ -70,6 +69,7 @@
 		READER_CHANNEL set last_modifier = #{lastModifier},
 		last_modify_date =
 		#{lastModifyDate}, deleted = #{deleted},
+		serial_number = #{serialNumber},
 		count =
 		#{count},
 		status =

@@ -32,7 +32,7 @@
 	<insert id="insert" parameterType="org.shaohuogun.reader.portal.message.model.Message">
 		insert into READER_MESSAGE
 		(id,
-		creator, create_date, deleted, serial_number, url,
+		creator, create_date, deleted, url,
 		amount, count,
 		status, channel_id,
 		title, release_date,
@@ -41,7 +41,6 @@
 		values (#{id},
 		#{creator},
 		#{createDate}, #{deleted},
-		#{serialNumber},
 		#{url},
 		#{amount},
 		#{count},
@@ -90,6 +89,7 @@
 		READER_MESSAGE set last_modifier = #{lastModifier},
 		last_modify_date =
 		#{lastModifyDate}, deleted = #{deleted},
+		serial_number = #{serialNumber},
 		count =
 		#{count},
 		status =

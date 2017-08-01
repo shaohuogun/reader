@@ -35,10 +35,10 @@ public class PickingRequestJob implements Job {
 
 	@Value("${quartz.job.picking.request.repeat-interval}")
 	private long repeatInterval;
-	
+
 	@Value("${hook.url.channel}")
 	private String hookUrlOfChannel;
-	
+
 	@Value("${hook.url.message}")
 	private String hookUrlOfMessage;
 
@@ -54,68 +54,44 @@ public class PickingRequestJob implements Job {
 			Channel channel = channelService.getChannelByPickingStatus(PickableObject.STATUS_INITIAL);
 			if (channel != null) {
 				String actionType = channel.getActionType();
-				String serialNumber = channel.getSerialNumber();
-				String targetUrl = channel.getUrl();
-				if (channel.getAmount() > 1) {
-					for (int i = 1; i <= channel.getAmount(); i++) {
-						JSONObject jsonContent = new JSONObject();
-						jsonContent.put(PickableObject.KEY_URL, (targetUrl + i));
-						
-						JSONObject jsonReq = new JSONObject();
-						jsonReq.put(PickableObject.KEY_ACTION_TYPE, actionType);
-						jsonReq.put(PickableObject.KEY_SERIAL_NUMBER, serialNumber);
-						jsonReq.put(PickableObject.KEY_CONTENT, jsonContent.toString());
-						jsonReq.put(PickableObject.KEY_HOOK_URL, hookUrlOfChannel);
-						pickerService.sendRequest(jsonReq);
-					}
-				} else {			
-					JSONObject jsonContent = new JSONObject();
-					jsonContent.put(PickableObject.KEY_URL, targetUrl);
-					
-					JSONObject jsonReq = new JSONObject();
-					jsonReq.put(PickableObject.KEY_ACTION_TYPE, actionType);
-					jsonReq.put(PickableObject.KEY_SERIAL_NUMBER, serialNumber);
-					jsonReq.put(PickableObject.KEY_CONTENT, jsonContent.toString());
-					jsonReq.put(PickableObject.KEY_HOOK_URL, hookUrlOfChannel);
-					pickerService.sendRequest(jsonReq);
-				}
+				String url = channel.getUrl();
+				int amount = channel.getAmount();
+
+				JSONObject jsonContent = new JSONObject();
+				jsonContent.put(PickableObject.KEY_URL, url);
+				jsonContent.put(PickableObject.KEY_AMOUNT, amount);
+
+				JSONObject jsonReq = new JSONObject();
+				jsonReq.put(PickableObject.KEY_ACTION_TYPE, actionType);
+				jsonReq.put(PickableObject.KEY_CONTENT, jsonContent.toString());
+				jsonReq.put(PickableObject.KEY_HOOK_URL, hookUrlOfChannel);
+				String serialNumber = pickerService.sendRequest(jsonReq);
 
 				channel.setLastModifyDate(new Date());
+				channel.setSerialNumber(serialNumber);
 				channel.setStatus(PickableObject.STATUS_PICKING);
 				channelService.modifyChannel(channel);
 			}
-			
+
 			MessageService messageService = (MessageService) applicationContext.getBean("messageService");
 			Message message = messageService.getMessageByPickingStatus(PickableObject.STATUS_INITIAL);
 			if (message != null) {
 				String actionType = message.getActionType();
-				String serialNumber = message.getSerialNumber();
-				String targetUrl = message.getUrl();		
-				if (message.getAmount() > 1) {
-					for (int i = 1; i <= message.getAmount(); i++) {
-						JSONObject jsonContent = new JSONObject();
-						jsonContent.put(PickableObject.KEY_URL, (targetUrl + i));
-						
-						JSONObject jsonReq = new JSONObject();
-						jsonReq.put(PickableObject.KEY_ACTION_TYPE, actionType);
-						jsonReq.put(PickableObject.KEY_SERIAL_NUMBER, serialNumber);
-						jsonReq.put(PickableObject.KEY_CONTENT, jsonContent.toString());
-						jsonReq.put(PickableObject.KEY_HOOK_URL, hookUrlOfMessage);
-						pickerService.sendRequest(jsonReq);
-					}
-				} else {
-					JSONObject jsonContent = new JSONObject();
-					jsonContent.put(PickableObject.KEY_URL, targetUrl);
-					
-					JSONObject jsonReq = new JSONObject();
-					jsonReq.put(PickableObject.KEY_ACTION_TYPE, actionType);
-					jsonReq.put(PickableObject.KEY_SERIAL_NUMBER, serialNumber);
-					jsonReq.put(PickableObject.KEY_CONTENT, jsonContent.toString());
-					jsonReq.put(PickableObject.KEY_HOOK_URL, hookUrlOfMessage);
-					pickerService.sendRequest(jsonReq);
-				}
-				
+				String url = message.getUrl();
+				int amount = message.getAmount();
+
+				JSONObject jsonContent = new JSONObject();
+				jsonContent.put(PickableObject.KEY_URL, url);
+				jsonContent.put(PickableObject.KEY_AMOUNT, amount);
+
+				JSONObject jsonReq = new JSONObject();
+				jsonReq.put(PickableObject.KEY_ACTION_TYPE, actionType);
+				jsonReq.put(PickableObject.KEY_CONTENT, jsonContent.toString());
+				jsonReq.put(PickableObject.KEY_HOOK_URL, hookUrlOfMessage);
+				String serialNumber = pickerService.sendRequest(jsonReq);
+
 				message.setLastModifyDate(new Date());
+				message.setSerialNumber(serialNumber);
 				message.setStatus(PickableObject.STATUS_PICKING);
 				messageService.modifyMessage(message);
 			}

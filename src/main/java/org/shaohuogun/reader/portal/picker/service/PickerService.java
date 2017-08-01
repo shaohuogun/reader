@@ -1,5 +1,9 @@
 package org.shaohuogun.reader.portal.picker.service;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -18,7 +22,7 @@ public class PickerService {
 	@Value("${service.url.picker}")
 	private String serviceUrlOfPicker;
 	
-	public void sendRequest(JSONObject jsonReq) throws Exception {
+	public String sendRequest(JSONObject jsonReq) throws Exception {
 		if (jsonReq == null) {
 			throw new NullPointerException("Request cann't be null.");
 		}
@@ -29,13 +33,24 @@ public class PickerService {
 		httpPost.addHeader("Content-Type", "application/json;charset=UTF-8");
 		httpPost.addHeader("Accept", "application/json");
 		httpPost.setEntity(params);
-		HttpResponse httpResponse = httpClient.execute(httpPost);
-
-		StatusLine statusLine = httpResponse.getStatusLine();
+		HttpResponse httpResp = httpClient.execute(httpPost);
+		
+		StatusLine statusLine = httpResp.getStatusLine();
 		int statusCode = statusLine.getStatusCode();
 		if (statusCode != HttpStatus.SC_OK) {
-			throw new Exception("Fail to request the picker service.");
+			throw new Exception("Fail to call the picker service, status code: " + statusCode);
 		}
+		
+		InputStream is = httpResp.getEntity().getContent();
+		StringBuffer sb = new StringBuffer();
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader br = new BufferedReader(isr);
+		String line;
+		while ((line = br.readLine()) != null) {
+			sb.append(line);
+		}
+		
+		return sb.toString();
 	}
 
 }

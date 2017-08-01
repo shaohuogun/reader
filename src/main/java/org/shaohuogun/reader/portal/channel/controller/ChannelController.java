@@ -29,8 +29,7 @@ public class ChannelController extends Controller {
 	public Channel createChannel(@RequestBody @Validated Channel channel) throws Exception {		
 		channel.setId(Utility.getUUID());
 		channel.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
-		channel.setSerialNumber(Utility.getUUID());
-
+		
 		channel = channelService.createChannel(channel);
 		Progress progress = new Progress();
 		progress.setId(channel.getId());

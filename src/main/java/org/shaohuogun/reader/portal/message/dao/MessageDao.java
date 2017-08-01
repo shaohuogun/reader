@@ -47,11 +47,11 @@ public class MessageDao {
 		sqlSession.update("org.shaohuogun.reader.portal.message.dao.MessageMapper.update", message);
 	}
 
-	public Message selectByStatus(String pickingStatus) {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.message.dao.MessageMapper.selectByStatus", pickingStatus);
+	public Message selectByStatus(String status) {
+		return sqlSession.selectOne("org.shaohuogun.reader.portal.message.dao.MessageMapper.selectByStatus", status);
 	}
 
-	public Message selectBySerialNumber(String pickingBatchNo) {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.message.dao.MessageMapper.selectBySerialNumber", pickingBatchNo);
+	public Message selectBySerialNumber(String serialNumber) {
+		return sqlSession.selectOne("org.shaohuogun.reader.portal.message.dao.MessageMapper.selectBySerialNumber", serialNumber);
 	}
 }

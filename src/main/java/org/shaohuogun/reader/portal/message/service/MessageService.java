@@ -77,20 +77,20 @@ public class MessageService {
 		return pagination;
 	}
 
-	public Message getMessageByPickingStatus(String pickingStatus) throws Exception {
-		if ((pickingStatus == null) || pickingStatus.isEmpty()) {
+	public Message getMessageByPickingStatus(String status) throws Exception {
+		if ((status == null) || status.isEmpty()) {
 			throw new IllegalArgumentException("Picking status cann't be null or empty.");
 		}	
 
-		return messageDao.selectByStatus(pickingStatus);
+		return messageDao.selectByStatus(status);
 	}
 	
-	public Message getMessageBySerialNumber(String pickingBatchNo) throws Exception {
-		if ((pickingBatchNo == null) || pickingBatchNo.isEmpty()) {
+	public Message getMessageBySerialNumber(String serialNumber) throws Exception {
+		if ((serialNumber == null) || serialNumber.isEmpty()) {
 			throw new IllegalArgumentException("Picking batch no cann't be null or empty.");
 		}	
 		
-		return messageDao.selectBySerialNumber(pickingBatchNo);
+		return messageDao.selectBySerialNumber(serialNumber);
 	}
 
 }

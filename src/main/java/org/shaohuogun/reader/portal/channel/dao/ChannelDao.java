@@ -39,14 +39,14 @@ public class ChannelDao {
 		sqlSession.update("org.shaohuogun.reader.portal.channel.dao.ChannelMapper.update", channel);
 	}
 
-	public Channel selectByStatus(String pickingStatus) {
+	public Channel selectByStatus(String status) {
 		return sqlSession.selectOne("org.shaohuogun.reader.portal.channel.dao.ChannelMapper.selectByStatus",
-				pickingStatus);
+				status);
 	}
 
-	public Channel selectBySerialNumber(String pickingBatchNo) {
+	public Channel selectBySerialNumber(String serialNumber) {
 		return sqlSession.selectOne("org.shaohuogun.reader.portal.channel.dao.ChannelMapper.selectBySerialNumber",
-				pickingBatchNo);
+				serialNumber);
 	}
 
 }

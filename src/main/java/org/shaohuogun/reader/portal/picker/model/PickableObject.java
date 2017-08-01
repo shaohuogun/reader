@@ -12,6 +12,7 @@ public abstract class PickableObject extends Model {
 	public final static String KEY_ACTION_TYPE = "actionType";
 	public final static String KEY_SERIAL_NUMBER = "serialNumber";
 	public final static String KEY_URL = "url";
+	public final static String KEY_AMOUNT = "amount";
 	public static final String KEY_CONTENT = "content";
 	public static final String KEY_HOOK_URL = "hookUrl";	
 
