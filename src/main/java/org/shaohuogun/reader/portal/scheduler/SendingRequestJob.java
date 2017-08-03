@@ -29,11 +29,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @DisallowConcurrentExecution
-public class PickingRequestJob implements Job {
+public class SendingRequestJob implements Job {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Value("${quartz.job.picking.request.repeat-interval}")
+	@Value("${quartz.job.sending.request.repeat-interval}")
 	private long repeatInterval;
 
 	@Value("${hook.url.channel}")
@@ -100,13 +100,13 @@ public class PickingRequestJob implements Job {
 		}
 	}
 
-	@Bean(name = "pickingRequestBean")
-	public JobDetailFactoryBean pickingRequestBean() {
+	@Bean(name = "sendingRequestBean")
+	public JobDetailFactoryBean sendingRequestBean() {
 		return QuartzConfig.createJobDetail(this.getClass());
 	}
 
-	@Bean(name = "pickingRequestTrigger")
-	public SimpleTriggerFactoryBean pickingRequestTrigger(@Qualifier("pickingRequestBean") JobDetail jobDetail) {
+	@Bean(name = "sendingRequestTrigger")
+	public SimpleTriggerFactoryBean sendingRequestTrigger(@Qualifier("sendingRequestBean") JobDetail jobDetail) {
 		return QuartzConfig.createSimpleTrigger(jobDetail, repeatInterval);
 	}
 

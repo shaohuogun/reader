@@ -56,12 +56,12 @@ public class HookController extends Controller {
 			sb1.append(":");
 			sb1.append(req.getRemotePort());
 			sb1.append("]");
-			throw new Exception("The picking result from [" + sb1.toString() + "]  is invalid.");
+			throw new Exception("The reply from [" + sb1.toString() + "]  is invalid.");
 		}
 
-		JSONObject jsonResult = new JSONObject(json);
-		String serialNumber = jsonResult.getString(PickableObject.KEY_SERIAL_NUMBER);	
-		JSONObject jsonContent = new JSONObject(jsonResult.getString(PickableObject.KEY_CONTENT));
+		JSONObject jsonReply = new JSONObject(json);
+		String serialNumber = jsonReply.getString(PickableObject.KEY_SERIAL_NUMBER);	
+		JSONObject jsonContent = new JSONObject(jsonReply.getString(PickableObject.KEY_CONTENT));
 		JSONArray jsonMsgs = jsonContent.getJSONArray("messages");
 		Channel channel = channelService.getChannelBySerialNumber(serialNumber);
 		for (int i = 0; i < jsonMsgs.length(); i++) {
@@ -115,12 +115,12 @@ public class HookController extends Controller {
 			sb1.append(":");
 			sb1.append(req.getRemotePort());
 			sb1.append("]");
-			throw new Exception("The picking result from [" + sb1.toString() + "]  is invalid.");
+			throw new Exception("The reply from [" + sb1.toString() + "]  is invalid.");
 		}
 
-		JSONObject jsonResult = new JSONObject(json);
-		String serialNumber = jsonResult.getString(PickableObject.KEY_SERIAL_NUMBER);	
-		JSONObject jsonContent = new JSONObject(jsonResult.getString(PickableObject.KEY_CONTENT));
+		JSONObject jsonReply = new JSONObject(json);
+		String serialNumber = jsonReply.getString(PickableObject.KEY_SERIAL_NUMBER);	
+		JSONObject jsonContent = new JSONObject(jsonReply.getString(PickableObject.KEY_CONTENT));
 		
 		Message message = messageService.getMessageBySerialNumber(serialNumber);
 		message.setLastModifyDate(new Date());
