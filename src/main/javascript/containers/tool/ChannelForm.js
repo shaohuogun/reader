@@ -1,13 +1,13 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Card, CardText} from 'material-ui/Card'
 import {Field, reduxForm} from 'redux-form'
 import MenuItem from 'material-ui/MenuItem'
 import {SelectField, TextField} from 'redux-form-material-ui'
 
-import storeProvider from '../store/storeProvider'
+import storeProvider from '../../store/storeProvider'
 import {
   submitChannel, updateChannel, asyncProgressWithInterval
-} from '../actions/service'
+} from '../../actions/tool'
 
 export function createChannel(channel) {
   const store = storeProvider.getStore()
@@ -34,12 +34,15 @@ const url = value =>
 : undefined)
 const nonzero = value => (value <= 0 ? '采集数量必须要大于0！' : undefined)
 
-class ChannelForm extends React.Component {
+class ChannelForm extends Component {
+  static propTypes = {
+  }
+
   componentDidMount() {
     this.refs.url // the Field
     .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
     .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
-    .focus(); // on TextField
+    .focus() // on TextField
   }
 
   render() {

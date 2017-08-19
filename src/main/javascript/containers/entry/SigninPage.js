@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {Component, PropTypes} from 'react'
 
 const pageStyle = {
   width: 685,
@@ -7,11 +6,10 @@ const pageStyle = {
   marginLeft: 15,
   float: 'left',
   display: 'inline-block',
-};
+}
 
-export default class SigninPage extends React.Component {
-  constructor(props) {
-    super(props);
+export default class SigninPage extends Component {
+  static propTypes = {
   }
 
   render() {
@@ -22,6 +20,3 @@ export default class SigninPage extends React.Component {
     );
   }
 }
-
-SigninPage.propTypes = {
-};

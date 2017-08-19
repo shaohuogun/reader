@@ -1,29 +1,29 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import ServiceCatalog from './ServiceCatalog'
+import EbookGrid from '../../components/ebook/EbookGrid'
 
-const catalogStyle = {
-  width: 300,
+const pageStyle = {
+  width: 685,
   marginTop: 15,
+  marginLeft: 15,
   float: 'left',
-  display: 'inline-block',
-  backgroundColor: '#fff',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-around',
 }
 
-export default class ServicePage extends Component {
+export default class EbookPage extends Component {
   static propTypes = {
   }
 
   render() {
     return (
-      <div>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <ServiceCatalog style={catalogStyle} />
+      <EbookGrid style={pageStyle} />
       </MuiThemeProvider>
-      {this.props.children}
-      </div>
     )
   }
 }

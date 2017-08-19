@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
@@ -11,14 +10,14 @@ import FlatButton from 'material-ui/FlatButton'
 import LinearProgress from 'material-ui/LinearProgress'
 
 import ChannelForm from './ChannelForm'
-import ChannelInfo from '../components/channel/ChannelInfo'
-import MessageList from '../components/message/MessageList'
-import EbookInfo from '../components/ebook/EbookInfo'
+import ChannelInfo from '../../components/channel/ChannelInfo'
+import MessageList from '../../components/message/MessageList'
+import EbookInfo from '../../components/ebook/EbookInfo'
 
 import {submit} from 'redux-form'
 import {connect} from 'react-redux'
-import {updateWizard} from '../actions/service'
-import {generateEbook, postEbook} from '../actions/mine'
+import {updateWizard} from '../../actions/tool'
+import {generateEbook, postEbook} from '../../actions/mine'
 
 const pageStyle = {
   width: 685,
@@ -37,7 +36,13 @@ const toolbarStyle = {
   textAlign: 'center'
 }
 
-class EbookWizard extends React.Component {
+class EbookWizard extends Component {
+  static propTypes = {
+    wizard: PropTypes.object.isRequired,
+    progress: PropTypes.number.isRequired,
+    channelId: PropTypes.string.isRequired,
+    ebook: PropTypes.object.isRequired
+  }
 
   handleNext = () => {
     const {dispatch, wizard, channelId} = this.props
@@ -77,7 +82,7 @@ class EbookWizard extends React.Component {
         <MessageList channelId={channelId}/>
         <LinearProgress mode="determinate" value={progress} />
         </div>
-      );
+      )
       case 2:
       return (
         <EbookInfo
@@ -151,13 +156,6 @@ class EbookWizard extends React.Component {
       </MuiThemeProvider>
     )
   }
-}
-
-EbookWizard.propTypes = {
-  wizard: PropTypes.object.isRequired,
-  progress: PropTypes.number.isRequired,
-  channelId: PropTypes.string.isRequired,
-  ebook: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({

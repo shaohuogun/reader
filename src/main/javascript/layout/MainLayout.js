@@ -24,7 +24,7 @@ export default class Layout extends Component {
       <ToolbarGroup>
       <a href="/index">首页</a>
       <ToolbarSeparator />
-      <a href="/service">伴读服务</a>
+      <a href="/tool">伴读服务</a>
       <ToolbarSeparator />
       <a href="/mine">我的主页</a>
       </ToolbarGroup>
@@ -35,6 +35,6 @@ export default class Layout extends Component {
       {this.props.children}
       </div>
       </div>
-    );
+    )
   }
 }

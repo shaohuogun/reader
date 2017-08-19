@@ -3,7 +3,7 @@ import {
   UPDATE_PROGRESS,
   SUBMIT_CHANNEL,
   UPDATE_CHANNEL
-} from '../actions/service'
+} from '../actions/tool'
 
 export function wizardReducer(state = {}, action) {
   switch (action.type) {

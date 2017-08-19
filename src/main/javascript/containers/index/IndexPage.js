@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {Component, PropTypes} from 'react'
 
 const pageStyle = {
   width: 685,
@@ -9,9 +8,8 @@ const pageStyle = {
   display: 'inline-block',
 };
 
-export default class IndexPage extends React.Component {
-  constructor(props) {
-    super(props);
+export default class IndexPage extends Component {
+  static propTypes = {
   }
 
   render() {
@@ -22,6 +20,3 @@ export default class IndexPage extends React.Component {
     );
   }
 }
-
-IndexPage.propTypes = {
-};

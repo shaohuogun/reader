@@ -9,7 +9,7 @@ const config = {
     entry: path.join(srcPath, '/entry.js'),
     index: path.join(srcPath, '/index.js'),
     mine: path.join(srcPath, '/mine.js'),
-    service: path.join(srcPath, '/service.js'),
+    tool: path.join(srcPath, '/tool.js'),
   },
   output: {
     path: dstPath,

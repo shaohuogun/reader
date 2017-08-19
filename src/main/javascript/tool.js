@@ -9,8 +9,8 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import MainLayout from './components/MainLayout'
-import routes from './routes/service'
+import MainLayout from './layout/MainLayout'
+import routes from './routes/tool'
 
 
 // Needed for onTouchTap
@@ -33,7 +33,7 @@ storeProvider.init(configureStore({
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
-export default class Service extends Component {
+export default class Tool extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired
   }
@@ -52,6 +52,6 @@ export default class Service extends Component {
 }
 
 ReactDOM.render(
-  <Service history={history} />,
+  <Tool history={history} />,
   document.getElementById('root')
 )

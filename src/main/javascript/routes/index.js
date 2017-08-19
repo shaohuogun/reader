@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 
-import IndexPage from '../containers/IndexPage'
+import IndexPage from '../containers/index/IndexPage'
 
 export default (
   <div>

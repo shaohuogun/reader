@@ -12,7 +12,7 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   )}/>
 )
 
-export default class ServiceCatalog extends Component {
+export default class ToolNavigator extends Component {
   static propTypes = {
   }
 
@@ -21,15 +21,15 @@ export default class ServiceCatalog extends Component {
       <List {...this.props}>
       <Subheader>服务目录</Subheader>
       <ListItem
-      primaryText={<CustomLink to="/service/readinglist" label="阅读清单" />}
+      primaryText={<CustomLink to="/tool/readinglist" label="阅读清单" />}
       leftAvatar={<Avatar src="/image/reading-list.jpg" />}
       />
       <ListItem
-      primaryText={<CustomLink to="/service/favorites" label="好文收藏" />}
+      primaryText={<CustomLink to="/tool/favorites" label="好文收藏" />}
       leftAvatar={<Avatar src="/image/favorites.jpg" />}
       />
       <ListItem
-      primaryText={<CustomLink to="/service/wizard" label="聚文成册" />}
+      primaryText={<CustomLink to="/tool/wizard" label="聚文成册" />}
       leftAvatar={<Avatar src="/image/wizard.jpg" />}
       />
       </List>

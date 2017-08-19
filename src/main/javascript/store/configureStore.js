@@ -4,7 +4,7 @@ import {routerReducer as routing} from 'react-router-redux'
 import {reducer as formReducer} from 'redux-form'
 import {combineReducers} from 'redux'
 
-import {wizardReducer, progressReducer, channelReducer} from '../reducers/service'
+import {wizardReducer, progressReducer, channelReducer} from '../reducers/tool'
 import {paginationReducer, ebookReducer} from '../reducers/mine'
 
 const rootReducer = combineReducers({

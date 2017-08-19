@@ -38,6 +38,6 @@ export default class Layout extends Component {
 			</GridList>
       </MuiThemeProvider>
       </div>
-    );
+    )
   }
 }

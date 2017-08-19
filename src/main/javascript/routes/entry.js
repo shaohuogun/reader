@@ -1,9 +1,9 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 
-import EntryPage from '../containers/EntryPage'
-import SignupPage from '../containers/SignupPage'
-import SigninPage from '../containers/SigninPage'
+import EntryPage from '../containers/entry/EntryPage'
+import SignupPage from '../containers/entry/SignupPage'
+import SigninPage from '../containers/entry/SigninPage'
 
 export default (
   <div>

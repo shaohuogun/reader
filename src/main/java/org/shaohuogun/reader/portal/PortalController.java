@@ -19,9 +19,9 @@ public class PortalController extends Controller {
 		return new ModelAndView("index");
 	}
 	
-	@RequestMapping(value = {"/service/**"}, method = RequestMethod.GET)
-	public ModelAndView service() {
-		return new ModelAndView("service");
+	@RequestMapping(value = {"/tool/**"}, method = RequestMethod.GET)
+	public ModelAndView tool() {
+		return new ModelAndView("tool");
 	}
 	
 	@RequestMapping(value = {"/mine/**"}, method = RequestMethod.GET)
