@@ -4,8 +4,18 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
 import FontIcon from 'material-ui/FontIcon'
 
+import MineNavigator from './MineNavigator'
+
 const contentStyle = {
   margin: '0 auto',
+}
+
+const navigatorStyle = {
+  width: 300,
+  marginTop: 15,
+  float: 'left',
+  display: 'inline-block',
+  backgroundColor: '#fff',
 }
 
 export default class MineLayout extends Component {
@@ -30,8 +40,11 @@ export default class MineLayout extends Component {
       </ToolbarGroup>
       </Toolbar>
       </MuiThemeProvider>
-
+      
       <div style={contentStyle}>
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <MineNavigator style={navigatorStyle} />
+      </MuiThemeProvider>
       {this.props.children}
       </div>
       </div>

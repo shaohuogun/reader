@@ -3,8 +3,18 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {GridList, GridTile} from 'material-ui/GridList'
 
+import EntryNavigator from './EntryNavigator'
+
 const contentStyle = {
   margin: '0 auto',
+}
+
+const navigatorStyle = {
+  width: 300,
+  marginTop: 15,
+  float: 'left',
+  display: 'inline-block',
+  backgroundColor: '#fff',
 }
 
 export default class EntryLayout extends Component {
@@ -32,6 +42,9 @@ export default class EntryLayout extends Component {
       cols={2}
       >
       <div style={contentStyle}>
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <EntryNavigator style={navigatorStyle} />
+      </MuiThemeProvider>
       {this.props.children}
       </div>
       </GridTile>
