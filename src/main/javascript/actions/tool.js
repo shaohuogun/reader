@@ -1,12 +1,27 @@
-export const UPDATE_WIZARD = 'UPDATE_WIZARD'
-export const UPDATE_PROGRESS = 'UPDATE_PROGRESS'
 export const SUBMIT_CHANNEL = 'SUBMIT_CHANNEL'
 export const UPDATE_CHANNEL = 'UPDATE_CHANNEL'
+export const UPDATE_EBOOK_STEPPER = 'UPDATE_EBOOK_STEPPER'
+export const UPDATE_PROGRESS = 'UPDATE_PROGRESS'
 
-export function updateWizard(wizard) {
+
+export function submitChannel(channel) {
   return {
-    type: UPDATE_WIZARD,
-    wizard
+    type: SUBMIT_CHANNEL,
+    channel
+  }
+}
+
+export function updateChannel(channel) {
+  return {
+    type: UPDATE_CHANNEL,
+    channel
+  }
+}
+
+export function updateEbookStepper(ebookStepper) {
+  return {
+    type: UPDATE_EBOOK_STEPPER,
+    ebookStepper
   }
 }
 
@@ -17,7 +32,7 @@ export function updateProgress(progress) {
   }
 }
 
-export function asyncProgressWithInterval(progressId) {
+export function asyncProgress(progressId) {
   return dispatch => {
     const interval = setInterval(() => {
       var url = '/api/progress/' + progressId
@@ -31,26 +46,11 @@ export function asyncProgressWithInterval(progressId) {
         dispatch(updateProgress(json))
         if (json === 100) {
           clearInterval(interval);
-          dispatch(updateWizard({
+          dispatch(updateEbookStepper({
             stepIndex: 1
           }))
         }
       })
     }, 1000)
-  }
-}
-
-export function submitChannel(channel) {
-  return {
-    type: SUBMIT_CHANNEL,
-    channel
-  }
-}
-
-export function updateChannel(channel) {
-  return {
-    type: UPDATE_CHANNEL,
-    channel,
-    receivedAt: Date.now()
   }
 }

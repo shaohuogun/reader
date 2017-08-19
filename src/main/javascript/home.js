@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import {Provider} from 'react-redux'
@@ -21,7 +22,7 @@ const layoutStyle = {
 }
 
 storeProvider.init(configureStore({
-  wizard: {
+  ebookStepper: {
     finished: false,
     stepIndex: 0
   },
@@ -33,10 +34,6 @@ const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
 export default class Home extends Component {
-  static propTypes = {
-    history: PropTypes.object.isRequired
-  }
-
   render () {
     return (
       <Provider key="provider" store={store}>
@@ -48,6 +45,10 @@ export default class Home extends Component {
       </Provider>
     )
   }
+}
+
+Home.propTypes = {
+  history: PropTypes.object.isRequired
 }
 
 ReactDOM.render(

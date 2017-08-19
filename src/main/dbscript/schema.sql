@@ -33,9 +33,7 @@ CREATE TABLE `READER_CHANNEL` (
   `amount` int(11) NOT NULL,
   `count` int(11) NOT NULL,
   `status` varchar(16) NOT NULL, 
-  `category` varchar(32) NOT NULL,  
   `name` varchar(64) NOT NULL,
-  `publisher` varchar(64) NOT NULL,
   `description` blob,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

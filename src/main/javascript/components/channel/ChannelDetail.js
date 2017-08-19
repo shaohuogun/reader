@@ -9,7 +9,7 @@ const toolbarStyle = {
 	textAlign: 'center',
 };
 
-export default class ChannelInfo extends React.Component {
+export default class ChannelDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,6 +75,6 @@ export default class ChannelInfo extends React.Component {
 
 };
 
-ChannelInfo.propTypes = {
+ChannelDetail.propTypes = {
   channelId: PropTypes.string.isRequired,
 };

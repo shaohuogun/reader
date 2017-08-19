@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {Route, Link} from 'react-router-dom'
 import {List, ListItem} from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
@@ -13,9 +14,6 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
 )
 
 export default class MineNavigator extends Component {
-  static propTypes = {
-  }
-
   render() {
     return (
       <List {...this.props}>
@@ -35,4 +33,7 @@ export default class MineNavigator extends Component {
       </List>
     )
   }
+}
+
+MineNavigator.propTypes = {
 }

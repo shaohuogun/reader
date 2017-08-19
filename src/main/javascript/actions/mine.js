@@ -51,7 +51,7 @@ export function generateEbook(channelId) {
     }).then(response => response.json())
     .then(json => {
       dispatch(generatedEbook(json))
-      dispatch(updateWizard({
+      dispatch(updateEbookStepper({
         stepIndex: 2
       }))
     })

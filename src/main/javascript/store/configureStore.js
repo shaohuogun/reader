@@ -4,13 +4,13 @@ import {routerReducer as routing} from 'react-router-redux'
 import {reducer as formReducer} from 'redux-form'
 import {combineReducers} from 'redux'
 
-import {wizardReducer, progressReducer, channelReducer} from '../reducers/tool'
+import {ebookStepperReducer, progressReducer, channelReducer} from '../reducers/tool'
 import {paginationReducer, ebookReducer} from '../reducers/mine'
 
 const rootReducer = combineReducers({
   routing,
   form: formReducer,
-  wizard: wizardReducer,
+  ebookStepper: ebookStepperReducer,
   progress: progressReducer,
   channel: channelReducer,
   pagination: paginationReducer,

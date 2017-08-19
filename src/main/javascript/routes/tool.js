@@ -1,10 +1,10 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 
-import EbookWizard from '../containers/tool/EbookWizard'
+import EbookStepper from '../containers/tool/EbookStepper'
 
 export default (
   <div>
-  <Route path="/tool/wizard" component={EbookWizard}/>
+  <Route path="/tool/ebookstepper" component={EbookStepper}/>
   </div>
 )

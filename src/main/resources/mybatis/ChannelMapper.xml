@@ -18,9 +18,7 @@
 		<result property="amount" column="amount" />
 		<result property="count" column="count" />
 		<result property="status" column="status" />
-		<result property="category" column="category" />
 		<result property="name" column="name" />
-		<result property="publisher" column="publisher" />
 		<result property="description" column="description"
 			typeHandler="org.shaohuogun.reader.portal.plugin.ibatis.BlobTypeHandler" />
 	</resultMap>
@@ -30,7 +28,7 @@
 		(id,
 		creator, create_date, deleted, url,
 		amount, count,
-		status, category, name, publisher,
+		status, name,
 		description)
 		values (#{id},
 		#{creator}, #{createDate}, #{deleted},
@@ -38,9 +36,7 @@
 		#{amount},
 		#{count},
 		#{status},
-		#{category},
 		#{name},
-		#{publisher},
 		#{description}
 		)
 	</insert>

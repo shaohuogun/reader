@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {Route, Link} from 'react-router-dom'
 import {List, ListItem} from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
@@ -13,9 +14,6 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
 )
 
 export default class ToolNavigator extends Component {
-  static propTypes = {
-  }
-
   render() {
     return (
       <List {...this.props}>
@@ -29,10 +27,13 @@ export default class ToolNavigator extends Component {
       leftAvatar={<Avatar src="/image/favorites.jpg" />}
       />
       <ListItem
-      primaryText={<CustomLink to="/tool/wizard" label="聚文成册" />}
-      leftAvatar={<Avatar src="/image/wizard.jpg" />}
+      primaryText={<CustomLink to="/tool/ebookstepper" label="聚文成册" />}
+      leftAvatar={<Avatar src="/image/ebook-stepper.jpg" />}
       />
       </List>
     )
   }
+}
+
+ToolNavigator.propTypes = {
 }

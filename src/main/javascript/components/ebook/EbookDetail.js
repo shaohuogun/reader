@@ -7,8 +7,7 @@ const toolbarStyle = {
 	textAlign: 'center',
 }
 
-export default class EbookInfo extends React.Component {
-
+export default class EbookDetail extends React.Component {
 	render() {
 		const {ebook, downloadEbook, postEbook} = this.props
 		return (
@@ -35,7 +34,7 @@ export default class EbookInfo extends React.Component {
 
 }
 
-EbookInfo.propTypes = {
+EbookDetail.propTypes = {
 	ebook: PropTypes.object.isRequired,
 	downloadEbook: PropTypes.func.isRequired,
 	postEbook: PropTypes.func.isRequired

@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {GridList, GridTile} from 'material-ui/GridList'
@@ -18,9 +19,6 @@ const navigatorStyle = {
 }
 
 export default class EntryLayout extends Component {
-  static propTypes = {
-  }
-
   render() {
     return (
       <div>
@@ -53,4 +51,7 @@ export default class EntryLayout extends Component {
       </div>
     )
   }
+}
+
+EntryLayout.propTypes = {
 }

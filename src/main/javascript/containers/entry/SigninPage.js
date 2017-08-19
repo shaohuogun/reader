@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 const pageStyle = {
   width: 685,
@@ -9,9 +10,6 @@ const pageStyle = {
 }
 
 export default class SigninPage extends Component {
-  static propTypes = {
-  }
-
   render() {
     return (
       <div style={pageStyle}>
@@ -19,4 +17,7 @@ export default class SigninPage extends Component {
       </div>
     );
   }
+}
+
+SigninPage.propTypes = {
 }

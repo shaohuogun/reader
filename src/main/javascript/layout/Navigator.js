@@ -1,11 +1,9 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
 import FontIcon from 'material-ui/FontIcon'
 
 export default class Navigator extends Component {
-  static propTypes = {
-  }
-
   render() {
     return (
       <Toolbar>
@@ -23,4 +21,7 @@ export default class Navigator extends Component {
       </Toolbar>
     )
   }
+}
+
+Navigator.propTypes = {
 }
