@@ -2,7 +2,8 @@ import {
   SUBMIT_CHANNEL,
   UPDATE_CHANNEL,
   UPDATE_EBOOK_STEPPER,
-  UPDATE_PROGRESS
+  UPDATE_PICKING_PROGRESS,
+  UPDATE_GENERATING_PROGRESS
 } from '../actions/tool'
 
 export function channelReducer(state = {}, action) {
@@ -28,7 +29,9 @@ export function ebookStepperReducer(state = {}, action) {
 export function progressReducer(state = {}, action) {
   console.log(state)
   switch (action.type) {
-    case UPDATE_PROGRESS:
+    case UPDATE_PICKING_PROGRESS:
+    return action.progress
+    case UPDATE_GENERATING_PROGRESS:
     return action.progress
     default:
     return state

@@ -17,7 +17,7 @@ import ChannelDetail from '../../components/channel/ChannelDetail'
 import MessageList from '../../components/message/MessageList'
 import EbookDetail from '../../components/ebook/EbookDetail'
 
-import {updateEbookStepper} from '../../actions/tool'
+import {updateEbookStepper, asyncGeneratingProgress} from '../../actions/tool'
 import {generateEbook, postEbook} from '../../actions/mine'
 
 const pageStyle = {
@@ -35,11 +35,12 @@ const toolbarStyle = {
 
 class EbookStepper extends Component {
   handleNext = () => {
-    const {dispatch, ebookStepper, channelId} = this.props
+    const {dispatch, ebookStepper, channel} = this.props
     if (ebookStepper.stepIndex === 0) {
       dispatch(submit('channelForm'))
     } else if (ebookStepper.stepIndex === 1) {
-      dispatch(generateEbook(channelId))
+      dispatch(generateEbook(channel.id))
+      dispatch(asyncGeneratingProgress('G-' + channel.id))
     } else {
       dispatch(updateEbookStepper({
         finished: ebookStepper.stepIndex >= 2,
@@ -88,7 +89,7 @@ class EbookStepper extends Component {
   }
 
   render() {
-    const {dispatch, ebookStepper, progress, channelId, ebook} = this.props
+    const {dispatch, ebookStepper, channel, progress, ebook} = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
@@ -106,7 +107,7 @@ class EbookStepper extends Component {
       <Step>
       <StepLabel>采集频道下的文章</StepLabel>
       <StepContent>
-      <MessageList channelId={channelId}/>
+      <MessageList channelId={channel.id}/>
       <LinearProgress mode="determinate" value={progress} />
       {this.renderStepActions(1)}
       </StepContent>
@@ -151,14 +152,14 @@ class EbookStepper extends Component {
 
 EbookStepper.propTypes = {
   ebookStepper: PropTypes.object.isRequired,
-  channelId: PropTypes.string.isRequired,
+  channel: PropTypes.object.isRequired,
   progress: PropTypes.number.isRequired,
   ebook: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
   ebookStepper: state.ebookStepper,
-  channelId: state.channel.id,
+  channel: state.channel,
   progress: state.progress,
   ebook: state.ebook
 })

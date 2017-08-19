@@ -27,6 +27,7 @@ storeProvider.init(configureStore({
     finished: false,
     stepIndex: 0
   },
+  channel: {},
   progress: 0,
   pagination: {}
 }))

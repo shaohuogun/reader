@@ -91,7 +91,7 @@ public class HookController extends Controller {
 			channel.setStatus(PickableObject.STATUS_PICKED);
 		}
 		channelService.modifyChannel(channel);
-		progressService.incProgressAmount(channel.getId(), jsonMsgs.length());
+		progressService.incProgressAmount(("P-" + channel.getId()), jsonMsgs.length());
 	}
 	
 	@RequestMapping(value = "/api/hook/message", method = RequestMethod.POST)
@@ -131,7 +131,7 @@ public class HookController extends Controller {
 
 		message.setContent(jsonContent.getString(Message.KEY_CONTENT));
 		messageService.modifyMessage(message);
-		progressService.incProgressCount(message.getChannelId(), 1);
+		progressService.incProgressCount(("P-" + message.getChannelId()), 1);
 	}
 
 }

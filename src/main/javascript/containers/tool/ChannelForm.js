@@ -7,7 +7,7 @@ import {SelectField, TextField} from 'redux-form-material-ui'
 
 import storeProvider from '../../store/storeProvider'
 import {
-  submitChannel, updateChannel, asyncProgress
+  submitChannel, updateChannel, asyncPickingProgress
 } from '../../actions/tool'
 
 export function createChannel(channel) {
@@ -22,7 +22,7 @@ export function createChannel(channel) {
   }).then(response => response.json())
   .then(json => {
     store.dispatch(updateChannel(json))
-    store.dispatch(asyncProgress(json.id))
+    store.dispatch(asyncPickingProgress('P-' + json.id))
   })
 }
 

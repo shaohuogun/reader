@@ -32,7 +32,7 @@ public class ChannelController extends Controller {
 		
 		channel = channelService.createChannel(channel);
 		Progress progress = new Progress();
-		progress.setId(channel.getId());
+		progress.setId("P-" + channel.getId());
 		progressService.addProgress(progress);
 		return channel;
 	}

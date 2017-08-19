@@ -24,6 +24,8 @@ import org.shaohuogun.reader.portal.ebook.service.EbookService;
 import org.shaohuogun.reader.portal.ebook.service.MobiGenerator;
 import org.shaohuogun.reader.portal.message.model.Message;
 import org.shaohuogun.reader.portal.message.service.MessageService;
+import org.shaohuogun.reader.portal.progress.model.Progress;
+import org.shaohuogun.reader.portal.progress.service.ProgressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,9 @@ public class EbookController extends Controller {
 	
 	@Autowired
 	private EbookService ebookService;
+	
+	@Autowired
+	private ProgressService progressService;
 
 	@RequestMapping(value = "/api/ebook/generate", method = RequestMethod.GET)
 	public Ebook generateEbook(@RequestParam(required = true) String targetType,
@@ -66,8 +71,14 @@ public class EbookController extends Controller {
 			messages.add((Message) models.get(i));
 		}
 		
+		Progress progress = new Progress();
+		progress.setId("G-" + channel.getId());
+		progress.setAmount(messages.size());
+		progressService.addProgress(progress);
+		
 		Ebook ebook = mobiGenerator.generate(channel, messages);
 		logger.info(ebook.getPath());
+		progressService.incProgressCount(("G-" + channel.getId()), messages.size());
 		return ebookService.createEbook(ebook);
 	}
 	

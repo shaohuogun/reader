@@ -22,11 +22,6 @@ const layoutStyle = {
 }
 
 storeProvider.init(configureStore({
-  ebookStepper: {
-    finished: false,
-    stepIndex: 0
-  },
-  progress: 0,
   pagination: {}
 }))
 
