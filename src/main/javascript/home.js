@@ -9,8 +9,8 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import MainLayout from './layout/MainLayout'
-import routes from './routes/index'
+import HomeLayout from './layout/HomeLayout'
+import routes from './routes/home'
 
 // Needed for onTouchTap
 injectTapEventPlugin();
@@ -32,7 +32,7 @@ storeProvider.init(configureStore({
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
-export default class Index extends Component {
+export default class Home extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired
   }
@@ -41,9 +41,9 @@ export default class Index extends Component {
     return (
       <Provider key="provider" store={store}>
       <Router key="router" history={this.props.history} >
-      <MainLayout style={layoutStyle}>
+      <HomeLayout style={layoutStyle}>
       {routes}
-      </MainLayout>
+      </HomeLayout>
       </Router>
       </Provider>
     )
@@ -51,6 +51,6 @@ export default class Index extends Component {
 }
 
 ReactDOM.render(
-  <Index history={history} />,
+  <Home history={history} />,
   document.getElementById('root')
 )

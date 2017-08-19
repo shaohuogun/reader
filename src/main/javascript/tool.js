@@ -9,7 +9,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import MainLayout from './layout/MainLayout'
+import ToolLayout from './layout/ToolLayout'
 import routes from './routes/tool'
 
 
@@ -42,9 +42,9 @@ export default class Tool extends Component {
     return (
       <Provider key="provider" store={store}>
       <Router key="router" history={this.props.history} >
-      <MainLayout style={layoutStyle}>
+      <ToolLayout style={layoutStyle}>
       {routes}
-      </MainLayout>
+      </ToolLayout>
       </Router>
       </Provider>
     )

@@ -8,7 +8,7 @@ const contentStyle = {
   margin: '0 auto',
 }
 
-export default class Layout extends Component {
+export default class MineLayout extends Component {
   static propTypes = {
   }
 
@@ -22,7 +22,7 @@ export default class Layout extends Component {
       <ToolbarTitle text="TAIZIDU" />
       </ToolbarGroup>
       <ToolbarGroup>
-      <a href="/index">首页</a>
+      <a href="/home">首页</a>
       <ToolbarSeparator />
       <a href="/tool">伴读服务</a>
       <ToolbarSeparator />

@@ -1,10 +1,10 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 
-import IndexPage from '../containers/index/IndexPage'
+import HomePage from '../containers/home/HomePage'
 
 export default (
   <div>
-  <Route path="/index" component={IndexPage}/>
+  <Route path="/home" component={HomePage}/>
   </div>
 )

@@ -9,7 +9,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import MainLayout from './layout/MainLayout'
+import MineLayout from './layout/MineLayout'
 import routes from './routes/mine'
 
 // Needed for onTouchTap
@@ -41,9 +41,9 @@ export default class Mine extends Component {
     return (
       <Provider key="provider" store={store}>
       <Router key="router" history={this.props.history} >
-      <MainLayout style={layoutStyle}>
+      <MineLayout style={layoutStyle}>
       {routes}
-      </MainLayout>
+      </MineLayout>
       </Router>
       </Provider>
     )

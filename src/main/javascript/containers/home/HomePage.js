@@ -8,14 +8,14 @@ const pageStyle = {
   display: 'inline-block',
 };
 
-export default class IndexPage extends Component {
+export default class HomePage extends Component {
   static propTypes = {
   }
 
   render() {
     return (
       <div style={pageStyle}>
-      <span>Index of the reader...</span>
+      <span>Home page of the reader...</span>
       </div>
     );
   }

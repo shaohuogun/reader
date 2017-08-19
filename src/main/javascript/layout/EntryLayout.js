@@ -7,7 +7,7 @@ const contentStyle = {
   margin: '0 auto',
 }
 
-export default class Layout extends Component {
+export default class EntryLayout extends Component {
   static propTypes = {
   }
 
