@@ -1,67 +1,61 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
+import {RadioButtonGroup} from 'redux-form-material-ui'
+import {RadioButton} from 'material-ui/RadioButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
-import storeProvider from '../../store/storeProvider'
-import {
-  submitReadingItem, updateReadingItem
-} from '../../actions/tool'
-
 export const fields = ['bookName', 'listId']
 
-export function createReadingItem(readingItem) {
-  const store = storeProvider.getStore()
-  store.dispatch(submitReadingItem(readingItem))
-  fetch('/api/readingitem', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(readingItem)
-  }).then(response => response.json())
-  .then(json => {
-    store.dispatch(updateReadingItem(json))
-  })
+const styles = {
+  checkedIcon: {
+    color: '#F44336',
+  },
+  radioButton: {
+    marginBottom: 16,
+  },
 }
 
-// Validation Functions
-const required = value => (value == null ? '必填属性，请填写！' : undefined)
-
 class ReadingItemSecondForm extends Component {
-  componentDidMount() {
-    this.refs.bookName // the Field
-    .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
-    .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
-    .focus() // on TextField
-  }
-
   render() {
-    const {handleSubmit} = this.props
+    const {
+      fields: {listId},
+      handleSubmit
+    } = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
-      name="bookName"
-      component={TextField}
-      hintText="请填写书籍的名称！"
-      floatingLabelText="书籍名称"
-      fullWidth={true}
-      validate={required}
-      ref="bookName"
-      withRef
-      />
-
+        name="listId"
+        component={RadioButtonGroup}
+        floatingLabelText="阅读清单">
+        <RadioButton
+          value="ab321255-2113-4505-8d49-0067a2a865d9"
+          label="生活书单"
+          checkedIcon={<ActionFavorite style={styles.checkedIcon} />}
+          uncheckedIcon={<ActionFavoriteBorder />}
+          style={styles.radioButton}
+        />
+        <RadioButton
+          value="d457e980-c8a7-4187-b5a7-2fb079ae0691"
+          label="工作书单"
+          checkedIcon={<ActionFavorite style={styles.checkedIcon} />}
+          uncheckedIcon={<ActionFavoriteBorder />}
+          style={styles.radioButton}
+        />
+      </Field>
       </form>
     )
   }
 }
 
 ReadingItemSecondForm.propTypes = {
+  fields: PropTypes.array.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({
   form: 'readingItemForm',
-  onSubmit: createReadingItem
+  fields,
+  destroyOnUnmount: false
 })(ReadingItemSecondForm)

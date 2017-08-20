@@ -72,6 +72,7 @@ export function asyncPickingProgress(progressId) {
         if (json === 100) {
           clearInterval(interval);
           dispatch(updateEbookStepper({
+            finished: false,
             stepIndex: 1
           }))
         }
@@ -102,6 +103,7 @@ export function asyncGeneratingProgress(progressId) {
         if (json === 100) {
           clearInterval(interval);
           dispatch(updateEbookStepper({
+            finished: true,
             stepIndex: 2
           }))
         }

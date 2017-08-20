@@ -33,14 +33,14 @@ class ReadingItemFirstForm extends Component {
       ref="bookName"
       withRef
       />
-      
+
       </form>
     )
   }
 }
 
 ReadingItemFirstForm.propTypes = {
-  fields: PropTypes.object.isRequired,
+  fields: PropTypes.array.isRequired,
   handleSubmit: PropTypes.func.isRequired
 }
 
