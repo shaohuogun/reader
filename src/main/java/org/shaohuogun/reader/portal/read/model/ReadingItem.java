@@ -10,29 +10,13 @@ public class ReadingItem extends Model {
 	public static final String STATUS_READING = "reading";
 	public static final String STATUS_READ = "read";
 	
-	private String listId;
+	private String bookName;
 	
 	private String bookId;
 	
-	private String bookName;
+	private String listId;
 	
 	private String status = STATUS_WANT;
-
-	public String getListId() {
-		return listId;
-	}
-	
-	public void setListId(String listId) {
-		this.listId = listId;
-	}
-	
-	public String getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(String bookId) {
-		this.bookId = bookId;
-	}
 
 	public String getBookName() {
 		return bookName;
@@ -40,6 +24,22 @@ public class ReadingItem extends Model {
 
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
+	}
+
+	public String getBookId() {
+		return bookId;
+	}
+
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
+	
+	public String getListId() {
+		return listId;
+	}
+	
+	public void setListId(String listId) {
+		this.listId = listId;
 	}
 
 	public String getStatus() {

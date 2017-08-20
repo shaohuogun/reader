@@ -1,15 +1,16 @@
-
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Card, CardText} from 'material-ui/Card'
 import {Field, reduxForm} from 'redux-form'
-import MenuItem from 'material-ui/MenuItem'
-import {SelectField, TextField} from 'redux-form-material-ui'
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
+import ActionFavorite from 'material-ui/svg-icons/action/favorite'
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
 import storeProvider from '../../store/storeProvider'
 import {
   submitReadingItem, updateReadingItem
 } from '../../actions/tool'
+
+export const fields = ['bookName', 'listId']
 
 export function createReadingItem(readingItem) {
   const store = storeProvider.getStore()
@@ -29,7 +30,7 @@ export function createReadingItem(readingItem) {
 // Validation Functions
 const required = value => (value == null ? '必填属性，请填写！' : undefined)
 
-class ReadingItemForm extends Component {
+class ReadingItemSecondForm extends Component {
   componentDidMount() {
     this.refs.bookName // the Field
     .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
@@ -40,11 +41,6 @@ class ReadingItemForm extends Component {
   render() {
     const {handleSubmit} = this.props
     return (
-      <Card
-      {...this.props}
-      zDepth={0}
-      >
-      <CardText>
       <form onSubmit={handleSubmit}>
       <Field
       name="bookName"
@@ -58,16 +54,14 @@ class ReadingItemForm extends Component {
       />
 
       </form>
-      </CardText>
-      </Card>
     )
   }
 }
 
-ReadingItemForm.propTypes = {
+ReadingItemSecondForm.propTypes = {
 }
 
 export default reduxForm({
   form: 'readingItemForm',
   onSubmit: createReadingItem
-})(ReadingItemForm)
+})(ReadingItemSecondForm)

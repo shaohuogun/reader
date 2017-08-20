@@ -29,10 +29,10 @@ CREATE TABLE `READER_CHANNEL` (
   `last_modify_date` datetime DEFAULT NULL,
   `deleted` char(1) NOT NULL,
   `serial_number` char(36) DEFAULT NULL,
-  `url` varchar(256) NOT NULL,  
+  `url` varchar(256) NOT NULL,
   `amount` int(11) NOT NULL,
   `count` int(11) NOT NULL,
-  `status` varchar(16) NOT NULL, 
+  `status` varchar(16) NOT NULL,
   `name` varchar(64) NOT NULL,
   `description` blob,
   PRIMARY KEY (`id`)
@@ -46,7 +46,7 @@ CREATE TABLE `READER_MESSAGE` (
   `last_modify_date` datetime DEFAULT NULL,
   `deleted` char(1) NOT NULL,
   `serial_number` char(36) DEFAULT NULL,
-  `url` varchar(256) NOT NULL,  
+  `url` varchar(256) NOT NULL,
   `amount` int(11) NOT NULL,
   `count` int(11) NOT NULL,
   `status` varchar(16) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE `READER_MESSAGE` (
   `pageview` int(11) NOT NULL,
   `comment_count` int(11) NOT NULL,
   `digest` blob DEFAULT NULL,
-  `content` mediumblob DEFAULT NULL,  
+  `content` mediumblob DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -70,7 +70,7 @@ CREATE TABLE `READER_EBOOK` (
   `channel_id` char(36) NOT NULL,
   `format` varchar(16) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `path` varchar(256) NOT NULL,  
+  `path` varchar(256) NOT NULL,
   `downloads` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -109,14 +109,9 @@ CREATE TABLE `READER_READING_ITEM` (
   `last_modifier` char(36) DEFAULT NULL,
   `last_modify_date` datetime DEFAULT NULL,
   `deleted` char(1) NOT NULL,
+  `book_name` varchar(128) NOT NULL,
+  `book_id` char(36) DEFAULT NULL,
   `list_id` char(36) NOT NULL,
-  `book_id` char(36) NOT NULL,
-  `book_name` varchar(64) NOT NULL,
   `status` varchar(16) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
-

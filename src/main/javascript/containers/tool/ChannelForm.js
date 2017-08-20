@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Card, CardText} from 'material-ui/Card'
 import {Field, reduxForm} from 'redux-form'
-import MenuItem from 'material-ui/MenuItem'
-import {SelectField, TextField} from 'redux-form-material-ui'
+import {TextField} from 'redux-form-material-ui'
 
 import storeProvider from '../../store/storeProvider'
 import {
@@ -43,11 +41,6 @@ class ChannelForm extends Component {
   render() {
     const {handleSubmit} = this.props
     return (
-      <Card
-      {...this.props}
-      zDepth={0}
-      >
-      <CardText>
       <form onSubmit={handleSubmit}>
       <Field
       name="url"
@@ -87,8 +80,6 @@ class ChannelForm extends Component {
       validate={[required, nonzero]}
       />
       </form>
-      </CardText>
-      </Card>
     )
   }
 }

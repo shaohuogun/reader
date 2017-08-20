@@ -12,7 +12,7 @@ import FlatButton from 'material-ui/FlatButton'
 import {reset, submit} from 'redux-form'
 import {connect} from 'react-redux'
 
-import ReadingItemForm from './ReadingItemForm'
+import ReadingItemFirstForm from './ReadingItemFirstForm'
 
 import {updateReadingStepper} from '../../actions/tool'
 
@@ -91,7 +91,7 @@ class ReadingStepper extends Component {
       <Step>
       <StepLabel>步骤一，填写待阅读的书名：</StepLabel>
       <StepContent>
-      <ReadingItemForm />
+      <ReadingItemFirstForm />
       {this.renderStepActions(0)}
       </StepContent>
       </Step>
