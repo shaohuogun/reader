@@ -5,7 +5,6 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 import {Card, CardText, CardActions} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
-import ReadingItemForm from './ReadingItemForm'
 import ReadingItemList from './ReadingItemList'
 
 const tabStyle = {
@@ -73,7 +72,6 @@ export default class ReadingListTabs extends React.Component {
   			{list.description}
   			</CardText>
   			<CardText>
-  			<ReadingItemForm listId={list.id} />
   			<ReadingItemList style={listStyle} listId={list.id} />
   			</CardText>
   			<CardActions style={toolbarStyle}>

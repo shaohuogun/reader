@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import ReadingListForm from '../../components/read/ReadingListForm'
 import ReadingListTabs from '../../components/read/ReadingListTabs'
 
 const pageStyle = {
@@ -24,7 +23,6 @@ export default class ReadingListPage extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
-      <ReadingListForm />
       <ReadingListTabs style={tabsStyle} />
       </div>
       </MuiThemeProvider>

@@ -70,7 +70,7 @@ class EbookStepper extends Component {
   }
 
   postEbook = (ebookId) => {
-    alert('尚未实现此功能！');    
+    alert('尚未实现此功能！');
   }
 
   renderStepActions = (stepIndex) => {
@@ -102,9 +102,9 @@ class EbookStepper extends Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
       <Stepper activeStep={ebookStepper.stepIndex} orientation="vertical">
-
+      
       <Step>
-      <StepLabel>输入目标频道信息</StepLabel>
+      <StepLabel>步骤一，填写目标媒体信息：</StepLabel>
       <StepContent>
       <ChannelForm />
       <LinearProgress mode="determinate" value={progress} />
@@ -113,7 +113,7 @@ class EbookStepper extends Component {
       </Step>
 
       <Step>
-      <StepLabel>采集频道下的文章</StepLabel>
+      <StepLabel>步骤二，确认媒体文章列表：</StepLabel>
       <StepContent>
       <MessageList channelId={channel.id}/>
       <LinearProgress mode="determinate" value={progress} />
@@ -122,7 +122,7 @@ class EbookStepper extends Component {
       </Step>
 
       <Step>
-      <StepLabel>导出文章到电子书</StepLabel>
+      <StepLabel>步骤三，导出文章到电子书：</StepLabel>
       <StepContent>
       <EbookDetail
       ebook={ebook}

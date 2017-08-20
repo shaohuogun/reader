@@ -23,6 +23,11 @@ const layoutStyle = {
 }
 
 storeProvider.init(configureStore({
+  readingStepper: {
+    finished: false,
+    stepIndex: 0
+  },
+  readingItem: {},
   ebookStepper: {
     finished: false,
     stepIndex: 0
