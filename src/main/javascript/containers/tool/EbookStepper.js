@@ -5,11 +5,12 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import {Step, Stepper, StepLabel, StepContent} from 'material-ui/Stepper'
+import LinearProgress from 'material-ui/LinearProgress'
+import {Card, CardActions} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
-import LinearProgress from 'material-ui/LinearProgress'
 
-import {submit} from 'redux-form'
+import {reset, submit} from 'redux-form'
 import {connect} from 'react-redux'
 
 import ChannelForm from './ChannelForm'
@@ -25,15 +26,29 @@ const pageStyle = {
   marginTop: 15,
   marginLeft: 15,
   float: 'left',
-  display: 'inline-block'
+  display: 'inline-block',
+  backgroundColor: '#fff'
 }
 
 const toolbarStyle = {
   marginTop: 15,
+  marginBottom: 15,
   textAlign: 'center'
 }
 
 class EbookStepper extends Component {
+  handlePrev = () => {
+    const {dispatch, ebookStepper} = this.props
+    if (ebookStepper.stepIndex === 0) {
+      dispatch(reset('channelForm'))
+    } else {
+      dispatch(updateEbookStepper({
+        finished: ebookStepper.stepIndex >= 2,
+        stepIndex: ebookStepper.stepIndex - 1
+      }))
+    }
+  }
+
   handleNext = () => {
     const {dispatch, ebookStepper, channel} = this.props
     if (ebookStepper.stepIndex === 0) {
@@ -41,20 +56,12 @@ class EbookStepper extends Component {
     } else if (ebookStepper.stepIndex === 1) {
       dispatch(generateEbook(channel.id))
       dispatch(asyncGeneratingProgress('G-' + channel.id))
-    } else {
+    } else if (ebookStepper.stepIndex === 2) {
       dispatch(updateEbookStepper({
-        finished: ebookStepper.stepIndex >= 2,
-        stepIndex: ebookStepper.stepIndex + 1
+        finished: false,
+        stepIndex: 0
       }))
     }
-  }
-
-  handlePrev = () => {
-    const {dispatch, ebookStepper} = this.props
-    dispatch(updateEbookStepper({
-      finished: ebookStepper.stepIndex >= 2,
-      stepIndex: ebookStepper.stepIndex - 1
-    }))
   }
 
   downloadEbook = (ebookId) => {
@@ -63,20 +70,20 @@ class EbookStepper extends Component {
   }
 
   postEbook = (ebookId) => {
+    alert('尚未实现此功能！');    
   }
 
   renderStepActions = (stepIndex) => {
     return (
-      <div style={toolbarStyle}>
-      {stepIndex > 0 && (
-        <FlatButton
-        label={'上一步'}
-        disabled={stepIndex === 0}
-        disableTouchRipple={true}
-        disableFocusRipple={true}
-        onTouchTap={this.handlePrev}
-        />
-      )}
+      <Card zDepth={0}>
+			<CardActions style={toolbarStyle}>
+      <FlatButton
+      label={stepIndex === 0 ? '重置' : '上一步'}
+      disableTouchRipple={true}
+      disableFocusRipple={true}
+      onTouchTap={this.handlePrev}
+      style={{margin: '0 15px 0 0'}}
+      />
       <RaisedButton
       label={stepIndex === 2 ? '完成' : '下一步'}
       disableTouchRipple={true}
@@ -84,7 +91,8 @@ class EbookStepper extends Component {
       primary={true}
       onTouchTap={this.handleNext}
       />
-      </div>
+			</CardActions>
+			</Card>
     )
   }
 
@@ -125,25 +133,6 @@ class EbookStepper extends Component {
       </Step>
 
       </Stepper>
-
-      {ebookStepper.finished && (
-        <p>
-        <a
-        href="#"
-        onClick={(event) => {
-          event.preventDefault()
-          const {dispatch} = this.props
-          dispatch(updateEbookStepper({
-            finished: false,
-            stepIndex: 0
-          }))
-        }}
-        >
-        点击此处
-        </a> 再来一次！
-        </p>
-      )}
-
       </div>
       </MuiThemeProvider>
     )
