@@ -8,15 +8,15 @@ import {Card, CardActions} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 
-import ReadingItemFirstForm from './ReadingItemFirstForm'
-import ReadingItemSecondForm from './ReadingItemSecondForm'
+import {reset, submit} from 'redux-form'
+import {connect} from 'react-redux'
+
+import ReadingItemFirstForm from '../../components/read/ReadingItemFirstForm'
+import ReadingItemSecondForm from '../../components/read/ReadingItemSecondForm'
 
 import {
   updateReadingStepper, submitReadingItem, updateReadingItem
 } from '../../actions/tool'
-
-import {reset, submit} from 'redux-form'
-import {connect} from 'react-redux'
 
 const pageStyle = {
   width: 685,

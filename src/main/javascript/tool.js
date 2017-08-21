@@ -10,7 +10,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import ToolLayout from './layout/tool/ToolLayout'
+import ToolLayout from './layouts/tool/ToolLayout'
 import routes from './routes/tool'
 
 

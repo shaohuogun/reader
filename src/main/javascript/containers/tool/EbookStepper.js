@@ -13,12 +13,14 @@ import FlatButton from 'material-ui/FlatButton'
 import {reset, submit} from 'redux-form'
 import {connect} from 'react-redux'
 
-import ChannelForm from './ChannelForm'
+import ChannelForm from '../../components/channel/ChannelForm'
 import ChannelDetail from '../../components/channel/ChannelDetail'
 import MessageList from '../../components/message/MessageList'
 import EbookDetail from '../../components/ebook/EbookDetail'
 
-import {updateEbookStepper, asyncGeneratingProgress} from '../../actions/tool'
+import {
+  updateEbookStepper, submitChannel, updateChannel, asyncPickingProgress, asyncGeneratingProgress
+} from '../../actions/tool'
 import {generateEbook, postEbook} from '../../actions/mine'
 
 const pageStyle = {
@@ -37,6 +39,29 @@ const toolbarStyle = {
 }
 
 class EbookStepper extends Component {
+  constructor(props) {
+    super(props)
+
+    // Tips: The best place to bind your member functions is in the component constructor
+    this.createChannel = this.createChannel.bind(this)
+  }
+
+  createChannel = (channel) => {
+    const {dispatch} = this.props
+    dispatch(submitChannel(channel))
+    fetch('/api/channel', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(channel)
+    }).then(response => response.json())
+    .then(json => {
+      dispatch(updateChannel(json))
+      dispatch(asyncPickingProgress('P-' + json.id))
+    })
+  }
+
   handlePrev = () => {
     const {dispatch, ebookStepper} = this.props
     if (ebookStepper.stepIndex === 0) {
@@ -76,7 +101,7 @@ class EbookStepper extends Component {
   renderStepActions = (stepIndex) => {
     return (
       <Card zDepth={0}>
-			<CardActions style={toolbarStyle}>
+      <CardActions style={toolbarStyle}>
       <FlatButton
       label={stepIndex === 0 ? '重置' : '上一步'}
       disableTouchRipple={true}
@@ -91,8 +116,8 @@ class EbookStepper extends Component {
       primary={true}
       onTouchTap={this.handleNext}
       />
-			</CardActions>
-			</Card>
+      </CardActions>
+      </Card>
     )
   }
 
@@ -102,11 +127,11 @@ class EbookStepper extends Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
       <Stepper activeStep={ebookStepper.stepIndex} orientation="vertical">
-      
+
       <Step>
       <StepLabel>步骤一，填写目标媒体信息：</StepLabel>
       <StepContent>
-      <ChannelForm />
+      <ChannelForm onSubmit={this.createChannel} />
       <LinearProgress mode="determinate" value={progress} />
       {this.renderStepActions(0)}
       </StepContent>

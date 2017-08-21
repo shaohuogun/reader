@@ -10,7 +10,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import MineLayout from './layout/mine/MineLayout'
+import MineLayout from './layouts/mine/MineLayout'
 import routes from './routes/mine'
 
 // Needed for onTouchTap

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 
-import HomePage from '../layout/home/HomePage'
+import HomePage from '../layouts/home/HomePage'
 
 export default (
   <div>

@@ -20,7 +20,7 @@ export default class MineNavigator extends Component {
       <Subheader>我的读伴</Subheader>
       <ListItem
       primaryText={<CustomLink to="/mine/readinglists" label="阅读书单" />}
-      leftAvatar={<Avatar src="/image/reading-list.jpg" />}
+      leftAvatar={<Avatar src="/image/reading.jpg" />}
       />
       <ListItem
       primaryText={<CustomLink to="/mine/channels" label="自媒体集" />}

@@ -10,7 +10,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import HomeLayout from './layout/home/HomeLayout'
+import HomeLayout from './layouts/home/HomeLayout'
 import routes from './routes/home'
 
 // Needed for onTouchTap
