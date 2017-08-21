@@ -9,14 +9,14 @@
         <package name="org.shaohuogun.reader.portal.channel.model"/>
         <package name="org.shaohuogun.reader.portal.ebook.model"/>
         <package name="org.shaohuogun.reader.portal.message.model"/>
-        <package name="org.shaohuogun.reader.portal.publisher.model"/>
         <package name="org.shaohuogun.reader.portal.read.model"/>
+        <package name="org.shaohuogun.reader.portal.user.model"/>
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/ChannelMapper.xml"/>
         <mapper resource="mybatis/EbookMapper.xml"/>
         <mapper resource="mybatis/MessageMapper.xml"/>
-        <mapper resource="mybatis/PublisherMapper.xml"/>
         <mapper resource="mybatis/ReadMapper.xml"/>
+        <mapper resource="mybatis/UserMapper.xml"/>
     </mappers>
 </configuration>

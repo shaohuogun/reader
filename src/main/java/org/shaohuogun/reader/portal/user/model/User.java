@@ -1,8 +1,8 @@
-package org.shaohuogun.reader.portal.publisher.model;
+package org.shaohuogun.reader.portal.user.model;
 
 import org.shaohuogun.common.Model;
 
-public class Publisher extends Model {
+public class User extends Model {
 	
 	private static final long serialVersionUID = 1L;
 	

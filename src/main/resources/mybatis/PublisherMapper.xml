@@ -4,9 +4,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.shaohuogun.reader.portal.publisher.dao.PublisherMapper">
-	<resultMap id="publisherResultMap"
-		type="org.shaohuogun.reader.portal.publisher.model.Publisher">
+<mapper namespace="org.shaohuogun.reader.portal.user.dao.UserMapper">
+	<resultMap id="userResultMap"
+		type="org.shaohuogun.reader.portal.user.model.User">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
@@ -20,8 +20,8 @@
 		<result property="profile" column="profile" />
 	</resultMap>
 
-	<insert id="insert" parameterType="org.shaohuogun.reader.portal.publisher.model.Publisher">
-		insert into READER_PUBLISHER
+	<insert id="insert" parameterType="org.shaohuogun.reader.portal.user.model.User">
+		insert into READER_USER
 		(id,
 		creator, create_date, deleted, name, nickname, sex,
 		portrait,
@@ -34,8 +34,8 @@
 	</insert>
 
 	<select id="selectById" parameterType="java.lang.String"
-		resultMap="publisherResultMap">
-		select * from READER_PUBLISHER where id = #{id}
+		resultMap="userResultMap">
+		select * from READER_USER where id = #{id}
 	</select>
 
 </mapper>

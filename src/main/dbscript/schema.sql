@@ -19,7 +19,7 @@ drop table if exists `READER_MESSAGE`;
 drop table if exists `READER_EBOOK`;
 drop table if exists `READER_READING_LIST`;
 drop table if exists `READER_READING_ITEM`;
-drop table if exists `READER_PUBLISHER`;
+drop table if exists `READER_USER`;
 
 CREATE TABLE `READER_CHANNEL` (
   `id` char(36) NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE `READER_EBOOK` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `READER_PUBLISHER` (
+CREATE TABLE `READER_USER` (
   `id` char(36) NOT NULL,
   `creator` char(36) NOT NULL,
   `create_date` datetime NOT NULL,
