@@ -23,7 +23,7 @@ export default class ToolNavigator extends Component {
       leftAvatar={<Avatar src="/image/tool/reading.jpg" />}
       />
       <ListItem
-      primaryText={<CustomLink to="/tool/favorites" label="好文收藏" />}
+      primaryText={<CustomLink to="/tool/message" label="好文收藏" />}
       leftAvatar={<Avatar src="/image/tool/favorites.jpg" />}
       />
       <ListItem
