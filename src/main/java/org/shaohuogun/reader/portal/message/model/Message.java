@@ -10,6 +10,9 @@ public class Message extends PickableObject {
 	
 	public static final String ACTION_TYPE = "message";
 	
+	public static final String CATEGORY_TYPE_CHANNEL = "Channel";
+	public static final String CATEGORY_TYPE_CATALOG = "Catalog";
+	
 	public static final String KEY_TITLE = "title";
 	public static final String KEY_RELEASE_DATE = "releaseDate";
 	public static final String KEY_PAGEVIEW = "pageview";
@@ -17,7 +20,9 @@ public class Message extends PickableObject {
 	public static final String KEY_DIGEST = "digest";
 	public static final String KEY_CONTENT = "content";
 	
-	private String channelId;
+	private String categoryType;
+	
+	private String categoryId;
 	
 	private String title;
 	
@@ -36,12 +41,20 @@ public class Message extends PickableObject {
 		return ACTION_TYPE;
 	}
 
-	public String getChannelId() {
-		return channelId;
+	public String getCategoryType() {
+		return categoryType;
 	}
 
-	public void setChannelId(String channelId) {
-		this.channelId = channelId;
+	public void setCategoryType(String categoryType) {
+		this.categoryType = categoryType;
+	}
+
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getTitle() {

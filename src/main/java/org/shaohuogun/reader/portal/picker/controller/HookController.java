@@ -70,7 +70,7 @@ public class HookController extends Controller {
 			Message message = new Message();
 			message.setId(Utility.getUUID());
 			message.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
-			message.setChannelId(channel.getId());
+			message.setCategoryId(channel.getId());
 
 			URL targetUrl = new URL(channel.getUrl());
 			String basePath = targetUrl.getProtocol() + "://" + targetUrl.getAuthority();
@@ -131,7 +131,7 @@ public class HookController extends Controller {
 
 		message.setContent(jsonContent.getString(Message.KEY_CONTENT));
 		messageService.modifyMessage(message);
-		progressService.incProgressCount(("P-" + message.getChannelId()), 1);
+		progressService.incProgressCount(("P-" + message.getCategoryId()), 1);
 	}
 
 }

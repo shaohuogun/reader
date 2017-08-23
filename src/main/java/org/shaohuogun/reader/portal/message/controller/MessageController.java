@@ -57,7 +57,7 @@ public class MessageController extends Controller {
 				Message message = new Message();
 				message.setId(Utility.getUUID());
 				message.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
-				message.setChannelId("WX-"+ author);
+				message.setCategoryId("WX-"+ author);
 				message.setUrl(contentUrl);
 				message.setTitle(title);
 				message.setReleaseDate(releaseDate);
@@ -72,7 +72,7 @@ public class MessageController extends Controller {
 				Message message = new Message();
 				message.setId(Utility.getUUID());
 				message.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
-				message.setChannelId("WX-张兰");
+				message.setCategoryId("WX-张兰");
 				message.setUrl("");
 				message.setTitle("hello world!");
 				message.setReleaseDate(releaseDate);
