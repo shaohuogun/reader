@@ -14,12 +14,67 @@
 --    limitations under the License.
 --
 
+drop table if exists `READER_USER`;
+drop table if exists `READER_READING_LIST`;
+drop table if exists `READER_READING_ITEM`;
+drop table if exists `READER_CATALOG`;
 drop table if exists `READER_CHANNEL`;
 drop table if exists `READER_MESSAGE`;
 drop table if exists `READER_EBOOK`;
-drop table if exists `READER_READING_LIST`;
-drop table if exists `READER_READING_ITEM`;
-drop table if exists `READER_USER`;
+
+CREATE TABLE `READER_USER` (
+  `id` char(36) NOT NULL,
+  `creator` char(36) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `last_modifier` char(36) DEFAULT NULL,
+  `last_modify_date` datetime DEFAULT NULL,
+  `deleted` char(1) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `nickname` varchar(64) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `portrait` varchar(256) DEFAULT NULL,
+  `profile` blob,
+  `mobile` varchar(16) DEFAULT NULL,
+  `sex` char(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `READER_READING_LIST` (
+  `id` char(36) NOT NULL,
+  `creator` char(36) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `last_modifier` char(36) DEFAULT NULL,
+  `last_modify_date` datetime DEFAULT NULL,
+  `deleted` char(1) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `description` blob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `READER_READING_ITEM` (
+  `id` char(36) NOT NULL,
+  `creator` char(36) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `last_modifier` char(36) DEFAULT NULL,
+  `last_modify_date` datetime DEFAULT NULL,
+  `deleted` char(1) NOT NULL,
+  `book_name` varchar(128) NOT NULL,
+  `book_id` char(36) DEFAULT NULL,
+  `list_id` char(36) NOT NULL,
+  `status` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `READER_CATALOG` (
+  `id` char(36) NOT NULL,
+  `creator` char(36) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `last_modifier` char(36) DEFAULT NULL,
+  `last_modify_date` datetime DEFAULT NULL,
+  `deleted` char(1) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `READER_CHANNEL` (
   `id` char(36) NOT NULL,
@@ -72,46 +127,5 @@ CREATE TABLE `READER_EBOOK` (
   `name` varchar(64) NOT NULL,
   `path` varchar(256) NOT NULL,
   `downloads` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `READER_USER` (
-  `id` char(36) NOT NULL,
-  `creator` char(36) NOT NULL,
-  `create_date` datetime NOT NULL,
-  `last_modifier` char(36) DEFAULT NULL,
-  `last_modify_date` datetime DEFAULT NULL,
-  `deleted` char(1) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  `nickname` varchar(64) NOT NULL,
-  `sex` char(1) NOT NULL,
-  `portrait` varchar(256) NOT NULL,
-  `profile` blob,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `READER_READING_LIST` (
-  `id` char(36) NOT NULL,
-  `creator` char(36) NOT NULL,
-  `create_date` datetime NOT NULL,
-  `last_modifier` char(36) DEFAULT NULL,
-  `last_modify_date` datetime DEFAULT NULL,
-  `deleted` char(1) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  `description` blob,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `READER_READING_ITEM` (
-  `id` char(36) NOT NULL,
-  `creator` char(36) NOT NULL,
-  `create_date` datetime NOT NULL,
-  `last_modifier` char(36) DEFAULT NULL,
-  `last_modify_date` datetime DEFAULT NULL,
-  `deleted` char(1) NOT NULL,
-  `book_name` varchar(128) NOT NULL,
-  `book_id` char(36) DEFAULT NULL,
-  `list_id` char(36) NOT NULL,
-  `status` varchar(16) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

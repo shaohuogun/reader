@@ -26,7 +26,7 @@ public class CatalogService {
 		catalogDao.insert(catalog);
 		return catalogDao.selectById(catalog.getId());
 	}
-
+	
 	public Catalog getCatalog(String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
 			throw new IllegalArgumentException("Catalog's id cann't be null or empty.");
@@ -67,22 +67,6 @@ public class CatalogService {
 
 		catalogDao.update(catalog);
 		return catalogDao.selectById(catalog.getId());
-	}
-	
-	public Catalog getCatalogByStatus(String status) throws Exception {
-		if ((status == null) || status.isEmpty()) {
-			throw new IllegalArgumentException("Status cann't be null or empty.");
-		}		
-		
-		return catalogDao.selectByStatus(status);
-	}
-	
-	public Catalog getCatalogBySerialNumber(String serialNumber) throws Exception {
-		if ((serialNumber == null) || serialNumber.isEmpty()) {
-			throw new IllegalArgumentException("Serial number cann't be null or empty.");
-		}		
-		
-		return catalogDao.selectBySerialNumber(serialNumber);
 	}
 	
 }

@@ -5,32 +5,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.shaohuogun.reader.portal.user.dao.UserMapper">
-	<resultMap id="userResultMap"
-		type="org.shaohuogun.reader.portal.user.model.User">
+	<resultMap id="userResultMap" type="org.shaohuogun.reader.portal.user.model.User">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
 		<result property="lastModifier" column="last_modifier" />
 		<result property="lastModifyDate" column="last_modify_date" />
 		<result property="deleted" column="deleted" />
-		<result property="name" column="name" />
+		<result property="email" column="email" />
 		<result property="nickname" column="nickname" />
-		<result property="sex" column="sex" />
+		<result property="password" column="password" />
 		<result property="portrait" column="portrait" />
 		<result property="profile" column="profile" />
+		<result property="mobile" column="mobile" />
+		<result property="sex" column="sex" />
 	</resultMap>
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.portal.user.model.User">
 		insert into READER_USER
 		(id,
-		creator, create_date, deleted, name, nickname, sex,
-		portrait,
-		profile)
-		values (#{id}, #{creator}, #{createDate}, #{deleted},
-		#{name},
+		creator, create_date, deleted, email, nickname, password)
+		values
+		(#{id}, #{creator}, #{createDate}, #{deleted},
+		#{email},
 		#{nickname},
-		#{sex},
-		#{portrait}, #{profile})
+		#{password})
 	</insert>
 
 	<select id="selectById" parameterType="java.lang.String"

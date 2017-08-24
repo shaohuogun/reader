@@ -39,13 +39,4 @@ public class CatalogDao {
 		sqlSession.update("org.shaohuogun.reader.portal.catalog.dao.CatalogMapper.update", catalog);
 	}
 
-	public Catalog selectByStatus(String status) {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.catalog.dao.CatalogMapper.selectByStatus", status);
-	}
-
-	public Catalog selectBySerialNumber(String serialNumber) {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.catalog.dao.CatalogMapper.selectBySerialNumber",
-				serialNumber);
-	}
-
 }

@@ -5,8 +5,6 @@ import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.portal.catalog.model.Catalog;
 import org.shaohuogun.reader.portal.catalog.service.CatalogService;
-import org.shaohuogun.reader.portal.progress.model.Progress;
-import org.shaohuogun.reader.portal.progress.service.ProgressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,19 +20,11 @@ public class CatalogController extends Controller {
 	@Autowired
 	private CatalogService catalogService;
 	
-	@Autowired
-	private ProgressService progressService;
-
 	@RequestMapping(value = "/api/catalog", method = RequestMethod.POST)
 	public Catalog createCatalog(@RequestBody @Validated Catalog catalog) throws Exception {		
 		catalog.setId(Utility.getUUID());
-		catalog.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
-		
-		catalog = catalogService.createCatalog(catalog);
-		Progress progress = new Progress();
-		progress.setId("P-" + catalog.getId());
-		progressService.addProgress(progress);
-		return catalog;
+		catalog.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");	
+		return catalogService.createCatalog(catalog);
 	}
 
 	@RequestMapping(value = "/api/catalog/{id}", method = RequestMethod.GET)

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shaohuogun.reader.portal.catalog.dao.CatalogMapper">
+	<resultMap id="catalogResultMap"
+		type="org.shaohuogun.reader.portal.catalog.model.Catalog">
+		<id property="id" column="id" />
+		<result property="creator" column="creator" />
+		<result property="createDate" column="create_date" />
+		<result property="lastModifier" column="last_modifier" />
+		<result property="lastModifyDate" column="last_modify_date" />
+		<result property="deleted" column="deleted" />
+		<result property="name" column="name" />
+	</resultMap>
+
+	<insert id="insert" parameterType="org.shaohuogun.reader.portal.catalog.model.Catalog">
+		insert into READER_CATALOG
+		(id,
+		creator, create_date, deleted, name)
+		values (#{id},
+		#{creator}, #{createDate}, #{deleted},
+		#{name}
+		)
+	</insert>
+
+	<select id="selectById" parameterType="java.lang.String"
+		resultMap="catalogResultMap">
+		select * from READER_CATALOG where id = #{id}
+	</select>
+
+	<select id="countByCreator" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) from READER_CATALOG where deleted = '0' and
+		creator
+		= #{creator}
+	</select>
+
+	<select id="selectByCreator" parameterType="java.lang.String"
+		resultMap="catalogResultMap">
+		select * from READER_CATALOG where deleted = '0' and creator
+		= #{creator} order by create_date desc
+	</select>
+
+	<update id="update" parameterType="org.shaohuogun.reader.portal.catalog.model.Catalog"
+		flushCache="true">
+		update
+		READER_CATALOG set last_modifier = #{lastModifier},
+		last_modify_date =
+		#{lastModifyDate}, deleted = #{deleted},
+		name = #{name}
+		where
+		id = #{id}
+	</update>
+
+</mapper>
+
