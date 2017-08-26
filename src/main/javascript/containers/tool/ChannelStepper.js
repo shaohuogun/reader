@@ -19,7 +19,7 @@ import MessageList from '../../components/message/MessageList'
 import EbookDetail from '../../components/ebook/EbookDetail'
 
 import {
-  updateEbookStepper, submitChannel, updateChannel, asyncPickingProgress, asyncGeneratingProgress
+  updateChannelStepper, submitChannel, updateChannel, asyncPickingProgress, asyncGeneratingProgress
 } from '../../actions/tool'
 import {generateEbook, postEbook} from '../../actions/mine'
 
@@ -38,7 +38,7 @@ const toolbarStyle = {
   textAlign: 'center'
 }
 
-class EbookStepper extends Component {
+class ChannelStepper extends Component {
   constructor(props) {
     super(props)
 
@@ -63,26 +63,26 @@ class EbookStepper extends Component {
   }
 
   handlePrev = () => {
-    const {dispatch, ebookStepper} = this.props
-    if (ebookStepper.stepIndex === 0) {
+    const {dispatch, channelStepper} = this.props
+    if (channelStepper.stepIndex === 0) {
       dispatch(reset('channelForm'))
     } else {
-      dispatch(updateEbookStepper({
-        finished: ebookStepper.stepIndex >= 2,
-        stepIndex: ebookStepper.stepIndex - 1
+      dispatch(updateChannelStepper({
+        finished: channelStepper.stepIndex >= 2,
+        stepIndex: channelStepper.stepIndex - 1
       }))
     }
   }
 
   handleNext = () => {
-    const {dispatch, ebookStepper, channel} = this.props
-    if (ebookStepper.stepIndex === 0) {
+    const {dispatch, channelStepper, channel} = this.props
+    if (channelStepper.stepIndex === 0) {
       dispatch(submit('channelForm'))
-    } else if (ebookStepper.stepIndex === 1) {
+    } else if (channelStepper.stepIndex === 1) {
       dispatch(generateEbook(channel.id))
       dispatch(asyncGeneratingProgress('G-' + channel.id))
-    } else if (ebookStepper.stepIndex === 2) {
-      dispatch(updateEbookStepper({
+    } else if (channelStepper.stepIndex === 2) {
+      dispatch(updateChannelStepper({
         finished: false,
         stepIndex: 0
       }))
@@ -122,11 +122,11 @@ class EbookStepper extends Component {
   }
 
   render() {
-    const {dispatch, ebookStepper, channel, progress, ebook} = this.props
+    const {dispatch, channelStepper, channel, progress, ebook} = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
-      <Stepper activeStep={ebookStepper.stepIndex} orientation="vertical">
+      <Stepper activeStep={channelStepper.stepIndex} orientation="vertical">
 
       <Step>
       <StepLabel>步骤一，填写目标媒体信息：</StepLabel>
@@ -164,18 +164,18 @@ class EbookStepper extends Component {
   }
 }
 
-EbookStepper.propTypes = {
-  ebookStepper: PropTypes.object.isRequired,
+ChannelStepper.propTypes = {
+  channelStepper: PropTypes.object.isRequired,
   channel: PropTypes.object.isRequired,
   progress: PropTypes.number.isRequired,
   ebook: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  ebookStepper: state.ebookStepper,
+  channelStepper: state.channelStepper,
   channel: state.channel,
   progress: state.progress,
   ebook: state.ebook
 })
 
-export default connect(mapStateToProps)(EbookStepper)
+export default connect(mapStateToProps)(ChannelStepper)

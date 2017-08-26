@@ -2,7 +2,10 @@ import {
   UPDATE_READING_STEPPER,
   SUBMIT_READING_ITEM,
   UPDATE_READING_ITEM,
-  UPDATE_EBOOK_STEPPER,
+  UPDATE_MESSAGE_STEPPER,
+  SUBMIT_MESSAGE,
+  UPDATE_MESSAGE,
+  UPDATE_CHANNEL_STEPPER,
   SUBMIT_CHANNEL,
   UPDATE_CHANNEL,
   UPDATE_PICKING_PROGRESS,
@@ -18,7 +21,7 @@ export function readingStepperReducer(state = {}, action) {
   }
 }
 
-export function readingItemReducer(state = {}, action) {
+export function readingReducer(state = {}, action) {
   switch (action.type) {
     case SUBMIT_READING_ITEM:
     return Object.assign({}, state, action.readingItem)
@@ -29,10 +32,30 @@ export function readingItemReducer(state = {}, action) {
   }
 }
 
-export function ebookStepperReducer(state = {}, action) {
+export function messageStepperReducer(state = {}, action) {
   switch (action.type) {
-    case UPDATE_EBOOK_STEPPER:
-    return Object.assign({}, state, action.ebookStepper)
+    case UPDATE_MESSAGE_STEPPER:
+    return Object.assign({}, state, action.messageStepper)
+    default:
+    return state
+  }
+}
+
+export function messageReducer(state = {}, action) {
+  switch (action.type) {
+    case SUBMIT_MESSAGE:
+    return Object.assign({}, state, action.message)
+    case UPDATE_MESSAGE:
+    return Object.assign({}, state, action.message)
+    default:
+    return state
+  }
+}
+
+export function channelStepperReducer(state = {}, action) {
+  switch (action.type) {
+    case UPDATE_CHANNEL_STEPPER:
+    return Object.assign({}, state, action.channelStepper)
     default:
     return state
   }

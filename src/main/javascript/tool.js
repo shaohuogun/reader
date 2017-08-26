@@ -28,7 +28,12 @@ storeProvider.init(configureStore({
     stepIndex: 0
   },
   readingItem: {},
-  ebookStepper: {
+  messageStepper: {
+    finished: false,
+    stepIndex: 0
+  },
+  message: {},  
+  channelStepper: {
     finished: false,
     stepIndex: 0
   },

@@ -2,9 +2,14 @@ export const UPDATE_READING_STEPPER = 'UPDATE_READING_STEPPER'
 export const SUBMIT_READING_ITEM = 'SUBMIT_READING_ITEM'
 export const UPDATE_READING_ITEM = 'UPDATE_READING_ITEM'
 
-export const UPDATE_EBOOK_STEPPER = 'UPDATE_EBOOK_STEPPER'
+export const UPDATE_MESSAGE_STEPPER = 'UPDATE_MESSAGE_STEPPER'
+export const SUBMIT_MESSAGE = 'SUBMIT_MESSAGE'
+export const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
+
+export const UPDATE_CHANNEL_STEPPER = 'UPDATE_CHANNEL_STEPPER'
 export const SUBMIT_CHANNEL = 'SUBMIT_CHANNEL'
 export const UPDATE_CHANNEL = 'UPDATE_CHANNEL'
+
 export const UPDATE_PICKING_PROGRESS = 'UPDATE_PICKING_PROGRESS'
 export const UPDATE_GENERATING_PROGRESS = 'UPDATE_GENERATING_PROGRESS'
 
@@ -29,10 +34,31 @@ export function updateReadingItem(readingItem) {
   }
 }
 
-export function updateEbookStepper(ebookStepper) {
+export function updateMessageStepper(messageStepper) {
   return {
-    type: UPDATE_EBOOK_STEPPER,
-    ebookStepper
+    type: UPDATE_MESSAGE_STEPPER,
+    messageStepper
+  }
+}
+
+export function submitMessage(message) {
+  return {
+    type: SUBMIT_MESSAGE,
+    message
+  }
+}
+
+export function updateMessage(message) {
+  return {
+    type: UPDATE_MESSAGE,
+    message
+  }
+}
+
+export function updateChannelStepper(channelStepper) {
+  return {
+    type: UPDATE_CHANNEL_STEPPER,
+    channelStepper
   }
 }
 
@@ -71,7 +97,7 @@ export function asyncPickingProgress(progressId) {
         dispatch(updatePickingProgress(json))
         if (json === 100) {
           clearInterval(interval);
-          dispatch(updateEbookStepper({
+          dispatch(updateChannelStepper({
             finished: false,
             stepIndex: 1
           }))
@@ -102,7 +128,7 @@ export function asyncGeneratingProgress(progressId) {
         dispatch(updateGeneratingProgress(json))
         if (json === 100) {
           clearInterval(interval);
-          dispatch(updateEbookStepper({
+          dispatch(updateChannelStepper({
             finished: true,
             stepIndex: 2
           }))
