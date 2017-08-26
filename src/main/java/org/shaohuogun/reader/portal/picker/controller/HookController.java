@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.shaohuogun.common.Controller;
 import org.shaohuogun.common.Utility;
+import org.shaohuogun.reader.portal.PortalConstants;
 import org.shaohuogun.reader.portal.channel.model.Channel;
 import org.shaohuogun.reader.portal.channel.service.ChannelService;
 import org.shaohuogun.reader.portal.message.model.Message;
@@ -70,6 +71,7 @@ public class HookController extends Controller {
 			Message message = new Message();
 			message.setId(Utility.getUUID());
 			message.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
+			message.setCategoryType(PortalConstants.CATEGORY_TYPE_CHANNEL);
 			message.setCategoryId(channel.getId());
 
 			URL targetUrl = new URL(channel.getUrl());

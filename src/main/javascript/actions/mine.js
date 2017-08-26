@@ -42,7 +42,7 @@ export function generatedEbook(ebook) {
 export function generateEbook(channelId) {
   return dispatch => {
     dispatch(generatingEbook(channelId))
-    var url = '/api/ebook/generate?targetType=1&targetId=' + channelId
+    var url = '/api/ebook/generate?categoryType="Channel"&categoryId=' + channelId
     return fetch(url, {
       method: 'GET',
       headers: {

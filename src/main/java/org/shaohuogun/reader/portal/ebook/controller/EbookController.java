@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.shaohuogun.common.Controller;
 import org.shaohuogun.common.Model;
 import org.shaohuogun.common.Pagination;
+import org.shaohuogun.reader.portal.PortalConstants;
+import org.shaohuogun.reader.portal.catalog.model.Catalog;
+import org.shaohuogun.reader.portal.catalog.service.CatalogService;
 import org.shaohuogun.reader.portal.channel.model.Channel;
 import org.shaohuogun.reader.portal.channel.service.ChannelService;
 import org.shaohuogun.reader.portal.ebook.model.Ebook;
@@ -39,49 +42,63 @@ import org.springframework.web.bind.annotation.RestController;
 public class EbookController extends Controller {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	private CatalogService catalogService;
 
 	@Autowired
 	private ChannelService channelService;
 
 	@Autowired
 	private MessageService messageService;
-	
+
 	@Autowired
 	private MobiGenerator mobiGenerator;
-	
+
 	@Autowired
 	private EbookService ebookService;
-	
+
 	@Autowired
 	private ProgressService progressService;
 
 	@RequestMapping(value = "/api/ebook/generate", method = RequestMethod.GET)
-	public Ebook generateEbook(@RequestParam(required = true) String targetType,
-			@RequestParam(required = true) String targetId) throws Exception {
-		Channel channel = channelService.getChannel(targetId);
-		int total = messageService.getMessageCountInChannel(targetId);
+	public Ebook generateEbook(@RequestParam(required = true) String categoryType,
+			@RequestParam(required = true) String categoryId) throws Exception {
+		String creator = null;
+		String categoryName = null;
+		if (PortalConstants.CATEGORY_TYPE_CATALOG.equalsIgnoreCase(categoryType)) {
+			Catalog catalog = catalogService.getCatalog(categoryId);
+			creator = catalog.getCreator();
+			categoryName = catalog.getName();
+		} else if (PortalConstants.CATEGORY_TYPE_CHANNEL.equalsIgnoreCase(categoryType)) {
+			Channel channel = channelService.getChannel(categoryId);
+			creator = channel.getCreator();
+			categoryName = channel.getName();
+		}
+		
+		int total = messageService.countMessageInCategory(categoryType, categoryId);
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
 		pagination.setPageSize(total);
 		pagination.setPageIndex(1);
-		pagination = messageService.getMessagesInChannel(targetId, pagination);
+		pagination = messageService.getMessagesInCategory(categoryType, categoryId, pagination);
 		List<Model> models = pagination.getObjects();
 		List<Message> messages = new ArrayList<Message>();
 		for (int i = 0; i < models.size(); i++) {
 			messages.add((Message) models.get(i));
 		}
-		
+
 		Progress progress = new Progress();
-		progress.setId("G-" + channel.getId());
+		progress.setId("G-" + categoryId);
 		progress.setAmount(messages.size());
 		progressService.addProgress(progress);
-		
-		Ebook ebook = mobiGenerator.generate(channel, messages);
+
+		Ebook ebook = mobiGenerator.generate(creator, categoryId, categoryName, messages);
 		logger.info(ebook.getPath());
-		progressService.incProgressCount(("G-" + channel.getId()), messages.size());
+		progressService.incProgressCount(("G-" + categoryId), messages.size());
 		return ebookService.createEbook(ebook);
 	}
-	
+
 	@RequestMapping(value = "/api/ebook/{id}/download", method = RequestMethod.GET)
 	public void downloadEbook(@PathVariable String id, HttpServletResponse resp) throws Exception {
 		Ebook ebook = ebookService.getEbook(id);
@@ -89,7 +106,8 @@ public class EbookController extends Controller {
 
 		File ebookFile = new File(ebookPath);
 		resp.reset();
-		resp.setHeader("Content-Disposition", "attachment;filename=\"" + URLEncoder.encode(ebook.getName(), "UTF-8") + "\"");
+		resp.setHeader("Content-Disposition",
+				"attachment;filename=\"" + URLEncoder.encode(ebook.getName(), "UTF-8") + "\"");
 		resp.addHeader("Content-Length", String.valueOf(ebookFile.length()));
 		resp.setContentType("application/octet-stream;charset=UTF-8");
 
@@ -104,17 +122,17 @@ public class EbookController extends Controller {
 		outputStream.close();
 		inputStream.close();
 	}
-	
+
 	@RequestMapping(value = "/api/channel/{id}/ebooks", method = RequestMethod.GET)
 	public Pagination getEbooksInChannel(@PathVariable String id,
 			@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
-		int total = ebookService.getEbookCountInChannel(id);
+		int total = ebookService.countEbookInCategory(PortalConstants.CATEGORY_TYPE_CHANNEL, id);
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
 		pagination.setPageIndex(page);
-		return ebookService.getEbooksInChannel(id, pagination);
+		return ebookService.getEbooksInCategory(PortalConstants.CATEGORY_TYPE_CHANNEL, id, pagination);
 	}
-	
+
 	@RequestMapping(value = "/api/myebooks", method = RequestMethod.GET)
 	public Pagination getMyEbooks(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
 		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
@@ -125,8 +143,8 @@ public class EbookController extends Controller {
 		pagination.setTotal(total);
 		pagination.setPageIndex(page);
 		return ebookService.getEbooksOfCreator(creator, pagination);
-	}	
-	
+	}
+
 	@RequestMapping(value = "/api/ebook/{id}/post", method = RequestMethod.GET)
 	public Ebook postEbook(@PathVariable String id) throws Exception {
 		Ebook ebook = ebookService.getEbook(id);

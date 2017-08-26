@@ -18,7 +18,8 @@
 		<result property="amount" column="amount" />
 		<result property="count" column="count" />
 		<result property="status" column="status" />
-		<result property="channelId" column="channel_id" />
+		<result property="categoryType" column="category_type" />
+		<result property="categoryId" column="category_id" />
 		<result property="title" column="title" />
 		<result property="releaseDate" column="release_date" />
 		<result property="pageview" column="pageview" />
@@ -34,10 +35,13 @@
 		(id,
 		creator, create_date, deleted, url,
 		amount, count,
-		status, channel_id,
+		status,
+		category_type,
+		categoryId,
 		title, release_date,
 		pageview, comment_count,
-		digest, content)
+		digest,
+		content)
 		values (#{id},
 		#{creator},
 		#{createDate}, #{deleted},
@@ -45,7 +49,8 @@
 		#{amount},
 		#{count},
 		#{status},
-		#{channelId},
+		#{categoryType},
+		#{categoryId},
 		#{title},
 		#{releaseDate},
 		#{pageview},
@@ -70,17 +75,20 @@
 		#{url}
 	</select>
 
-	<select id="countByChannelId" parameterType="java.lang.String"
+	<select id="countByCategory" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select count(*) from READER_MESSAGE where deleted = '0' and
+		channel_type = #{channelType} and
 		channel_id = #{channelId}
 	</select>
 
-	<select id="selectByChannelId" parameterType="java.lang.String"
+	<select id="selectByCategory" parameterType="java.util.Map"
 		resultMap="messageResultMap">
 		select * from READER_MESSAGE where deleted = '0' and
+		channel_type = #{channelType} and
 		channel_id
-		= #{channelId} order by url desc;
+		= #{channelId} order by url
+		desc;
 	</select>
 
 	<update id="update" parameterType="org.shaohuogun.reader.portal.message.model.Message"

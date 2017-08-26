@@ -15,7 +15,7 @@ import MessageFirstForm from '../../components/message/MessageFirstForm'
 import MessageSecondForm from '../../components/message/MessageSecondForm'
 
 import {
-  updateMessageStepper, submitReadingItem, updateReadingItem
+  updateMessageStepper, submitMessage, updateMessage
 } from '../../actions/tool'
 
 const pageStyle = {
@@ -38,23 +38,23 @@ class MessageStepper extends Component {
     super(props)
 
     // Tips: The best place to bind your member functions is in the component constructor
-    this.createReadingItem = this.createReadingItem.bind(this)
+    this.createMessage = this.createMessage.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
     this.handleNext = this.handleNext.bind(this)
   }
 
-  createReadingItem = (readingItem) => {
+  createMessage = (message) => {
     const {dispatch} = this.props
-    dispatch(submitReadingItem(readingItem))
-    fetch('/api/readingitem', {
+    dispatch(submitMessage(message))
+    fetch('/api/message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify(readingItem)
+      body: JSON.stringify(message)
     }).then(response => response.json())
     .then(json => {
-      dispatch(updateReadingItem(json))
+      dispatch(updateMessage(json))
       dispatch(updateMessageStepper({
         finished: true,
         stepIndex: 2
@@ -63,27 +63,27 @@ class MessageStepper extends Component {
   }
 
   handlePrev = () => {
-    const {dispatch, readingStepper} = this.props
-    if (readingStepper.stepIndex === 0) {
-      dispatch(reset('readingItemForm'))
+    const {dispatch, messageStepper} = this.props
+    if (messageStepper.stepIndex === 0) {
+      dispatch(reset('messageForm'))
     } else {
       dispatch(updateMessageStepper({
-        finished: readingStepper.stepIndex >= 2,
-        stepIndex: readingStepper.stepIndex - 1
+        finished: messageStepper.stepIndex >= 2,
+        stepIndex: messageStepper.stepIndex - 1
       }))
     }
   }
 
   handleNext = () => {
-    const {dispatch, readingStepper, readingItem} = this.props
-    if (readingStepper.stepIndex === 0) {
+    const {dispatch, messageStepper, message} = this.props
+    if (messageStepper.stepIndex === 0) {
       dispatch(updateMessageStepper({
         finished: false,
         stepIndex: 1
       }))
-    } else if (readingStepper.stepIndex === 1) {
-      dispatch(submit('readingItemForm'))
-    } else if (readingStepper.stepIndex === 2) {
+    } else if (messageStepper.stepIndex === 1) {
+      dispatch(submit('messageForm'))
+    } else if (messageStepper.stepIndex === 2) {
       dispatch(updateMessageStepper({
         finished: false,
         stepIndex: 0
@@ -115,14 +115,14 @@ class MessageStepper extends Component {
   }
 
   render() {
-    const {dispatch, readingStepper} = this.props
+    const {dispatch, messageStepper} = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
-      <Stepper activeStep={readingStepper.stepIndex} orientation="vertical">
+      <Stepper activeStep={messageStepper.stepIndex} orientation="vertical">
 
       <Step>
-      <StepLabel>步骤一，填写待阅读的书名：</StepLabel>
+      <StepLabel>步骤一，填写目标文章网址：</StepLabel>
       <StepContent>
       <MessageFirstForm onSubmit={this.handleNext} />
       {this.renderStepActions(0)}
@@ -130,15 +130,15 @@ class MessageStepper extends Component {
       </Step>
 
       <Step>
-      <StepLabel>步骤二，选择目标阅读清单：</StepLabel>
+      <StepLabel>步骤二，选择文章收藏分类：</StepLabel>
       <StepContent>
-      <MessageSecondForm onSubmit={this.createReadingItem} />
+      <MessageSecondForm onSubmit={this.createMessage} />
       {this.renderStepActions(1)}
       </StepContent>
       </Step>
 
       <Step>
-      <StepLabel>步骤三，确认阅读清单信息：</StepLabel>
+      <StepLabel>步骤三，确认文章分类信息：</StepLabel>
       <StepContent>
 
       {this.renderStepActions(2)}
@@ -153,13 +153,13 @@ class MessageStepper extends Component {
 }
 
 MessageStepper.propTypes = {
-  readingStepper: PropTypes.object.isRequired,
-  readingItem: PropTypes.object.isRequired
+  messageStepper: PropTypes.object.isRequired,
+  message: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  readingStepper: state.readingStepper,
-  readingItem: state.readingItem
+  messageStepper: state.messageStepper,
+  message: state.message
 })
 
 export default connect(mapStateToProps)(MessageStepper)

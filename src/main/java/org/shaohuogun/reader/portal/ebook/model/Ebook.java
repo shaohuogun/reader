@@ -9,10 +9,13 @@ public class Ebook extends Model {
 	
 	public static final String FORMAT_MOBI = "mobi";
 	public static final String FORMAT_AZW3 = "azw3"; 
-	public static final String FORMAT_EPUB = "epub"; 
+	public static final String FORMAT_EPUB = "epub";
 	
 	@NotBlank(message = "不允许为空！")
-	private String channelId;
+	private String categoryType;
+	
+	@NotBlank(message = "不允许为空！")	
+	private String categoryId;
 	
 	@NotBlank(message = "不允许为空！")
 	private String format;
@@ -25,12 +28,20 @@ public class Ebook extends Model {
 	
 	private Integer downloads = 0;
 
-	public String getChannelId() {
-		return channelId;
+	public String getCategoryType() {
+		return categoryType;
 	}
 
-	public void setChannelId(String channelId) {
-		this.channelId = channelId;
+	public void setCategoryType(String categoryType) {
+		this.categoryType = categoryType;
+	}
+
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getFormat() {

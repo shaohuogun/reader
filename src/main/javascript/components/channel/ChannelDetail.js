@@ -40,8 +40,8 @@ export default class ChannelDetail extends React.Component {
       url: "/api/ebook/generate",
 			type: "GET",
 			data: {
-				targetType: "1",
-				targetId: self.props.channelId,
+				categoryType: "Channel",
+				categoryId: self.props.channelId,
 			},
     }).then(function(data) {
 			var ebook = data;

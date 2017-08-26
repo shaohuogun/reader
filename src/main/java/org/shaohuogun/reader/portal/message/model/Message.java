@@ -10,9 +10,6 @@ public class Message extends PickableObject {
 	
 	public static final String ACTION_TYPE = "message";
 	
-	public static final String CATEGORY_TYPE_CHANNEL = "Channel";
-	public static final String CATEGORY_TYPE_CATALOG = "Catalog";
-	
 	public static final String KEY_TITLE = "title";
 	public static final String KEY_RELEASE_DATE = "releaseDate";
 	public static final String KEY_PAGEVIEW = "pageview";

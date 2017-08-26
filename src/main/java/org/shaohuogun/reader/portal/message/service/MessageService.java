@@ -53,17 +53,25 @@ public class MessageService {
 		return messageDao.selectById(message.getId());
 	}
 
-	public int getMessageCountInChannel(String channelId) throws Exception {
-		if ((channelId == null) || channelId.isEmpty()) {
-			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
+	public int countMessageInCategory(String categoryType, String categoryId) throws Exception {
+		if ((categoryType == null) || categoryType.isEmpty()) {
+			throw new IllegalArgumentException("Category's type cann't be null or empty.");
 		}
-		
-		return messageDao.countByChannelId(channelId);
+
+		if ((categoryId == null) || categoryId.isEmpty()) {
+			throw new IllegalArgumentException("Category's id cann't be null or empty.");
+		}
+
+		return messageDao.countByCategory(categoryType, categoryId);
 	}
 
-	public Pagination getMessagesInChannel(String channelId, Pagination pagination) throws Exception {
-		if ((channelId == null) || channelId.isEmpty()) {
-			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
+	public Pagination getMessagesInCategory(String categoryType, String categoryId, Pagination pagination) throws Exception {
+		if ((categoryType == null) || categoryType.isEmpty()) {
+			throw new IllegalArgumentException("Category's type cann't be null or empty.");
+		}
+
+		if ((categoryId == null) || categoryId.isEmpty()) {
+			throw new IllegalArgumentException("Category's id cann't be null or empty.");
 		}
 		
 		if (pagination == null) {
@@ -72,7 +80,7 @@ public class MessageService {
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> messages = messageDao.selectByChannelId(channelId, offset, limit);
+		List<Model> messages = messageDao.selectByCategory(categoryType, categoryId, offset, limit);
 		pagination.setObjects(messages);
 		return pagination;
 	}

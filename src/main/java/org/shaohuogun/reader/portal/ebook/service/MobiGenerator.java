@@ -16,7 +16,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.shaohuogun.common.Utility;
-import org.shaohuogun.reader.portal.channel.model.Channel;
+import org.shaohuogun.reader.portal.PortalConstants;
 import org.shaohuogun.reader.portal.ebook.model.Ebook;
 import org.shaohuogun.reader.portal.message.model.Message;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,9 +47,13 @@ public class MobiGenerator {
 		return outputDir;
 	}
 
-	private Map<String, Object> generateDataModel(final Channel channel, final List<Message> messages) throws Exception {
-		if (channel == null) {
-			throw new NullPointerException("Channel cann't be null.");
+	private Map<String, Object> generateDataModel(final String categoryId, final String categoryName, final List<Message> messages) throws Exception {
+		if (categoryId == null) {
+			throw new NullPointerException("Category's id cann't be null.");
+		}
+
+		if (categoryName == null) {
+			throw new NullPointerException("Category's name cann't be null.");
 		}
 		
 		if ((messages == null) || messages.isEmpty()) {
@@ -57,9 +61,9 @@ public class MobiGenerator {
 		}
 		
 		Map<String, Object> dataModel = new HashMap<String, Object>();
-		dataModel.put("channelId", channel.getId());
-		dataModel.put("channelName", channel.getName());
-		dataModel.put("uuid", Utility.getMd5Code(channel.getName().getBytes()));
+		dataModel.put("channelId", categoryId);
+		dataModel.put("channelName", categoryName);
+		dataModel.put("uuid", Utility.getMd5Code(categoryName.getBytes()));
 		dataModel.put("format", "periodical");
 		dataModel.put("createTime", new Date());
 		dataModel.put("messageCount", messages.size());
@@ -156,16 +160,24 @@ public class MobiGenerator {
 		os.close();
 	}
 	
-	public Ebook generate(Channel channel, List<Message> messages) throws Exception {
-		if (channel == null) {
-			throw new NullPointerException("Channel cann't be null.");
+	public Ebook generate(final String creator, final String categoryId, final String categoryName, List<Message> messages) throws Exception {
+		if (creator == null) {
+			throw new NullPointerException("Creator cann't be null.");
+		}
+		
+		if (categoryId == null) {
+			throw new NullPointerException("Category's id cann't be null.");
+		}
+
+		if (categoryName == null) {
+			throw new NullPointerException("Category's name cann't be null.");
 		}
 		
 		if ((messages == null) || messages.isEmpty()) {
 			throw new IllegalArgumentException("Messages cann't be null or empty.");
 		}
 		
-		String ebookPath = String.format("%s/%s", this.outputDir, channel.getCreator());
+		String ebookPath = String.format("%s/%s", this.outputDir, creator);
 		File ebookDir = new File(ebookPath);
 		if (!ebookDir.exists()) {
 			boolean isSuccess = ebookDir.mkdir();
@@ -174,7 +186,7 @@ public class MobiGenerator {
 			}
 		}
 		
-		ebookPath = String.format("%s/%s", ebookPath, channel.getId());
+		ebookPath = String.format("%s/%s", ebookPath, categoryId);
 		ebookDir = new File(ebookPath);
 		if (!ebookDir.exists()) {
 			boolean isSuccess = ebookDir.mkdir();
@@ -183,12 +195,12 @@ public class MobiGenerator {
 			}
 		}
 		
-		Map<String, Object> dataModel = generateDataModel(channel, messages);
+		Map<String, Object> dataModel = generateDataModel(categoryId, categoryName, messages);
 		executeTemplate(dataModel, ebookPath);
 		copyCoverImage(ebookPath);
 		
 		String opfFilePath = String.format("%s/%s", ebookPath, templateNames[5]);
-		String ebookName = String.format("%s.%s", channel.getName(), Ebook.FORMAT_MOBI);
+		String ebookName = String.format("%s.%s", categoryName, Ebook.FORMAT_MOBI);
 		String cmdString = String.format("%s/kindlegen %s -o %s", this.kindlegenDir, opfFilePath, ebookName);
 		Process process = Runtime.getRuntime().exec(cmdString);
 		process.waitFor();
@@ -205,11 +217,12 @@ public class MobiGenerator {
 		
 		Ebook ebook = new Ebook();
 		ebook.setId(Utility.getUUID());
-		ebook.setCreator(channel.getCreator());
-		ebook.setChannelId(channel.getId());
+		ebook.setCreator(creator);
+		ebook.setCategoryType(PortalConstants.CATEGORY_TYPE_CHANNEL);
+		ebook.setCategoryId(categoryId);
 		ebook.setFormat(Ebook.FORMAT_MOBI);
 		ebook.setName(ebookName);
-		String subPath = String.format("%s/%s", channel.getCreator(), channel.getId());
+		String subPath = String.format("%s/%s", creator, categoryId);
 		ebook.setPath(subPath);
 		return ebook;
 	}

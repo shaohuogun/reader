@@ -1,10 +1,13 @@
 package org.shaohuogun.reader.portal.ebook.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.shaohuogun.common.Model;
+import org.shaohuogun.reader.portal.PortalConstants;
 import org.shaohuogun.reader.portal.ebook.model.Ebook;
 import org.springframework.stereotype.Component;
 
@@ -25,13 +28,19 @@ public class EbookDao {
 		return sqlSession.selectOne("org.shaohuogun.reader.portal.ebook.dao.EbookMapper.selectById", id);
 	}
 
-	public int countByChannelId(String channelId) {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.ebook.dao.EbookMapper.countByChannelId", channelId);
+	public int countByCategory(String categoryType, String categoryId) {
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put(PortalConstants.KEY_CATEGORY_TYPE, categoryType);
+		paramMap.put(PortalConstants.KEY_CATEGORY_ID, categoryId);
+		return sqlSession.selectOne("org.shaohuogun.reader.portal.ebook.dao.EbookMapper.countByCategory", paramMap);
 	}
 
-	public List<Model> selectByChannelId(String channelId, int offset, int limit) {
+	public List<Model> selectByCategory(String categoryType, String categoryId, int offset, int limit) {
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put(PortalConstants.KEY_CATEGORY_TYPE, categoryType);
+		paramMap.put(PortalConstants.KEY_CATEGORY_ID, categoryId);
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.portal.ebook.dao.EbookMapper.selectByChannelId", channelId,
+		return sqlSession.selectList("org.shaohuogun.reader.portal.ebook.dao.EbookMapper.selectByCategory", paramMap,
 				rowBounds);
 	}
 
@@ -41,7 +50,8 @@ public class EbookDao {
 
 	public List<Model> selectByCreator(String creator, int offset, int limit) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.portal.ebook.dao.EbookMapper.selectByCreator", creator, rowBounds);
+		return sqlSession.selectList("org.shaohuogun.reader.portal.ebook.dao.EbookMapper.selectByCreator", creator,
+				rowBounds);
 	}
 
 }

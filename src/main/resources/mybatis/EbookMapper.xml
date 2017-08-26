@@ -5,14 +5,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.shaohuogun.reader.portal.ebook.dao.EbookMapper">
-	<resultMap id="ebookResultMap" type="org.shaohuogun.reader.portal.ebook.model.Ebook">
+	<resultMap id="ebookResultMap"
+		type="org.shaohuogun.reader.portal.ebook.model.Ebook">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
 		<result property="lastModifier" column="last_modifier" />
 		<result property="lastModifyDate" column="last_modify_date" />
 		<result property="deleted" column="deleted" />
-		<result property="channelId" column="channel_id" />
+		<result property="categoryType" column="category_type" />
+		<result property="categoryId" column="category_id" />
 		<result property="format" column="format" />
 		<result property="name" column="name" />
 		<result property="path" column="path" />
@@ -21,10 +23,15 @@
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.portal.ebook.model.Ebook">
 		insert into READER_EBOOK (id,
-		creator, create_date, deleted, channel_id, format, name, path, downloads)
+		creator, create_date, deleted, category_type, categoryId, format,
+		name, path,
+		downloads)
 		values (#{id},
-		#{creator}, #{createDate}, #{deleted}, #{channelId}, #{format},
-		#{name}, #{path}, #{downloads})
+		#{creator}, #{createDate},
+		#{deleted},
+		#{categoryType}, #{categoryId}, #{format},
+		#{name}, #{path},
+		#{downloads})
 	</insert>
 
 	<select id="selectById" parameterType="java.lang.String"
@@ -32,17 +39,19 @@
 		select * from READER_EBOOK where id = #{id}
 	</select>
 
-	<select id="countByChannelId" parameterType="java.lang.String"
+	<select id="countByCategory" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select count(*) from READER_EBOOK where deleted = '0' and
+		channel_type = #{channelType} and
 		channel_id = #{channelId}
 	</select>
 
-	<select id="selectByChannelId" parameterType="java.lang.String"
+	<select id="selectByCategory" parameterType="java.util.Map"
 		resultMap="ebookResultMap">
 		select * from READER_EBOOK where deleted = '0' and
-		channel_id
-		= #{channelId} order by create_date desc;
+		channel_type = #{channelType} and
+		channel_id = #{channelId} order by
+		create_date desc;
 	</select>
 
 	<select id="countByCreator" parameterType="java.lang.String"

@@ -12,48 +12,56 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EbookService {
-	
+
 	@Autowired
 	private EbookDao ebookDao;
-	
+
 	@Transactional
 	public Ebook createEbook(Ebook ebook) throws Exception {
 		if (ebook == null) {
 			throw new NullPointerException("Ebook cann't be null.");
 		}
-		
+
 		ebookDao.insert(ebook);
 		return ebookDao.selectById(ebook.getId());
 	}
-	
+
 	public Ebook getEbook(String id) throws Exception {
 		if ((id == null) || id.isEmpty()) {
 			throw new IllegalArgumentException("Ebook id cann't be null or empty.");
 		}
-		
+
 		return ebookDao.selectById(id);
 	}
 
-	public int getEbookCountInChannel(String channelId) {
-		if ((channelId == null) || channelId.isEmpty()) {
-			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
+	public int countEbookInCategory(String categoryType, String categoryId) {
+		if ((categoryType == null) || categoryType.isEmpty()) {
+			throw new IllegalArgumentException("Category's type cann't be null or empty.");
 		}
-		
-		return ebookDao.countByChannelId(channelId);
+
+		if ((categoryId == null) || categoryId.isEmpty()) {
+			throw new IllegalArgumentException("Category's id cann't be null or empty.");
+		}
+
+		return ebookDao.countByCategory(categoryType, categoryId);
 	}
 
-	public Pagination getEbooksInChannel(String channelId, Pagination pagination) {
-		if ((channelId == null) || channelId.isEmpty()) {
-			throw new IllegalArgumentException("Channel's id cann't be null or empty.");
+	public Pagination getEbooksInCategory(String categoryType, String categoryId, Pagination pagination) {
+		if ((categoryType == null) || categoryType.isEmpty()) {
+			throw new IllegalArgumentException("Category's type cann't be null or empty.");
 		}
-		
+
+		if ((categoryId == null) || categoryId.isEmpty()) {
+			throw new IllegalArgumentException("Category's id cann't be null or empty.");
+		}
+
 		if (pagination == null) {
 			throw new NullPointerException("Pagination cann't be null.");
 		}
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> ebooks = ebookDao.selectByChannelId(channelId, offset, limit);
+		List<Model> ebooks = ebookDao.selectByCategory(categoryType, categoryId, offset, limit);
 		pagination.setObjects(ebooks);
 		return pagination;
 	}
@@ -62,10 +70,10 @@ public class EbookService {
 		if ((creator == null) || creator.isEmpty()) {
 			throw new IllegalArgumentException("Creator cann't be null or empty.");
 		}
-		
+
 		return ebookDao.countByCreator(creator);
 	}
-	
+
 	public Pagination getEbooksOfCreator(String creator, Pagination pagination) {
 		if ((creator == null) || creator.isEmpty()) {
 			throw new IllegalArgumentException("Creator cann't be null or empty.");
@@ -81,5 +89,5 @@ public class EbookService {
 		pagination.setObjects(ebooks);
 		return pagination;
 	}
-	
+
 }

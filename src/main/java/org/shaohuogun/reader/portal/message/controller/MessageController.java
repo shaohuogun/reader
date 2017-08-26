@@ -10,10 +10,13 @@ import org.json.JSONObject;
 import org.shaohuogun.common.Controller;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
+import org.shaohuogun.reader.portal.PortalConstants;
 import org.shaohuogun.reader.portal.message.model.Message;
 import org.shaohuogun.reader.portal.message.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,15 +87,22 @@ public class MessageController extends Controller {
 			}
 		}
 	}
-
+	
+	@RequestMapping(value = "/api/message", method = RequestMethod.POST)
+	public Message createMessage(@RequestBody @Validated Message message) throws Exception {		
+		message.setId(Utility.getUUID());
+		message.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
+		return messageService.createMessage(message);
+	}
+	
 	@RequestMapping(value = "/api/channel/{id}/messages", method = RequestMethod.GET)
 	public Pagination getMessagesInChannel(@PathVariable String id,
 			@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
-		int total = messageService.getMessageCountInChannel(id);
+		int total = messageService.countMessageInCategory(PortalConstants.CATEGORY_TYPE_CHANNEL, id);
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
 		pagination.setPageIndex(page);
-		return messageService.getMessagesInChannel(id, pagination);
+		return messageService.getMessagesInCategory(PortalConstants.CATEGORY_TYPE_CHANNEL, id, pagination);
 	}
 
 	@RequestMapping(value = "/api/message/{id}", method = RequestMethod.GET)
