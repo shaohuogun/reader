@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {TextField} from 'redux-form-material-ui'
 
-export const fields = ['bookName']
-
 // Validation Functions
 const required = value => (value == null ? '必填属性，请填写！' : undefined)
 
@@ -17,10 +15,7 @@ class ReadingItemFirstForm extends Component {
   }
 
   render() {
-    const {
-      fields: {bookName},
-      handleSubmit
-    } = this.props
+    const {handleSubmit} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -40,12 +35,11 @@ class ReadingItemFirstForm extends Component {
 }
 
 ReadingItemFirstForm.propTypes = {
-  fields: PropTypes.array.isRequired,
   handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({
   form: 'readingItemForm',
-  fields,
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true
 })(ReadingItemFirstForm)

@@ -110,6 +110,7 @@ CREATE TABLE `READER_MESSAGE` (
   `status` varchar(16) NOT NULL,
   `category_type` varchar(64) NOT NULL,
   `category_id` char(36) NOT NULL,
+  `category_name` varchar(64) NOT NULL,
   `title` varchar(128) DEFAULT NULL,
   `release_date` datetime DEFAULT NULL,
   `pageview` int(11) DEFAULT NULL,

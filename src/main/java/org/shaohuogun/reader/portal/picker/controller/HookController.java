@@ -61,7 +61,7 @@ public class HookController extends Controller {
 		}
 
 		JSONObject jsonReply = new JSONObject(json);
-		String serialNumber = jsonReply.getString(PickableObject.KEY_SERIAL_NUMBER);	
+		String serialNumber = jsonReply.getString(PickableObject.KEY_SERIAL_NUMBER);
 		JSONObject jsonContent = new JSONObject(jsonReply.getString(PickableObject.KEY_CONTENT));
 		JSONArray jsonMsgs = jsonContent.getJSONArray("messages");
 		Channel channel = channelService.getChannelBySerialNumber(serialNumber);
@@ -73,6 +73,7 @@ public class HookController extends Controller {
 			message.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
 			message.setCategoryType(PortalConstants.CATEGORY_TYPE_CHANNEL);
 			message.setCategoryId(channel.getId());
+			message.setCategoryName(channel.getName());
 
 			URL targetUrl = new URL(channel.getUrl());
 			String basePath = targetUrl.getProtocol() + "://" + targetUrl.getAuthority();
@@ -95,7 +96,7 @@ public class HookController extends Controller {
 		channelService.modifyChannel(channel);
 		progressService.incProgressAmount(("P-" + channel.getId()), jsonMsgs.length());
 	}
-	
+
 	@RequestMapping(value = "/api/hook/message", method = RequestMethod.POST)
 	public void receiveMessage(HttpServletRequest req) throws Exception {
 		req.setCharacterEncoding(Utility.ENCODE_UTF8);
@@ -121,9 +122,9 @@ public class HookController extends Controller {
 		}
 
 		JSONObject jsonReply = new JSONObject(json);
-		String serialNumber = jsonReply.getString(PickableObject.KEY_SERIAL_NUMBER);	
+		String serialNumber = jsonReply.getString(PickableObject.KEY_SERIAL_NUMBER);
 		JSONObject jsonContent = new JSONObject(jsonReply.getString(PickableObject.KEY_CONTENT));
-		
+
 		Message message = messageService.getMessageBySerialNumber(serialNumber);
 		message.setLastModifyDate(new Date());
 		message.setCount(message.getCount() + 1);
@@ -133,7 +134,9 @@ public class HookController extends Controller {
 
 		message.setContent(jsonContent.getString(Message.KEY_CONTENT));
 		messageService.modifyMessage(message);
-		progressService.incProgressCount(("P-" + message.getCategoryId()), 1);
+		if (PortalConstants.CATEGORY_TYPE_CHANNEL.equalsIgnoreCase(message.getCategoryType())) {
+			progressService.incProgressCount(("P-" + message.getCategoryId()), 1);
+		}
 	}
 
 }

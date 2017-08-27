@@ -46,7 +46,7 @@ class MessageStepper extends Component {
   createMessage = (message) => {
     const {dispatch} = this.props
     dispatch(submitMessage(message))
-    fetch('/api/message', {
+    fetch('/api/message?categoryType=Catalog', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'

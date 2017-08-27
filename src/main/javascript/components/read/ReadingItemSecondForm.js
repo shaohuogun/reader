@@ -6,8 +6,6 @@ import {RadioButton} from 'material-ui/RadioButton'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite'
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
 
-export const fields = ['bookName', 'listId']
-
 const styles = {
   checkedIcon: {
     color: '#F44336',
@@ -19,10 +17,7 @@ const styles = {
 
 class ReadingItemSecondForm extends Component {
   render() {
-    const {
-      fields: {listId},
-      handleSubmit
-    } = this.props
+    const {handleSubmit} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -50,12 +45,11 @@ class ReadingItemSecondForm extends Component {
 }
 
 ReadingItemSecondForm.propTypes = {
-  fields: PropTypes.array.isRequired,
   handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({
   form: 'readingItemForm',
-  fields,
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true
 })(ReadingItemSecondForm)

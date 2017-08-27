@@ -21,6 +21,8 @@ public class Message extends PickableObject {
 	
 	private String categoryId;
 	
+	private String categoryName;
+	
 	private String title;
 	
 	private Date releaseDate;
@@ -52,6 +54,20 @@ public class Message extends PickableObject {
 
 	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	/**
+	 * @return the categoryName
+	 */
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	/**
+	 * @param categoryName the categoryName to set
+	 */
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getTitle() {

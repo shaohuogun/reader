@@ -20,6 +20,7 @@
 		<result property="status" column="status" />
 		<result property="categoryType" column="category_type" />
 		<result property="categoryId" column="category_id" />
+		<result property="categoryName" column="category_name" />
 		<result property="title" column="title" />
 		<result property="releaseDate" column="release_date" />
 		<result property="pageview" column="pageview" />
@@ -37,20 +38,24 @@
 		amount, count,
 		status,
 		category_type,
-		categoryId,
+		category_id,
+		category_name,
 		title, release_date,
-		pageview, comment_count,
+		pageview,
+		comment_count,
 		digest,
 		content)
 		values (#{id},
 		#{creator},
-		#{createDate}, #{deleted},
+		#{createDate},
+		#{deleted},
 		#{url},
 		#{amount},
 		#{count},
 		#{status},
 		#{categoryType},
 		#{categoryId},
+		#{categoryName},
 		#{title},
 		#{releaseDate},
 		#{pageview},
@@ -78,16 +83,17 @@
 	<select id="countByCategory" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select count(*) from READER_MESSAGE where deleted = '0' and
-		channel_type = #{channelType} and
-		channel_id = #{channelId}
+		category_type = #{categoryType} and
+		category_id = #{categoryId}
 	</select>
 
 	<select id="selectByCategory" parameterType="java.util.Map"
 		resultMap="messageResultMap">
 		select * from READER_MESSAGE where deleted = '0' and
-		channel_type = #{channelType} and
-		channel_id
-		= #{channelId} order by url
+		category_type = #{categoryType} and
+		category_id
+		= #{categoryId} order by
+		url
 		desc;
 	</select>
 

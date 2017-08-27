@@ -23,7 +23,7 @@
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.portal.ebook.model.Ebook">
 		insert into READER_EBOOK (id,
-		creator, create_date, deleted, category_type, categoryId, format,
+		creator, create_date, deleted, category_type, category_id, format,
 		name, path,
 		downloads)
 		values (#{id},
@@ -42,15 +42,16 @@
 	<select id="countByCategory" parameterType="java.util.Map"
 		resultType="java.lang.Integer">
 		select count(*) from READER_EBOOK where deleted = '0' and
-		channel_type = #{channelType} and
-		channel_id = #{channelId}
+		category_type = #{categoryType} and
+		category_id = #{categoryId}
 	</select>
 
 	<select id="selectByCategory" parameterType="java.util.Map"
 		resultMap="ebookResultMap">
 		select * from READER_EBOOK where deleted = '0' and
-		channel_type = #{channelType} and
-		channel_id = #{channelId} order by
+		category_type = #{categoryType} and
+		category_id = #{categoryId} order
+		by
 		create_date desc;
 	</select>
 
