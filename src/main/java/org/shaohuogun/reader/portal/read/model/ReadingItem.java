@@ -1,8 +1,8 @@
 package org.shaohuogun.reader.portal.read.model;
 
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 
-public class ReadingItem extends Model {
+public class ReadingItem extends Entity {
 
 	private static final long serialVersionUID = 1L;
 	

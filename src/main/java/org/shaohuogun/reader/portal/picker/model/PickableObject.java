@@ -3,9 +3,9 @@ package org.shaohuogun.reader.portal.picker.model;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.URL;
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 
-public abstract class PickableObject extends Model {
+public abstract class PickableObject extends Entity {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -30,9 +30,12 @@ public abstract class PickableObject extends Model {
 
 	private Integer count = 0;
 	
-	private String status = STATUS_INITIAL;
-	
 	public abstract String getActionType();
+	
+	public PickableObject() {
+		super();	
+		this.setStatus(STATUS_INITIAL);
+	}
 	
 	public String getSerialNumber() {
 		return serialNumber;
@@ -64,14 +67,6 @@ public abstract class PickableObject extends Model {
 	
 	public void setCount(Integer count) {
 		this.count = count;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-	
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	
 }

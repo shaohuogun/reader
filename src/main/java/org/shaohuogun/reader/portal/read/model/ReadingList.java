@@ -1,9 +1,9 @@
 package org.shaohuogun.reader.portal.read.model;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 
-public class ReadingList extends Model {
+public class ReadingList extends Entity {
 
 	private static final long serialVersionUID = 1L;
 

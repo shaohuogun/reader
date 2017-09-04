@@ -1,9 +1,9 @@
 package org.shaohuogun.reader.portal.catalog.model;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 
-public class Catalog extends Model {
+public class Catalog extends Entity {
 
 	private static final long serialVersionUID = 1L;
 

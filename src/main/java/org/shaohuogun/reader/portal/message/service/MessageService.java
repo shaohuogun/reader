@@ -2,7 +2,7 @@ package org.shaohuogun.reader.portal.message.service;
 
 import java.util.List;
 
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.reader.portal.message.dao.MessageDao;
 import org.shaohuogun.reader.portal.message.model.Message;
@@ -80,7 +80,7 @@ public class MessageService {
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> messages = messageDao.selectByCategory(categoryType, categoryId, offset, limit);
+		List<Entity> messages = messageDao.selectByCategory(categoryType, categoryId, offset, limit);
 		pagination.setObjects(messages);
 		return pagination;
 	}

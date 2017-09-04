@@ -3,7 +3,7 @@ package org.shaohuogun.reader.portal.read.controller;
 import java.util.List;
 
 import org.shaohuogun.common.Controller;
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.portal.read.model.ReadingList;
@@ -43,7 +43,7 @@ public class ReadController extends Controller {
 	}
 
 	@RequestMapping(value = "/api/myreadinglists", method = RequestMethod.GET)
-	public List<Model> getMyReadingLists() throws Exception {
+	public List<Entity> getMyReadingLists() throws Exception {
 		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
 		return readService.getReadingLists(creator);
 	}

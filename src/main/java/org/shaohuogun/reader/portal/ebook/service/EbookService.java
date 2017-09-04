@@ -2,7 +2,7 @@ package org.shaohuogun.reader.portal.ebook.service;
 
 import java.util.List;
 
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.reader.portal.ebook.dao.EbookDao;
 import org.shaohuogun.reader.portal.ebook.model.Ebook;
@@ -61,7 +61,7 @@ public class EbookService {
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> ebooks = ebookDao.selectByCategory(categoryType, categoryId, offset, limit);
+		List<Entity> ebooks = ebookDao.selectByCategory(categoryType, categoryId, offset, limit);
 		pagination.setObjects(ebooks);
 		return pagination;
 	}
@@ -85,7 +85,7 @@ public class EbookService {
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> ebooks = ebookDao.selectByCreator(creator, offset, limit);
+		List<Entity> ebooks = ebookDao.selectByCreator(creator, offset, limit);
 		pagination.setObjects(ebooks);
 		return pagination;
 	}

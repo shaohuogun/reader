@@ -15,7 +15,7 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletResponse;
 
 import org.shaohuogun.common.Controller;
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.reader.portal.PortalConstants;
 import org.shaohuogun.reader.portal.catalog.model.Catalog;
@@ -82,7 +82,7 @@ public class EbookController extends Controller {
 		pagination.setPageSize(total);
 		pagination.setPageIndex(1);
 		pagination = messageService.getMessagesInCategory(categoryType, categoryId, pagination);
-		List<Model> models = pagination.getObjects();
+		List<Entity> models = pagination.getObjects();
 		List<Message> messages = new ArrayList<Message>();
 		for (int i = 0; i < models.size(); i++) {
 			messages.add((Message) models.get(i));

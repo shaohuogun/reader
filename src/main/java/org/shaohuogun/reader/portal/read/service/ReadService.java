@@ -2,7 +2,7 @@ package org.shaohuogun.reader.portal.read.service;
 
 import java.util.List;
 
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 import org.shaohuogun.common.Pagination;
 import org.shaohuogun.reader.portal.read.dao.ReadDao;
 import org.shaohuogun.reader.portal.read.model.ReadingList;
@@ -45,12 +45,12 @@ public class ReadService {
 			throw new NullPointerException("Reading list cann't be null.");
 		}
 
-		readingList.setDeleted(Model.DELETED_YES);
+		readingList.setDeleted(Entity.DELETED_YES);
 		readDao.updateReadingList(readingList);
 	}
 		
 	
-	public List<Model> getReadingLists(String creator) throws Exception {
+	public List<Entity> getReadingLists(String creator) throws Exception {
 		if ((creator == null) || creator.isEmpty()) {
 			throw new IllegalArgumentException("Creator cann't be null or empty.");
 		}
@@ -69,7 +69,7 @@ public class ReadService {
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> readingLists = readDao.selectReadingLists(offset, limit);
+		List<Entity> readingLists = readDao.selectReadingLists(offset, limit);
 		pagination.setObjects(readingLists);
 		return pagination;
 	}
@@ -121,7 +121,7 @@ public class ReadService {
 
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> readingItems = readDao.selectReadingItemsByListId(listId, offset, limit);
+		List<Entity> readingItems = readDao.selectReadingItemsByListId(listId, offset, limit);
 		pagination.setObjects(readingItems);
 		return pagination;
 	}

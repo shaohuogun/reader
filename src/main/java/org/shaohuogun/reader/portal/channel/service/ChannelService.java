@@ -2,7 +2,7 @@ package org.shaohuogun.reader.portal.channel.service;
 
 import java.util.List;
 
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 import org.shaohuogun.common.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +54,7 @@ public class ChannelService {
 		
 		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
 		int limit = pagination.getPageSize();
-		List<Model> channels = channelDao.selectByCreator(creator, offset, limit);
+		List<Entity> channels = channelDao.selectByCreator(creator, offset, limit);
 		pagination.setObjects(channels);
 		return pagination;
 	}

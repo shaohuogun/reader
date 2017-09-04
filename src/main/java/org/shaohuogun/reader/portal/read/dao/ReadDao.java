@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 import org.shaohuogun.reader.portal.read.model.ReadingItem;
 import org.shaohuogun.reader.portal.read.model.ReadingList;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class ReadDao {
 		return sqlSession.selectOne("org.shaohuogun.reader.portal.read.dao.ReadMapper.selectReadingListById", id);
 	}
 
-	public List<Model> selectReadingListsByCreator(String creator) {
+	public List<Entity> selectReadingListsByCreator(String creator) {
 		return sqlSession.selectList("org.shaohuogun.reader.portal.read.dao.ReadMapper.selectReadingListsByCreator", creator);
 	}
 
@@ -34,7 +34,7 @@ public class ReadDao {
 		return sqlSession.selectOne("org.shaohuogun.reader.portal.read.dao.ReadMapper.countReadingList");
 	}
 
-	public List<Model> selectReadingLists(int offset, int limit) {
+	public List<Entity> selectReadingLists(int offset, int limit) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return sqlSession.selectList("org.shaohuogun.reader.portal.read.dao.ReadMapper.selectReadingLists", rowBounds);
 	}
@@ -55,7 +55,7 @@ public class ReadDao {
 		return sqlSession.selectOne("org.shaohuogun.reader.portal.read.dao.ReadMapper.countReadingItemByListId", listId);
 	}
 
-	public List<Model> selectReadingItemsByListId(String listId, int offset, int limit) {
+	public List<Entity> selectReadingItemsByListId(String listId, int offset, int limit) {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return sqlSession.selectList("org.shaohuogun.reader.portal.read.dao.ReadMapper.selectReadingItemsByListId", listId,
 				rowBounds);

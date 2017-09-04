@@ -1,9 +1,9 @@
 package org.shaohuogun.reader.portal.ebook.model;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.shaohuogun.common.Model;
+import org.shaohuogun.common.Entity;
 
-public class Ebook extends Model {
+public class Ebook extends Entity {
 
 	private static final long serialVersionUID = 1L;
 	
