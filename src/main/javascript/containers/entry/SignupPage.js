@@ -1,5 +1,10 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+import SignupForm from '../../components/user/SignupForm'
 
 const pageStyle = {
   width: 685,
@@ -12,10 +17,10 @@ const pageStyle = {
 export default class SignupPage extends Component {
   render() {
     return (
-      <div style={pageStyle}>
-      <span>This is the signup page.</span>
-      </div>
-    );
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <SignupForm style={pageStyle} />
+      </MuiThemeProvider>
+    )
   }
 }
 

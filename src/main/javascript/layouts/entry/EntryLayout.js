@@ -2,51 +2,35 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {GridList, GridTile} from 'material-ui/GridList'
 
 import EntryNavigator from './EntryNavigator'
-
-const contentStyle = {
-  margin: '0 auto',
-}
+import EntryFooter from './EntryFooter'
 
 const navigatorStyle = {
-  width: 300,
-  marginTop: 15,
-  float: 'left',
-  display: 'inline-block',
-  backgroundColor: '#fff',
+  marginTop: 100,
+  textAlign: 'center',
+  backgroundColor: '#fafafa',
+}
+
+const footerStyle = {
+  marginTop: 100,
+  textAlign: 'center',
+  backgroundColor: '#fafafa',
 }
 
 export default class EntryLayout extends Component {
   render() {
     return (
       <div>
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <GridList
-			cols={5}
-			cellHeight={600}
-			padding={15}
-			>
-      <GridTile
-      key='albumArea'
-      cols={3}
-      >
-      <img src="/image/cover-default.jpg" />
-      </GridTile>
-
-      <GridTile
-      key='formArea'
-      cols={2}
-      >
-      <div style={contentStyle}>
+      <div>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <EntryNavigator style={navigatorStyle} />
       </MuiThemeProvider>
       {this.props.children}
       </div>
-      </GridTile>
-			</GridList>
+
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <EntryFooter style={footerStyle} />
       </MuiThemeProvider>
       </div>
     )

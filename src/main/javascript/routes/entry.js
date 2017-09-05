@@ -6,7 +6,7 @@ import SigninPage from '../containers/entry/SigninPage'
 
 export default (
   <div>
-  <Route path="/entry/signin" component={SignupPage}/>
-  <Route path="/entry/signup" component={SigninPage}/>
+  <Route path="/entry/signup" component={SignupPage}/>
+  <Route path="/entry/signin" component={SigninPage}/>
   </div>
 )
