@@ -12,7 +12,9 @@ import org.shaohuogun.reader.portal.user.model.User;
 import org.shaohuogun.reader.portal.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +30,12 @@ public class UserController extends Controller {
 
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping(value = "/api/session", method = RequestMethod.POST)
+	public @ResponseBody LoginForm createSession(@RequestBody @Validated LoginForm loginForm) throws Exception {		
+		return loginForm;	
+//		return "redirect:/home";
+	}
 
 	@RequestMapping(value = "/user/{userId}/form", method = RequestMethod.GET)
 	public String gotoUserForm(HttpServletRequest req, Model model) {

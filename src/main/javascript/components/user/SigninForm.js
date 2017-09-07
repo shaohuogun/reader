@@ -49,8 +49,5 @@ SigninForm.propTypes = {
 }
 
 export default reduxForm({
-  form: 'channelForm',
-  initialValues: {
-    amount: 1
-  }
+  form: 'loginForm'
 })(SigninForm)

@@ -22,7 +22,6 @@ const layoutStyle = {
 }
 
 storeProvider.init(configureStore({
-  pagination: {}
 }))
 
 const store = storeProvider.getStore()
