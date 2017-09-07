@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.shaohuogun.common.Controller;
+import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.portal.invitation.model.Invitation;
 import org.shaohuogun.reader.portal.user.model.Portrait;
 import org.shaohuogun.reader.portal.user.model.User;
@@ -30,6 +31,14 @@ public class UserController extends Controller {
 
 	@Autowired
 	private UserService userService;
+		
+	@RequestMapping(value = "/api/user", method = RequestMethod.POST)
+	public @ResponseBody User createUser(@RequestBody @Validated User user) throws Exception {
+		user.setId(Utility.getUUID());
+		user.setCreator("a11039eb-4ba1-441a-bfdb-0d40f61a53dd");
+		return userService.createUser(user);
+//		return "redirect:/home";
+	}
 	
 	@RequestMapping(value = "/api/session", method = RequestMethod.POST)
 	public @ResponseBody LoginForm createSession(@RequestBody @Validated LoginForm loginForm) throws Exception {		

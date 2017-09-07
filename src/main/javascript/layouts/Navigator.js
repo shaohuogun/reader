@@ -12,11 +12,13 @@ export default class Navigator extends Component {
       <ToolbarTitle text="TAIZIDU" />
       </ToolbarGroup>
       <ToolbarGroup>
-      <a href="/home">本站首页</a>
+      <a href="/home">网站首页</a>
       <ToolbarSeparator />
       <a href="/tool">伴读服务</a>
       <ToolbarSeparator />
       <a href="/mine">我的空间</a>
+      <ToolbarSeparator />
+      <a href="/entry">退出系统</a>      
       </ToolbarGroup>
       </Toolbar>
     )

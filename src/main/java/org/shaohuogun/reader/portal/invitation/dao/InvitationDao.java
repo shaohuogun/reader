@@ -43,10 +43,4 @@ public class InvitationDao {
 				status, rowBounds);
 	}
 
-	public List<Invitation> selectForSending(int offset, int limit) {
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.portal.invitation.dao.InvitationMapper.selectForSending",
-				Invitation.STATUS_INITIAL, rowBounds);
-	}
-
 }

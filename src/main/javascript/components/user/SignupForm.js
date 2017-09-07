@@ -23,8 +23,8 @@ class SignupForm extends Component {
       <Field
       name="email"
       component={TextField}
-      hintText="请填写电子邮箱的地址！"
-      floatingLabelText="电子邮箱"
+      hintText="请填写邮箱地址！"
+      floatingLabelText="邮箱"
       fullWidth={true}
       validate={[required, email]}
       ref="email"
@@ -34,8 +34,8 @@ class SignupForm extends Component {
       <Field
       name="nickname"
       component={TextField}
-      hintText="请填写昵称的信息！"
-      floatingLabelText="网络昵称"
+      hintText="请填写个人昵称！"
+      floatingLabelText="昵称"
       fullWidth={true}
       validate={required}
       />
@@ -43,8 +43,8 @@ class SignupForm extends Component {
       <Field
       name="password"
       component={TextField}
-      hintText="请填写登录的密码！"
-      floatingLabelText="媒体简介"
+      hintText="请填写登录密码！"
+      floatingLabelText="密码"
       fullWidth={true}
       validate={required}
       />
@@ -58,8 +58,5 @@ SignupForm.propTypes = {
 }
 
 export default reduxForm({
-  form: 'channelForm',
-  initialValues: {
-    amount: 1
-  }
+  form: 'userForm'
 })(SignupForm)

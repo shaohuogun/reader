@@ -11,6 +11,7 @@
 		<result property="createDate" column="create_date" />
 		<result property="lastModifier" column="last_modifier" />
 		<result property="lastModifyDate" column="last_modify_date" />
+		<result property="status" column="status" />		
 		<result property="deleted" column="deleted" />
 		<result property="email" column="email" />
 		<result property="nickname" column="nickname" />
@@ -24,9 +25,9 @@
 	<insert id="insert" parameterType="org.shaohuogun.reader.portal.user.model.User">
 		insert into READER_USER
 		(id,
-		creator, create_date, deleted, email, nickname, password)
+		creator, create_date, status, deleted, email, nickname, password)
 		values
-		(#{id}, #{creator}, #{createDate}, #{deleted},
+		(#{id}, #{creator}, #{createDate}, #{status}, #{deleted},
 		#{email},
 		#{nickname},
 		#{password})

@@ -5,44 +5,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.shaohuogun.reader.portal.read.dao.ReadMapper">
-	<resultMap id="readingListResultMap" type="org.shaohuogun.reader.portal.read.model.ReadingList">
+	<resultMap id="readingListResultMap"
+		type="org.shaohuogun.reader.portal.read.model.ReadingList">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
 		<result property="lastModifier" column="last_modifier" />
 		<result property="lastModifyDate" column="last_modify_date" />
+		<result property="status" column="status" />
 		<result property="deleted" column="deleted" />
 		<result property="name" column="name" />
 		<result property="description" column="description"
 			typeHandler="org.shaohuogun.reader.portal.plugin.ibatis.BlobTypeHandler" />
 	</resultMap>
 
-	<resultMap id="readingItemResultMap" type="org.shaohuogun.reader.portal.read.model.ReadingItem">
+	<resultMap id="readingItemResultMap"
+		type="org.shaohuogun.reader.portal.read.model.ReadingItem">
 		<id property="id" column="id" />
 		<result property="creator" column="creator" />
 		<result property="createDate" column="create_date" />
 		<result property="lastModifier" column="last_modifier" />
 		<result property="lastModifyDate" column="last_modify_date" />
+		<result property="status" column="status" />
 		<result property="deleted" column="deleted" />
 		<result property="listId" column="list_id" />
 		<result property="bookId" column="book_id" />
 		<result property="bookName" column="book_name" />
-		<result property="status" column="status" />
 	</resultMap>
 
 	<insert id="insertReadingList" parameterType="org.shaohuogun.reader.portal.read.model.ReadingList">
 		insert into
 		READER_READING_LIST
 		(id,
-		creator, create_date, deleted, name,
+		creator, create_date, status, deleted, name,
 		description)
 		values (#{id},
-		#{creator}, #{createDate}, #{deleted},
+		#{creator}, #{createDate}, #{status},
+		#{deleted},
 		#{name},
 		#{description}
 		)
 	</insert>
-	
+
 	<select id="selectReadingListById" parameterType="java.lang.String"
 		resultMap="readingListResultMap">
 		select * from READER_READING_LIST where id = #{id}
@@ -71,10 +75,13 @@
 		READER_READING_LIST set last_modifier =
 		#{lastModifier},
 		last_modify_date =
-		#{lastModifyDate}, deleted =
+		#{lastModifyDate},
+		status =
+		#{status}, deleted =
 		#{deleted},
 		name = #{name},
-		description = #{description}
+		description =
+		#{description}
 		where
 		id = #{id}
 	</update>
@@ -83,15 +90,15 @@
 		insert into
 		READER_READING_ITEM
 		(id,
-		creator, create_date, deleted, list_id,
-		book_id, book_name, status)
+		creator, create_date, status, deleted, list_id,
+		book_id, book_name)
 		values (#{id},
 		#{creator}, #{createDate},
+		#{status},
 		#{deleted},
 		#{listId},
 		#{bookId},
-		#{bookName},
-		#{status}
+		#{bookName}
 		)
 	</insert>
 
@@ -121,9 +128,10 @@
 		READER_READING_ITEM set last_modifier =
 		#{lastModifier},
 		last_modify_date =
-		#{lastModifyDate}, deleted =
-		#{deleted},
-		status = #{status}
+		#{lastModifyDate},
+		status =
+		#{status}, deleted =
+		#{deleted}
 		where
 		id = #{id}
 	</update>

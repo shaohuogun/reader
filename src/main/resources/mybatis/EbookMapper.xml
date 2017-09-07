@@ -12,6 +12,7 @@
 		<result property="createDate" column="create_date" />
 		<result property="lastModifier" column="last_modifier" />
 		<result property="lastModifyDate" column="last_modify_date" />
+		<result property="status" column="status" />		
 		<result property="deleted" column="deleted" />
 		<result property="categoryType" column="category_type" />
 		<result property="categoryId" column="category_id" />
@@ -23,11 +24,11 @@
 
 	<insert id="insert" parameterType="org.shaohuogun.reader.portal.ebook.model.Ebook">
 		insert into READER_EBOOK (id,
-		creator, create_date, deleted, category_type, category_id, format,
+		creator, create_date, status, deleted, category_type, category_id, format,
 		name, path,
 		downloads)
 		values (#{id},
-		#{creator}, #{createDate},
+		#{creator}, #{createDate}, #{status},
 		#{deleted},
 		#{categoryType}, #{categoryId}, #{format},
 		#{name}, #{path},

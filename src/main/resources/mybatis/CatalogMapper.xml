@@ -12,6 +12,7 @@
 		<result property="createDate" column="create_date" />
 		<result property="lastModifier" column="last_modifier" />
 		<result property="lastModifyDate" column="last_modify_date" />
+		<result property="status" column="status" />		
 		<result property="deleted" column="deleted" />
 		<result property="name" column="name" />
 	</resultMap>
@@ -19,9 +20,9 @@
 	<insert id="insert" parameterType="org.shaohuogun.reader.portal.catalog.model.Catalog">
 		insert into READER_CATALOG
 		(id,
-		creator, create_date, deleted, name)
+		creator, create_date, status, deleted, name)
 		values (#{id},
-		#{creator}, #{createDate}, #{deleted},
+		#{creator}, #{createDate}, #{status}, #{deleted},
 		#{name}
 		)
 	</insert>
@@ -49,7 +50,10 @@
 		update
 		READER_CATALOG set last_modifier = #{lastModifier},
 		last_modify_date =
-		#{lastModifyDate}, deleted = #{deleted},
+		#{lastModifyDate},
+		status =
+		#{status}, deleted =
+		#{deleted},
 		name = #{name}
 		where
 		id = #{id}

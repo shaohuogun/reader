@@ -112,19 +112,19 @@ public class InvitationService {
 
 	@Transactional
 	public void sendInvitations(Integer count, String domainName) throws Exception {
-		List<Invitation> invitations = invitationDao.selectForSending(0, count);
+		List<Entity> invitations = invitationDao.selectByStatus(Invitation.STATUS_INITIAL, 0, count);
 		if ((invitations == null) || invitations.isEmpty()) {
 			return;
 		}
 
-		for (Invitation curInvitation : invitations) {
+		for (Entity curInvitation : invitations) {
 			User creator = userService.getUser(curInvitation.getCreator());
 //			wnxSmtp.send(creator.getEmail(), curInvitation.getAddressee(), curInvitation.getSubject(),
 //					format(curInvitation, domainName));
 			// 发送成功后更新邀请的状态
 			curInvitation.setLastModifyDate(new Date());
 			curInvitation.setStatus(Invitation.STATUS_SENT);
-			invitationDao.update(curInvitation);
+			invitationDao.update((Invitation) curInvitation);
 		}
 	}
 
