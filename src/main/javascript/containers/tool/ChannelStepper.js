@@ -45,7 +45,7 @@ class ChannelStepper extends Component {
     // Tips: The best place to bind your member functions is in the component constructor
     this.createChannel = this.createChannel.bind(this)
   }
-
+  
   createChannel = (channel) => {
     const {dispatch} = this.props
     dispatch(submitChannel(channel))

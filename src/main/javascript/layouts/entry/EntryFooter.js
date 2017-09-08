@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Route, Link} from 'react-router-dom'
 import {GridList, GridTile} from 'material-ui/GridList'
 
 export default class EntryFooter extends Component {
@@ -8,7 +7,7 @@ export default class EntryFooter extends Component {
     return (
       <GridList
       cols={5}
-      cellHeight={300}
+      cellHeight={200}
       padding={15}
       {...this.props}
       >

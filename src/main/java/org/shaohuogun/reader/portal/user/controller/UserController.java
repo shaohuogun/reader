@@ -41,8 +41,8 @@ public class UserController extends Controller {
 	}
 	
 	@RequestMapping(value = "/api/session", method = RequestMethod.POST)
-	public @ResponseBody LoginForm createSession(@RequestBody @Validated LoginForm loginForm) throws Exception {		
-		return loginForm;	
+	public @ResponseBody SigninForm createSession(@RequestBody @Validated SigninForm signinForm) throws Exception {		
+		return signinForm;	
 //		return "redirect:/home";
 	}
 

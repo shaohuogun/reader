@@ -13,7 +13,7 @@ const navigatorStyle = {
 }
 
 const footerStyle = {
-  marginTop: 100,
+  marginTop: 50,
   textAlign: 'center',
   backgroundColor: '#fafafa',
 }
@@ -21,13 +21,11 @@ const footerStyle = {
 export default class EntryLayout extends Component {
   render() {
     return (
-      <div>
-      <div>
+      <div {...this.props}>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <EntryNavigator style={navigatorStyle} />
       </MuiThemeProvider>
       {this.props.children}
-      </div>
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <EntryFooter style={footerStyle} />

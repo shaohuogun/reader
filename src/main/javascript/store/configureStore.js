@@ -4,6 +4,7 @@ import {routerReducer as routing} from 'react-router-redux'
 import {reducer as formReducer} from 'redux-form'
 import {combineReducers} from 'redux'
 
+import {signupReducer} from '../reducers/entry'
 import {readingStepperReducer, readingReducer, messageStepperReducer, messageReducer,
   channelStepperReducer, channelReducer, progressReducer} from '../reducers/tool'
 import {ebookReducer, paginationReducer} from '../reducers/mine'
@@ -11,6 +12,7 @@ import {ebookReducer, paginationReducer} from '../reducers/mine'
 const rootReducer = combineReducers({
   routing,
   form: formReducer,
+  agreed: signupReducer,
   readingStepper: readingStepperReducer,
   readingItem: readingReducer,
   messageStepper: messageStepperReducer,

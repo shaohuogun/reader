@@ -21,14 +21,14 @@ export default class EntryNavigator extends Component {
       {...this.props}
       >
       <GridTile
-      key='about'
+      key='signup'
       cols={1}
       >
       <CustomLink to="/entry/signup" label="注册" />
       </GridTile>
 
       <GridTile
-      key='contact'
+      key='signin'
       cols={1}
       >
       <CustomLink to="/entry/signin" label="登录" />

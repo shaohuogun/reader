@@ -49,5 +49,5 @@ SigninForm.propTypes = {
 }
 
 export default reduxForm({
-  form: 'loginForm'
+  form: 'signinForm'
 })(SigninForm)

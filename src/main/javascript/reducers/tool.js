@@ -73,7 +73,6 @@ export function channelReducer(state = {}, action) {
 }
 
 export function progressReducer(state = {}, action) {
-  console.log(state)
   switch (action.type) {
     case UPDATE_PICKING_PROGRESS:
     return action.progress

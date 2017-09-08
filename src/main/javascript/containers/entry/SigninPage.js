@@ -12,14 +12,6 @@ import {connect} from 'react-redux'
 
 import SigninForm from '../../components/user/SigninForm'
 
-const pageStyle = {
-  width: 685,
-  marginTop: 15,
-  marginLeft: 15,
-  float: 'left',
-  display: 'inline-block',
-}
-
 const toolbarStyle = {
   marginTop: 15,
   marginBottom: 15,
@@ -34,14 +26,14 @@ class SigninPage extends Component {
     this.createSession = this.createSession.bind(this)
   }
 
-  createSession = (loginForm) => {
+  createSession = (signinForm) => {
     const {dispatch} = this.props
     fetch('/api/session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify(loginForm)
+      body: JSON.stringify(signinForm)
     }).then(response => response.json())
     .then(json => {
       window.location.href = '/home';
@@ -50,20 +42,20 @@ class SigninPage extends Component {
 
   resetForm = () => {
     const {dispatch} = this.props
-    dispatch(reset('loginForm'))
+    dispatch(reset('signinForm'))
   }
 
   submitForm = () => {
     const {dispatch} = this.props
-    dispatch(submit('loginForm'))
+    dispatch(submit('signinForm'))
   }
 
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Card zDepth={0}>
+      <Card {...this.props} zDepth={0}>
       <CardText>
-      <SigninForm style={pageStyle} onSubmit={this.createSession} />
+      <SigninForm onSubmit={this.createSession} />
       </CardText>
       <CardActions style={toolbarStyle}>
       <FlatButton
@@ -71,10 +63,9 @@ class SigninPage extends Component {
       disableTouchRipple={true}
       disableFocusRipple={true}
       onTouchTap={this.resetForm}
-      style={{margin: '0 15px 0 0'}}
       />
       <RaisedButton
-      label="提交"
+      label="登录"
       disableTouchRipple={true}
       disableFocusRipple={true}
       primary={true}
@@ -82,8 +73,6 @@ class SigninPage extends Component {
       />
       </CardActions>
       </Card>
-
-
       </MuiThemeProvider>
     )
   }

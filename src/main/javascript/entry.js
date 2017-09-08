@@ -18,10 +18,13 @@ injectTapEventPlugin();
 
 const layoutStyle = {
   margin: '0 auto',
-  backgroundColor: '#f5f5f5',
+  width: '400px',
+  textAlign: 'center',
+  backgroundColor: '#fafafa',
 }
 
 storeProvider.init(configureStore({
+  agreed: false,
 }))
 
 const store = storeProvider.getStore()

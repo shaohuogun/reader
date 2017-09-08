@@ -16,10 +16,10 @@ public class User extends Entity {
     
 	private String email;
 	
-	private String nickname;
-	
 	private String password;
 	
+	private String nickname;
+		
 	private String portraitId;
 	
 	private String profile;
@@ -47,21 +47,21 @@ public class User extends Entity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
+	
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getPortraitId() {

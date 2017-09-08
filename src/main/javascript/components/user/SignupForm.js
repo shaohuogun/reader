@@ -32,19 +32,19 @@ class SignupForm extends Component {
       />
 
       <Field
-      name="nickname"
-      component={TextField}
-      hintText="请填写个人昵称！"
-      floatingLabelText="昵称"
-      fullWidth={true}
-      validate={required}
-      />
-
-      <Field
       name="password"
       component={TextField}
       hintText="请填写登录密码！"
       floatingLabelText="密码"
+      fullWidth={true}
+      validate={required}
+      />
+          
+      <Field
+      name="nickname"
+      component={TextField}
+      hintText="请填写个人昵称！"
+      floatingLabelText="昵称"
       fullWidth={true}
       validate={required}
       />
@@ -58,5 +58,5 @@ SignupForm.propTypes = {
 }
 
 export default reduxForm({
-  form: 'userForm'
+  form: 'signupForm'
 })(SignupForm)
