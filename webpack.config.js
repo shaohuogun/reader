@@ -10,6 +10,7 @@ const config = {
     home: path.join(srcPath, '/home.js'),
     mine: path.join(srcPath, '/mine.js'),
     tool: path.join(srcPath, '/tool.js'),
+    about: path.join(srcPath, '/about.js'),
   },
   output: {
     path: dstPath,

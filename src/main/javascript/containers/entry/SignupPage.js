@@ -8,7 +8,7 @@ import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 
-import {reset, submit} from 'redux-form'
+import {submit} from 'redux-form'
 import {connect} from 'react-redux'
 
 import {
@@ -54,13 +54,6 @@ class SignupPage extends Component {
   updateAgreement = () => {
     const {dispatch, agreed} = this.props
     dispatch(updateAgreement(!agreed))
-
-
-  }
-
-  resetForm = () => {
-    const {dispatch} = this.props
-    dispatch(reset('signupForm'))
   }
 
   submitForm = () => {
@@ -84,16 +77,11 @@ class SignupPage extends Component {
       />
       </CardText>
       <CardActions style={toolbarStyle}>
-      <FlatButton
-      label="重置"
-      disableTouchRipple={true}
-      disableFocusRipple={true}
-      onTouchTap={this.resetForm}
-      />
       <RaisedButton
       label="注册"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      fullWidth={true}
       primary={true}
       onTouchTap={this.submitForm}
       disabled={!agreed}

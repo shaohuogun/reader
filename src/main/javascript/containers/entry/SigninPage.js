@@ -7,7 +7,7 @@ import {Card, CardText, CardActions} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 
-import {reset, submit} from 'redux-form'
+import {submit} from 'redux-form'
 import {connect} from 'react-redux'
 
 import SigninForm from '../../components/user/SigninForm'
@@ -39,12 +39,7 @@ class SigninPage extends Component {
       window.location.href = '/home';
     })
   }
-
-  resetForm = () => {
-    const {dispatch} = this.props
-    dispatch(reset('signinForm'))
-  }
-
+  
   submitForm = () => {
     const {dispatch} = this.props
     dispatch(submit('signinForm'))
@@ -58,16 +53,11 @@ class SigninPage extends Component {
       <SigninForm onSubmit={this.createSession} />
       </CardText>
       <CardActions style={toolbarStyle}>
-      <FlatButton
-      label="重置"
-      disableTouchRipple={true}
-      disableFocusRipple={true}
-      onTouchTap={this.resetForm}
-      />
       <RaisedButton
       label="登录"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      fullWidth={true}
       primary={true}
       onTouchTap={this.submitForm}
       />

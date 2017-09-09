@@ -10,8 +10,8 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import ToolLayout from './layouts/tool/ToolLayout'
-import routes from './routes/tool'
+import AboutLayout from './layouts/about/AboutLayout'
+import routes from './routes/about'
 
 // Needed for onTouchTap
 injectTapEventPlugin();
@@ -22,47 +22,31 @@ const layoutStyle = {
 }
 
 storeProvider.init(configureStore({
-  readingStepper: {
-    finished: false,
-    stepIndex: 0
-  },
-  readingItem: {},
-  messageStepper: {
-    finished: false,
-    stepIndex: 0
-  },
-  message: {},
-  channelStepper: {
-    finished: false,
-    stepIndex: 0
-  },
-  channel: {},
-  progress: 0,
-  pagination: {}
+  
 }))
 
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
-export default class Tool extends Component {
+export default class About extends Component {
   render () {
     return (
       <Provider key="provider" store={store}>
       <Router key="router" history={this.props.history} >
-      <ToolLayout style={layoutStyle}>
+      <AboutLayout style={layoutStyle}>
       {routes}
-      </ToolLayout>
+      </AboutLayout>
       </Router>
       </Provider>
     )
   }
 }
 
-Tool.propTypes = {
+About.propTypes = {
   history: PropTypes.object.isRequired
 }
 
 ReactDOM.render(
-  <Tool history={history} />,
+  <About history={history} />,
   document.getElementById('root')
 )

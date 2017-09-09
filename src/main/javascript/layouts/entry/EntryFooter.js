@@ -12,38 +12,38 @@ export default class EntryFooter extends Component {
       {...this.props}
       >
       <GridTile
-      key='about'
+      key='profile'
       cols={1}
       >
-      <a href="/about">关于我们</a>
+      <a href="/about/profile">网站简介</a>
       </GridTile>
 
       <GridTile
       key='contact'
       cols={1}
       >
-      <a href="/contact">联系方式</a>
+      <a href="/about/contact">联系方式</a>
       </GridTile>
 
       <GridTile
-      key='jobs'
+      key='business'
       cols={1}
       >
-      <a href="/jobs">招贤纳士</a>
+      <a href="/about/profile">商务合作</a>
       </GridTile>
 
       <GridTile
-      key='mobile'
+      key='disclaimer'
       cols={1}
       >
-      <a href="/mobile">移动应用</a>
+      <a href="/about/disclaimer">免责声明</a>
       </GridTile>
 
       <GridTile
       key='suggest'
       cols={1}
       >
-      <a href="/suggest">问题反馈</a>
+      <a href="/about/contact">建议反馈</a>
       </GridTile>
       </GridList>
     )

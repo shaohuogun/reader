@@ -29,4 +29,9 @@ public class PortalController extends Controller {
 		return new ModelAndView("mine");
 	}
 	
+	@RequestMapping(value = {"/about/**"}, method = RequestMethod.GET)
+	public ModelAndView about() {
+		return new ModelAndView("about");
+	}
+	
 }
