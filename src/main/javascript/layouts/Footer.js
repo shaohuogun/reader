@@ -2,13 +2,21 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {GridList, GridTile} from 'material-ui/GridList'
 
-export default class EntryFooter extends Component {
+const footerStyle = {
+  marginTop: '15px',
+  textAlign: 'center',
+  fontSize: '12px',
+  backgroundColor: '#fafafa',
+}
+
+export default class Footer extends Component {
   render() {
     return (
       <GridList
       cols={5}
       cellHeight={200}
       padding={15}
+      style={footerStyle}
       {...this.props}
       >
       <GridTile
@@ -50,5 +58,5 @@ export default class EntryFooter extends Component {
   }
 }
 
-EntryFooter.propTypes = {
+Footer.propTypes = {
 }

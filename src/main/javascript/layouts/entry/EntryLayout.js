@@ -4,16 +4,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import EntryNavigator from './EntryNavigator'
-import EntryFooter from './EntryFooter'
+import Footer from '../Footer'
 
 const navigatorStyle = {
   marginTop: 100,
-  textAlign: 'center',
-  backgroundColor: '#fafafa',
-}
-
-const footerStyle = {
-  marginTop: 50,
   textAlign: 'center',
   backgroundColor: '#fafafa',
 }
@@ -28,7 +22,7 @@ export default class EntryLayout extends Component {
       {this.props.children}
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <EntryFooter style={footerStyle} />
+      <Footer />
       </MuiThemeProvider>
       </div>
     )
