@@ -5,7 +5,7 @@ import {reducer as formReducer} from 'redux-form'
 import {combineReducers} from 'redux'
 
 import {signupReducer} from '../reducers/entry'
-import {readingStepperReducer, readingReducer, messageStepperReducer, catalogReducer, messageReducer,
+import {readingStepperReducer, readingListReducer, readingItemReducer, messageStepperReducer, catalogReducer, messageReducer,
   channelStepperReducer, channelReducer, progressReducer} from '../reducers/tool'
 import {ebookReducer, paginationReducer} from '../reducers/mine'
 
@@ -14,7 +14,8 @@ const rootReducer = combineReducers({
   form: formReducer,
   agreed: signupReducer,
   readingStepper: readingStepperReducer,
-  readingItem: readingReducer,
+  readingLists: readingListReducer,
+  readingItem: readingItemReducer,
   messageStepper: messageStepperReducer,
   catalogs: catalogReducer,
   message: messageReducer,

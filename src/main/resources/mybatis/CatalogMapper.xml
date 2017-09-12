@@ -32,13 +32,6 @@
 		select * from READER_CATALOG where id = #{id}
 	</select>
 
-	<select id="countByCreator" parameterType="java.lang.String"
-		resultType="java.lang.Integer">
-		select count(*) from READER_CATALOG where deleted = '0' and
-		creator
-		= #{creator}
-	</select>
-
 	<select id="selectByCreator" parameterType="java.lang.String"
 		resultMap="catalogResultMap">
 		select * from READER_CATALOG where deleted = '0' and creator

@@ -17,7 +17,7 @@ public class ReadDao {
 	public ReadDao(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-
+	
 	public void insertReadingList(ReadingList readingList) {
 		sqlSession.insert("org.shaohuogun.reader.portal.read.dao.ReadMapper.insertReadingList", readingList);
 	}
@@ -26,17 +26,8 @@ public class ReadDao {
 		return sqlSession.selectOne("org.shaohuogun.reader.portal.read.dao.ReadMapper.selectReadingListById", id);
 	}
 
-	public List<Entity> selectReadingListsByCreator(String creator) {
+	public List<ReadingList> selectReadingListsByCreator(String creator) {
 		return sqlSession.selectList("org.shaohuogun.reader.portal.read.dao.ReadMapper.selectReadingListsByCreator", creator);
-	}
-
-	public int countReadingList() {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.read.dao.ReadMapper.countReadingList");
-	}
-
-	public List<Entity> selectReadingLists(int offset, int limit) {
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.portal.read.dao.ReadMapper.selectReadingLists", rowBounds);
 	}
 
 	public void updateReadingList(ReadingList readingList) {

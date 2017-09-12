@@ -16,6 +16,8 @@ public class ReadingItem extends Entity {
 	
 	private String listId;
 	
+	private String listName;
+	
 	private String status = STATUS_WANT;
 
 	public String getBookName() {
@@ -40,6 +42,14 @@ public class ReadingItem extends Entity {
 	
 	public void setListId(String listId) {
 		this.listId = listId;
+	}
+
+	public String getListName() {
+		return listName;
+	}
+
+	public void setListName(String listName) {
+		this.listName = listName;
 	}
 
 	public String getStatus() {

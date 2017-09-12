@@ -131,6 +131,7 @@ CREATE TABLE `READER_READING_ITEM` (
   `book_name` varchar(128) NOT NULL,
   `book_id` char(36) DEFAULT NULL,
   `list_id` char(36) NOT NULL,
+  `list_name` varchar(64) NOT NULL,  
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -15,7 +15,7 @@ import ReadingItemFirstForm from '../../components/read/ReadingItemFirstForm'
 import ReadingItemSecondForm from '../../components/read/ReadingItemSecondForm'
 
 import {
-  updateReadingStepper, submitReadingItem, updateReadingItem
+  updateReadingStepper, updateReadingLists, submitReadingItem, updateReadingItem
 } from '../../actions/tool'
 
 const pageStyle = {
@@ -41,6 +41,23 @@ class ReadingStepper extends Component {
     this.createReadingItem = this.createReadingItem.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
     this.handleNext = this.handleNext.bind(this)
+  }
+
+  loadMyReadingLists = () => {
+    const {dispatch} = this.props
+    fetch('/api/myreadinglists', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    }).then(response => response.json())
+    .then(json => {
+      dispatch(updateReadingLists(json))
+      dispatch(updateReadingStepper({
+        finished: false,
+        stepIndex: 1
+      }))
+    })
   }
 
   createReadingItem = (readingItem) => {
@@ -77,10 +94,7 @@ class ReadingStepper extends Component {
   handleNext = () => {
     const {dispatch, readingStepper, readingItem} = this.props
     if (readingStepper.stepIndex === 0) {
-      dispatch(updateReadingStepper({
-        finished: false,
-        stepIndex: 1
-      }))
+      this.loadMyReadingLists()
     } else if (readingStepper.stepIndex === 1) {
       dispatch(submit('readingItemForm'))
     } else if (readingStepper.stepIndex === 2) {
@@ -115,7 +129,7 @@ class ReadingStepper extends Component {
   }
 
   render() {
-    const {dispatch, readingStepper} = this.props
+    const {dispatch, readingStepper, readingLists} = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
@@ -132,7 +146,7 @@ class ReadingStepper extends Component {
       <Step>
       <StepLabel>步骤二，选择目标阅读清单：</StepLabel>
       <StepContent>
-      <ReadingItemSecondForm onSubmit={this.createReadingItem} />
+      <ReadingItemSecondForm readingLists={readingLists} onSubmit={this.createReadingItem} />
       {this.renderStepActions(1)}
       </StepContent>
       </Step>
@@ -154,11 +168,13 @@ class ReadingStepper extends Component {
 
 ReadingStepper.propTypes = {
   readingStepper: PropTypes.object.isRequired,
+  readingLists: PropTypes.array.isRequired,
   readingItem: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
   readingStepper: state.readingStepper,
+  readingLists: state.readingLists,
   readingItem: state.readingItem
 })
 

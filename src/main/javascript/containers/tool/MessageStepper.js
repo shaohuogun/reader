@@ -45,14 +45,14 @@ class MessageStepper extends Component {
 
   loadMyCatalogs = () => {
     const {dispatch} = this.props
-    fetch('/api/mycatalogs?page=1', {
+    fetch('/api/mycatalogs', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       }
     }).then(response => response.json())
     .then(json => {
-      dispatch(updateCatalogs(json.objects))
+      dispatch(updateCatalogs(json))
       dispatch(updateMessageStepper({
         finished: false,
         stepIndex: 1

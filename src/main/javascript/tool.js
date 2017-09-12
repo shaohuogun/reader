@@ -26,6 +26,7 @@ storeProvider.init(configureStore({
     finished: false,
     stepIndex: 0
   },
+  readingLists: [],
   readingItem: {},
   messageStepper: {
     finished: false,

@@ -2,14 +2,11 @@ package org.shaohuogun.reader.portal.catalog.service;
 
 import java.util.List;
 
-import org.shaohuogun.common.Entity;
-import org.shaohuogun.common.Pagination;
+import org.shaohuogun.reader.portal.catalog.dao.CatalogDao;
+import org.shaohuogun.reader.portal.catalog.model.Catalog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import org.shaohuogun.reader.portal.catalog.dao.CatalogDao;
-import org.shaohuogun.reader.portal.catalog.model.Catalog;
 
 @Service
 public class CatalogService {
@@ -35,28 +32,12 @@ public class CatalogService {
 		return catalogDao.selectById(id);
 	}
 	
-	public int getCatalogCountOfCreator(String creator) throws Exception {
+	public List<Catalog> getCatalogsByCreator(String creator) throws Exception {
 		if ((creator == null) || creator.isEmpty()) {
 			throw new IllegalArgumentException("Creator cann't be null or empty.");
 		}
-		
-		return catalogDao.countByCreator(creator);
-	}
-	
-	public Pagination getCatalogsOfCreator(String creator, Pagination pagination) throws Exception {
-		if ((creator == null) || creator.isEmpty()) {
-			throw new IllegalArgumentException("Creator cann't be null or empty.");
-		}
-		
-		if (pagination == null) {
-			throw new NullPointerException("Pagination cann't be null.");
-		}
-		
-		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
-		int limit = pagination.getPageSize();
-		List<Entity> catalogs = catalogDao.selectByCreator(creator, offset, limit);
-		pagination.setObjects(catalogs);
-		return pagination;
+
+		return catalogDao.selectByCreator(creator);
 	}
 
 	@Transactional

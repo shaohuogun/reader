@@ -28,9 +28,10 @@
 		<result property="lastModifyDate" column="last_modify_date" />
 		<result property="status" column="status" />
 		<result property="deleted" column="deleted" />
-		<result property="listId" column="list_id" />
-		<result property="bookId" column="book_id" />
 		<result property="bookName" column="book_name" />
+		<result property="bookId" column="book_id" />
+		<result property="listId" column="list_id" />
+		<result property="listName" column="list_name" />
 	</resultMap>
 
 	<insert id="insertReadingList" parameterType="org.shaohuogun.reader.portal.read.model.ReadingList">
@@ -59,16 +60,6 @@
 		creator = #{creator} order by create_date desc
 	</select>
 
-	<select id="countReadingList" resultType="java.lang.Integer">
-		select count(*) from
-		READER_READING_LIST where deleted = '0'
-	</select>
-
-	<select id="selectReadingLists" resultMap="readingListResultMap">
-		select * from
-		READER_READING_LIST where deleted = '0' order by create_date desc
-	</select>
-
 	<update id="updateReadingList" parameterType="org.shaohuogun.reader.portal.read.model.ReadingList"
 		flushCache="true">
 		update
@@ -90,15 +81,18 @@
 		insert into
 		READER_READING_ITEM
 		(id,
-		creator, create_date, status, deleted, list_id,
-		book_id, book_name)
+		creator, create_date, status, deleted,
+		book_name,
+		book_id, list_id, list_name)
 		values (#{id},
-		#{creator}, #{createDate},
+		#{creator},
+		#{createDate},
 		#{status},
 		#{deleted},
-		#{listId},
+		#{bookName},
 		#{bookId},
-		#{bookName}
+		#{listId},
+		#{listName}
 		)
 	</insert>
 

@@ -1,7 +1,8 @@
 package org.shaohuogun.reader.portal.catalog.controller;
 
+import java.util.List;
+
 import org.shaohuogun.common.Controller;
-import org.shaohuogun.common.Pagination;
 import org.shaohuogun.common.Utility;
 import org.shaohuogun.reader.portal.catalog.model.Catalog;
 import org.shaohuogun.reader.portal.catalog.service.CatalogService;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,15 +33,9 @@ public class CatalogController extends Controller {
 	}
 
 	@RequestMapping(value = "/api/mycatalogs", method = RequestMethod.GET)
-	public Pagination getMyCatalogs(@RequestParam(defaultValue = "1", required = false) int page) throws Exception {
+	public List<Catalog> getMyCatalogs() throws Exception {
 		String creator = "a11039eb-4ba1-441a-bfdb-0d40f61a53dd";
-
-		int total = catalogService.getCatalogCountOfCreator(creator);
-		Pagination pagination = new Pagination();
-		pagination.setTotal(total);
-		pagination.setPageSize(total);
-		pagination.setPageIndex(page);
-		return catalogService.getCatalogsOfCreator(creator, pagination);
+		return catalogService.getCatalogsByCreator(creator);
 	}
 
 }

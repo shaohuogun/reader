@@ -1,5 +1,6 @@
 import {
   UPDATE_READING_STEPPER,
+  UPDATE_READING_LISTS,
   SUBMIT_READING_ITEM,
   UPDATE_READING_ITEM,
   UPDATE_MESSAGE_STEPPER,
@@ -22,7 +23,16 @@ export function readingStepperReducer(state = {}, action) {
   }
 }
 
-export function readingReducer(state = {}, action) {
+export function readingListReducer(state = [], action) {
+  switch (action.type) {
+    case UPDATE_READING_LISTS:
+    return action.readingLists
+    default:
+    return state
+  }
+}
+
+export function readingItemReducer(state = {}, action) {
   switch (action.type) {
     case SUBMIT_READING_ITEM:
     return Object.assign({}, state, action.readingItem)

@@ -2,11 +2,9 @@ package org.shaohuogun.reader.portal.catalog.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Component;
-import org.shaohuogun.common.Entity;
 import org.shaohuogun.reader.portal.catalog.model.Catalog;
+import org.springframework.stereotype.Component;
 
 @Component
 public class CatalogDao {
@@ -25,14 +23,8 @@ public class CatalogDao {
 		return sqlSession.selectOne("org.shaohuogun.reader.portal.catalog.dao.CatalogMapper.selectById", id);
 	}
 
-	public int countByCreator(String creator) {
-		return sqlSession.selectOne("org.shaohuogun.reader.portal.catalog.dao.CatalogMapper.countByCreator", creator);
-	}
-
-	public List<Entity> selectByCreator(String creator, int offset, int limit) {
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return sqlSession.selectList("org.shaohuogun.reader.portal.catalog.dao.CatalogMapper.selectByCreator", creator,
-				rowBounds);
+	public List<Catalog> selectByCreator(String creator) {
+		return sqlSession.selectList("org.shaohuogun.reader.portal.catalog.dao.CatalogMapper.selectByCreator", creator);
 	}
 
 	public void update(Catalog catalog) {

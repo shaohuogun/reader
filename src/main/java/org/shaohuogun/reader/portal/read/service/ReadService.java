@@ -48,30 +48,13 @@ public class ReadService {
 		readingList.setDeleted(Entity.DELETED_YES);
 		readDao.updateReadingList(readingList);
 	}
-		
 	
-	public List<Entity> getReadingLists(String creator) throws Exception {
+	public List<ReadingList> getReadingListsByCreator(String creator) throws Exception {
 		if ((creator == null) || creator.isEmpty()) {
 			throw new IllegalArgumentException("Creator cann't be null or empty.");
 		}
 		
 		return readDao.selectReadingListsByCreator(creator);
-	}
-
-	public int getReadingListCount() throws Exception {
-		return readDao.countReadingList();
-	}
-
-	public Pagination getReadingLists(Pagination pagination) throws Exception {
-		if (pagination == null) {
-			throw new NullPointerException("Pagination cann't be null.");
-		}
-
-		int offset = (pagination.getPageIndex() - 1) * pagination.getPageSize();
-		int limit = pagination.getPageSize();
-		List<Entity> readingLists = readDao.selectReadingLists(offset, limit);
-		pagination.setObjects(readingLists);
-		return pagination;
 	}
 
 	@Transactional
@@ -102,7 +85,7 @@ public class ReadService {
 		return readDao.selectReadingItemById(id);
 	}
 
-	public int getReadingItemCount(String listId) throws Exception {
+	public int countReadingItemByListId(String listId) throws Exception {
 		if ((listId == null) || listId.isEmpty()) {
 			throw new IllegalArgumentException("Reading list's id cann't be null or empty.");
 		}
@@ -110,7 +93,7 @@ public class ReadService {
 		return readDao.countReadingItemByListId(listId);
 	}
 
-	public Pagination getReadingItems(String listId, Pagination pagination) throws Exception {
+	public Pagination getReadingItemsByListId(String listId, Pagination pagination) throws Exception {
 		if ((listId == null) || listId.isEmpty()) {
 			throw new IllegalArgumentException("Reading list's id cann't be null or empty.");
 		}
