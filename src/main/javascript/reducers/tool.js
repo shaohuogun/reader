@@ -42,10 +42,9 @@ export function messageStepperReducer(state = {}, action) {
   }
 }
 
-export function catalogReducer(state = {}, action) {
+export function catalogReducer(state = [], action) {
   switch (action.type) {
     case UPDATE_CATALOGS:
-    // return Object.assign({}, state, {catalogs:[...action.catalogs]})
     return action.catalogs
     default:
     return state
