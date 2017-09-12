@@ -39,6 +39,7 @@ public class CatalogController extends Controller {
 		int total = catalogService.getCatalogCountOfCreator(creator);
 		Pagination pagination = new Pagination();
 		pagination.setTotal(total);
+		pagination.setPageSize(total);
 		pagination.setPageIndex(page);
 		return catalogService.getCatalogsOfCreator(creator, pagination);
 	}

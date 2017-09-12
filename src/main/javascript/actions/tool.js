@@ -3,6 +3,7 @@ export const SUBMIT_READING_ITEM = 'SUBMIT_READING_ITEM'
 export const UPDATE_READING_ITEM = 'UPDATE_READING_ITEM'
 
 export const UPDATE_MESSAGE_STEPPER = 'UPDATE_MESSAGE_STEPPER'
+export const UPDATE_CATALOGS = 'UPDATE_CATALOGS'
 export const SUBMIT_MESSAGE = 'SUBMIT_MESSAGE'
 export const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
 
@@ -38,6 +39,13 @@ export function updateMessageStepper(messageStepper) {
   return {
     type: UPDATE_MESSAGE_STEPPER,
     messageStepper
+  }
+}
+
+export function updateCatalogs(catalogs) {
+  return {
+    type: UPDATE_CATALOGS,
+    catalogs
   }
 }
 
@@ -96,7 +104,7 @@ export function asyncPickingProgress(progressId) {
       .then(json => {
         dispatch(updatePickingProgress(json))
         if (json === 100) {
-          clearInterval(interval);
+          clearInterval(interval)
           dispatch(updateChannelStepper({
             finished: false,
             stepIndex: 1
@@ -127,7 +135,7 @@ export function asyncGeneratingProgress(progressId) {
       .then(json => {
         dispatch(updateGeneratingProgress(json))
         if (json === 100) {
-          clearInterval(interval);
+          clearInterval(interval)
           dispatch(updateChannelStepper({
             finished: true,
             stepIndex: 2

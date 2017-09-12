@@ -31,6 +31,7 @@ storeProvider.init(configureStore({
     finished: false,
     stepIndex: 0
   },
+  catalogs: [],
   message: {},
   channelStepper: {
     finished: false,

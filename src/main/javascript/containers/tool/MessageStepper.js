@@ -15,7 +15,7 @@ import MessageFirstForm from '../../components/message/MessageFirstForm'
 import MessageSecondForm from '../../components/message/MessageSecondForm'
 
 import {
-  updateMessageStepper, submitMessage, updateMessage
+  updateMessageStepper, updateCatalogs, submitMessage, updateMessage
 } from '../../actions/tool'
 
 const pageStyle = {
@@ -41,6 +41,23 @@ class MessageStepper extends Component {
     this.createMessage = this.createMessage.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
     this.handleNext = this.handleNext.bind(this)
+  }
+
+  loadMyCatalogs = () => {
+    const {dispatch} = this.props
+    fetch('/api/mycatalogs?page=1', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      }
+    }).then(response => response.json())
+    .then(json => {
+      dispatch(updateCatalogs(json.objects))
+      dispatch(updateMessageStepper({
+        finished: false,
+        stepIndex: 1
+      }))
+    })
   }
 
   createMessage = (message) => {
@@ -77,10 +94,7 @@ class MessageStepper extends Component {
   handleNext = () => {
     const {dispatch, messageStepper, message} = this.props
     if (messageStepper.stepIndex === 0) {
-      dispatch(updateMessageStepper({
-        finished: false,
-        stepIndex: 1
-      }))
+      this.loadMyCatalogs()
     } else if (messageStepper.stepIndex === 1) {
       dispatch(submit('messageForm'))
     } else if (messageStepper.stepIndex === 2) {
@@ -115,7 +129,7 @@ class MessageStepper extends Component {
   }
 
   render() {
-    const {dispatch, messageStepper} = this.props
+    const {dispatch, messageStepper, catalogs} = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
@@ -132,7 +146,7 @@ class MessageStepper extends Component {
       <Step>
       <StepLabel>步骤二，选择文章收藏分类：</StepLabel>
       <StepContent>
-      <MessageSecondForm onSubmit={this.createMessage} />
+      <MessageSecondForm catalogs={catalogs} onSubmit={this.createMessage} />
       {this.renderStepActions(1)}
       </StepContent>
       </Step>
@@ -154,11 +168,13 @@ class MessageStepper extends Component {
 
 MessageStepper.propTypes = {
   messageStepper: PropTypes.object.isRequired,
+  catalogs: PropTypes.array.isRequired,
   message: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
   messageStepper: state.messageStepper,
+  catalogs: state.catalogs,
   message: state.message
 })
 

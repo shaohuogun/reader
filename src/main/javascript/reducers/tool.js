@@ -3,6 +3,7 @@ import {
   SUBMIT_READING_ITEM,
   UPDATE_READING_ITEM,
   UPDATE_MESSAGE_STEPPER,
+  UPDATE_CATALOGS,
   SUBMIT_MESSAGE,
   UPDATE_MESSAGE,
   UPDATE_CHANNEL_STEPPER,
@@ -36,6 +37,16 @@ export function messageStepperReducer(state = {}, action) {
   switch (action.type) {
     case UPDATE_MESSAGE_STEPPER:
     return Object.assign({}, state, action.messageStepper)
+    default:
+    return state
+  }
+}
+
+export function catalogReducer(state = {}, action) {
+  switch (action.type) {
+    case UPDATE_CATALOGS:
+    // return Object.assign({}, state, {catalogs:[...action.catalogs]})
+    return action.catalogs
     default:
     return state
   }

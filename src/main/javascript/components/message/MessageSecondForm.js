@@ -31,27 +31,32 @@ const validate = values => {
 
 class MessageSecondForm extends Component {
   render() {
-    const {handleSubmit} = this.props
+    const {handleSubmit, catalogs} = this.props
+    var radios = []
+		if (catalogs != null) {
+      var catalogCount = catalogs.length
+  		for (var i = 0; i < catalogCount; i++) {
+  			var catalog = catalogs[i]
+  			radios.push(
+          <RadioButton
+            key={catalog.id}
+            value={catalog.id}
+            label={catalog.name}
+            checkedIcon={<ActionFavorite style={styles.checkedIcon} />}
+            uncheckedIcon={<ActionFavoriteBorder />}
+            style={styles.radioButton}
+          />
+  			)
+  		}
+		}
+
     return (
       <form onSubmit={handleSubmit}>
       <Field
         name="categoryId"
         component={RadioButtonGroup}
         floatingLabelText="文章分类">
-        <RadioButton
-          value="ab321255-2113-4505-8d49-0067a2a865d9"
-          label="鸡汤励志"
-          checkedIcon={<ActionFavorite style={styles.checkedIcon} />}
-          uncheckedIcon={<ActionFavoriteBorder />}
-          style={styles.radioButton}
-        />
-        <RadioButton
-          value="d457e980-c8a7-4187-b5a7-2fb079ae0691"
-          label="工作技能"
-          checkedIcon={<ActionFavorite style={styles.checkedIcon} />}
-          uncheckedIcon={<ActionFavoriteBorder />}
-          style={styles.radioButton}
-        />
+        {radios}
       </Field>
 
       <Field
@@ -67,7 +72,8 @@ class MessageSecondForm extends Component {
 }
 
 MessageSecondForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  catalogs: PropTypes.array.isRequired
 }
 
 export default reduxForm({
