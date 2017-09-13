@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {Route, Link} from 'react-router-dom'
 import {List, ListItem} from 'material-ui/List'
@@ -13,27 +13,25 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   )}/>
 )
 
-export default class ToolNavigator extends Component {
-  render() {
-    return (
-      <List {...this.props}>
-      <Subheader>服务目录</Subheader>
-      <ListItem
-      primaryText={<CustomLink to="/tool/reading" label="阅读清单" />}
-      leftAvatar={<Avatar src="/image/tool/reading.jpg" />}
-      />
-      <ListItem
-      primaryText={<CustomLink to="/tool/message" label="好文收藏" />}
-      leftAvatar={<Avatar src="/image/tool/favorites.jpg" />}
-      />
-      <ListItem
-      primaryText={<CustomLink to="/tool/channel" label="聚文成册" />}
-      leftAvatar={<Avatar src="/image/tool/ebook.jpg" />}
-      />
-      </List>
-    )
-  }
-}
+const ToolNavigator = (props) => (
+  <List {...props}>
+  <Subheader>服务目录</Subheader>
+  <ListItem
+  primaryText={<CustomLink to="/tool/reading" label="阅读清单" />}
+  leftAvatar={<Avatar src="/image/tool/reading.jpg" />}
+  />
+  <ListItem
+  primaryText={<CustomLink to="/tool/message" label="好文收藏" />}
+  leftAvatar={<Avatar src="/image/tool/favorites.jpg" />}
+  />
+  <ListItem
+  primaryText={<CustomLink to="/tool/channel" label="聚文成册" />}
+  leftAvatar={<Avatar src="/image/tool/ebook.jpg" />}
+  />
+  </List>
+)
 
 ToolNavigator.propTypes = {
 }
+
+export default ToolNavigator

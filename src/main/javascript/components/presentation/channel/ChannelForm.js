@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {TextField} from 'redux-form-material-ui'
@@ -9,61 +9,47 @@ const urlRegrex = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3
 const url = value => (value && !urlRegrex.test(value) ? '无效URL，请检查！' : undefined)
 const nonzero = value => (value <= 0 ? '采集数量必须大于0！' : undefined)
 
-class ChannelForm extends Component {
-  componentDidMount() {
-    this.refs.url // the Field
-    .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
-    .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
-    .focus() // on TextField
-  }
+const ChannelForm = ({handleSubmit}) => (
+  <form onSubmit={handleSubmit}>
+  <Field
+  name="url"
+  component={TextField}
+  hintText="请填写媒体的网址！"
+  floatingLabelText="媒体网址"
+  fullWidth={true}
+  validate={[required, url]}
+  />
 
-  render() {
-    const {handleSubmit} = this.props
-    return (
-      <form onSubmit={handleSubmit}>
-      <Field
-      name="url"
-      component={TextField}
-      hintText="请填写媒体的网址！"
-      floatingLabelText="媒体网址"
-      fullWidth={true}
-      validate={[required, url]}
-      ref="url"
-      withRef
-      />
+  <Field
+  name="name"
+  component={TextField}
+  hintText="请填写媒体的名称！"
+  floatingLabelText="媒体名称"
+  fullWidth={true}
+  validate={required}
+  />
 
-      <Field
-      name="name"
-      component={TextField}
-      hintText="请填写媒体的名称！"
-      floatingLabelText="媒体名称"
-      fullWidth={true}
-      validate={required}
-      />
+  <Field
+  name="description"
+  component={TextField}
+  hintText="请填写媒体的简介！"
+  floatingLabelText="媒体简介"
+  multiLine={true}
+  rows={3}
+  fullWidth={true}
+  validate={required}
+  />
 
-      <Field
-      name="description"
-      component={TextField}
-      hintText="请填写媒体的简介！"
-      floatingLabelText="媒体简介"
-      multiLine={true}
-      rows={3}
-      fullWidth={true}
-      validate={required}
-      />
-
-      <Field
-      name="amount"
-      component={TextField}
-      hintText="请填写采集的页数！"
-      floatingLabelText="采集页数"
-      fullWidth={true}
-      validate={[required, nonzero]}
-      />
-      </form>
-    )
-  }
-}
+  <Field
+  name="amount"
+  component={TextField}
+  hintText="请填写采集的页数！"
+  floatingLabelText="采集页数"
+  fullWidth={true}
+  validate={[required, nonzero]}
+  />
+  </form>
+)
 
 ChannelForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired

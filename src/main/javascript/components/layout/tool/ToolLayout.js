@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -26,27 +26,25 @@ const sidebarStyle = {
   display: 'inline-block',
 }
 
-export default class ToolLayout extends Component {
-  render() {
-    return (
-      <div>
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Header style={headerStyle} />
-      </MuiThemeProvider>
+const ToolLayout = (props) => (
+  <div>
+  <MuiThemeProvider muiTheme={getMuiTheme()}>
+  <Header style={headerStyle} />
+  </MuiThemeProvider>
 
-      <div style={contentStyle}>
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <div style={sidebarStyle}>
-        <ToolNavigator style={navigatorStyle} />
-        <Footer />
-      </div>
-      </MuiThemeProvider>
-      {this.props.children}
-      </div>
-      </div>
-    )
-  }
-}
+  <div style={contentStyle}>
+  <MuiThemeProvider muiTheme={getMuiTheme()}>
+  <div style={sidebarStyle}>
+  <ToolNavigator style={navigatorStyle} />
+  <Footer />
+  </div>
+  </MuiThemeProvider>
+  {props.children}
+  </div>
+  </div>
+)
 
 ToolLayout.propTypes = {
 }
+
+export default ToolLayout

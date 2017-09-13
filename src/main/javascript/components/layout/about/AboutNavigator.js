@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {Route, Link} from 'react-router-dom'
 import {List, ListItem} from 'material-ui/List'
@@ -13,23 +13,21 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   )}/>
 )
 
-export default class AboutNavigator extends Component {
-  render() {
-    return (
-      <List {...this.props}>
-      <Subheader>关于</Subheader>
-      <ListItem
-      primaryText={<CustomLink to="/about/profile" label="网站简介" />}
-      leftAvatar={<Avatar src="/image/about/profile.jpg" />}
-      />
-      <ListItem
-      primaryText={<CustomLink to="/about/contact" label="联系方式" />}
-      leftAvatar={<Avatar src="/image/about/contact.jpg" />}
-      />
-      </List>
-    )
-  }
-}
+const AboutNavigator = (props) => (
+  <List {...props}>
+  <Subheader>关于</Subheader>
+  <ListItem
+  primaryText={<CustomLink to="/about/profile" label="网站简介" />}
+  leftAvatar={<Avatar src="/image/about/profile.jpg" />}
+  />
+  <ListItem
+  primaryText={<CustomLink to="/about/contact" label="联系方式" />}
+  leftAvatar={<Avatar src="/image/about/contact.jpg" />}
+  />
+  </List>
+)
 
 AboutNavigator.propTypes = {
 }
+
+export default AboutNavigator

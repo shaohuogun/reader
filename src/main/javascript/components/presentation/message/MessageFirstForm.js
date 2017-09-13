@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {TextField} from 'redux-form-material-ui'
@@ -16,32 +16,17 @@ const validate = values => {
   return errors
 }
 
-class MessageFirstForm extends Component {
-  componentDidMount() {
-    this.refs.url // the Field
-    .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
-    .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
-    .focus() // on TextField
-  }
-
-  render() {
-    const {handleSubmit} = this.props
-    return (
-      <form onSubmit={handleSubmit}>
-      <Field
-      name="url"
-      component={TextField}
-      hintText="请填写目标文章网址！"
-      floatingLabelText="文章网址"
-      fullWidth={true}
-      ref="url"
-      withRef
-      />
-
-      </form>
-    )
-  }
-}
+const MessageFirstForm = ({handleSubmit}) => (
+  <form onSubmit={handleSubmit}>
+  <Field
+  name="url"
+  component={TextField}
+  hintText="请填写目标文章网址！"
+  floatingLabelText="文章网址"
+  fullWidth={true}
+  />
+  </form>
+)
 
 MessageFirstForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired
