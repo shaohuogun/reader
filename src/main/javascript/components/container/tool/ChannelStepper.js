@@ -13,15 +13,15 @@ import FlatButton from 'material-ui/FlatButton'
 import {reset, submit} from 'redux-form'
 import {connect} from 'react-redux'
 
-import ChannelForm from '../../components/channel/ChannelForm'
-import ChannelDetail from '../../components/channel/ChannelDetail'
-import MessageList from '../../components/message/MessageList'
-import EbookDetail from '../../components/ebook/EbookDetail'
+import ChannelForm from '../../presentation/channel/ChannelForm'
+import ChannelDetail from '../../presentation/channel/ChannelDetail'
+import MessageList from '../../presentation/message/MessageList'
+import EbookDetail from '../../presentation/ebook/EbookDetail'
 
 import {
   updateChannelStepper, submitChannel, updateChannel, asyncPickingProgress, asyncGeneratingProgress
-} from '../../actions/tool'
-import {generateEbook, postEbook} from '../../actions/mine'
+} from '../../../actions/tool'
+import {generateEbook, postEbook} from '../../../actions/mine'
 
 const pageStyle = {
   width: 685,
@@ -45,7 +45,7 @@ class ChannelStepper extends Component {
     // Tips: The best place to bind your member functions is in the component constructor
     this.createChannel = this.createChannel.bind(this)
   }
-  
+
   createChannel = (channel) => {
     const {dispatch} = this.props
     dispatch(submitChannel(channel))

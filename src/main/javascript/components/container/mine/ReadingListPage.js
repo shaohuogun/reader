@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import ChannelList from '../../components/channel/ChannelList'
+import ReadingListTabs from '../../presentation/read/ReadingListTabs'
 
 const pageStyle = {
   width: 685,
@@ -14,15 +14,21 @@ const pageStyle = {
   display: 'inline-block',
 }
 
-export default class ChannelPage extends Component {
+const tabsStyle = {
+  marginTop: 15,
+}
+
+export default class ReadingListPage extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <ChannelList style={pageStyle} />
+      <div style={pageStyle}>
+      <ReadingListTabs style={tabsStyle} />
+      </div>
       </MuiThemeProvider>
     )
   }
 }
 
-ChannelPage.propTypes = {
+ReadingListPage.propTypes = {
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import {Redirect, Route} from 'react-router-dom'
 
-import SignupPage from '../containers/entry/SignupPage'
-import SigninPage from '../containers/entry/SigninPage'
+import SignupPage from '../components/container/entry/SignupPage'
+import SigninPage from '../components/container/entry/SigninPage'
 
 export default (
   <div>

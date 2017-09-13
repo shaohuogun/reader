@@ -11,12 +11,12 @@ import FlatButton from 'material-ui/FlatButton'
 import {reset, submit} from 'redux-form'
 import {connect} from 'react-redux'
 
-import MessageFirstForm from '../../components/message/MessageFirstForm'
-import MessageSecondForm from '../../components/message/MessageSecondForm'
+import ReadingItemFirstForm from '../../presentation/read/ReadingItemFirstForm'
+import ReadingItemSecondForm from '../../presentation/read/ReadingItemSecondForm'
 
 import {
-  updateMessageStepper, updateCatalogs, submitMessage, updateMessage
-} from '../../actions/tool'
+  updateReadingStepper, updateReadingLists, submitReadingItem, updateReadingItem
+} from '../../../actions/tool'
 
 const pageStyle = {
   width: 685,
@@ -33,46 +33,46 @@ const toolbarStyle = {
   textAlign: 'center'
 }
 
-class MessageStepper extends Component {
+class ReadingStepper extends Component {
   constructor(props) {
     super(props)
 
     // Tips: The best place to bind your member functions is in the component constructor
-    this.createMessage = this.createMessage.bind(this)
+    this.createReadingItem = this.createReadingItem.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
     this.handleNext = this.handleNext.bind(this)
   }
 
-  loadMyCatalogs = () => {
+  loadMyReadingLists = () => {
     const {dispatch} = this.props
-    fetch('/api/mycatalogs', {
+    fetch('/api/myreadinglists', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       }
     }).then(response => response.json())
     .then(json => {
-      dispatch(updateCatalogs(json))
-      dispatch(updateMessageStepper({
+      dispatch(updateReadingLists(json))
+      dispatch(updateReadingStepper({
         finished: false,
         stepIndex: 1
       }))
     })
   }
 
-  createMessage = (message) => {
+  createReadingItem = (readingItem) => {
     const {dispatch} = this.props
-    dispatch(submitMessage(message))
-    fetch('/api/message?categoryType=Catalog', {
+    dispatch(submitReadingItem(readingItem))
+    fetch('/api/readingitem', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify(message)
+      body: JSON.stringify(readingItem)
     }).then(response => response.json())
     .then(json => {
-      dispatch(updateMessage(json))
-      dispatch(updateMessageStepper({
+      dispatch(updateReadingItem(json))
+      dispatch(updateReadingStepper({
         finished: true,
         stepIndex: 2
       }))
@@ -80,25 +80,25 @@ class MessageStepper extends Component {
   }
 
   handlePrev = () => {
-    const {dispatch, messageStepper} = this.props
-    if (messageStepper.stepIndex === 0) {
-      dispatch(reset('messageForm'))
+    const {dispatch, readingStepper} = this.props
+    if (readingStepper.stepIndex === 0) {
+      dispatch(reset('readingItemForm'))
     } else {
-      dispatch(updateMessageStepper({
-        finished: messageStepper.stepIndex >= 2,
-        stepIndex: messageStepper.stepIndex - 1
+      dispatch(updateReadingStepper({
+        finished: readingStepper.stepIndex >= 2,
+        stepIndex: readingStepper.stepIndex - 1
       }))
     }
   }
 
   handleNext = () => {
-    const {dispatch, messageStepper, message} = this.props
-    if (messageStepper.stepIndex === 0) {
-      this.loadMyCatalogs()
-    } else if (messageStepper.stepIndex === 1) {
-      dispatch(submit('messageForm'))
-    } else if (messageStepper.stepIndex === 2) {
-      dispatch(updateMessageStepper({
+    const {dispatch, readingStepper, readingItem} = this.props
+    if (readingStepper.stepIndex === 0) {
+      this.loadMyReadingLists()
+    } else if (readingStepper.stepIndex === 1) {
+      dispatch(submit('readingItemForm'))
+    } else if (readingStepper.stepIndex === 2) {
+      dispatch(updateReadingStepper({
         finished: false,
         stepIndex: 0
       }))
@@ -129,30 +129,30 @@ class MessageStepper extends Component {
   }
 
   render() {
-    const {dispatch, messageStepper, catalogs} = this.props
+    const {dispatch, readingStepper, readingLists} = this.props
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
-      <Stepper activeStep={messageStepper.stepIndex} orientation="vertical">
+      <Stepper activeStep={readingStepper.stepIndex} orientation="vertical">
 
       <Step>
-      <StepLabel>步骤一，填写目标文章网址：</StepLabel>
+      <StepLabel>步骤一，填写待阅读的书名：</StepLabel>
       <StepContent>
-      <MessageFirstForm onSubmit={this.handleNext} />
+      <ReadingItemFirstForm onSubmit={this.handleNext} />
       {this.renderStepActions(0)}
       </StepContent>
       </Step>
 
       <Step>
-      <StepLabel>步骤二，选择文章收藏分类：</StepLabel>
+      <StepLabel>步骤二，选择目标阅读清单：</StepLabel>
       <StepContent>
-      <MessageSecondForm catalogs={catalogs} onSubmit={this.createMessage} />
+      <ReadingItemSecondForm readingLists={readingLists} onSubmit={this.createReadingItem} />
       {this.renderStepActions(1)}
       </StepContent>
       </Step>
 
       <Step>
-      <StepLabel>步骤三，确认文章分类信息：</StepLabel>
+      <StepLabel>步骤三，确认阅读清单信息：</StepLabel>
       <StepContent>
 
       {this.renderStepActions(2)}
@@ -166,16 +166,16 @@ class MessageStepper extends Component {
   }
 }
 
-MessageStepper.propTypes = {
-  messageStepper: PropTypes.object.isRequired,
-  catalogs: PropTypes.array.isRequired,
-  message: PropTypes.object.isRequired
+ReadingStepper.propTypes = {
+  readingStepper: PropTypes.object.isRequired,
+  readingLists: PropTypes.array.isRequired,
+  readingItem: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  messageStepper: state.messageStepper,
-  catalogs: state.catalogs,
-  message: state.message
+  readingStepper: state.readingStepper,
+  readingLists: state.readingLists,
+  readingItem: state.readingItem
 })
 
-export default connect(mapStateToProps)(MessageStepper)
+export default connect(mapStateToProps)(ReadingStepper)

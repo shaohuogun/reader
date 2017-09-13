@@ -5,9 +5,9 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {Tabs, Tab} from 'material-ui/Tabs'
 
-import ChannelDetail from '../../components/channel/ChannelDetail'
-import MessageList from '../../components/message/MessageList'
-import EbookTable from '../../components/ebook/EbookTable'
+import ChannelDetail from '../../presentation/channel/ChannelDetail'
+import MessageList from '../../presentation/message/MessageList'
+import EbookTable from '../../presentation/ebook/EbookTable'
 
 const pageStyle = {
   width: 685,

@@ -4,31 +4,27 @@ import ReactDOM from 'react-dom'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import ReadingListTabs from '../../components/read/ReadingListTabs'
+import EbookGrid from '../../presentation/ebook/EbookGrid'
 
 const pageStyle = {
   width: 685,
   marginTop: 15,
   marginLeft: 15,
   float: 'left',
-  display: 'inline-block',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-around',
 }
 
-const tabsStyle = {
-  marginTop: 15,
-}
-
-export default class ReadingListPage extends Component {
+export default class EbookPage extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <div style={pageStyle}>
-      <ReadingListTabs style={tabsStyle} />
-      </div>
+      <EbookGrid style={pageStyle} />
       </MuiThemeProvider>
     )
   }
 }
 
-ReadingListPage.propTypes = {
+EbookPage.propTypes = {
 }

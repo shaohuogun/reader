@@ -10,7 +10,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import configureStore from './store/configureStore'
 import storeProvider from './store/storeProvider'
 
-import AboutLayout from './layouts/about/AboutLayout'
+import AboutLayout from './components/layout/about/AboutLayout'
 import routes from './routes/about'
 
 // Needed for onTouchTap
@@ -22,7 +22,7 @@ const layoutStyle = {
 }
 
 storeProvider.init(configureStore({
-  
+
 }))
 
 const store = storeProvider.getStore()

@@ -1,10 +1,10 @@
 import React from 'react'
 import {Redirect, Route} from 'react-router-dom'
 
-import ReadingListPage from '../containers/mine/ReadingListPage'
-import ChannelPage from '../containers/mine/ChannelPage'
-import MessagePage from '../containers/mine/MessagePage'
-import EbookPage from '../containers/mine/EbookPage'
+import ReadingListPage from '../components/container/mine/ReadingListPage'
+import ChannelPage from '../components/container/mine/ChannelPage'
+import MessagePage from '../components/container/mine/MessagePage'
+import EbookPage from '../components/container/mine/EbookPage'
 
 export default (
   <div>

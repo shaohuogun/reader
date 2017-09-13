@@ -1,8 +1,8 @@
 import React from 'react'
 import {Redirect, Route} from 'react-router-dom'
 
-import ProfilePage from '../containers/about/ProfilePage'
-import ContactPage from '../containers/about/ContactPage'
+import ProfilePage from '../components/container/about/ProfilePage'
+import ContactPage from '../components/container/about/ContactPage'
 
 export default (
   <div>

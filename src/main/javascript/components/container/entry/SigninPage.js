@@ -10,7 +10,7 @@ import FlatButton from 'material-ui/FlatButton'
 import {submit} from 'redux-form'
 import {connect} from 'react-redux'
 
-import SigninForm from '../../components/user/SigninForm'
+import SigninForm from '../../presentation/user/SigninForm'
 
 const toolbarStyle = {
   marginTop: 15,
@@ -39,7 +39,7 @@ class SigninPage extends Component {
       window.location.href = '/home';
     })
   }
-  
+
   submitForm = () => {
     const {dispatch} = this.props
     dispatch(submit('signinForm'))

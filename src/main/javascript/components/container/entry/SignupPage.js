@@ -13,8 +13,8 @@ import {connect} from 'react-redux'
 
 import {
   updateAgreement
-} from '../../actions/entry'
-import SignupForm from '../../components/user/SignupForm'
+} from '../../../actions/entry'
+import SignupForm from '../../presentation/user/SignupForm'
 
 const agreementStyle = {
   textAlign: 'left'

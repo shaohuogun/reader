@@ -4,27 +4,25 @@ import ReactDOM from 'react-dom'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import EbookGrid from '../../components/ebook/EbookGrid'
+import ChannelList from '../../presentation/channel/ChannelList'
 
 const pageStyle = {
   width: 685,
   marginTop: 15,
   marginLeft: 15,
   float: 'left',
-  display: 'flex',
-  flexWrap: 'wrap',
-  justifyContent: 'space-around',
+  display: 'inline-block',
 }
 
-export default class EbookPage extends Component {
+export default class ChannelPage extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <EbookGrid style={pageStyle} />
+      <ChannelList style={pageStyle} />
       </MuiThemeProvider>
     )
   }
 }
 
-EbookPage.propTypes = {
+ChannelPage.propTypes = {
 }
