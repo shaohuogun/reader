@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -19,6 +19,21 @@ injectTapEventPlugin();
 const layoutStyle = {
   margin: '0 auto',
   backgroundColor: '#f5f5f5',
+}
+
+const Tool = ({store, history}) => (
+  <Provider key="provider" store={store}>
+  <Router key="router" history={history} >
+  <ToolLayout style={layoutStyle}>
+  {routes}
+  </ToolLayout>
+  </Router>
+  </Provider>
+)
+
+Tool.propTypes = {
+  store: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 storeProvider.init(configureStore({
@@ -46,25 +61,7 @@ storeProvider.init(configureStore({
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
-export default class Tool extends Component {
-  render () {
-    return (
-      <Provider key="provider" store={store}>
-      <Router key="router" history={this.props.history} >
-      <ToolLayout style={layoutStyle}>
-      {routes}
-      </ToolLayout>
-      </Router>
-      </Provider>
-    )
-  }
-}
-
-Tool.propTypes = {
-  history: PropTypes.object.isRequired
-}
-
 ReactDOM.render(
-  <Tool history={history} />,
+  <Tool store={store} history={history} />,
   document.getElementById('root')
 )

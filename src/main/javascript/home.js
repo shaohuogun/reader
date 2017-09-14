@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -21,6 +21,21 @@ const layoutStyle = {
   backgroundColor: '#f5f5f5',
 }
 
+const Home = ({store, history}) => (
+  <Provider key="provider" store={store}>
+  <Router key="router" history={history} >
+  <HomeLayout style={layoutStyle}>
+  {routes}
+  </HomeLayout>
+  </Router>
+  </Provider>
+)
+
+Home.propTypes = {
+  store: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+}
+
 storeProvider.init(configureStore({
   pagination: {}
 }))
@@ -28,25 +43,7 @@ storeProvider.init(configureStore({
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
-export default class Home extends Component {
-  render () {
-    return (
-      <Provider key="provider" store={store}>
-      <Router key="router" history={this.props.history} >
-      <HomeLayout style={layoutStyle}>
-      {routes}
-      </HomeLayout>
-      </Router>
-      </Provider>
-    )
-  }
-}
-
-Home.propTypes = {
-  history: PropTypes.object.isRequired
-}
-
 ReactDOM.render(
-  <Home history={history} />,
+  <Home store={store} history={history} />,
   document.getElementById('root')
 )

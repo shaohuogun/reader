@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -23,6 +23,21 @@ const layoutStyle = {
   backgroundColor: '#fafafa',
 }
 
+const Entry = ({store, history}) => (
+  <Provider key="provider" store={store}>
+  <Router key="router" history={history} >
+  <EntryLayout style={layoutStyle}>
+  {routes}
+  </EntryLayout>
+  </Router>
+  </Provider>
+)
+
+Entry.propTypes = {
+  store: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+}
+
 storeProvider.init(configureStore({
   agreed: false,
 }))
@@ -30,25 +45,7 @@ storeProvider.init(configureStore({
 const store = storeProvider.getStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)
 
-export default class Entry extends Component {
-  render () {
-    return (
-      <Provider key="provider" store={store}>
-      <Router key="router" history={this.props.history} >
-      <EntryLayout style={layoutStyle}>
-      {routes}
-      </EntryLayout>
-      </Router>
-      </Provider>
-    )
-  }
-}
-
-Entry.propTypes = {
-  history: PropTypes.object.isRequired
-}
-
 ReactDOM.render(
-  <Entry history={history} />,
+  <Entry store={store} history={history} />,
   document.getElementById('root')
 )
