@@ -26,6 +26,13 @@ const sidebarStyle = {
   display: 'inline-block',
 }
 
+const footerStyle = {
+  marginTop: '15px',
+  textAlign: 'center',
+  fontSize: '12px',
+  backgroundColor: '#fafafa'
+}
+
 const ToolLayout = (props) => (
   <div>
   <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -36,7 +43,7 @@ const ToolLayout = (props) => (
   <MuiThemeProvider muiTheme={getMuiTheme()}>
   <div style={sidebarStyle}>
   <ToolNavigator style={navigatorStyle} />
-  <Footer />
+  <Footer style={footerStyle} />
   </div>
   </MuiThemeProvider>
   {props.children}

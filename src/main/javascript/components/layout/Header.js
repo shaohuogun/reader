@@ -12,11 +12,11 @@ const navigatorStyle = {
   textAlign: 'right',
 }
 
-const Header = (props) => (
+const Header = ({style}) => (
   <GridList
   cols={2}
   cellHeight={50}
-  {...props}
+  style={style}
   >
   <GridTile
   key='logo'

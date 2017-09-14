@@ -2,20 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {GridList, GridTile} from 'material-ui/GridList'
 
-const footerStyle = {
-  marginTop: '15px',
-  textAlign: 'center',
-  fontSize: '12px',
-  backgroundColor: '#fafafa'
-}
-
-const Footer = (props) => (
+const Footer = ({style}) => (
   <GridList
   cols={5}
   cellHeight={200}
   padding={15}
-  style={footerStyle}
-  {...props}
+  style={style}
   >
   <GridTile
   key='profile'

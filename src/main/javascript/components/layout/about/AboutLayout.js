@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import Header from '../Header'
 import AboutNavigator from './AboutNavigator'
+import Footer from '../Footer'
 
 const headerStyle = {
   backgroundColor: '#eeeeee',
@@ -25,6 +26,13 @@ const sidebarStyle = {
   display: 'inline-block',
 }
 
+const footerStyle = {
+  marginTop: '15px',
+  textAlign: 'center',
+  fontSize: '12px',
+  backgroundColor: '#fafafa'
+}
+
 const AboutLayout = (props) => (
   <div>
   <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -35,6 +43,7 @@ const AboutLayout = (props) => (
   <MuiThemeProvider muiTheme={getMuiTheme()}>
   <div style={sidebarStyle}>
   <AboutNavigator style={navigatorStyle} />
+  <Footer style={footerStyle} />
   </div>
   </MuiThemeProvider>
   {props.children}

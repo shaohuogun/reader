@@ -12,6 +12,13 @@ const navigatorStyle = {
   backgroundColor: '#fafafa',
 }
 
+const footerStyle = {
+  marginTop: '15px',
+  textAlign: 'center',
+  fontSize: '12px',
+  backgroundColor: '#fafafa'
+}
+
 const EntryLayout = (props) => (
       <div {...props}>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -20,7 +27,7 @@ const EntryLayout = (props) => (
       {props.children}
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Footer />
+      <Footer style={footerStyle} />
       </MuiThemeProvider>
       </div>
     )
