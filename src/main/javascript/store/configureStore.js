@@ -1,5 +1,6 @@
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
+import {createLogger} from 'redux-logger'
 import {routerReducer as routing} from 'react-router-redux'
 import {reducer as formReducer} from 'redux-form'
 import {combineReducers} from 'redux'
@@ -26,10 +27,12 @@ const rootReducer = combineReducers({
   pagination: paginationReducer
 })
 
+var logger = createLogger()
+
 const configureStore = preloadedState => createStore(
   rootReducer,
   preloadedState,
-  applyMiddleware(thunk)
+  applyMiddleware(thunk, logger)
 )
 
 export default configureStore
