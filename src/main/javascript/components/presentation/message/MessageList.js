@@ -6,7 +6,7 @@ import Divider from 'material-ui/Divider';
 import Pagination from 'material-ui-pagination';
 
 import {connect} from 'react-redux'
-import {asyncPagination} from '../../../actions/mine'
+import {asyncPagination} from '../../../actions/message'
 
 const toolbarStyle = {
 	textAlign: 'center'

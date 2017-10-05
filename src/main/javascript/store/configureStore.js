@@ -5,26 +5,28 @@ import {routerReducer as routing} from 'react-router-redux'
 import {reducer as formReducer} from 'redux-form'
 import {combineReducers} from 'redux'
 
-import {signupReducer} from '../reducers/entry'
-import {readingStepperReducer, readingListReducer, readingItemReducer, messageStepperReducer, catalogReducer, messageReducer,
-  channelStepperReducer, channelReducer, progressReducer} from '../reducers/tool'
-import {ebookReducer, paginationReducer} from '../reducers/mine'
+import {userReducer} from '../reducers/user'
+import {readingStepperReducer, readingListReducer, readingItemReducer} from '../reducers/read'
+import {catalogReducer} from '../reducers/catalog'
+import {channelStepperReducer, channelReducer, progressReducer} from '../reducers/channel'
+import {paginationReducer, messageStepperReducer, messageReducer} from '../reducers/message'
+import {ebookReducer} from '../reducers/ebook'
 
 const rootReducer = combineReducers({
   routing,
   form: formReducer,
-  agreed: signupReducer,
+  agreed: userReducer,
   readingStepper: readingStepperReducer,
   readingLists: readingListReducer,
   readingItem: readingItemReducer,
-  messageStepper: messageStepperReducer,
   catalogs: catalogReducer,
-  message: messageReducer,
   channelStepper: channelStepperReducer,
   channel: channelReducer,
-  ebook: ebookReducer,
   progress: progressReducer,
-  pagination: paginationReducer
+  messageStepper: messageStepperReducer,
+  message: messageReducer,
+  pagination: paginationReducer,
+  ebook: ebookReducer
 })
 
 var logger = createLogger()

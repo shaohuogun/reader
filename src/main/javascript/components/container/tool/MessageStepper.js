@@ -14,9 +14,10 @@ import {connect} from 'react-redux'
 import MessageFirstForm from '../../presentation/message/MessageFirstForm'
 import MessageSecondForm from '../../presentation/message/MessageSecondForm'
 
+import {updateCatalogs} from '../../../actions/catalog'
 import {
-  updateMessageStepper, updateCatalogs, submitMessage, updateMessage
-} from '../../../actions/tool'
+  updateMessageStepper, submitMessage, updateMessage
+} from '../../../actions/message'
 
 const pageStyle = {
   width: 685,

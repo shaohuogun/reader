@@ -13,7 +13,7 @@ import {connect} from 'react-redux'
 
 import {
   updateAgreement
-} from '../../../actions/entry'
+} from '../../../actions/user'
 import SignupForm from '../../presentation/user/SignupForm'
 
 const agreementStyle = {

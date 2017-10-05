@@ -20,8 +20,8 @@ import EbookDetail from '../../presentation/ebook/EbookDetail'
 
 import {
   updateChannelStepper, submitChannel, updateChannel, asyncPickingProgress, asyncGeneratingProgress
-} from '../../../actions/tool'
-import {generateEbook, postEbook} from '../../../actions/mine'
+} from '../../../actions/channel'
+import {generateEbook, postEbook} from '../../../actions/ebook'
 
 const pageStyle = {
   width: 685,

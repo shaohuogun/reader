@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+import Footer from './Footer'
 import EntryNavigator from './EntryNavigator'
-import Footer from '../Footer'
 
 const navigatorStyle = {
   marginTop: 100,

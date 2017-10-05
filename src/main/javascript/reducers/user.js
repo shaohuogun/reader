@@ -1,8 +1,8 @@
 import {
   UPDATE_AGREEMENT
-} from '../actions/entry'
+} from '../actions/user'
 
-export function signupReducer(state = {}, action) {
+export function userReducer(state = {}, action) {
   switch (action.type) {
     case UPDATE_AGREEMENT:
     return action.agreed

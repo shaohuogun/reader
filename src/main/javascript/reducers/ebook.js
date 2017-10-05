@@ -1,19 +1,9 @@
 import {
-  UPDATE_PAGINATION,
   GENERATING_EBOOK,
   GENERATED_EBOOK,
   POSTING_EBOOK,
   POSTED_EBOOK
-} from '../actions/mine'
-
-export function paginationReducer(state = {}, action) {
-  switch (action.type) {
-    case UPDATE_PAGINATION:
-    return Object.assign({}, state, action.pagination)
-    default:
-    return state
-  }
-}
+} from '../actions/ebook'
 
 export function ebookReducer(state = {}, action) {
   switch (action.type) {

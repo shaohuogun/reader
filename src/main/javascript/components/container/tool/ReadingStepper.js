@@ -16,7 +16,7 @@ import ReadingItemSecondForm from '../../presentation/read/ReadingItemSecondForm
 
 import {
   updateReadingStepper, updateReadingLists, submitReadingItem, updateReadingItem
-} from '../../../actions/tool'
+} from '../../../actions/read'
 
 const pageStyle = {
   width: 685,

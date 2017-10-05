@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import Header from '../Header'
-import AboutNavigator from './AboutNavigator'
-import Footer from '../Footer'
+import Header from './Header'
+import Footer from './Footer'
+import MineNavigator from './MineNavigator'
 
 const headerStyle = {
   backgroundColor: '#eeeeee',
@@ -33,7 +33,7 @@ const footerStyle = {
   backgroundColor: '#fafafa'
 }
 
-const AboutLayout = (props) => (
+const MineLayout = (props) => (
   <div>
   <MuiThemeProvider muiTheme={getMuiTheme()}>
   <Header style={headerStyle} />
@@ -42,7 +42,7 @@ const AboutLayout = (props) => (
   <div style={contentStyle}>
   <MuiThemeProvider muiTheme={getMuiTheme()}>
   <div style={sidebarStyle}>
-  <AboutNavigator style={navigatorStyle} />
+  <MineNavigator style={navigatorStyle} />
   <Footer style={footerStyle} />
   </div>
   </MuiThemeProvider>
@@ -51,7 +51,7 @@ const AboutLayout = (props) => (
   </div>
 )
 
-AboutLayout.propTypes = {
+MineLayout.propTypes = {
 }
 
-export default AboutLayout
+export default MineLayout
