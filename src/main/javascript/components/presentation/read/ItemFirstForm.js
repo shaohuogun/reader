@@ -2,11 +2,19 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {TextField} from 'redux-form-material-ui'
+import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
+
+const toolbarStyle = {
+  marginTop: 15,
+  marginBottom: 15,
+  textAlign: 'center'
+}
 
 // Validation Functions
 const required = value => (value == null ? '必填属性，请填写！' : undefined)
 
-class ReadingItemFirstForm extends Component {
+class ItemFirstForm extends Component {
   constructor(props) {
     super(props)
   }
@@ -19,7 +27,7 @@ class ReadingItemFirstForm extends Component {
   }
 
   render() {
-    const {handleSubmit} = this.props
+    const {handleSubmit, reset} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -32,17 +40,35 @@ class ReadingItemFirstForm extends Component {
       ref="bookName"
       withRef
       />
+
+      <div style={toolbarStyle}>
+      <FlatButton
+      label="重置"
+      disableTouchRipple={true}
+      disableFocusRipple={true}
+      onTouchTap={reset}
+      style={{margin: '0 15px 0 0'}}
+      />
+      <RaisedButton
+      label="下一步"
+      disableTouchRipple={true}
+      disableFocusRipple={true}
+      primary={true}
+      onTouchTap={handleSubmit}
+      />
+      </div>
       </form>
     )
   }
 }
 
-ReadingItemFirstForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired
+ItemFirstForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired
 }
 
 export default reduxForm({
   form: 'readingItemForm',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true
-})(ReadingItemFirstForm)
+})(ItemFirstForm)

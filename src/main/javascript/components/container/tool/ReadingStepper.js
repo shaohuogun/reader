@@ -4,15 +4,13 @@ import ReactDOM from 'react-dom'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {Step, Stepper, StepLabel, StepContent} from 'material-ui/Stepper'
-import {Card, CardActions} from 'material-ui/Card'
-import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
 
 import {reset, submit} from 'redux-form'
 import {connect} from 'react-redux'
 
-import ReadingItemFirstForm from '../../presentation/read/ReadingItemFirstForm'
-import ReadingItemSecondForm from '../../presentation/read/ReadingItemSecondForm'
+import ItemFirstForm from '../../presentation/read/ItemFirstForm'
+import ItemSecondForm from '../../presentation/read/ItemSecondForm'
+import ItemThirdForm from '../../presentation/read/ItemThirdForm'
 
 import {
   updateReadingStepper, updateReadingLists, submitReadingItem, updateReadingItem
@@ -27,23 +25,42 @@ const pageStyle = {
   backgroundColor: '#fff'
 }
 
-const toolbarStyle = {
-  marginTop: 15,
-  marginBottom: 15,
-  textAlign: 'center'
-}
-
 class ReadingStepper extends Component {
   constructor(props) {
     super(props)
 
     // Tips: The best place to bind your member functions is in the component constructor
-    this.createReadingItem = this.createReadingItem.bind(this)
-    this.handlePrev = this.handlePrev.bind(this)
-    this.handleNext = this.handleNext.bind(this)
+    this.reset = this.reset.bind(this)
+    this.loadMyLists = this.loadMyLists.bind(this)
+    this.previousStep = this.previousStep.bind(this)
+    this.nextStep = this.nextStep.bind(this)
+    this.createItem = this.createItem.bind(this)
+    this.finish = this.finish.bind(this)
   }
 
-  loadMyReadingLists = () => {
+  reset = () => {
+    const {dispatch} = this.props
+    dispatch(reset('readingItemForm'))
+  }
+
+  previousStep = () => {
+    const {dispatch, readingStepper} = this.props
+    dispatch(updateReadingStepper({
+      finished: false,
+      stepIndex: readingStepper.stepIndex - 1
+    }))
+  }
+
+  nextStep = () => {
+    const {dispatch, readingStepper} = this.props
+    var nextStepIndex = readingStepper.stepIndex + 1
+    dispatch(updateReadingStepper({
+      finished: nextStepIndex == 2,
+      stepIndex: nextStepIndex
+    }))
+  }
+
+  loadMyLists = () => {
     const {dispatch} = this.props
     fetch('/api/myreadinglists', {
       method: 'GET',
@@ -53,14 +70,11 @@ class ReadingStepper extends Component {
     }).then(response => response.json())
     .then(json => {
       dispatch(updateReadingLists(json))
-      dispatch(updateReadingStepper({
-        finished: false,
-        stepIndex: 1
-      }))
+      this.nextStep()
     })
   }
 
-  createReadingItem = (readingItem) => {
+  createItem = (readingItem) => {
     const {dispatch} = this.props
     dispatch(submitReadingItem(readingItem))
     fetch('/api/readingitem', {
@@ -72,60 +86,16 @@ class ReadingStepper extends Component {
     }).then(response => response.json())
     .then(json => {
       dispatch(updateReadingItem(json))
-      dispatch(updateReadingStepper({
-        finished: true,
-        stepIndex: 2
-      }))
+      this.nextStep()
     })
   }
 
-  handlePrev = () => {
-    const {dispatch, readingStepper} = this.props
-    if (readingStepper.stepIndex === 0) {
-      dispatch(reset('readingItemForm'))
-    } else {
-      dispatch(updateReadingStepper({
-        finished: readingStepper.stepIndex >= 2,
-        stepIndex: readingStepper.stepIndex - 1
-      }))
-    }
-  }
-
-  handleNext = () => {
-    const {dispatch, readingStepper, readingItem} = this.props
-    if (readingStepper.stepIndex === 0) {
-      this.loadMyReadingLists()
-    } else if (readingStepper.stepIndex === 1) {
-      dispatch(submit('readingItemForm'))
-    } else if (readingStepper.stepIndex === 2) {
-      dispatch(updateReadingStepper({
-        finished: false,
-        stepIndex: 0
-      }))
-    }
-  }
-
-  renderStepActions = (stepIndex) => {
-    return (
-      <Card zDepth={0}>
-      <CardActions style={toolbarStyle}>
-      <FlatButton
-      label={stepIndex === 0 ? '重置' : '上一步'}
-      disableTouchRipple={true}
-      disableFocusRipple={true}
-      onTouchTap={this.handlePrev}
-      style={{margin: '0 15px 0 0'}}
-      />
-      <RaisedButton
-      label={stepIndex === 2 ? '完成' : '下一步'}
-      disableTouchRipple={true}
-      disableFocusRipple={true}
-      primary={true}
-      onTouchTap={this.handleNext}
-      />
-      </CardActions>
-      </Card>
-    )
+  finish = () => {
+    const {dispatch} = this.props
+    dispatch(updateReadingStepper({
+      finished: false,
+      stepIndex: 0
+    }))
   }
 
   render() {
@@ -138,27 +108,23 @@ class ReadingStepper extends Component {
       <Step>
       <StepLabel>步骤一，填写待阅读的书名：</StepLabel>
       <StepContent>
-      <ReadingItemFirstForm onSubmit={this.handleNext} />
-      {this.renderStepActions(0)}
+      <ItemFirstForm reset={this.reset} onSubmit={this.loadMyLists} />
       </StepContent>
       </Step>
 
       <Step>
       <StepLabel>步骤二，选择目标阅读清单：</StepLabel>
       <StepContent>
-      <ReadingItemSecondForm readingLists={readingLists} onSubmit={this.createReadingItem} />
-      {this.renderStepActions(1)}
+      <ItemSecondForm readingLists={readingLists} reset={this.reset} previousStep={this.previousStep} onSubmit={this.createItem} />
       </StepContent>
       </Step>
 
       <Step>
       <StepLabel>步骤三，确认阅读清单信息：</StepLabel>
       <StepContent>
-
-      {this.renderStepActions(2)}
+      <ItemThirdForm reset={this.reset} onSubmit={this.finish} />
       </StepContent>
       </Step>
-
       </Stepper>
       </div>
       </MuiThemeProvider>
