@@ -26,7 +26,7 @@ class ItemSecondForm extends Component {
   }
 
   render() {
-    const {handleSubmit, reset, previousStep, readingLists} = this.props
+    const {handleSubmit, previousStep, readingLists} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -54,17 +54,9 @@ class ItemSecondForm extends Component {
 
       <div style={toolbarStyle}>
       <FlatButton
-      label="重置"
-      disableTouchRipple={true}
-      disableFocusRipple={true}
-      onTouchTap={reset}
-      style={{margin: '0 15px 0 0'}}
-      />
-      <RaisedButton
       label="上一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
-      primary={false}
       onTouchTap={previousStep}
       style={{margin: '0 15px 0 0'}}
       />
@@ -83,7 +75,6 @@ class ItemSecondForm extends Component {
 
 ItemSecondForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired,
   previousStep: PropTypes.func.isRequired,
   readingLists: PropTypes.array.isRequired
 }

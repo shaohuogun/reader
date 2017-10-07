@@ -30,17 +30,10 @@ class ReadingStepper extends Component {
     super(props)
 
     // Tips: The best place to bind your member functions is in the component constructor
-    this.reset = this.reset.bind(this)
     this.loadMyLists = this.loadMyLists.bind(this)
     this.previousStep = this.previousStep.bind(this)
     this.nextStep = this.nextStep.bind(this)
     this.createItem = this.createItem.bind(this)
-    this.finish = this.finish.bind(this)
-  }
-
-  reset = () => {
-    const {dispatch} = this.props
-    dispatch(reset('readingItemForm'))
   }
 
   previousStep = () => {
@@ -86,16 +79,12 @@ class ReadingStepper extends Component {
     }).then(response => response.json())
     .then(json => {
       dispatch(updateReadingItem(json))
-      this.nextStep()
+      dispatch(updateReadingStepper({
+        finished: false,
+        stepIndex: 0
+      }))
+      dispatch(reset("readingItemForm"))
     })
-  }
-
-  finish = () => {
-    const {dispatch} = this.props
-    dispatch(updateReadingStepper({
-      finished: false,
-      stepIndex: 0
-    }))
   }
 
   render() {
@@ -108,21 +97,21 @@ class ReadingStepper extends Component {
       <Step>
       <StepLabel>步骤一，填写待阅读的书名：</StepLabel>
       <StepContent>
-      <ItemFirstForm reset={this.reset} onSubmit={this.loadMyLists} />
+      <ItemFirstForm onSubmit={this.loadMyLists} />
       </StepContent>
       </Step>
 
       <Step>
       <StepLabel>步骤二，选择目标阅读清单：</StepLabel>
       <StepContent>
-      <ItemSecondForm readingLists={readingLists} reset={this.reset} previousStep={this.previousStep} onSubmit={this.createItem} />
+      <ItemSecondForm readingLists={readingLists} previousStep={this.previousStep} onSubmit={this.nextStep} />
       </StepContent>
       </Step>
 
       <Step>
       <StepLabel>步骤三，确认阅读清单信息：</StepLabel>
       <StepContent>
-      <ItemThirdForm reset={this.reset} onSubmit={this.finish} />
+      <ItemThirdForm previousStep={this.previousStep} onSubmit={this.createItem} />
       </StepContent>
       </Step>
       </Stepper>

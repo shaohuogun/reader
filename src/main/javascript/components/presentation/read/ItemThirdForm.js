@@ -17,15 +17,15 @@ class ItemThirdForm extends Component {
   }
 
   render() {
-    const {handleSubmit, reset} = this.props
+    const {handleSubmit, previousStep} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <div style={toolbarStyle}>
       <FlatButton
-      label="重置"
+      label="上一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
-      onTouchTap={reset}
+      onTouchTap={previousStep}
       style={{margin: '0 15px 0 0'}}
       />
       <RaisedButton
@@ -43,7 +43,7 @@ class ItemThirdForm extends Component {
 
 ItemThirdForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired
+  previousStep: PropTypes.func.isRequired
 }
 
 export default reduxForm({

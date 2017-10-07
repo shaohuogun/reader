@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {TextField} from 'redux-form-material-ui'
-import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const toolbarStyle = {
@@ -27,7 +26,7 @@ class ItemFirstForm extends Component {
   }
 
   render() {
-    const {handleSubmit, reset} = this.props
+    const {handleSubmit} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -42,13 +41,6 @@ class ItemFirstForm extends Component {
       />
 
       <div style={toolbarStyle}>
-      <FlatButton
-      label="重置"
-      disableTouchRipple={true}
-      disableFocusRipple={true}
-      onTouchTap={reset}
-      style={{margin: '0 15px 0 0'}}
-      />
       <RaisedButton
       label="下一步"
       disableTouchRipple={true}
@@ -63,8 +55,7 @@ class ItemFirstForm extends Component {
 }
 
 ItemFirstForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({
