@@ -37,10 +37,6 @@ Tool.propTypes = {
 }
 
 storeProvider.init(configureStore({
-  readingStepper: {
-    finished: false,
-    stepIndex: 0
-  },
   readingLists: [],
   readingItem: {},
   messageStepper: {
