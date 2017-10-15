@@ -26,7 +26,7 @@ class ItemSecondForm extends Component {
   }
 
   render() {
-    const {handleSubmit, previousStep, readingLists} = this.props
+    const {readingLists, previousStep, handleSubmit} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -74,9 +74,9 @@ class ItemSecondForm extends Component {
 }
 
 ItemSecondForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  readingLists: PropTypes.array.isRequired,
   previousStep: PropTypes.func.isRequired,
-  readingLists: PropTypes.array.isRequired
+  handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({

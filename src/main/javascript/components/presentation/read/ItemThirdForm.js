@@ -17,7 +17,7 @@ class ItemThirdForm extends Component {
   }
 
   render() {
-    const {handleSubmit, previousStep} = this.props
+    const {previousStep, handleSubmit} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <div style={toolbarStyle}>
@@ -42,8 +42,8 @@ class ItemThirdForm extends Component {
 }
 
 ItemThirdForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  previousStep: PropTypes.func.isRequired
+  previousStep: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({

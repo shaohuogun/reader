@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-
 import {reset, submit} from 'redux-form'
 import {connect} from 'react-redux'
 
@@ -8,12 +7,11 @@ import {
   updateReadingLists, submitReadingItem, updateReadingItem
 } from '../../../actions/read'
 
-import ReadingStepper from './ReadingStepper'
+import ReadingStepper from '../../presentation/read/ReadingStepper'
 
 class ReadingStepperContainer extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       stepIndex: 0
     }
@@ -21,31 +19,31 @@ class ReadingStepperContainer extends Component {
     // Tips: The best place to bind your member functions is in the component constructor
     this.previousStep = this.previousStep.bind(this)
     this.nextStep = this.nextStep.bind(this)
-    this.loadMyLists = this.loadMyLists.bind(this)
-    this.createItem = this.createItem.bind(this)
+    this.loadReadingLists = this.loadReadingLists.bind(this)
+    this.createReadingItem = this.createReadingItem.bind(this)
   }
 
-  initializeStep = () => {
+  initializeStepper = () => {
     this.setState({
       stepIndex: 0
     })
   }
 
   previousStep = () => {
-    var newStepIndex = this.state.stepIndex - 1
+    var curStepIndex = this.state.stepIndex - 1
     this.setState({
-      stepIndex: newStepIndex
+      stepIndex: curStepIndex
     })
   }
 
   nextStep = () => {
-    var newStepIndex = this.state.stepIndex + 1
+    var curStepIndex = this.state.stepIndex + 1
     this.setState({
-      stepIndex: newStepIndex
+      stepIndex: curStepIndex
     })
   }
 
-  loadMyLists = () => {
+  loadReadingLists = () => {
     const {dispatch} = this.props
     fetch('/api/myreadinglists', {
       method: 'GET',
@@ -59,7 +57,7 @@ class ReadingStepperContainer extends Component {
     })
   }
 
-  createItem = (readingItem) => {
+  createReadingItem = (readingItem) => {
     const {dispatch} = this.props
     dispatch(submitReadingItem(readingItem))
     fetch('/api/readingitem', {
@@ -72,7 +70,7 @@ class ReadingStepperContainer extends Component {
     .then(json => {
       dispatch(updateReadingItem(json))
       dispatch(reset("readingItemForm"))
-      this.initializeStep()
+      this.initializeStepper()
     })
   }
 
@@ -81,7 +79,7 @@ class ReadingStepperContainer extends Component {
     return (
       <ReadingStepper stepIndex={this.state.stepIndex}
       readingLists={readingLists} previousStep={this.previousStep} nextStep={this.nextStep}
-      loadMyLists={this.loadMyLists} createItem={this.createItem} />
+      loadReadingLists={this.loadReadingLists} createReadingItem={this.createReadingItem} />
     )
   }
 }

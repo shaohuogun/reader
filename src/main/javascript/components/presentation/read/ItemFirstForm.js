@@ -17,7 +17,7 @@ class ItemFirstForm extends Component {
   constructor(props) {
     super(props)
   }
-
+  
   componentDidMount() {
     this.refs.bookName // the Field
     .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
