@@ -13,11 +13,11 @@ const toolbarStyle = {
 // Validation Functions
 const required = value => (value == null ? '必填属性，请填写！' : undefined)
 
-class ItemFirstForm extends Component {
+class ItemFirstPage extends Component {
   constructor(props) {
     super(props)
   }
-  
+
   componentDidMount() {
     this.refs.bookName // the Field
     .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
@@ -54,7 +54,7 @@ class ItemFirstForm extends Component {
   }
 }
 
-ItemFirstForm.propTypes = {
+ItemFirstPage.propTypes = {
   handleSubmit: PropTypes.func.isRequired
 }
 
@@ -62,4 +62,4 @@ export default reduxForm({
   form: 'readingItemForm',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true
-})(ItemFirstForm)
+})(ItemFirstPage)

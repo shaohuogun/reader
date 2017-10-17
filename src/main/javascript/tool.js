@@ -39,18 +39,10 @@ Tool.propTypes = {
 storeProvider.init(configureStore({
   readingLists: [],
   readingItem: {},
-  messageStepper: {
-    finished: false,
-    stepIndex: 0
-  },
   catalogs: [],
   message: {},
-  channelStepper: {
-    finished: false,
-    stepIndex: 0
-  },
   channel: {},
-  progress: 0,
+  progress: {pickingMessage: 0, generatingEbook: 0},
   pagination: {}
 }))
 

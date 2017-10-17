@@ -2,10 +2,18 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
-import {RadioButton} from 'material-ui/RadioButton'
+import RadioButton from 'material-ui/RadioButton'
 import {TextField} from 'redux-form-material-ui'
+import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 
-class MessageSecondForm extends Component {
+const toolbarStyle = {
+  marginTop: 15,
+  marginBottom: 15,
+  textAlign: 'center'
+}
+
+class MessageSecondPage extends Component {
   constructor(props) {
     super(props)
   }
@@ -18,7 +26,7 @@ class MessageSecondForm extends Component {
   }
 
   render() {
-    const {handleSubmit, catalogs} = this.props
+    const {catalogs, previousStep, handleSubmit} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -33,7 +41,7 @@ class MessageSecondForm extends Component {
         />
       )}
       </Field>
-      
+
       <Field
       name="categoryName"
       component={TextField}
@@ -43,20 +51,39 @@ class MessageSecondForm extends Component {
       ref="categoryName"
       withRef
       />
+
+      <div style={toolbarStyle}>
+      <FlatButton
+      label="上一步"
+      disableTouchRipple={true}
+      disableFocusRipple={true}
+      onTouchTap={previousStep}
+      style={{margin: '0 15px 0 0'}}
+      />
+      <RaisedButton
+      label="下一步"
+      disableTouchRipple={true}
+      disableFocusRipple={true}
+      primary={true}
+      onTouchTap={handleSubmit}
+      />
+      </div>
       </form>
     )
   }
 }
 
-MessageSecondForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+MessageSecondPage.propTypes = {
   catalogs: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
-  }).isRequired).isRequired
+  }).isRequired).isRequired,
+  previousStep: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({
   form: 'messageForm',
-  destroyOnUnmount: false
-})(MessageSecondForm)
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true
+})(MessageSecondPage)

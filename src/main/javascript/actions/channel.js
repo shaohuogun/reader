@@ -1,16 +1,8 @@
-export const UPDATE_CHANNEL_STEPPER = 'UPDATE_CHANNEL_STEPPER'
 export const SUBMIT_CHANNEL = 'SUBMIT_CHANNEL'
 export const UPDATE_CHANNEL = 'UPDATE_CHANNEL'
 
-export const UPDATE_PICKING_PROGRESS = 'UPDATE_PICKING_PROGRESS'
-export const UPDATE_GENERATING_PROGRESS = 'UPDATE_GENERATING_PROGRESS'
-
-export function updateChannelStepper(channelStepper) {
-  return {
-    type: UPDATE_CHANNEL_STEPPER,
-    channelStepper
-  }
-}
+export const UPDATE_PROGRESS_PICKING_MESSAGE = 'UPDATE_PROGRESS_PICKING_MESSAGE'
+export const UPDATE_PROGRESS_GENERATING_EBOOK = 'UPDATE_PROGRESS_GENERATING_EBOOK'
 
 export function submitChannel(channel) {
   return {
@@ -26,14 +18,14 @@ export function updateChannel(channel) {
   }
 }
 
-export function updatePickingProgress(progress) {
+export function updateProgressOfPickingMessage(progress) {
   return {
-    type: UPDATE_PICKING_PROGRESS,
+    type: UPDATE_PROGRESS_PICKING_MESSAGE,
     progress
   }
 }
 
-export function asyncPickingProgress(progressId) {
+export function asyncProgressOfPickingMessage(progressId) {
   return dispatch => {
     const interval = setInterval(() => {
       var url = '/api/progress/' + progressId
@@ -44,27 +36,24 @@ export function asyncPickingProgress(progressId) {
         }
       }).then(response => response.json())
       .then(json => {
-        dispatch(updatePickingProgress(json))
+        dispatch(updateProgressOfPickingMessage(json))
         if (json === 100) {
           clearInterval(interval)
-          dispatch(updateChannelStepper({
-            finished: false,
-            stepIndex: 1
-          }))
+          dispatch(updateProgressOfPickingMessage(0))
         }
       })
     }, 1000)
   }
 }
 
-export function updateGeneratingProgress(progress) {
+export function updateProgressOfGeneratingEbook(progress) {
   return {
-    type: UPDATE_GENERATING_PROGRESS,
+    type: UPDATE_PROGRESS_GENERATING_EBOOK,
     progress
   }
 }
 
-export function asyncGeneratingProgress(progressId) {
+export function asyncProgressOfGeneratingEbook(progressId) {
   return dispatch => {
     const interval = setInterval(() => {
       var url = '/api/progress/' + progressId
@@ -75,13 +64,10 @@ export function asyncGeneratingProgress(progressId) {
         }
       }).then(response => response.json())
       .then(json => {
-        dispatch(updateGeneratingProgress(json))
+        dispatch(updateProgressOfGeneratingEbook(json))
         if (json === 100) {
           clearInterval(interval)
-          dispatch(updateChannelStepper({
-            finished: true,
-            stepIndex: 2
-          }))
+          dispatch(updateProgressOfGeneratingEbook(0))
         }
       })
     }, 1000)

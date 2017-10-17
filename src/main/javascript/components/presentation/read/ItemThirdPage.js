@@ -11,7 +11,7 @@ const toolbarStyle = {
   textAlign: 'center'
 }
 
-class ItemThirdForm extends Component {
+class ItemThirdPage extends Component {
   constructor(props) {
     super(props)
   }
@@ -41,7 +41,7 @@ class ItemThirdForm extends Component {
   }
 }
 
-ItemThirdForm.propTypes = {
+ItemThirdPage.propTypes = {
   previousStep: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired
 }
@@ -50,4 +50,4 @@ export default reduxForm({
   form: 'readingItemForm',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true
-})(ItemThirdForm)
+})(ItemThirdPage)

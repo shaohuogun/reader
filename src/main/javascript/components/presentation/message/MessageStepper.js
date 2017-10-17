@@ -4,9 +4,9 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {Step, Stepper, StepLabel, StepContent} from 'material-ui/Stepper'
 
-import ItemFirstPage from './ItemFirstPage'
-import ItemSecondPage from './ItemSecondPage'
-import ItemThirdPage from './ItemThirdPage'
+import MessageFirstPage from './MessageFirstPage'
+import MessageSecondPage from './MessageSecondPage'
+import MessageThirdPage from './MessageThirdPage'
 
 const pageStyle = {
   width: 685,
@@ -17,43 +17,44 @@ const pageStyle = {
   backgroundColor: '#fff'
 }
 
-const ReadingStepper = (props) => (
+const MessageStepper = (props) => (
   <MuiThemeProvider muiTheme={getMuiTheme()}>
   <div style={pageStyle}>
   <Stepper activeStep={props.stepIndex} orientation="vertical">
 
   <Step>
-  <StepLabel>步骤一，填写待阅读的书名：</StepLabel>
+  <StepLabel>步骤一，填写目标文章网址：</StepLabel>
   <StepContent>
-  <ItemFirstPage onSubmit={props.loadReadingLists} />
+  <MessageFirstPage onSubmit={props.loadCatalogs} />
   </StepContent>
   </Step>
 
   <Step>
-  <StepLabel>步骤二，选择目标阅读清单：</StepLabel>
+  <StepLabel>步骤二，选择文章收藏分类：</StepLabel>
   <StepContent>
-  <ItemSecondPage readingLists={props.readingLists} previousStep={props.previousStep} onSubmit={props.nextStep} />
+  <MessageSecondPage catalogs={props.catalogs} previousStep={props.previousStep} onSubmit={props.nextStep} />
   </StepContent>
   </Step>
 
   <Step>
-  <StepLabel>步骤三，确认阅读清单信息：</StepLabel>
+  <StepLabel>步骤三，确认文章分类信息：</StepLabel>
   <StepContent>
-  <ItemThirdPage previousStep={props.previousStep} onSubmit={props.createReadingItem} />
+  <MessageThirdPage previousStep={props.previousStep} onSubmit={props.createMessage} />
   </StepContent>
   </Step>
+
   </Stepper>
   </div>
   </MuiThemeProvider>
 )
 
-ReadingStepper.propTypes = {
+MessageStepper.propTypes = {
   stepIndex: PropTypes.number.isRequired,
   previousStep: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
-  readingLists: PropTypes.array.isRequired,
-  loadReadingLists: PropTypes.func.isRequired,
-  createReadingItem: PropTypes.func.isRequired
+  catalogs: PropTypes.array.isRequired,
+  loadCatalogs: PropTypes.func.isRequired,
+  createMessage: PropTypes.func.isRequired
 }
 
-export default ReadingStepper
+export default MessageStepper

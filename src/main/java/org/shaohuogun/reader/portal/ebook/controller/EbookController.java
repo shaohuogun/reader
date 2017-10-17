@@ -70,7 +70,7 @@ public class EbookController extends Controller {
 			Catalog catalog = catalogService.getCatalog(categoryId);
 			creator = catalog.getCreator();
 			categoryName = catalog.getName();
-		} else if (PortalConstants.CATEGORY_TYPE_CHANNEL.equalsIgnoreCase(categoryType)) {
+		} else {
 			Channel channel = channelService.getChannel(categoryId);
 			creator = channel.getCreator();
 			categoryName = channel.getName();

@@ -4,12 +4,13 @@ import PropTypes from 'prop-types'
 import {reset, submit} from 'redux-form'
 import {connect} from 'react-redux'
 
+import {updateCatalogs} from '../../../actions/catalog'
 import {
-  updateReadingLists, submitReadingItem, updateReadingItem
-} from '../../../actions/read'
-import ReadingStepper from '../../presentation/read/ReadingStepper'
+  submitMessage, updateMessage
+} from '../../../actions/message'
+import MessageStepper from '../../presentation/message/MessageStepper'
 
-class ReadingStepperContainer extends Component {
+class MessageStepperContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,13 +20,13 @@ class ReadingStepperContainer extends Component {
     // Tips: The best place to bind your member functions is in the component constructor
     this.previousStep = this.previousStep.bind(this)
     this.nextStep = this.nextStep.bind(this)
-    this.loadReadingLists = this.loadReadingLists.bind(this)
-    this.createReadingItem = this.createReadingItem.bind(this)
+    this.loadCatalogs = this.loadCatalogs.bind(this)
+    this.createMessage = this.createMessage.bind(this)
   }
 
   restartStepper = () => {
     const {dispatch} = this.props
-    dispatch(reset("readingItemForm"))
+    dispatch(reset("messageForm"))
     this.setState({
       stepIndex: 0
     })
@@ -45,54 +46,54 @@ class ReadingStepperContainer extends Component {
     })
   }
 
-  loadReadingLists = () => {
+  loadCatalogs = () => {
     const {dispatch} = this.props
-    fetch('/api/myreadinglists', {
+    fetch('/api/mycatalogs', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       }
     }).then(response => response.json())
     .then(json => {
-      dispatch(updateReadingLists(json))
+      dispatch(updateCatalogs(json))
       this.nextStep()
     })
   }
 
-  createReadingItem = (readingItem) => {
+  createMessage = (message) => {
     const {dispatch} = this.props
-    dispatch(submitReadingItem(readingItem))
-    fetch('/api/readingitem', {
+    dispatch(submitMessage(message))
+    fetch('/api/message?categoryType=Catalog', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify(readingItem)
+      body: JSON.stringify(message)
     }).then(response => response.json())
     .then(json => {
-      dispatch(updateReadingItem(json))
+      dispatch(updateMessage(json))
       this.restartStepper()
     })
   }
 
   render() {
-    const {dispatch, readingLists} = this.props
+    const {dispatch, catalogs} = this.props
     return (
-      <ReadingStepper stepIndex={this.state.stepIndex}
-      readingLists={readingLists} previousStep={this.previousStep} nextStep={this.nextStep}
-      loadReadingLists={this.loadReadingLists} createReadingItem={this.createReadingItem} />
+      <MessageStepper stepIndex={this.state.stepIndex}
+      catalogs={catalogs} previousStep={this.previousStep} nextStep={this.nextStep}
+      loadCatalogs={this.loadCatalogs} createMessage={this.createMessage} />
     )
   }
 }
 
-ReadingStepperContainer.propTypes = {
-  readingLists: PropTypes.array.isRequired,
-  readingItem: PropTypes.object.isRequired
+MessageStepperContainer.propTypes = {
+  catalogs: PropTypes.array.isRequired,
+  message: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  readingLists: state.readingLists,
-  readingItem: state.readingItem
+  catalogs: state.catalogs,
+  message: state.message
 })
 
-export default connect(mapStateToProps)(ReadingStepperContainer)
+export default connect(mapStateToProps)(MessageStepperContainer)

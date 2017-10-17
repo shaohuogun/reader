@@ -1,19 +1,9 @@
 import {
-  UPDATE_CHANNEL_STEPPER,
   SUBMIT_CHANNEL,
   UPDATE_CHANNEL,
-  UPDATE_PICKING_PROGRESS,
-  UPDATE_GENERATING_PROGRESS
+  UPDATE_PROGRESS_PICKING_MESSAGE,
+  UPDATE_PROGRESS_GENERATING_EBOOK
 } from '../actions/channel'
-
-export function channelStepperReducer(state = {}, action) {
-  switch (action.type) {
-    case UPDATE_CHANNEL_STEPPER:
-    return Object.assign({}, state, action.channelStepper)
-    default:
-    return state
-  }
-}
 
 export function channelReducer(state = {}, action) {
   switch (action.type) {
@@ -28,10 +18,10 @@ export function channelReducer(state = {}, action) {
 
 export function progressReducer(state = {}, action) {
   switch (action.type) {
-    case UPDATE_PICKING_PROGRESS:
-    return action.progress
-    case UPDATE_GENERATING_PROGRESS:
-    return action.progress
+    case UPDATE_PROGRESS_PICKING_MESSAGE:
+    return Object.assign({}, state, {pickingMessage: action.progress})
+    case UPDATE_PROGRESS_GENERATING_EBOOK:
+    return Object.assign({}, state, {generatingEbook: action.progress})
     default:
     return state
   }

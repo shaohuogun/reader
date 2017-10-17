@@ -8,8 +8,8 @@ import {combineReducers} from 'redux'
 import {userReducer} from '../reducers/user'
 import {readingListReducer, readingItemReducer} from '../reducers/read'
 import {catalogReducer} from '../reducers/catalog'
-import {channelStepperReducer, channelReducer, progressReducer} from '../reducers/channel'
-import {paginationReducer, messageStepperReducer, messageReducer} from '../reducers/message'
+import {channelReducer, progressReducer} from '../reducers/channel'
+import {paginationReducer, messageReducer} from '../reducers/message'
 import {ebookReducer} from '../reducers/ebook'
 
 const rootReducer = combineReducers({
@@ -19,11 +19,9 @@ const rootReducer = combineReducers({
   readingLists: readingListReducer,
   readingItem: readingItemReducer,
   catalogs: catalogReducer,
-  channelStepper: channelStepperReducer,
+  message: messageReducer,
   channel: channelReducer,
   progress: progressReducer,
-  messageStepper: messageStepperReducer,
-  message: messageReducer,
   pagination: paginationReducer,
   ebook: ebookReducer
 })

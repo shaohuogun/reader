@@ -1,15 +1,7 @@
-export const UPDATE_MESSAGE_STEPPER = 'UPDATE_MESSAGE_STEPPER'
 export const SUBMIT_MESSAGE = 'SUBMIT_MESSAGE'
 export const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
 export const UPDATE_PAGINATION = 'UPDATE_PAGINATION'
 export const ASYNC_PAGINATION = 'ASYNC_PAGINATION'
-
-export function updateMessageStepper(messageStepper) {
-  return {
-    type: UPDATE_MESSAGE_STEPPER,
-    messageStepper
-  }
-}
 
 export function submitMessage(message) {
   return {
