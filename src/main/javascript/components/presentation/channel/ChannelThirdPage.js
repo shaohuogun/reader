@@ -12,7 +12,7 @@ const toolbarStyle = {
 
 export default class ChannelThirdPage extends Component {
 	render() {
-		const {ebook, downloadEbook, postEbook, restart} = this.props
+		const {ebook, downloadEbook, postEbook, pristine, submitting, restart} = this.props
 		return (
 			<Card zDepth={0}>
 			<CardHeader
@@ -37,6 +37,7 @@ export default class ChannelThirdPage extends Component {
 			label="重新开始"
 			disableTouchRipple={true}
 			disableFocusRipple={true}
+      disabled={pristine || submitting}
 			primary={true}
 			onTouchTap={restart}
 			/>

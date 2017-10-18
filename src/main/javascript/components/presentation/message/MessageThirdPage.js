@@ -17,7 +17,7 @@ class MessageThirdPage extends Component {
   }
 
   render() {
-    const {previousStep, handleSubmit} = this.props
+    const {previousStep, handleSubmit, pristine, submitting} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <div style={toolbarStyle}>
@@ -25,6 +25,7 @@ class MessageThirdPage extends Component {
       label="上一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      disabled={pristine || submitting}
       onTouchTap={previousStep}
       style={{margin: '0 15px 0 0'}}
       />
@@ -32,6 +33,7 @@ class MessageThirdPage extends Component {
       label="完成"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      disabled={pristine || submitting}
       primary={true}
       onTouchTap={handleSubmit}
       />

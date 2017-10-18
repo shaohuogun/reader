@@ -30,7 +30,7 @@ class ChannelFirstPage extends Component {
   }
 
   render() {
-    const {handleSubmit, progress} = this.props
+    const {handleSubmit, pristine, submitting, progress} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -80,6 +80,7 @@ class ChannelFirstPage extends Component {
       label="提交采集"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      disabled={pristine || submitting}
       primary={true}
       onTouchTap={handleSubmit}
       />

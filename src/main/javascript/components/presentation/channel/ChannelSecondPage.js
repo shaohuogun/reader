@@ -20,7 +20,7 @@ export default class ChannelSecondPage extends Component {
 	}
 
 	render() {
-		const {pagination, loadMessages, progress, restart, generateEbook} = this.props
+		const {pagination, loadMessages, progress, pristine, submitting, restart, generateEbook} = this.props
 		return (
 			<div>
 			<MessageList pagination={pagination} loadMessages={loadMessages} />
@@ -31,6 +31,7 @@ export default class ChannelSecondPage extends Component {
       label="重新开始"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      disabled={pristine || submitting}
       onTouchTap={restart}
       style={{margin: '0 15px 0 0'}}
       />
@@ -38,6 +39,7 @@ export default class ChannelSecondPage extends Component {
       label="生成电子书"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      disabled={pristine || submitting}
       primary={true}
       onTouchTap={generateEbook}
       />

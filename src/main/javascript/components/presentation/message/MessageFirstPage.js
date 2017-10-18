@@ -28,7 +28,7 @@ class MessageFirstPage extends Component {
   }
 
   render() {
-    const {handleSubmit} = this.props
+    const {handleSubmit, pristine, submitting} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -47,6 +47,7 @@ class MessageFirstPage extends Component {
       label="下一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      disabled={pristine || submitting}
       primary={true}
       onTouchTap={handleSubmit}
       />

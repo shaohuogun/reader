@@ -25,7 +25,7 @@ class ItemSecondPage extends Component {
   }
 
   render() {
-    const {readingLists, previousStep, handleSubmit} = this.props
+    const {readingLists, previousStep, handleSubmit, pristine, submitting} = this.props
     return (
       <form onSubmit={handleSubmit}>
       <Field
@@ -56,6 +56,7 @@ class ItemSecondPage extends Component {
       label="上一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      disabled={pristine || submitting}
       onTouchTap={previousStep}
       style={{margin: '0 15px 0 0'}}
       />
@@ -63,6 +64,7 @@ class ItemSecondPage extends Component {
       label="下一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
+      disabled={pristine || submitting}
       primary={true}
       onTouchTap={handleSubmit}
       />
