@@ -22,12 +22,14 @@ const MessageList = (props) => {
   var messageCount = messages.length
   for (var i = 0; i < messageCount; i++) {
     var curMessage = messages[i]
+    var keyOne = 'ML-' + curMessage.id
+    var KeyTwo = 'DV-' + curMessage.id
     rows.push(
-      <MessageListItem key={curMessage.id} message={curMessage} />
+      <MessageListItem key={keyOne} message={curMessage} />
     )
 
     if (i < (messageCount - 1)) {
-      rows.push(<Divider key={curMessage.id} />)
+      rows.push(<Divider key={KeyTwo} />)
     }
   }
 

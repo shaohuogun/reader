@@ -36,7 +36,7 @@ const ChannelStepper = (props) => (
   progress={props.progress.generatingEbook} restart={props.restart} generateEbook={props.generateEbook} />
   </StepContent>
   </Step>
-  
+
   <Step>
   <StepLabel>步骤三，导出文章到电子书：</StepLabel>
   <StepContent>
@@ -56,8 +56,6 @@ ChannelStepper.propTypes = {
   progress: PropTypes.object.isRequired,
   pagination: PropTypes.object.isRequired,
   ebook: PropTypes.object.isRequired,
-  previousStep: PropTypes.func.isRequired,
-  nextStep: PropTypes.func.isRequired,
   createChannel: PropTypes.func.isRequired,
   loadMessages: PropTypes.func.isRequired,
   generateEbook: PropTypes.func.isRequired,
