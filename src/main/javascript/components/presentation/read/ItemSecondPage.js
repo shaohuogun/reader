@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
+import Toggle from 'material-ui/Toggle'
 import {RadioButtonGroup, TextField} from 'redux-form-material-ui'
 import RadioButton from 'material-ui/RadioButton'
 import FlatButton from 'material-ui/FlatButton'
@@ -15,41 +16,64 @@ const toolbarStyle = {
 class ItemSecondPage extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      isCreatingNew : false
+    }
+
+    this.isCreatingNew = this.isCreatingNew.bind(this)
   }
 
   componentDidMount() {
-    this.refs.listName // the Field
-    .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
-    .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
-    .focus() // on TextField
+    // this.refs.listName // the Field
+    // .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
+    // .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
+    // .focus() // on TextField
+  }
+
+  isCreatingNew = (event, isInputChecked) => {
+    this.setState({
+      isCreatingNew: isInputChecked
+    })
   }
 
   render() {
     const {readingLists, previousStep, handleSubmit, pristine, submitting} = this.props
     return (
+      <div>
+      <Toggle
+      label="创建一个新的阅读清单"
+      labelPosition="right"
+      defaultToggled={false}
+      onToggle={this.isCreatingNew}
+      />
+          
       <form onSubmit={handleSubmit}>
-      <Field
-      name="listId"
-      component={RadioButtonGroup}
-      floatingLabelText="阅读清单">
-      {readingLists.map(readingList =>
-        <RadioButton
-        key={readingList.id}
-        value={readingList.id}
-        label={readingList.name}
+      {!this.state.isCreatingNew && (
+        <Field
+        name="listId"
+        component={RadioButtonGroup}
+        floatingLabelText="阅读清单">
+        {readingLists.map(readingList =>
+          <RadioButton
+          key={readingList.id}
+          value={readingList.id}
+          label={readingList.name}
+          />
+        )}
+        </Field>
+      )}
+
+      {this.state.isCreatingNew && (
+        <Field
+        name="listName"
+        component={TextField}
+        hintText="请填写阅读清单名称！"
+        floatingLabelText="阅读清单"
+        fullWidth={true}
+        ref="listName"
+        withRef
         />
       )}
-      </Field>
-
-      <Field
-      name="listName"
-      component={TextField}
-      hintText="请填写阅读清单名称！"
-      floatingLabelText="阅读清单"
-      fullWidth={true}
-      ref="listName"
-      withRef
-      />
 
       <div style={toolbarStyle}>
       <FlatButton
@@ -70,6 +94,7 @@ class ItemSecondPage extends Component {
       />
       </div>
       </form>
+      </div>
     )
   }
 }
