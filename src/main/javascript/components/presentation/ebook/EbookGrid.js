@@ -21,7 +21,7 @@ export default class EbookGrid extends React.Component {
 		};
 	}
 
-	loadPagination = (page) => {
+	loadMessages = (page) => {
 		var self = this;
 		$.ajax({
 			url: "/api/myebooks",
@@ -37,7 +37,7 @@ export default class EbookGrid extends React.Component {
 	}
 
 	componentDidMount() {
-		this.loadPagination(1);
+		this.loadMessages(1);
 	}
 
 	downloadEbook = (ebookId) => {
@@ -108,7 +108,7 @@ export default class EbookGrid extends React.Component {
 			total = {this.state.pagination.pageCount}
 			current = {this.state.pagination.pageIndex}
 			display = {this.state.pagination.pageShow}
-			onChange = {current => this.loadPagination(current)}
+			onChange = {current => this.loadMessages(current)}
 			/>
 			</CardActions>
 			</Card>

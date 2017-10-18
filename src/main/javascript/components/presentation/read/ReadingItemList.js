@@ -18,7 +18,7 @@ export default class ReadingItemList extends React.Component {
 		};
 	}
 
-	loadPagination = (page) => {
+	loadMessages = (page) => {
 		var self = this;
 		$.ajax({
 			url: "/api/readinglist/" + self.props.listId + "/items",
@@ -34,7 +34,7 @@ export default class ReadingItemList extends React.Component {
 	}
 
 	componentDidMount() {
-		this.loadPagination(1);
+		this.loadMessages(1);
 	}
 
 	render() {
@@ -49,15 +49,15 @@ export default class ReadingItemList extends React.Component {
 			var listItem = listItems[i];
 			rows.push(
 				<ListItem
-          primaryText={listItem.bookName}
-          secondaryText={<span>{listItem.status}</span>}
-          secondaryTextLines={1}
-					key={listItem.id}
-        />
+				key={listItem.id}
+				primaryText={listItem.bookName}
+				secondaryText={<span>{listItem.status}</span>}
+				secondaryTextLines={1}
+				/>
 			);
 
 			if (i < (listItemCount - 1)) {
-				rows.push(<Divider />);
+				rows.push(<Divider key={listItem.id} />);
 			}
 		}
 
@@ -73,7 +73,7 @@ export default class ReadingItemList extends React.Component {
 			total = {this.state.pagination.pageCount}
 			current = {this.state.pagination.pageIndex}
 			display = {this.state.pagination.pageShow}
-			onChange = {current => this.loadPagination(current)}
+			onChange = {current => this.loadMessages(current)}
 			/>
 			</CardActions>
 			</Card>

@@ -17,14 +17,14 @@ export function updateMessage(message) {
   }
 }
 
-export function updatePagination(pagination) {
+export function updateMessagePagination(pagination) {
   return {
     type: UPDATE_PAGINATION,
     pagination
   }
 }
 
-export function asyncPagination(channelId, page) {
+export function asyncMessagesInChannel(channelId, page) {
   return dispatch => {
     var url = '/api/channel/' + channelId + '/messages?page=' + page
     return fetch(url, {
@@ -33,6 +33,6 @@ export function asyncPagination(channelId, page) {
         'Content-Type': 'application/json;charset=utf-8'
       }
     }).then(response => response.json())
-    .then(json => dispatch(updatePagination(json)))
+    .then(json => dispatch(updateMessagePagination(json)))
   }
 }

@@ -20,7 +20,7 @@ export default class EbookTable extends React.Component {
 		};
 	}
 
-	loadPagination = (page) => {
+	loadMessages = (page) => {
 		var self = this;
 		$.ajax({
 			url: "/api/channel/" + self.props.channelId + "/ebooks",
@@ -36,7 +36,7 @@ export default class EbookTable extends React.Component {
 	}
 
 	componentDidMount() {
-		this.loadPagination(1);
+		this.loadMessages(1);
 	}
 
 	downloadEbook = (ebookId) => {
@@ -74,7 +74,7 @@ export default class EbookTable extends React.Component {
 		for (var i = 0; i < ebookCount; i++) {
 			var ebook = ebooks[i];
 			rows.push(
-				<TableRow>
+				<TableRow key={ebook.id}>
 					<TableRowColumn>{ebook.createDate}</TableRowColumn>
 					<TableRowColumn>{ebook.name}</TableRowColumn>
 					<TableRowColumn>{ebook.downloads}</TableRowColumn>
@@ -122,7 +122,7 @@ export default class EbookTable extends React.Component {
 			total = {this.state.pagination.pageCount}
 			current = {this.state.pagination.pageIndex}
 			display = {this.state.pagination.pageShow}
-			onChange = {current => this.loadPagination(current)}
+			onChange = {current => this.loadMessages(current)}
 			/>
 			</CardActions>
 			</Card>

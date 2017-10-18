@@ -32,14 +32,14 @@ const ChannelStepper = (props) => (
   <Step>
   <StepLabel>步骤二，确认媒体文章列表：</StepLabel>
   <StepContent>
-  <ChannelSecondPage pagination={props.pagination} loadPagination={props.loadPagination} progress={props.progress.generatingEbook} restartStepper={props.restartStepper} generateEbook={props.generateEbook} />
+  <ChannelSecondPage pagination={props.pagination} loadMessages={props.loadMessages} progress={props.progress.generatingEbook} restart={props.restart} generateEbook={props.generateEbook} />
   </StepContent>
   </Step>
 
   <Step>
   <StepLabel>步骤三，导出文章到电子书：</StepLabel>
   <StepContent>
-  <ChannelThirdPage ebook={props.ebook} downloadEbook={props.downloadEbook} postEbook={props.postEbook} restartStepper={props.restartStepper} />
+  <ChannelThirdPage ebook={props.ebook} downloadEbook={props.downloadEbook} postEbook={props.postEbook} restart={props.restart} />
   </StepContent>
   </Step>
 
@@ -57,11 +57,11 @@ ChannelStepper.propTypes = {
   previousStep: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
   createChannel: PropTypes.func.isRequired,
-  loadPagination: PropTypes.func.isRequired,
+  loadMessages: PropTypes.func.isRequired,
   generateEbook: PropTypes.func.isRequired,
   downloadEbook: PropTypes.func.isRequired,
   postEbook: PropTypes.func.isRequired,
-  restartStepper: PropTypes.func.isRequired
+  restart: PropTypes.func.isRequired
 }
 
 export default ChannelStepper

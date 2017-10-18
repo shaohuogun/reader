@@ -19,7 +19,7 @@ export default class ChannelList extends React.Component {
 		};
 	}
 
-	loadPagination = (page) => {
+	loadMessages = (page) => {
 		var self = this;
 		$.ajax({
 			url: "/api/mychannels",
@@ -35,7 +35,7 @@ export default class ChannelList extends React.Component {
 	}
 
 	componentDidMount() {
-		this.loadPagination(1);
+		this.loadMessages(1);
 	}
 
 	handleItemCLick = (channelId) => {
@@ -55,16 +55,16 @@ export default class ChannelList extends React.Component {
 			var uri = '/mine/channel/' + channel.id
 			rows.push(
 				<ListItem
+				key={channel.id}
 				primaryText={<span>[<a href={channel.url}>原文地址</a>]：<Link to={uri}>{channel.name}</Link></span>}
 				secondaryText={channel.description}
 				secondaryTextLines={1}
-				key={channel.id}
 				onTouchTap={this.handleItemCLick.bind(this, channel.id)}
 				/>
 			);
 
 			if (i < (channelCount - 1)) {
-				rows.push(<Divider />);
+				rows.push(<Divider key={channel.id} />);
 			}
 		}
 
@@ -81,7 +81,7 @@ export default class ChannelList extends React.Component {
 			total = {this.state.pagination.pageCount}
 			current = {this.state.pagination.pageIndex}
 			display = {this.state.pagination.pageShow}
-			onChange = {current => this.loadPagination(current)}
+			onChange = {current => this.loadMessages(current)}
 			/>
 			</CardActions>
 			</Card>

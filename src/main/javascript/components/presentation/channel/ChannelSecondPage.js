@@ -15,15 +15,15 @@ const toolbarStyle = {
 
 export default class ChannelSecondPage extends Component {
 	componentDidMount() {
-		const {loadPagination} = this.props
-		loadPagination(1)
+		const {loadMessages} = this.props
+		loadMessages(1)
 	}
 
 	render() {
-		const {pagination, loadPagination, progress, restartStepper, generateEbook} = this.props
+		const {pagination, loadMessages, progress, restart, generateEbook} = this.props
 		return (
 			<div>
-			<MessageList pagination={pagination} loadPagination={loadPagination} />
+			<MessageList pagination={pagination} loadMessages={loadMessages} />
 			<LinearProgress mode="determinate" value={progress} />
 
 			<div style={toolbarStyle}>
@@ -31,7 +31,7 @@ export default class ChannelSecondPage extends Component {
       label="重新开始"
       disableTouchRipple={true}
       disableFocusRipple={true}
-      onTouchTap={restartStepper}
+      onTouchTap={restart}
       style={{margin: '0 15px 0 0'}}
       />
       <RaisedButton
@@ -49,8 +49,8 @@ export default class ChannelSecondPage extends Component {
 
 ChannelSecondPage.propTypes = {
 	pagination: PropTypes.object.isRequired,
-	loadPagination: PropTypes.func.isRequired,
+	loadMessages: PropTypes.func.isRequired,
 	progress: PropTypes.number.isRequired,
-  restartStepper: PropTypes.func.isRequired,
+  restart: PropTypes.func.isRequired,
   generateEbook: PropTypes.func.isRequired
 }

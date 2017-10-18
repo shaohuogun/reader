@@ -23,7 +23,7 @@ class ReadingStepperContainer extends Component {
     this.createReadingItem = this.createReadingItem.bind(this)
   }
 
-  restartStepper = () => {
+  restart = () => {
     const {dispatch} = this.props
     dispatch(reset("readingItemForm"))
     this.setState({
@@ -32,16 +32,14 @@ class ReadingStepperContainer extends Component {
   }
 
   previousStep = () => {
-    var curStepIndex = this.state.stepIndex - 1
     this.setState({
-      stepIndex: curStepIndex
+      stepIndex: this.state.stepIndex - 1
     })
   }
 
   nextStep = () => {
-    var curStepIndex = this.state.stepIndex + 1
     this.setState({
-      stepIndex: curStepIndex
+      stepIndex: this.state.stepIndex + 1
     })
   }
 
@@ -71,12 +69,12 @@ class ReadingStepperContainer extends Component {
     }).then(response => response.json())
     .then(json => {
       dispatch(updateReadingItem(json))
-      this.restartStepper()
+      this.restart()
     })
   }
 
   render() {
-    const {dispatch, readingLists} = this.props
+    const {readingLists} = this.props
     return (
       <ReadingStepper stepIndex={this.state.stepIndex}
       readingLists={readingLists} previousStep={this.previousStep} nextStep={this.nextStep}

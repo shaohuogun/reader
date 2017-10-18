@@ -24,7 +24,7 @@ class MessageStepperContainer extends Component {
     this.createMessage = this.createMessage.bind(this)
   }
 
-  restartStepper = () => {
+  restart = () => {
     const {dispatch} = this.props
     dispatch(reset("messageForm"))
     this.setState({
@@ -33,16 +33,14 @@ class MessageStepperContainer extends Component {
   }
 
   previousStep = () => {
-    var curStepIndex = this.state.stepIndex - 1
     this.setState({
-      stepIndex: curStepIndex
+      stepIndex: this.state.stepIndex - 1
     })
   }
 
   nextStep = () => {
-    var curStepIndex = this.state.stepIndex + 1
     this.setState({
-      stepIndex: curStepIndex
+      stepIndex: this.state.stepIndex + 1
     })
   }
 
@@ -72,12 +70,12 @@ class MessageStepperContainer extends Component {
     }).then(response => response.json())
     .then(json => {
       dispatch(updateMessage(json))
-      this.restartStepper()
+      this.restart()
     })
   }
 
   render() {
-    const {dispatch, catalogs} = this.props
+    const {catalogs} = this.props
     return (
       <MessageStepper stepIndex={this.state.stepIndex}
       catalogs={catalogs} previousStep={this.previousStep} nextStep={this.nextStep}

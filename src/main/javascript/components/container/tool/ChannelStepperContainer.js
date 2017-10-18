@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import {
   submitChannel, updateChannel, asyncProgressOfPickingMessage, asyncProgressOfGeneratingEbook
 } from '../../../actions/channel'
-import {asyncPagination} from '../../../actions/message'
+import {asyncMessagesInChannel} from '../../../actions/message'
 import {generateEbook, postEbook} from '../../../actions/ebook'
 import ChannelStepper from '../../presentation/channel/ChannelStepper'
 
@@ -19,9 +19,9 @@ class ChannelStepperContainer extends Component {
     }
 
     // Tips: The best place to bind your member functions is in the component constructor
-    this.restartStepper = this.restartStepper.bind(this)
+    this.restart = this.restart.bind(this)
     this.createChannel = this.createChannel.bind(this)
-    this.loadPagination = this.loadPagination.bind(this)
+    this.loadMessages = this.loadMessages.bind(this)
     this.generateEbook = this.generateEbook.bind(this)
     this.downloadEbook = this.downloadEbook.bind(this)
     this.postEbook = this.postEbook.bind(this)
@@ -42,7 +42,7 @@ class ChannelStepperContainer extends Component {
     }
   }
 
-  restartStepper = () => {
+  restart = () => {
     const {dispatch} = this.props
     dispatch(reset('channelForm'))
     this.setState({
@@ -66,11 +66,11 @@ class ChannelStepperContainer extends Component {
     })
   }
 
-  loadPagination = (page) => {
+  loadMessages = (page) => {
     const {dispatch, channel} = this.props
-    dispatch(asyncPagination(channel.id, page))
+    dispatch(asyncMessagesInChannel(channel.id, page))
   }
-
+  
   generateEbook = () => {
     const {dispatch, channel} = this.props
     dispatch(generateEbook(channel.id))
@@ -87,12 +87,12 @@ class ChannelStepperContainer extends Component {
   }
 
   render() {
-    const {dispatch, channel, progress, pagination, ebook} = this.props
+    const {channel, progress, pagination, ebook} = this.props
     return (
       <ChannelStepper stepIndex={this.state.stepIndex}
       channel={channel} progress={progress} pagination={pagination} ebook={ebook}
-      createChannel={this.createChannel} loadPagination={this.loadPagination} generateEbook={this.generateEbook}
-      downloadEbook={this.downloadEbook} postEbook={this.postEbook} restartStepper={this.restartStepper} />
+      createChannel={this.createChannel} loadMessages={this.loadMessages} generateEbook={this.generateEbook}
+      downloadEbook={this.downloadEbook} postEbook={this.postEbook} restart={this.restart} />
     )
   }
 }

@@ -12,7 +12,7 @@ const toolbarStyle = {
 
 export default class ChannelThirdPage extends Component {
 	render() {
-		const {ebook, downloadEbook, postEbook, restartStepper} = this.props
+		const {ebook, downloadEbook, postEbook, restart} = this.props
 		return (
 			<Card zDepth={0}>
 			<CardHeader
@@ -38,7 +38,7 @@ export default class ChannelThirdPage extends Component {
 			disableTouchRipple={true}
 			disableFocusRipple={true}
 			primary={true}
-			onTouchTap={restartStepper}
+			onTouchTap={restart}
 			/>
 			</CardActions>
 			</Card>
@@ -51,5 +51,5 @@ ChannelThirdPage.propTypes = {
 	ebook: PropTypes.object.isRequired,
 	downloadEbook: PropTypes.func.isRequired,
 	postEbook: PropTypes.func.isRequired,
-  restartStepper: PropTypes.func.isRequired
+  restart: PropTypes.func.isRequired
 }
