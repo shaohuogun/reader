@@ -32,14 +32,16 @@ const ChannelStepper = (props) => (
   <Step>
   <StepLabel>步骤二，确认媒体文章列表：</StepLabel>
   <StepContent>
-  <ChannelSecondPage pagination={props.pagination} loadMessages={props.loadMessages} progress={props.progress.generatingEbook} restart={props.restart} generateEbook={props.generateEbook} />
+  <ChannelSecondPage pagination={props.pagination} loadMessages={props.loadMessages}
+  progress={props.progress.generatingEbook} restart={props.restart} generateEbook={props.generateEbook} />
   </StepContent>
   </Step>
-
+  
   <Step>
   <StepLabel>步骤三，导出文章到电子书：</StepLabel>
   <StepContent>
-  <ChannelThirdPage ebook={props.ebook} downloadEbook={props.downloadEbook} postEbook={props.postEbook} restart={props.restart} />
+  <ChannelThirdPage ebook={props.ebook} downloadEbook={props.downloadEbook}
+  postEbook={props.postEbook} restart={props.restart} />
   </StepContent>
   </Step>
 

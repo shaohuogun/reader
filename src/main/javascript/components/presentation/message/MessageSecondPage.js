@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
-import {RadioButtonGroup} from 'redux-form-material-ui'
+import {RadioButtonGroup, TextField} from 'redux-form-material-ui'
 import RadioButton from 'material-ui/RadioButton'
-import {TextField} from 'redux-form-material-ui'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 
