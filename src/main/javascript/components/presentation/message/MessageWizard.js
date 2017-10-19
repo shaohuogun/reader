@@ -14,24 +14,24 @@ const pageStyle = {
   backgroundColor: '#fff'
 }
 
-const MessageStepper = (props) => (
+const MessageWizard = (props) => (
   <div style={pageStyle}>
-  {props.stepIndex === 1 && (
+  {props.pageIndex === 1 && (
     <MessageFirstPage onSubmit={props.loadCatalogs} />
   )}
 
-  {props.stepIndex === 2 && (
+  {props.pageIndex === 2 && (
     <MessageSecondPage catalogs={props.catalogs} previousStep={props.previousStep} onSubmit={props.nextStep} />
   )}
 
-  {props.stepIndex === 3 && (
+  {props.pageIndex === 3 && (
     <MessageThirdPage previousStep={props.previousStep} onSubmit={props.createMessage} />
   )}
   </div>
 )
 
-MessageStepper.propTypes = {
-  stepIndex: PropTypes.number.isRequired,
+MessageWizard.propTypes = {
+  pageIndex: PropTypes.number.isRequired,
   previousStep: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
   catalogs: PropTypes.array.isRequired,
@@ -39,4 +39,4 @@ MessageStepper.propTypes = {
   createMessage: PropTypes.func.isRequired
 }
 
-export default MessageStepper
+export default MessageWizard

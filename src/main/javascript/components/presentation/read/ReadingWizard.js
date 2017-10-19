@@ -14,24 +14,24 @@ const pageStyle = {
   backgroundColor: '#fff'
 }
 
-const ReadingStepper = (props) => (
+const ReadingWizard = (props) => (
   <div style={pageStyle}>
-  {props.stepIndex === 1 && (
+  {props.pageIndex === 1 && (
     <ItemFirstPage onSubmit={props.loadReadingLists} />
   )}
 
-  {props.stepIndex === 2 && (
+  {props.pageIndex === 2 && (
     <ItemSecondPage readingLists={props.readingLists} previousStep={props.previousStep} onSubmit={props.nextStep} />
   )}
 
-  {props.stepIndex === 3 && (
+  {props.pageIndex === 3 && (
     <ItemThirdPage previousStep={props.previousStep} onSubmit={props.createReadingItem} />
   )}
   </div>
 )
 
-ReadingStepper.propTypes = {
-  stepIndex: PropTypes.number.isRequired,
+ReadingWizard.propTypes = {
+  pageIndex: PropTypes.number.isRequired,
   previousStep: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
   readingLists: PropTypes.array.isRequired,
@@ -39,4 +39,4 @@ ReadingStepper.propTypes = {
   createReadingItem: PropTypes.func.isRequired
 }
 
-export default ReadingStepper
+export default ReadingWizard

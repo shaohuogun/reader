@@ -1,14 +1,14 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 
-import MessageStepperContainer from '../components/container/tool/MessageStepperContainer'
-import ReadingStepperContainer from '../components/container/tool/ReadingStepperContainer'
-import ChannelStepperContainer from '../components/container/tool/ChannelStepperContainer'
+import MessageWizardContainer from '../components/container/tool/MessageWizardContainer'
+import ReadingWizardContainer from '../components/container/tool/ReadingWizardContainer'
+import ChannelWizardContainer from '../components/container/tool/ChannelWizardContainer'
 
 export default (
   <div>
-  <Route path="/tool/message" component={MessageStepperContainer}/>
-  <Route path="/tool/reading" component={ReadingStepperContainer}/>
-  <Route path="/tool/channel" component={ChannelStepperContainer}/>
+  <Route path="/tool/message" component={MessageWizardContainer}/>
+  <Route path="/tool/reading" component={ReadingWizardContainer}/>
+  <Route path="/tool/channel" component={ChannelWizardContainer}/>
   </div>
 )

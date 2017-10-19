@@ -7,13 +7,13 @@ import {connect} from 'react-redux'
 import {
   updateReadingLists, submitReadingItem, updateReadingItem
 } from '../../../actions/read'
-import ReadingStepper from '../../presentation/read/ReadingStepper'
+import ReadingWizard from '../../presentation/read/ReadingWizard'
 
-class ReadingStepperContainer extends Component {
+class ReadingWizardContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      stepIndex: 0
+      pageIndex: 1
     }
 
     // Tips: The best place to bind your member functions is in the component constructor
@@ -27,19 +27,19 @@ class ReadingStepperContainer extends Component {
     const {dispatch} = this.props
     dispatch(reset("readingItemForm"))
     this.setState({
-      stepIndex: 0
+      pageIndex: 1
     })
   }
 
   previousStep = () => {
     this.setState({
-      stepIndex: this.state.stepIndex - 1
+      pageIndex: this.state.pageIndex - 1
     })
   }
 
   nextStep = () => {
     this.setState({
-      stepIndex: this.state.stepIndex + 1
+      pageIndex: this.state.pageIndex + 1
     })
   }
 
@@ -76,14 +76,14 @@ class ReadingStepperContainer extends Component {
   render() {
     const {readingLists} = this.props
     return (
-      <ReadingStepper stepIndex={this.state.stepIndex}
+      <ReadingWizard pageIndex={this.state.pageIndex}
       readingLists={readingLists} previousStep={this.previousStep} nextStep={this.nextStep}
       loadReadingLists={this.loadReadingLists} createReadingItem={this.createReadingItem} />
     )
   }
 }
 
-ReadingStepperContainer.propTypes = {
+ReadingWizardContainer.propTypes = {
   readingLists: PropTypes.array.isRequired,
   readingItem: PropTypes.object.isRequired
 }
@@ -93,4 +93,4 @@ const mapStateToProps = (state) => ({
   readingItem: state.readingItem
 })
 
-export default connect(mapStateToProps)(ReadingStepperContainer)
+export default connect(mapStateToProps)(ReadingWizardContainer)

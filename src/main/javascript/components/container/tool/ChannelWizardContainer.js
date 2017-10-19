@@ -9,13 +9,13 @@ import {
 } from '../../../actions/channel'
 import {asyncMessagesInChannel} from '../../../actions/message'
 import {generateEbook, postEbook} from '../../../actions/ebook'
-import ChannelStepper from '../../presentation/channel/ChannelStepper'
+import ChannelWizard from '../../presentation/channel/ChannelWizard'
 
-class ChannelStepperContainer extends Component {
+class ChannelWizardContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      stepIndex: 0
+      pageIndex: 1
     }
 
     // Tips: The best place to bind your member functions is in the component constructor
@@ -29,15 +29,15 @@ class ChannelStepperContainer extends Component {
 
   componentWillReceiveProps() {
     const {progress} = this.props
-    if ((this.state.stepIndex === 0) && (progress.pickingMessage === 100)) {
+    if ((this.state.pageIndex === 1) && (progress.pickingMessage === 100)) {
       this.setState({
-        stepIndex: this.state.stepIndex + 1
+        pageIndex: this.state.pageIndex + 1
       })
     }
 
-    if ((this.state.stepIndex === 1) && (progress.generatingEbook === 100)) {
+    if ((this.state.pageIndex === 2) && (progress.generatingEbook === 100)) {
       this.setState({
-        stepIndex: this.state.stepIndex + 1
+        pageIndex: this.state.pageIndex + 1
       })
     }
   }
@@ -46,7 +46,7 @@ class ChannelStepperContainer extends Component {
     const {dispatch} = this.props
     dispatch(reset('channelForm'))
     this.setState({
-      stepIndex: 0
+      pageIndex: 1
     })
   }
 
@@ -70,7 +70,7 @@ class ChannelStepperContainer extends Component {
     const {dispatch, channel} = this.props
     dispatch(asyncMessagesInChannel(channel.id, page))
   }
-  
+
   generateEbook = () => {
     const {dispatch, channel} = this.props
     dispatch(generateEbook(channel.id))
@@ -89,7 +89,7 @@ class ChannelStepperContainer extends Component {
   render() {
     const {channel, progress, pagination, ebook} = this.props
     return (
-      <ChannelStepper stepIndex={this.state.stepIndex}
+      <ChannelWizard pageIndex={this.state.pageIndex}
       channel={channel} progress={progress} pagination={pagination} ebook={ebook}
       createChannel={this.createChannel} loadMessages={this.loadMessages} generateEbook={this.generateEbook}
       downloadEbook={this.downloadEbook} postEbook={this.postEbook} restart={this.restart} />
@@ -97,7 +97,7 @@ class ChannelStepperContainer extends Component {
   }
 }
 
-ChannelStepperContainer.propTypes = {
+ChannelWizardContainer.propTypes = {
   channel: PropTypes.object.isRequired,
   progress: PropTypes.object.isRequired,
   pagination: PropTypes.object.isRequired,
@@ -111,4 +111,4 @@ const mapStateToProps = (state) => ({
   ebook: state.ebook
 })
 
-export default connect(mapStateToProps)(ChannelStepperContainer)
+export default connect(mapStateToProps)(ChannelWizardContainer)

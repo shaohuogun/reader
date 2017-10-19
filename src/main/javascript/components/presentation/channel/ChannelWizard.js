@@ -14,26 +14,26 @@ const pageStyle = {
   backgroundColor: '#fff'
 }
 
-const ChannelStepper = (props) => (
+const ChannelWizard = (props) => (
   <div style={pageStyle}>
-  {props.stepIndex === 1 && (
+  {props.pageIndex === 1 && (
     <ChannelFirstPage onSubmit={props.createChannel} progress={props.progress.pickingMessage} />
   )}
 
-  {props.stepIndex === 2 && (
+  {props.pageIndex === 2 && (
     <ChannelSecondPage pagination={props.pagination} loadMessages={props.loadMessages}
     progress={props.progress.generatingEbook} restart={props.restart} generateEbook={props.generateEbook} />
   )}
 
-  {props.stepIndex === 3 && (
+  {props.pageIndex === 3 && (
     <ChannelThirdPage ebook={props.ebook} downloadEbook={props.downloadEbook}
     postEbook={props.postEbook} restart={props.restart} />
   )}
   </div>
 )
 
-ChannelStepper.propTypes = {
-  stepIndex: PropTypes.number.isRequired,
+ChannelWizard.propTypes = {
+  pageIndex: PropTypes.number.isRequired,
   channel: PropTypes.object.isRequired,
   progress: PropTypes.object.isRequired,
   pagination: PropTypes.object.isRequired,
@@ -46,4 +46,4 @@ ChannelStepper.propTypes = {
   restart: PropTypes.func.isRequired
 }
 
-export default ChannelStepper
+export default ChannelWizard

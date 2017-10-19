@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {GridList, GridListTile} from 'material-ui/GridList'
 
 const logoStyle = {
-  padding: '15px',
+  padding: '20px',
   textAlign: 'left',
 }
 
@@ -15,7 +15,7 @@ const navigatorStyle = {
 const Header = ({style}) => (
   <GridList
   cols={2}
-  cellHeight={50}
+  cellHeight={60}
   style={style}
   >
   <GridListTile

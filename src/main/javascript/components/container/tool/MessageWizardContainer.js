@@ -8,13 +8,13 @@ import {updateCatalogs} from '../../../actions/catalog'
 import {
   submitMessage, updateMessage
 } from '../../../actions/message'
-import MessageStepper from '../../presentation/message/MessageStepper'
+import MessageWizard from '../../presentation/message/MessageWizard'
 
-class MessageStepperContainer extends Component {
+class MessageWizardContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      stepIndex: 0
+      pageIndex: 1
     }
 
     // Tips: The best place to bind your member functions is in the component constructor
@@ -28,19 +28,19 @@ class MessageStepperContainer extends Component {
     const {dispatch} = this.props
     dispatch(reset("messageForm"))
     this.setState({
-      stepIndex: 0
+      pageIndex: 1
     })
   }
 
   previousStep = () => {
     this.setState({
-      stepIndex: this.state.stepIndex - 1
+      pageIndex: this.state.pageIndex - 1
     })
   }
 
   nextStep = () => {
     this.setState({
-      stepIndex: this.state.stepIndex + 1
+      pageIndex: this.state.pageIndex + 1
     })
   }
 
@@ -77,14 +77,14 @@ class MessageStepperContainer extends Component {
   render() {
     const {catalogs} = this.props
     return (
-      <MessageStepper stepIndex={this.state.stepIndex}
+      <MessageWizard pageIndex={this.state.pageIndex}
       catalogs={catalogs} previousStep={this.previousStep} nextStep={this.nextStep}
       loadCatalogs={this.loadCatalogs} createMessage={this.createMessage} />
     )
   }
 }
 
-MessageStepperContainer.propTypes = {
+MessageWizardContainer.propTypes = {
   catalogs: PropTypes.array.isRequired,
   message: PropTypes.object.isRequired
 }
@@ -94,4 +94,4 @@ const mapStateToProps = (state) => ({
   message: state.message
 })
 
-export default connect(mapStateToProps)(MessageStepperContainer)
+export default connect(mapStateToProps)(MessageWizardContainer)

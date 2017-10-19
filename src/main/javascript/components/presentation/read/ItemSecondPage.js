@@ -32,7 +32,7 @@ class ItemSecondPage extends Component {
 
   isCreatingNew = (event, checked) => {
     this.setState({
-      isCreatingNew: checked
+      isCreatingNew: !this.state.isCreatingNew
     })
   }
 
