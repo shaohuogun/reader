@@ -2,7 +2,7 @@ import $ from "jquery";
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardText, CardActions} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import Snackbar from 'material-ui/Snackbar';
 import Pagination from 'material-ui-pagination';
@@ -79,12 +79,12 @@ export default class EbookTable extends React.Component {
 					<TableRowColumn>{ebook.name}</TableRowColumn>
 					<TableRowColumn>{ebook.downloads}</TableRowColumn>
 					<TableRowColumn>
-						<FlatButton
+						<Button
 						label="下载"
 						secondary={true}
 						onTouchTap={this.downloadEbook.bind(this, ebook.id)}
 						/>
-						<FlatButton
+						<Button
 						label="发送"
 						secondary={true}
 						onTouchTap={this.postEbook.bind(this, ebook.id)}

@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Route, Link} from 'react-router-dom'
-import {List, ListItem} from 'material-ui/List'
-import Subheader from 'material-ui/Subheader'
-import Avatar from 'material-ui/Avatar'
+import ListSubheader from 'material-ui/List/ListSubheader'
+import List, {ListItem, ListItemText} from 'material-ui/List'
 
 const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   <Route exact={activeOnlyWhenExact} path={to} children={({match}) => (
@@ -15,19 +14,19 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
 
 const ToolNavigator = (props) => (
   <List {...props}>
-  <Subheader>服务目录</Subheader>
-  <ListItem
-  primaryText={<CustomLink to="/tool/reading" label="阅读清单" />}
-  leftAvatar={<Avatar src="/image/tool/reading.jpg" />}
-  />
-  <ListItem
-  primaryText={<CustomLink to="/tool/message" label="好文收藏" />}
-  leftAvatar={<Avatar src="/image/tool/favorites.jpg" />}
-  />
-  <ListItem
-  primaryText={<CustomLink to="/tool/channel" label="聚文成册" />}
-  leftAvatar={<Avatar src="/image/tool/ebook.jpg" />}
-  />
+  <ListSubheader>服务目录</ListSubheader>
+
+  <ListItem button component="a" href="/tool/reading">
+    <ListItemText primary="阅读清单" />
+  </ListItem>
+
+  <ListItem button component="a" href="/tool/message">
+    <ListItemText primary="好文收藏" />
+  </ListItem>
+
+  <ListItem button component="a" href="/tool/channel">
+    <ListItemText primary="聚文成册" />
+  </ListItem>
   </List>
 )
 

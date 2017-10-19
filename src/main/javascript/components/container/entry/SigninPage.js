@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {Card, CardText, CardActions} from 'material-ui/Card'
-import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 
 import {submit} from 'redux-form'
 import {connect} from 'react-redux'
@@ -47,13 +43,12 @@ class SigninPage extends Component {
 
   render() {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Card {...this.props} zDepth={0}>
       <CardText>
       <SigninForm onSubmit={this.createSession} />
       </CardText>
       <CardActions style={toolbarStyle}>
-      <RaisedButton
+      <Button raised
       label="登录"
       disableTouchRipple={true}
       disableFocusRipple={true}
@@ -63,7 +58,6 @@ class SigninPage extends Component {
       />
       </CardActions>
       </Card>
-      </MuiThemeProvider>
     )
   }
 }

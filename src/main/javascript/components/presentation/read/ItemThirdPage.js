@@ -2,8 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {TextField} from 'redux-form-material-ui'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from 'material-ui/Button'
 
 const toolbarStyle = {
   marginTop: 15,
@@ -20,8 +19,9 @@ class ItemThirdPage extends Component {
     const {previousStep, handleSubmit, pristine, submitting} = this.props
     return (
       <form onSubmit={handleSubmit}>
+      <span>步骤三，确认阅读清单信息：</span>
       <div style={toolbarStyle}>
-      <FlatButton
+      <Button
       label="上一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
@@ -29,7 +29,7 @@ class ItemThirdPage extends Component {
       onTouchTap={previousStep}
       style={{margin: '0 15px 0 0'}}
       />
-      <RaisedButton
+      <Button raised
       label="完成"
       disableTouchRipple={true}
       disableFocusRipple={true}

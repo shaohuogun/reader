@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import {Card, CardText, CardActions} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 
 import ReadingItemList from './ReadingItemList'
 
@@ -75,7 +75,7 @@ export default class ReadingListTabs extends React.Component {
   			<ReadingItemList style={listStyle} listId={list.id} />
   			</CardText>
   			<CardActions style={toolbarStyle}>
-  			<FlatButton
+  			<Button
   			label="删除"
   			secondary={true}
   			onTouchTap={this.deleteReadingList.bind(this, list.id)}

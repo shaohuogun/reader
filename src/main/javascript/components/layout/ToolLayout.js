@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles'
 
 import Header from './Header'
 import Footer from './Footer'
@@ -33,14 +32,16 @@ const footerStyle = {
   backgroundColor: '#fafafa'
 }
 
+const theme = createMuiTheme()
+
 const ToolLayout = (props) => (
   <div>
-  <MuiThemeProvider muiTheme={getMuiTheme()}>
+  <MuiThemeProvider theme={theme}>
   <Header style={headerStyle} />
   </MuiThemeProvider>
 
   <div style={contentStyle}>
-  <MuiThemeProvider muiTheme={getMuiTheme()}>
+  <MuiThemeProvider theme={theme}>
   <div style={sidebarStyle}>
   <ToolNavigator style={navigatorStyle} />
   <Footer style={footerStyle} />

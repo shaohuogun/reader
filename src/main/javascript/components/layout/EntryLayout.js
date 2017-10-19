@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles'
 
 import Footer from './Footer'
 import EntryNavigator from './EntryNavigator'
@@ -19,18 +18,20 @@ const footerStyle = {
   backgroundColor: '#fafafa'
 }
 
-const EntryLayout = (props) => (
-      <div {...props}>
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <EntryNavigator style={navigatorStyle} />
-      </MuiThemeProvider>
-      {props.children}
+const theme = createMuiTheme()
 
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Footer style={footerStyle} />
-      </MuiThemeProvider>
-      </div>
-    )
+const EntryLayout = (props) => (
+  <div {...props}>
+  <MuiThemeProvider theme={theme}>
+  <EntryNavigator style={navigatorStyle} />
+  </MuiThemeProvider>
+  {props.children}
+
+  <MuiThemeProvider theme={theme}>
+  <Footer style={footerStyle} />
+  </MuiThemeProvider>
+  </div>
+)
 
 EntryLayout.propTypes = {
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Card, CardHeader, CardActions} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 
 const toolbarStyle = {
 	textAlign: 'center',
@@ -17,12 +17,12 @@ export default class EbookDetail extends React.Component {
 			subtitle={ebook.createDate}
 			/>
 			<CardActions style={toolbarStyle}>
-			<FlatButton
+			<Button
 			label="下载"
 			secondary={true}
 			onTouchTap={downloadEbook.bind(this, ebook.id)}
 			/>
-			<FlatButton
+			<Button
 			label="发送"
 			secondary={true}
 			onTouchTap={postEbook.bind(this, ebook.id)}

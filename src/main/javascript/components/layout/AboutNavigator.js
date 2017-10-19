@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Route, Link} from 'react-router-dom'
-import {List, ListItem} from 'material-ui/List'
-import Subheader from 'material-ui/Subheader'
-import Avatar from 'material-ui/Avatar'
+import ListSubheader from 'material-ui/List/ListSubheader'
+import List, {ListItem, ListItemText} from 'material-ui/List'
 
 const CustomLink = ({activeOnlyWhenExact, to, label}) => (
   <Route exact={activeOnlyWhenExact} path={to} children={({match}) => (
@@ -15,15 +14,15 @@ const CustomLink = ({activeOnlyWhenExact, to, label}) => (
 
 const AboutNavigator = (props) => (
   <List {...props}>
-  <Subheader>关于</Subheader>
-  <ListItem
-  primaryText={<CustomLink to="/about/profile" label="网站简介" />}
-  leftAvatar={<Avatar src="/image/about/profile.jpg" />}
-  />
-  <ListItem
-  primaryText={<CustomLink to="/about/contact" label="联系方式" />}
-  leftAvatar={<Avatar src="/image/about/contact.jpg" />}
-  />
+  <ListSubheader>关于</ListSubheader>
+
+  <ListItem button component="a" href="/about/profile">
+    <ListItemText primary="网站简介" />
+  </ListItem>
+
+  <ListItem button component="a" href="/about/contact">
+    <ListItemText primary="联系方式" />
+  </ListItem>
   </List>
 )
 

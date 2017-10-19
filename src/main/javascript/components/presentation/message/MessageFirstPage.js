@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {TextField} from 'redux-form-material-ui'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from 'material-ui/Button'
 
 const toolbarStyle = {
   marginTop: 15,
@@ -31,6 +31,7 @@ class MessageFirstPage extends Component {
     const {handleSubmit, pristine, submitting} = this.props
     return (
       <form onSubmit={handleSubmit}>
+      <span>步骤一，填写目标文章网址：</span>
       <Field
       name="url"
       component={TextField}
@@ -43,7 +44,7 @@ class MessageFirstPage extends Component {
       />
 
       <div style={toolbarStyle}>
-      <RaisedButton
+      <Button raised
       label="下一步"
       disableTouchRipple={true}
       disableFocusRipple={true}

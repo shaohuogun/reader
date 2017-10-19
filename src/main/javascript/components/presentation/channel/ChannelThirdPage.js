@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Card, CardHeader, CardActions} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from 'material-ui/Button'
 
 const toolbarStyle = {
   marginTop: 15,
@@ -14,18 +13,20 @@ export default class ChannelThirdPage extends Component {
 	render() {
 		const {ebook, downloadEbook, postEbook, pristine, submitting, restart} = this.props
 		return (
+      <div>
+      <span>步骤三，导出文章到电子书：</span>
 			<Card zDepth={0}>
 			<CardHeader
 			title={ebook.name}
 			subtitle={ebook.createDate}
 			/>
 			<CardActions style={toolbarStyle}>
-			<FlatButton
+			<Button
 			label="下载"
 			secondary={true}
 			onTouchTap={downloadEbook.bind(this, ebook.id)}
 			/>
-			<FlatButton
+			<Button
 			label="发送"
 			secondary={true}
 			onTouchTap={postEbook.bind(this, ebook.id)}
@@ -33,7 +34,7 @@ export default class ChannelThirdPage extends Component {
 			</CardActions>
 
 			<CardActions style={toolbarStyle}>
-			<RaisedButton
+			<Button raised
 			label="重新开始"
 			disableTouchRipple={true}
 			disableFocusRipple={true}
@@ -43,6 +44,7 @@ export default class ChannelThirdPage extends Component {
 			/>
 			</CardActions>
 			</Card>
+      </div>
 		)
 	}
 

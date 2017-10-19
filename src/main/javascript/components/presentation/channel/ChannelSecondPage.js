@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import LinearProgress from 'material-ui/LinearProgress'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
+import {LinearProgress} from 'material-ui/Progress'
+import Button from 'material-ui/Button'
 
 import MessageList from '../message/MessageList'
 
@@ -23,11 +22,12 @@ export default class ChannelSecondPage extends Component {
 		const {pagination, loadMessages, progress, pristine, submitting, restart, generateEbook} = this.props
 		return (
 			<div>
+      <span>步骤二，确认媒体文章列表：</span>
 			<MessageList pagination={pagination} loadMessages={loadMessages} />
 			<LinearProgress mode="determinate" value={progress} />
 
 			<div style={toolbarStyle}>
-      <FlatButton
+      <Button
       label="重新开始"
       disableTouchRipple={true}
       disableFocusRipple={true}
@@ -35,7 +35,7 @@ export default class ChannelSecondPage extends Component {
       onTouchTap={restart}
       style={{margin: '0 15px 0 0'}}
       />
-      <RaisedButton
+      <Button raised
       label="生成电子书"
       disableTouchRipple={true}
       disableFocusRipple={true}

@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import ReadingListTabs from '../../presentation/read/ReadingListTabs'
 
@@ -21,11 +18,9 @@ const tabsStyle = {
 export default class ReadingListPage extends Component {
   render() {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
       <ReadingListTabs style={tabsStyle} />
       </div>
-      </MuiThemeProvider>
     )
   }
 }

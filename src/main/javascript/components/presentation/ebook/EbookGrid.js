@@ -1,28 +1,28 @@
-import $ from "jquery";
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Card, CardText, CardActions} from 'material-ui/Card';
-import {GridList, GridTile} from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
-import Snackbar from 'material-ui/Snackbar';
-import Pagination from 'material-ui-pagination';
+import $ from "jquery"
+import React from 'react'
+import PropTypes from 'prop-types'
+import {Card, CardText, CardActions} from 'material-ui/Card'
+import {GridList, GridListTile} from 'material-ui/GridList'
+import IconButton from 'material-ui/IconButton'
+import FavoriteBorder from 'material-ui-icons/FavoriteBorder'
+import Snackbar from 'material-ui/Snackbar'
+import Pagination from 'material-ui-pagination'
 
 const toolbarStyle = {
 	textAlign: 'center',
-};
+}
 
 export default class EbookGrid extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			pagination: {},
 			open: false,
-		};
+		}
 	}
 
 	loadMessages = (page) => {
-		var self = this;
+		var self = this
 		$.ajax({
 			url: "/api/myebooks",
 			type: "GET",
@@ -32,21 +32,21 @@ export default class EbookGrid extends React.Component {
 		}).then(function(data) {
 			self.setState({
 				pagination: data,
-			});
-		});
+			})
+		})
 	}
 
 	componentDidMount() {
-		this.loadMessages(1);
+		this.loadMessages(1)
 	}
 
 	downloadEbook = (ebookId) => {
-		var downloadUrl = "/api/ebook/" + ebookId + "/download";
-		window.open(downloadUrl, "_blank");
+		var downloadUrl = "/api/ebook/" + ebookId + "/download"
+		window.open(downloadUrl, "_blank")
 	}
 
 	postEbook = (ebookId) => {
-		var self = this;
+		var self = this
 		$.ajax({
 			url: "/api/ebook/" + ebookId + "/post",
 			type: "GET",
@@ -54,36 +54,36 @@ export default class EbookGrid extends React.Component {
 		}).then(function(data) {
 			self.setState({
 				open: true,
-			});
-		});
+			})
+		})
 	}
 
 	handleRequestClose = () => {
 		this.setState({
 			open: false,
-		});
+		})
 	}
 
 	render() {
-		var ebooks = this.state.pagination.objects;
+		var ebooks = this.state.pagination.objects
 		if (ebooks == null) {
-			return (<GridList {...this.props} zDepth={0}></GridList>);
+			return (<GridList {...this.props} zDepth={0}></GridList>)
 		}
 
-		var rows = [];
-		var ebookCount = ebooks.length;
+		var rows = []
+		var ebookCount = ebooks.length
 		for (var i = 0; i < ebookCount; i++) {
-			var ebook = ebooks[i];
+			var ebook = ebooks[i]
 			rows.push(
-				<GridTile
+				<GridListTile
 				key={ebook.id}
 				title={ebook.name}
 				subtitle={<span>by <b>{ebook.createDate}</b></span>}
-				actionIcon={<IconButton><ActionFavoriteBorder color="white" /></IconButton>}
+				actionIcon={<IconButton><FavoriteBorder color="white" /></IconButton>}
 				>
 				<img src="/image/cover-default.jpg" />
-				</GridTile>
-			);
+				</GridListTile>
+			)
 		}
 
 		return (
@@ -112,10 +112,9 @@ export default class EbookGrid extends React.Component {
 			/>
 			</CardActions>
 			</Card>
-		);
+		)
 	}
-
-};
+}
 
 EbookGrid.propTypes = {
-};
+}

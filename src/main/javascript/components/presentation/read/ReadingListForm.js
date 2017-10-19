@@ -5,7 +5,7 @@ import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button'
 
 const toolbarStyle = {
   textAlign: 'center',
@@ -86,8 +86,8 @@ export default class ReadingListForm extends React.Component {
       />
       </CardText>
       <CardActions style={toolbarStyle} expandable={true}>
-      <RaisedButton label="取消" secondary={true} onTouchTap={this.handleCancel} />
-      <RaisedButton label="提交" primary={true} onTouchTap={this.handleSubmit} />
+      <Button raised label="取消" secondary={true} onTouchTap={this.handleCancel} />
+      <Button raised label="提交" primary={true} onTouchTap={this.handleSubmit} />
       </CardActions>
       </Card>
     );

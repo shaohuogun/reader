@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
-import Toggle from 'material-ui/Toggle'
-import {RadioButtonGroup, TextField} from 'redux-form-material-ui'
-import RadioButton from 'material-ui/RadioButton'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
+import {FormLabel, FormControlLabel, FormGroup} from 'material-ui/Form'
+import Switch from 'material-ui/Switch'
+import {TextField} from 'redux-form-material-ui'
+import Radio, {RadioGroup} from 'material-ui/Radio'
+import Button from 'material-ui/Button'
 
 const toolbarStyle = {
   marginTop: 15,
@@ -30,35 +30,35 @@ class ItemSecondPage extends Component {
     // .focus() // on TextField
   }
 
-  isCreatingNew = (event, isInputChecked) => {
+  isCreatingNew = (event, checked) => {
     this.setState({
-      isCreatingNew: isInputChecked
+      isCreatingNew: checked
     })
   }
 
   render() {
     const {readingLists, previousStep, handleSubmit, pristine, submitting} = this.props
     return (
-      <div>
-      <Toggle
+      <FormGroup>
+      <FormLabel component="legend">步骤二，选择目标阅读清单：</FormLabel>
+      <FormControlLabel
+      control={
+        <Switch
+        checked={false}
+        onChange={this.isCreatingNew}
+        />
+      }
       label="创建一个新的阅读清单"
-      labelPosition="right"
-      defaultToggled={false}
-      onToggle={this.isCreatingNew}
       />
-          
+
       <form onSubmit={handleSubmit}>
       {!this.state.isCreatingNew && (
         <Field
         name="listId"
-        component={RadioButtonGroup}
+        component={RadioGroup}
         floatingLabelText="阅读清单">
         {readingLists.map(readingList =>
-          <RadioButton
-          key={readingList.id}
-          value={readingList.id}
-          label={readingList.name}
-          />
+          <FormControlLabel key={readingList.id} value={readingList.id} control={<Radio />} label={readingList.name} />
         )}
         </Field>
       )}
@@ -76,7 +76,7 @@ class ItemSecondPage extends Component {
       )}
 
       <div style={toolbarStyle}>
-      <FlatButton
+      <Button
       label="上一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
@@ -84,7 +84,7 @@ class ItemSecondPage extends Component {
       onTouchTap={previousStep}
       style={{margin: '0 15px 0 0'}}
       />
-      <RaisedButton
+      <Button raised
       label="下一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
@@ -94,7 +94,8 @@ class ItemSecondPage extends Component {
       />
       </div>
       </form>
-      </div>
+      </FormGroup>
+
     )
   }
 }

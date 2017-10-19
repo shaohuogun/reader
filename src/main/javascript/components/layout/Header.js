@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {GridList, GridTile} from 'material-ui/GridList'
+import {GridList, GridListTile} from 'material-ui/GridList'
 
 const logoStyle = {
   padding: '15px',
@@ -18,15 +18,15 @@ const Header = ({style}) => (
   cellHeight={50}
   style={style}
   >
-  <GridTile
+  <GridListTile
   key='logo'
   cols={1}
   style={logoStyle}
   >
   <a href="/home">TAIZIDU</a>
-  </GridTile>
+  </GridListTile>
 
-  <GridTile
+  <GridListTile
   key='navigator'
   cols={1}
   style={navigatorStyle}
@@ -42,7 +42,7 @@ const Header = ({style}) => (
   <a href="/entry/signin">登录</a>
   &nbsp;&nbsp;
   <a href="/entry">退出</a>
-  </GridTile>
+  </GridListTile>
   </GridList>
 )
 

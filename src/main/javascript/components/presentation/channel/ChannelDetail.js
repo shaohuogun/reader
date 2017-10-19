@@ -1,24 +1,24 @@
-import $ from "jquery";
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import ActionBook from 'material-ui/svg-icons/action/book';
+import $ from "jquery"
+import React from 'react'
+import PropTypes from 'prop-types'
+import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card'
+import Button from 'material-ui/Button'
+import Book from 'material-ui-icons/Book'
 
 const toolbarStyle = {
 	textAlign: 'center',
-};
+}
 
 export default class ChannelDetail extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       channel: {},
-    };
+    }
   }
 
   loadChannel() {
-    var self = this;
+    var self = this
     $.ajax({
       url: "/api/channel/" + self.props.channelId,
 			type: "GET",
@@ -26,16 +26,16 @@ export default class ChannelDetail extends React.Component {
     }).then(function(data) {
       self.setState({
         channel: data,
-      });
-    });
+      })
+    })
   }
 
   componentDidMount() {
-    this.loadChannel();
+    this.loadChannel()
   }
 
   generateEbook = () => {
-    var self = this;
+    var self = this
     $.ajax({
       url: "/api/ebook/generate",
 			type: "GET",
@@ -44,10 +44,10 @@ export default class ChannelDetail extends React.Component {
 				categoryId: self.props.channelId,
 			},
     }).then(function(data) {
-			var ebook = data;
-      var downloadUrl = "/api/ebook/" + ebook.id + "/download";
-      window.open(downloadUrl, "_blank");
-    });
+			var ebook = data
+      var downloadUrl = "/api/ebook/" + ebook.id + "/download"
+      window.open(downloadUrl, "_blank")
+    })
   }
 
   render() {
@@ -61,20 +61,19 @@ export default class ChannelDetail extends React.Component {
       {this.state.channel.description}
       </CardText>
       <CardActions style={toolbarStyle}>
-      <RaisedButton
+      <Button raised
         label="生成电子书"
         labelPosition="before"
         primary={true}
-        icon={<ActionBook />}
+        icon={<Book />}
         onTouchTap={this.generateEbook.bind(this)}
       />
       </CardActions>
       </Card>
-    );
+    )
   }
-
-};
+}
 
 ChannelDetail.propTypes = {
   channelId: PropTypes.string.isRequired,
-};
+}

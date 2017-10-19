@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {Tabs, Tab} from 'material-ui/Tabs'
 
 import ChannelDetail from '../../presentation/channel/ChannelDetail'
@@ -25,7 +22,6 @@ export default class MessagePage extends Component {
   render() {
     var channelId = this.props.match.params.channelId
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
       <div style={pageStyle}>
       <ChannelDetail channelId={channelId} />
       <Tabs style={tabStyle}>
@@ -37,7 +33,6 @@ export default class MessagePage extends Component {
         </Tab>
       </Tabs>
       </div>
-      </MuiThemeProvider>
     )
   }
 }

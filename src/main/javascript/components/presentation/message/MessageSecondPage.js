@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
-import {RadioButtonGroup, TextField} from 'redux-form-material-ui'
-import RadioButton from 'material-ui/RadioButton'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
+import {TextField} from 'redux-form-material-ui'
+import Radio, {RadioGroup} from 'material-ui/Radio'
+import Button from 'material-ui/Button'
 
 const toolbarStyle = {
   marginTop: 15,
@@ -28,12 +27,13 @@ class MessageSecondPage extends Component {
     const {catalogs, previousStep, handleSubmit, pristine, submitting} = this.props
     return (
       <form onSubmit={handleSubmit}>
+      <span>步骤二，选择文章收藏分类：</span>      
       <Field
       name="categoryId"
-      component={RadioButtonGroup}
+      component={RadioGroup}
       floatingLabelText="文章分类">
       {catalogs.map(catalog =>
-        <RadioButton
+        <Radio
         key={catalog.id}
         value={catalog.id}
         label={catalog.name}
@@ -52,7 +52,7 @@ class MessageSecondPage extends Component {
       />
 
       <div style={toolbarStyle}>
-      <FlatButton
+      <Button
       label="上一步"
       disableTouchRipple={true}
       disableFocusRipple={true}
@@ -60,7 +60,7 @@ class MessageSecondPage extends Component {
       onTouchTap={previousStep}
       style={{margin: '0 15px 0 0'}}
       />
-      <RaisedButton
+      <Button raised
       label="下一步"
       disableTouchRipple={true}
       disableFocusRipple={true}

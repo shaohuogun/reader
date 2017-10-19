@@ -1,8 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {Step, Stepper, StepLabel, StepContent} from 'material-ui/Stepper'
 
 import ItemFirstPage from './ItemFirstPage'
 import ItemSecondPage from './ItemSecondPage'
@@ -18,33 +15,19 @@ const pageStyle = {
 }
 
 const ReadingStepper = (props) => (
-  <MuiThemeProvider muiTheme={getMuiTheme()}>
   <div style={pageStyle}>
-  <Stepper activeStep={props.stepIndex} orientation="vertical">
+  {props.stepIndex === 1 && (
+    <ItemFirstPage onSubmit={props.loadReadingLists} />
+  )}
 
-  <Step>
-  <StepLabel>步骤一，填写待阅读的书名：</StepLabel>
-  <StepContent>
-  <ItemFirstPage onSubmit={props.loadReadingLists} />
-  </StepContent>
-  </Step>
+  {props.stepIndex === 2 && (
+    <ItemSecondPage readingLists={props.readingLists} previousStep={props.previousStep} onSubmit={props.nextStep} />
+  )}
 
-  <Step>
-  <StepLabel>步骤二，选择目标阅读清单：</StepLabel>
-  <StepContent>
-  <ItemSecondPage readingLists={props.readingLists} previousStep={props.previousStep} onSubmit={props.nextStep} />
-  </StepContent>
-  </Step>
-
-  <Step>
-  <StepLabel>步骤三，确认阅读清单信息：</StepLabel>
-  <StepContent>
-  <ItemThirdPage previousStep={props.previousStep} onSubmit={props.createReadingItem} />
-  </StepContent>
-  </Step>
-  </Stepper>
+  {props.stepIndex === 3 && (
+    <ItemThirdPage previousStep={props.previousStep} onSubmit={props.createReadingItem} />
+  )}
   </div>
-  </MuiThemeProvider>
 )
 
 ReadingStepper.propTypes = {

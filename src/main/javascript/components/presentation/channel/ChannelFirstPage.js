@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Field, reduxForm} from 'redux-form'
 import {TextField} from 'redux-form-material-ui'
-import LinearProgress from 'material-ui/LinearProgress'
-import RaisedButton from 'material-ui/RaisedButton'
+import {LinearProgress} from 'material-ui/Progress'
+import Button from 'material-ui/Button'
 
 const toolbarStyle = {
   marginTop: 15,
@@ -33,6 +33,7 @@ class ChannelFirstPage extends Component {
     const {handleSubmit, pristine, submitting, progress} = this.props
     return (
       <form onSubmit={handleSubmit}>
+      <span>步骤一，填写目标媒体信息：</span>
       <Field
       name="url"
       component={TextField}
@@ -76,7 +77,7 @@ class ChannelFirstPage extends Component {
       <LinearProgress mode="determinate" value={progress} />
 
       <div style={toolbarStyle}>
-      <RaisedButton
+      <Button raised
       label="提交采集"
       disableTouchRipple={true}
       disableFocusRipple={true}

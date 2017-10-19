@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles'
 
 import Header from './Header'
 import Footer from './Footer'
@@ -14,9 +13,11 @@ const contentStyle = {
   margin: '0 auto',
 }
 
+const theme = createMuiTheme()
+
 const HomeLayout = (props) => (
   <div>
-  <MuiThemeProvider muiTheme={getMuiTheme()}>
+  <MuiThemeProvider theme={theme}>
   <Header style={headerStyle} />
   </MuiThemeProvider>
 
